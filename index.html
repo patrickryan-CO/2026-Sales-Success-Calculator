@@ -1,0 +1,688 @@
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    /* Set base font to Inter */
+    body {
+        font-family: 'Inter', sans-serif;
+    }
+    
+    /* Custom styles for number inputs (hide arrows) */
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    /* --- Re-defined Utility Classes (replaces @apply) --- */
+    
+    .input-label {
+        display: block;
+        font-size: 0.875rem; /* 14px */
+        font-weight: 500;
+        color: #374151; /* gray-700 */
+        margin-bottom: 0.25rem; /* mb-1 */
+    }
+    
+    .input-field {
+        display: block;
+        width: 100%;
+        border-radius: 0.375rem; /* rounded-md */
+        border: 1px solid #D1D5DB; /* border-gray-300 */
+        padding: 0.5rem 0.75rem; /* py-2 px-3 */
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+    }
+    .input-field:focus {
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+        border-color: #2563EB; /* focus:border-blue-500 */
+        box-shadow: 0 0 0 2px #BFDBFE; /* focus:ring focus:ring-blue-200 */
+    }
+    
+    .calc-box {
+        background-color: #F9FAFB; /* bg-gray-50 */
+        border: 1px solid #E5E7EB; /* border-gray-200 */
+        border-radius: 0.5rem; /* rounded-lg */
+        padding: 1rem; /* p-4 */
+    }
+    
+    .calc-output {
+        display: block;
+        font-size: 1.875rem; /* text-3xl */
+        font-weight: 700;
+        color: #1E40AF; /* text-blue-800 */
+        margin-top: 0.25rem; /* mt-1 */
+    }
+
+    .step-heading {
+        font-size: 1.5rem; /* text-2xl */
+        font-weight: 700;
+        color: #1E3A8A; /* text-blue-900 */
+        margin-bottom: 1.5rem; /* mb-6 */
+        padding-bottom: 0.5rem; /* pb-2 */
+        border-bottom: 1px solid #E5E7EB; /* border-b border-gray-200 */
+    }
+    
+    /* Make headings focusable for accessibility */
+    .step-heading:focus, #main-heading:focus {
+        outline: none;
+    }
+    
+    .progress-step {
+        flex: 1;
+        padding: 0.5rem; /* py-2 */
+        text-align: center;
+        font-size: 0.875rem; /* text-sm */
+        font-weight: 600;
+        color: #4B5563; /* text-gray-600 */
+        border-bottom: 4px solid transparent; /* Default state */
+    }
+    
+    .progress-step-active {
+        color: #1D4ED8; /* text-blue-700 */
+        border-bottom-color: #1D4ED8; /* border-blue-700 */
+    }
+    
+    .nav-button {
+        display: inline-block;
+        padding: 0.625rem 1.25rem; /* py-2.5 px-5 */
+        border-radius: 0.375rem; /* rounded-md */
+        font-size: 0.875rem; /* text-sm */
+        font-weight: 600;
+        text-align: center;
+        border: 1px solid transparent;
+        transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+        cursor: pointer;
+    }
+    
+    .nav-button-primary {
+        background-color: #2563EB; /* bg-blue-600 */
+        color: #FFFFFF; /* text-white */
+    }
+    .nav-button-primary:hover {
+        background-color: #1D4ED8; /* hover:bg-blue-700 */
+    }
+    
+    .nav-button-secondary {
+        background-color: #FFFFFF; /* bg-white */
+        color: #B91C1C; /* text-red-700 */
+        border-color: #D1D5DB; /* border-gray-300 */
+    }
+    .nav-button-secondary:hover {
+        background-color: #F9FAFB; /* hover:bg-gray-50 */
+        color: #991B1B; /* hover:text-red-800 */
+    }
+    
+    .nav-button-default {
+        background-color: #E5E7EB; /* bg-gray-200 */
+        color: #374151; /* text-gray-700 */
+    }
+    .nav-button-default:hover {
+        background-color: #D1D5DB; /* hover:bg-gray-300 */
+    }
+
+    /* --- New Slider Styles --- */
+    input[type=range] {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 8px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    input[type=range]:hover {
+        opacity: 1;
+    }
+    input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #2563eb; /* blue-600 */
+        cursor: pointer;
+        box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
+    input[type=range]::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #2563eb; /* blue-600 */
+        cursor: pointer;
+        border: none;
+        box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
+
+    /* Print styles */
+    @media print {
+        body {
+            background-color: white !important; /* Ensure white background for print */
+            font-family: 'Inter', sans-serif !important; /* Force font in print */
+        }
+        .max-w-4xl {
+            box-shadow: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+        /* Show all steps when printing */
+        .step-panel {
+            display: block !important;
+            visibility: visible !important;
+        }
+        /* Ensure inputs and text areas are visible */
+        .hidden {
+            display: block !impo
+        }
+        input, select, textarea {
+            border: 1px solid #ccc !important; /* Ensure inputs have borders */
+        }
+        /* Hide UI elements */
+        #navigation-buttons, #progress-bar-container {
+            display: none !important;
+        }
+        /* Style print-specific sections better */
+        .step-heading {
+            margin-top: 2rem; /* Add space before each new step */
+            page-break-before: auto;
+            page-break-inside: avoid;
+        }
+    }
+</style>
+
+<div class="bg-gray-100" style="font-family: 'Inter', sans-serif;">
+    <div class="max-w-4xl mx-auto p-6 md:p-10 bg-white rounded-lg shadow-2xl my-12">
+        <header class="mb-10 text-center">
+            <h1 id="main-heading" tabindex="-1" class="text-4xl font-bold text-blue-900">The Trimble 2026 Success Plan</h1>
+            <p class="text-xl font-bold text-orange-600">Personal Success Plan for 2026 (My Commitment)</p>
+            <p class="text-lg text-blue-700 italic mt-2">PEOPLE, PIPELINE & PRODUCTIVITY</p>
+        </header>
+
+        <div id="progress-bar-container" class="mb-8 border-b-2 border-gray-200">
+            <div class="flex gap-x-2">
+                <div id="progress-1" class="progress-step progress-step-active">Step 1 : My Look Back 2025</div>
+                <div id="progress-2" class="progress-step">Step 2 : The Formula</div>
+                <div id="progress-3" class="progress-step">Step 3 : Scenarios</div>
+                <div id="progress-4" class="progress-step">Step 4 : My Action Plan for 2026</div>
+            </div>
+        </div>
+
+        <form id="skoForm" onsubmit="return false;">
+
+            <div id="step-1-content" class="step-panel">
+                <section>
+                    <h2 class="step-heading" tabindex="-1">Step 1 : My Look Back 2025</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                        <div>
+                            <label for="personName" class="input-label">My Name:</label>
+                            <input type="text" id="personName" class="input-field" placeholder="e.g., Jane Doe">
+                        </div>
+                        <div>
+                            <label for="managerName" class="input-label">My Manager's Name:</label>
+                            <input type="text" id="managerName" class="input-field" placeholder="e.g., John Smith">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label for="region" class="input-label">My Region:</label>
+                            <select id="region" class="input-field">
+                                <option value="" disabled selected>Select your region</option>
+                                <option value="NA">NA (North America)</option>
+                                <option value="EMEA">EMEA</option>
+                                <option value="APAC">APAC</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="quota2025" class="input-label">2025 Quota:</label>
+                            <div class="relative">
+                                <input type="number" id="quota2025" class="input-field" placeholder="e.g., 1,000,000">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="bookings2025" class="input-label">2025 Bookings:</label>
+                            <div class="relative">
+                                <input type="number" id="bookings2025" class="input-field" placeholder="e.g., 1,100,000">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="winRate2025" class="input-label">My 2025 Win Rate:</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">%</span>
+                                <input type="number" id="winRate2025" class="input-field pr-7" placeholder="e.g., 25">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="avgDealSize2025" class="input-label">My 2025 Avg. Deal Size:</label>
+                            <div class="relative">
+                                <input type="number" id="avgDealSize2025" class="input-field" placeholder="e.g., 50,000">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="avgMeetings2025" class="input-label">My 2025 Avg. In-Person Meetings (Quarterly):</label>
+                            <input type="number" id="avgMeetings2025" class="input-field" placeholder="e.g., 15">
+                        </div>
+
+                        <div class="calc-box md:col-span-1 flex flex-col justify-center">
+                            <span class="text-sm font-medium text-gray-700">2025 Attainment:</span>
+                            <span id="attainment2025" class="calc-output">0%</span>
+                            <span class="text-xs text-gray-500">(Bookings / Quota)</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="step-2-content" class="step-panel hidden">
+                <section>
+                    <h2 class="step-heading" tabindex="-1">Step 2 : The Formula</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                        <div>
+                            <label for="quota2026" class="input-label">My 2026 Quota: <span class="text-red-600 font-bold">(A)</span></label>
+                            <div class="relative">
+                                <input type="number" id="quota2026" class="input-field" placeholder="e.g., 1,200,000">
+                            </div>
+                        </div>
+                        <div class="md:col-span-1">
+                            <p class="text-sm text-gray-600 mt-6">If my 2025 efficiency stays the same...</p>
+                        </div>
+
+                        <div class="calc-box">
+                            <span class="text-sm font-medium text-gray-700">Total Pipeline I Must Close: <span class="font-bold">(B)</span></span>
+                            <span id="pipelineToClose2026" class="calc-output">0</span>
+                            <span class="text-xs text-gray-500">(A) / (My 2025 Win Rate)</span>
+                        </div>
+                        <div class="calc-box">
+                            <span class="text-sm font-medium text-gray-700">Total Deals I Must Close: <span class="font-bold">(C)</span></span>
+                            <span id="dealsToClose2026" class="calc-output">0</span>
+                            <span class="text-xs text-gray-500">(B) / (My 2025 Avg. Deal Size)</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <label class="input-label">My Reflection:</label>
+                        <div class="flex flex-wrap gap-x-6 gap-y-2 mt-2">
+                            <div class="flex items-center">
+                                <input id="reflect-1" name="reflection" type="radio" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300">
+                                <label for="reflect-1" class="ml-2 block text-sm text-gray-900">"Based on this, my 2026 goal feels <strong>achievable</strong>."</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="reflect-2" name="reflection" type="radio" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300">
+                                <label for="reflect-2" class="ml-2 block text-sm text-gray-900">"Based on this, my 2026 goal feels <strong>challenging</strong>."</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="reflect-3" name="reflection" type="radio" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300">
+                                <label for="reflect-3" class="ml-2 block text-sm text-gray-900">"Based on this, my 2026 goal feels <strong>impossible</strong>."</label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="step-3-content" class="step-panel hidden">
+                <section>
+                    <h2 class="step-heading" tabindex="-1">Step 3 : Scenarios</h2>
+                    <hr class="my-4 border-gray-200">
+                    <p class="text-slate-600 mb-6">See how small efficiency gains create massive impact.</p>
+                    
+                    <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+                                
+                        <div class="space-y-4 p-6 rounded-lg bg-blue-50 border border-blue-200">
+                            <h3 class="text-xl font-semibold text-blue-800">Lever 1: Improve Win Rate</h3>
+                            <label for="winRateImprovement" class="block text-sm font-medium text-slate-700">
+                                Improve Win Rate by: <span id="winRateImprovementLabel" class="font-bold text-blue-700">5.0%</span>
+                                (New Win Rate: <span id="newWinRateLabel" class="font-bold">0%</span>)
+                            </label>
+                            <input type="range" id="winRateImprovement" min="0" max="25" value="5" step="0.5" class="w-full">
+                            
+                            <div class="bg-white p-6 rounded-xl border border-blue-200">
+                                <label class="text-base font-medium text-blue-900">New Pipeline Needed</label>
+                                <p id="newPipelineNeeded" class="text-3xl font-extrabold text-blue-700 mt-2">0</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-xl border border-blue-200">
+                                <label class="text-base font-medium text-blue-900">New Pipeline Coverage</label>
+                                <p id="newPipelineCoverage" class="text-3xl font-extrabold text-blue-700 mt-2">0.0x</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 p-6 rounded-lg bg-purple-50 border border-purple-200">
+                            <h3 class="text-xl font-semibold text-purple-800">Lever 2: Improve Avg. Deal Size</h3>
+                            <label for="dealSizeImprovement" class="block text-sm font-medium text-slate-700">
+                                Improve Avg. Deal Size by: <span id="dealSizeImprovementLabel" class="font-bold text-purple-700">15%</span>
+                                (New Avg. Deal Size: <span id="newAvgDealSizeLabel" class="font-bold">0</span>)
+                            </label>
+                            <input type="range" id="dealSizeImprovement" min="0" max="50" value="15" step="1" class="w-full">
+                            
+                            <div class="bg-white p-6 rounded-xl border border-purple-200">
+                                <label class="text-base font-medium text-purple-900">New Deals Needed</label>
+                                <p id="newDealsNeeded" class="text-3xl font-extrabold text-purple-700 mt-2">0</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-xl border border-purple-200">
+                                <label class="text-base font-medium text-purple-900">Pipeline Coverage</label>
+                                <p id="dealsPipelineCoverage" class="text-3xl font-extrabold text-purple-700 mt-2">0.0x</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 p-6 rounded-lg bg-green-50 border border-green-200">
+                            <h3 class="text-xl font-semibold text-green-800">Lever 3: Increase Meetings</h3>
+                            <p class="text-sm text-slate-600">Context: Deals with in-person meetings are 40% more likely to close.</p>
+                            
+                            <label for="meetingImprovement" class="block text-sm font-medium text-slate-700">
+                                Increase Avg. Quarterly Meetings by: <span id="meetingImprovementLabel" class="font-bold text-green-700">5</span>
+                                (New Quarterly Avg: <span id="newMeetingAvgLabel" class="font-bold">0</span>)
+                            </label>
+                            <input type="range" id="meetingImprovement" min="0" max="20" value="5" step="1" class="w-full">
+                            
+                            <label for="meetingsImpliedWinRate" class="block text-sm font-medium text-slate-700 mt-2">
+                                My Implied New Win Rate from this activity:
+                            </label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">%</span>
+                                <input type="number" id="meetingsImpliedWinRate" class="input-field pr-7" placeholder="e.g., 28">
+                            </div>
+
+                            <div class="bg-white p-6 rounded-xl border border-green-200">
+                                <label class="text-base font-medium text-green-900">New Pipeline Needed</label>
+                                <p id="meetingsPipelineNeeded" class="text-3xl font-extrabold text-green-700 mt-2">0</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-xl border border-green-200">
+                                <label class="text-base font-medium text-green-900">New Pipeline Coverage</label>
+                                <p id="meetingsPipelineCoverage" class="text-3xl font-extrabold text-green-700 mt-2">0.0x</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </div> <div id="step-4-content" class="step-panel hidden">
+                <section>
+                    <h2 class="step-heading" tabindex="-1">Step 4 : My Action Plan for 2026</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <label class="input-label !font-semibold !text-base !text-gray-800">My Primary Goal (The Lever):</label>
+                            <div class="flex flex-wrap gap-x-6 gap-y-2 mt-2">
+                                <div class="flex items-center">
+                                    <input id="goal-win-rate" name="primaryGoal" type="radio" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300">
+                                    <label for="goal-win-rate" class="ml-2 block text-sm text-gray-900">"I will focus on improving my <strong>Win Rate</strong> (Lever 1)."</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="goal-deal-size" name="primaryGoal" type="radio" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300">
+                                    <label for="goal-deal-size" class="ml-2 block text-sm text-gray-900">"I will focus on improving my <strong>Avg. Deal Size</strong> (Lever 2)."</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="goal-meetings" name="primaryGoal" type="radio" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300">
+                                    <label for="goal-meetings" class="ml-2 block text-sm text-gray-900">"I will focus on increasing my <strong>In-Person Meetings</strong> (Lever 3)."</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="goal-both" name="primaryGoal" type="radio" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300">
+                                    <label for="goal-both" class="ml-2 block text-sm text-gray-900">"I will focus on <strong>Both (Levers 1 & 2)</strong>."</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="goal-all-three" name="primaryGoal" type="radio" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300">
+                                    <label for="goal-all-three" class="ml-2 block text-sm text-gray-900">"I will focus on <strong>All Three Levers</strong>."</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="input-label">Key Action 1:</label>
+                            <input type="text" class="input-field" placeholder="e.g., I will disqualify 20% more deals before the demo stage...">
+                        </div>
+                        <div>
+                            <label class="input-label">Key Action 2:</label>
+                            <input type="text" class="input-field" placeholder="e.g., I will use the '3 Whys' on every discovery call...">
+                        </div>
+                        <div>
+                            <label class="input-label">Key Action 3:</label>
+                            <input type="text" class="input-field" placeholder="e.g., I will bring a technical expert into 100% of my deals over 75k...">
+                        </div>
+                        
+                        <div>
+                            <label class="input-label !font-semibold !text-base !text-gray-800">My Secondary goal (Activity): "Complete the PIC Certification by [Date]"</label>
+                            <label class="input-label mt-2">Key Action:</label>
+                            <input type="text" class="input-field" placeholder="e.g., I will block 2 hours on my calendar every Friday...">
+                        </div>
+                        
+                        <div>
+                            <label class="input-label !font-semibold !text-base !text-gray-800">My Forecasting Goal (Predictability): "My Rep Commit will be 95-105% accurate every quarter."</label>
+                            <label class="input-label mt-2">Key Action:</label>
+                            <input type="text" class="input-field" placeholder="e.g., I will 'murder-board' my own commit list...">
+                        </div>
+
+                        <div>
+                            <label class="input-label !font-semibold !text-base !text-gray-800">My Personal Improvement Plan:</label>
+                            <div class="mt-2 space-y-4">
+                                <div>
+                                    <label class="input-label">1. Account Planning:</label>
+                                    <input type="text" class="input-field" placeholder="e.g., I will create a 4-quarter plan for my Top 10 accounts...">
+                                </div>
+                                <div>
+                                    <label class="input-label">2. Territory Management:</label>
+                                    <input type="text" class="input-field" placeholder="e.g., I will segment my territory and run one mini-campaign per quarter...">
+                                </div>
+                                <div>
+                                    <label class="input-label">3. Cross Selling:</label>
+                                    <input type="text" class="input-field" placeholder="e.g., I will identify 2 cross-sell opportunities in my Top 10 accounts...">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+
+
+            <div id="navigation-buttons" class="mt-12 pt-6 border-t border-gray-300 flex justify-between items-center">
+                <button type="button" id="prevButton" class="nav-button nav-button-default" style="display: none;">
+                    Previous
+                </button>
+                
+                <div class="flex-grow"></div>
+
+                <div class="flex gap-4">
+                     <button type="button" id="resetButton" class="nav-button nav-button-secondary" style="display: none;">
+                         Start Over
+                     </button>
+                     <button type="button" id="printButton" class="nav-button nav-button-primary text-center" style="display: none;">
+                         <div>
+                             <span>Save as PDF / Submit</span>
+                             <span class="block text-xs font-normal opacity-80">My 2026 Success Plan Commitment</span>
+                         </div>
+                     </button>
+                     <button type="button" id="nextButton" class="nav-button nav-button-primary">
+                         Next
+                     </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<script>
+    // --- Helper Functions ---
+    const $ = (selector) => document.getElementById(selector);
+    
+    const formatLargeNumber = (val) => {
+        if (isNaN(val) || !isFinite(val)) return '0';
+        return val.toLocaleString('en-US', { maximumFractionDigits: 0 });
+    };
+    const formatPercent = (val) => {
+        if (isNaN(val) || !isFinite(val)) return '0%';
+        return val.toFixed(1) + '%';
+    };
+    const formatNumber = (val) => {
+        if (isNaN(val) || !isFinite(val)) return '0';
+        return val.toLocaleString('en-US', { maximumFractionDigits: 1 });
+    };
+    const formatCoverage = (val) => {
+        if (isNaN(val) || !isFinite(val)) return '0.0x';
+        return val.toFixed(1) + 'x';
+    };
+
+    // --- Main Calculation Function ---
+    function calculatePlan() {
+        // Get all input values
+        const quota2025 = parseFloat($('quota2025').value.replace(/,/g, '')) || 0;
+        const bookings2025 = parseFloat($('bookings2025').value.replace(/,/g, '')) || 0;
+        const winRate2025 = parseFloat($('winRate2025').value) || 0;
+        const avgDealSize2025 = parseFloat($('avgDealSize2025').value.replace(/,/g, '')) || 0;
+        const avgMeetings2025 = parseFloat($('avgMeetings2025').value) || 0;
+        const quota2026 = parseFloat($('quota2026').value.replace(/,/g, '')) || 0;
+        const winRateImprovement = parseFloat($('winRateImprovement').value) || 0;
+        const dealSizeImprovement = parseFloat($('dealSizeImprovement').value) || 0;
+        
+        const meetingImprovement = parseFloat($('meetingImprovement').value) || 0;
+        const meetingsImpliedWinRate = parseFloat($('meetingsImpliedWinRate').value) || 0;
+
+        // --- Step 1 Calculations ---
+        const attainment2025 = quota2025 > 0 ? (bookings2025 / quota2025) * 100 : 0;
+        $('attainment2025').textContent = formatPercent(attainment2025);
+
+        // --- Step 2 Calculations ---
+        const winRateDecimal = winRate2025 / 100;
+        const pipelineToClose2026 = winRateDecimal > 0 ? quota2026 / winRateDecimal :.0;
+        const dealsToClose2026 = avgDealSize2025 > 0 ? pipelineToClose2026 / avgDealSize2025 : 0;
+        
+        $('pipelineToClose2026').textContent = formatLargeNumber(pipelineToClose2026);
+        $('dealsToClose2026').textContent = formatNumber(dealsToClose2026);
+
+        // --- Step 3 Calculations ---
+        // Scenario A: Win Rate
+        const newWinRate = winRate2025 + winRateImprovement;
+        const newWinRateDecimal = newWinRate / 100;
+        const newPipelineNeeded = newWinRateDecimal > 0 ? quota2026 / newWinRateDecimal : 0;
+        const newPipelineCoverage = quota2026 > 0 ? newPipelineNeeded / quota2026 : 0;
+
+        $('winRateImprovementLabel').textContent = `${winRateImprovement.toFixed(1)}%`;
+        $('newWinRateLabel').textContent = formatPercent(newWinRate);
+        $('newPipelineNeeded').textContent = formatLargeNumber(newPipelineNeeded);
+        $('newPipelineCoverage').textContent = formatCoverage(newPipelineCoverage);
+
+        // Scenario B: Avg. Deal Size
+        const newAvgDealSize = avgDealSize2025 * (1 + (dealSizeImprovement / 100));
+        // EXPERT COMMENT: This calculation shows the number of *new, larger* deals
+        // needed to hit quota. This is correct for this scenario.
+        const newDealsNeeded = newAvgDealSize > 0 ? quota2026 / newAvgDealSize : 0;
+        // EXPERT COMMENT: This calculation shows the pipeline coverage *if you only
+        // rely on your 2025 win rate*, as a baseline.
+        const dealsPipelineCoverage = quota2026 > 0 ? pipelineToClose2026 / quota2026 : 0; 
+
+        $('dealSizeImprovementLabel').textContent = `${dealSizeImprovement.toFixed(1)}%`;
+        $('newAvgDealSizeLabel').textContent = formatLargeNumber(newAvgDealSize);
+        $('newDealsNeeded').textContent = formatNumber(newDealsNeeded);
+        $('dealsPipelineCoverage').textContent = formatCoverage(dealsPipelineCoverage);
+
+        // Scenario C: In-Person Meetings
+        const newMeetingAvg = avgMeetings2025 + meetingImprovement;
+        const meetingsImpliedWinRateDecimal = meetingsImpliedWinRate / 100;
+        const meetingsPipelineNeeded = meetingsImpliedWinRateDecimal > 0 ? quota2026 / meetingsImpliedWinRateDecimal : 0;
+        const meetingsPipelineCoverage = quota2026 > 0 ? meetingsPipelineNeeded / quota2026 : 0;
+        
+        $('meetingImprovementLabel').textContent = meetingImprovement.toFixed(0);
+        $('newMeetingAvgLabel').textContent = newMeetingAvg.toFixed(0);
+        $('meetingsPipelineNeeded').textContent = formatLargeNumber(meetingsPipelineNeeded);
+        $('meetingsPipelineCoverage').textContent = formatCoverage(meetingsPipelineCoverage);
+    }
+
+    // --- Wizard Logic ---
+    let currentStep = 1;
+    const totalSteps = 4;
+
+    function showStep(step) {
+        // Hide all steps
+        for (let i = 1; i <= totalSteps; i++) {
+            $(`step-${i}-content`).classList.add('hidden');
+            $(`progress-${i}`).classList.remove('progress-step-active');
+        }
+        
+        // Show current step
+        const stepContent = $(`step-${step}-content`);
+        stepContent.classList.remove('hidden');
+
+        // Update progress bar
+        for (let i = 1; i <= step; i++) {
+            $(`progress-${i}`).classList.add('progress-step-active');
+        }
+
+        // Update button visibility
+        $('prevButton').style.display = (step === 1) ? 'none' : 'inline-block';
+        $('nextButton').style.display = (step === totalSteps) ? 'none' : 'inline-block';
+        $('printButton').style.display = (step === totalSteps) ? 'inline-block' : 'none';
+        $('resetButton').style.display = (step === totalSteps) ? 'inline-block' : 'none';
+
+        // ACCESSIBILITY: Set focus to the new step's heading
+        const heading = stepContent.querySelector('.step-heading');
+        if (heading) {
+            heading.focus();
+        }
+    }
+
+    // --- Event Listeners ---
+    document.addEventListener('DOMContentLoaded', () => {
+        // Add listeners to all inputs
+        const inputsToTrack = [
+            'quota2025', 'bookings2025', 'winRate2025', 'avgDealSize2025', 'quota2026',
+            'avgMeetings2025'
+        ];
+        inputsToTrack.forEach(id => {
+            if ($(id)) {
+                $(id).addEventListener('input', calculatePlan);
+            }
+        });
+
+        // Add listeners to sliders and new inputs
+        const slidersAndInputs = [
+            'winRateImprovement', 'dealSizeImprovement', 'meetingImprovement', 'meetingsImpliedWinRate'
+        ];
+        slidersAndInputs.forEach(id => {
+            if ($(id)) {
+                $(id).addEventListener('input', calculatePlan);
+            }
+        });
+
+        // Navigation buttons
+        $('nextButton').addEventListener('click', () => {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        });
+
+        $('prevButton').addEventListener('click', () => {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        });
+
+        // Reset Form
+        $('resetButton').addEventListener('click', () => {
+            $('skoForm').reset();
+            calculatePlan(); // Recalculate to set all outputs to 0
+            currentStep = 1;
+            showStep(currentStep);
+            // ACCESSIBILITY: Set focus back to the main heading
+            $('main-heading').focus();
+        });
+
+        // Print button
+        $('printButton').addEventListener('click', () => {
+            window.print();
+        });
+
+        // Initial calculation on load
+        calculatePlan();
+        // Show the first step
+        showStep(currentStep);
+    });
+
+</script>
