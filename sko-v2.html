@@ -31,25 +31,46 @@
     
     /* Wizard Container & Conversational Style */
     .wizard-container {
-        max-width: 48rem; /* Equivalent to max-w-4xl */
-        margin-left: auto;
-        margin-right: auto;
-        padding: 2.5rem; /* p-10 */
+        /* Mobile First: Tight Padding, Smaller Max Width */
+        max-width: 100%;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        padding: 1rem; /* p-4 on mobile */
         background-color: #ffffff;
         border-radius: 0.5rem; /* rounded-lg */
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-2xl */
-        margin-top: 3rem;
-        margin-bottom: 3rem;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); 
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    /* Larger Screens: Restore original size */
+    @media (min-width: 768px) {
+        .wizard-container {
+            max-width: 48rem; /* Equivalent to max-w-4xl */
+            margin-left: auto;
+            margin-right: auto;
+            padding: 2.5rem; /* p-10 */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+        }
     }
 
     .conversation-bubble {
         background-color: #f3f6f9; /* system-bg */
         border: 1px solid #e5e7eb;
-        padding: 1.5rem;
-        margin-bottom: 2rem;
+        padding: 1rem; /* Reduced padding for mobile */
+        margin-bottom: 1.5rem;
         border-radius: 0.5rem;
-        font-size: 1.05rem;
-        line-height: 1.6;
+        font-size: 0.95rem; /* Smaller text on mobile */
+        line-height: 1.5;
+    }
+    @media (min-width: 768px) {
+        .conversation-bubble {
+            padding: 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
     }
 
     .conversation-bubble strong {
@@ -99,15 +120,20 @@
         background-color: #F9FAFB;
         border: 1px solid #E5E7EB;
         border-radius: 0.5rem;
-        padding: 1rem;
+        padding: 0.75rem; /* Reduced padding for mobile */
     }
     
     .calc-output {
         display: block;
-        font-size: 1.875rem;
+        font-size: 1.5rem; /* Smaller font for mobile */
         font-weight: 700;
         color: #0063a3;
         margin-top: 0.25rem;
+    }
+    @media (min-width: 768px) {
+        .calc-output {
+            font-size: 1.875rem;
+        }
     }
 
     /* Slider Styles (Retained) */
@@ -144,18 +170,33 @@
         -moz-appearance: textfield;
     }
     
-    /* Navigation Buttons (Retained) */
+    /* Navigation Buttons (Optimized for Mobile) */
+    .nav-button-group {
+        display: flex;
+        gap: 0.5rem; /* Reduced gap */
+        flex-wrap: wrap; /* Allow wrapping if necessary */
+        justify-content: flex-end;
+    }
+
     .nav-button {
         display: inline-block;
-        padding: 0.625rem 1.25rem;
+        padding: 0.5rem 1rem; /* Reduced padding for mobile */
         border-radius: 0.375rem;
-        font-size: 0.875rem;
+        font-size: 0.8rem; /* Smaller font on mobile */
         font-weight: 600;
         text-align: center;
         border: 1px solid transparent;
         transition: all 0.2s;
         cursor: pointer;
+        white-space: nowrap; /* Prevent buttons from splitting words */
     }
+    @media (min-width: 768px) {
+        .nav-button {
+            padding: 0.625rem 1.25rem;
+            font-size: 0.875rem;
+        }
+    }
+
     .nav-button-primary {
         background-color: #0063a3;
         color: #FFFFFF;
@@ -174,8 +215,8 @@
     .nav-button-default:hover {
         background-color: #D1D5DB;
     }
-
-    /* Tooltip Styles (Simplified/Retained) */
+    
+    /* Tooltip Styles (Retained) */
     .tooltip-trigger {
         position: relative;
         display: inline-block;
@@ -240,9 +281,9 @@
 
 <div class="bg-gray-100" style="font-family: 'Open Sans', sans-serif;">
     <div class="wizard-container">
-        <header class="mb-10 text-center space-y-2">
-            <h1 id="main-heading" class="text-3xl font-bold text-primary">The Trimble 2026 Success Plan</h1>
-            <p class="text-lg font-semibold text-primary-text">Personal Commitment Wizard (V2)</p>
+        <header class="mb-6 text-center space-y-2">
+            <h1 id="main-heading" class="text-2xl md:text-3xl font-bold text-primary">The Trimble 2026 Success Plan</h1>
+            <p class="text-base md:text-lg font-semibold text-primary-text">Personal Commitment Wizard (V2)</p>
             <p class="text-sm text-primary-text italic">PEOPLE, PIPELINE & PRODUCTIVITY</p>
         </header>
 
@@ -442,19 +483,19 @@
                 </div>
 
                 <div class="form-group" id="group-action-people">
-                    <label class="input-label">Action: Focus on **People** (Training, Coaching, Skill-building):</label>
+                    <label class="input-label">Action: Focus on <strong>People</strong> (Training, Coaching, Skill-building):</label>
                     <input type="text" id="action-people" class="input-field required-field" placeholder="e.g., I will complete PIC certification by Q2, or I will 'murder-board' my deals with my manager...">
                     <span id="error-action-people" class="error-message hidden">People action is required.</span>
                 </div>
                 
                 <div class="form-group" id="group-action-pipeline">
-                    <label class="input-label">Action: Focus on **Pipeline** (Qualification, Prospecting, Deal Flow):</label>
+                    <label class="input-label">Action: Focus on <strong>Pipeline</strong> (Qualification, Prospecting, Deal Flow):</label>
                     <input type="text" id="action-pipeline" class="input-field required-field" placeholder="e.g., I will disqualify 20% more deals before the demo stage, or I will run one targeted outreach campaign per month...">
                     <span id="error-action-pipeline" class="error-message hidden">Pipeline action is required.</span>
                 </div>
 
                 <div class="form-group" id="group-action-productivity">
-                    <label class="input-label">Action: Focus on **Productivity** (Tech Stack Use, Time Management):</label>
+                    <label class="input-label">Action: Focus on <strong>Productivity</strong> (Tech Stack Use, Time Management):</label>
                     <input type="text" id="action-productivity" class="input-field required-field" placeholder="e.g., I will block 2 hours on my calendar every Friday for administrative tasks, or I will utilize the pricing tool for all deals under $15k...">
                     <span id="error-action-productivity" class="error-message hidden">Productivity action is required.</span>
                 </div>
@@ -486,14 +527,14 @@
 
             </div>
 
-            <div id="navigation-buttons" class="mt-12 pt-6 border-t border-gray-300 flex justify-between items-center">
+            <div id="navigation-buttons" class="mt-8 pt-4 border-t border-gray-300 flex justify-between items-center">
                 <button type="button" id="prevButton" class="nav-button nav-button-default" style="display: none;">
                     ← Previous
                 </button>
                 
                 <div class="flex-grow"></div>
 
-                <div class="flex gap-4">
+                <div class="nav-button-group">
                      <button type="button" id="resetButton" class="nav-button nav-button-default">
                          Start Over
                      </button>
@@ -564,30 +605,30 @@
     };
     
     // --- Step Definitions (The Core Conversation) ---
-    // Maps a step index to the field/group it should display
+    // All bolding now uses HTML <strong> tags
     const steps = [
-        { id: 'intro', fieldId: null, prompt: "Welcome to the **Trimble 2026 Success Plan Wizard**! We're here to turn your ambition into measurable results. Hit **Next** to start establishing your baseline." }, // 0
-        { id: 'personName', fieldId: 'personName', prompt: "Let's start with the hero of this story! **What is your full name?** This ensures your plan gets properly credited to you." }, // 1
-        { id: 'managerName', fieldId: 'managerName', prompt: "Who's your co-pilot? **Please enter your manager's full name.** We need to know who to share your legendary commitment with!" }, // 2
-        { id: 'region', fieldId: 'region', prompt: "Geography check! **Which region are you primarily responsible for?** This helps us analyze regional trends." }, // 3
-        { id: 'quota2025', fieldId: 'quota2025', prompt: "Time for the look-back. **What was your total assigned Quota for 2025?** Enter the dollar amount only (no commas needed)." }, // 4
-        { id: 'bookings2025', fieldId: 'bookings2025', prompt: "And the result? **What were your total Bookings (Closed-Won Revenue) in 2025?** Enter the dollar amount. (Watch the Attainment calculator update!)" }, // 5
-        { id: 'winRate2025', fieldId: 'winRate2025', prompt: "Efficiency matters! **What was your average Win Rate (%) in 2025?** This is your baseline effectiveness. Enter the percentage (e.g., 25)." }, // 6
-        { id: 'avgDealSize2025', fieldId: 'avgDealSize2025', prompt: "Value check! **What was your average Deal Size ($) in 2025?** This metric defines the volume of business you typically handle." }, // 7
-        { id: 'avgMeetings2025', fieldId: 'avgMeetings2025', prompt: "Activity check! **On average, how many *in-person* customer meetings did you conduct each quarter?** This metric links activity to success." }, // 8
-        { id: 'quota2026', fieldId: 'quota2026', prompt: "Forward look! **What is your new 2026 Quota Commitment?** Enter the amount. The system will now calculate the massive pipeline and deal volume required *if* your 2025 efficiency remains the same." }, // 9
-        { id: 'reflection', fieldId: 'reflection', prompt: "Based on the intimidating required pipeline and deal count above, **how do you feel about your 2026 goal?** Be honest—this sets the stage for where you need to focus!" }, // 10
-        { id: 'winRateImprovement', fieldId: 'winRateImprovement', prompt: "### 💡 SCENARIO MODELING: LEVER 1 (Quality) ### Improving your **Win Rate** reduces the sheer amount of pipeline you need. **How much better can you get?** Adjust the slider to commit to a Win Rate percentage gain." }, // 11
-        { id: 'dealSizeImprovement', fieldId: 'dealSizeImprovement', prompt: "### 💡 SCENARIO MODELING: LEVER 2 (Value) ### Increasing your **Avg. Deal Size** reduces the *number of deals* you have to close. **How much larger can you make your deals?** Adjust the slider to commit to a percentage gain." }, // 12
-        { id: 'meetingImprovement', fieldId: 'meetingImprovement', prompt: "### 💡 SCENARIO MODELING: LEVER 3 (Activity) ### Commit to increasing your **Quarterly In-Person Meetings**. Then, set the **Implied New Win Rate (%)** you believe this increased activity will deliver. This sets your activity target!" }, // 13
-        { id: 'primaryGoal', fieldId: 'primaryGoal', prompt: "### 🚀 ACTION PLAN: PRIMARY FOCUS ### Based on the modeling you just completed, **which lever(s) will be your primary focus in 2026?** Choose the one that gives you the best return on effort." }, // 14
-        { id: 'action-people', fieldId: 'action-people', prompt: "### 🚀 ACTION PLAN: PEOPLE ### Commit to a **measurable action** focused on **PEOPLE** (e.g., training, coaching, skill development). What is your growth action for 2026?" }, // 15
-        { id: 'action-pipeline', fieldId: 'action-pipeline', prompt: "### 🚀 ACTION PLAN: PIPELINE ### Commit to a **measurable action** focused on **PIPELINE** (e.g., qualification, deal flow, prospecting). What action improves your deal quality?" }, // 16
-        { id: 'action-productivity', fieldId: 'action-productivity', prompt: "### 🚀 ACTION PLAN: PRODUCTIVITY ### Commit to a **measurable action** focused on **PRODUCTIVITY** (e.g., tech stack use, time management). What action saves you time or increases efficiency?" }, // 17
-        { id: 'action-forecast', fieldId: 'action-forecast', prompt: "### 🚀 ACTION PLAN: FORECASTING ### **My Rep Commit will be 95-105% accurate every quarter.** What is the **Key Action** you will take to guarantee this predictability?" }, // 18
-        { id: 'action-account-plan', fieldId: 'action-account-plan', prompt: "### 🚀 ACTION PLAN: GROWTH ### Define your plan for **Account Planning**. What measurable step will you take to manage strategic accounts better?" }, // 19
-        { id: 'action-cross-sell', fieldId: 'action-cross-sell', prompt: "### 🚀 ACTION PLAN: GROWTH ### Define your plan for **Cross Selling**. What measurable step will you take to expand business within existing accounts?" }, // 20
-        { id: 'review', fieldId: 'review', prompt: "### ✅ COMMITMENT REVIEW ### Congratulations! You have defined your 2026 Success Plan. Review the final commitment summary below, and when you are ready, click **Export JSON Data** to submit your plan to your manager.", group: $('group-review') } // 21
+        { id: 'intro', fieldId: null, prompt: "Welcome to the <strong>Trimble 2026 Success Plan Wizard</strong>! We're here to turn your ambition into measurable results. Hit <strong>Next</strong> to start establishing your baseline." }, // 0
+        { id: 'personName', fieldId: 'personName', prompt: "Let's start with the hero of this story! <strong>What is your full name?</strong> This ensures your plan gets properly credited to you." }, // 1
+        { id: 'managerName', fieldId: 'managerName', prompt: "Who's your co-pilot? <strong>Please enter your manager's full name.</strong> We need to know who to share your legendary commitment with!" }, // 2
+        { id: 'region', fieldId: 'region', prompt: "Geography check! <strong>Which region are you primarily responsible for?</strong> This helps us analyze regional trends." }, // 3
+        { id: 'quota2025', fieldId: 'quota2025', prompt: "Time for the look-back. <strong>What was your total assigned Quota for 2025?</strong> Enter the dollar amount only (no commas needed)." }, // 4
+        { id: 'bookings2025', fieldId: 'bookings2025', prompt: "And the result? <strong>What were your total Bookings (Closed-Won Revenue) in 2025?</strong> Enter the dollar amount. (Watch the Attainment calculator update!)" }, // 5
+        { id: 'winRate2025', fieldId: 'winRate2025', prompt: "Efficiency matters! <strong>What was your average Win Rate (%) in 2025?</strong> This is your baseline effectiveness. Enter the percentage (e.g., 25)." }, // 6
+        { id: 'avgDealSize2025', fieldId: 'avgDealSize2025', prompt: "Value check! <strong>What was your average Deal Size ($) in 2025?</strong> This metric defines the volume of business you typically handle." }, // 7
+        { id: 'avgMeetings2025', fieldId: 'avgMeetings2025', prompt: "Activity check! <strong>On average, how many <em>in-person</em> customer meetings did you conduct each quarter?</strong> This metric links activity to success." }, // 8
+        { id: 'quota2026', fieldId: 'quota2026', prompt: "Forward look! <strong>What is your new 2026 Quota Commitment?</strong> Enter the amount. The system will now calculate the massive pipeline and deal volume required <em>if</em> your 2025 efficiency remains the same." }, // 9
+        { id: 'reflection', fieldId: 'reflection', prompt: "Based on the intimidating required pipeline and deal count above, <strong>how do you feel about your 2026 goal?</strong> Be honest—this sets the stage for where you need to focus!" }, // 10
+        { id: 'winRateImprovement', fieldId: 'winRateImprovement', prompt: "<h3>💡 SCENARIO MODELING: LEVER 1 (Quality)</h3> Improving your <strong>Win Rate</strong> reduces the sheer amount of pipeline you need. <strong>How much better can you get?</strong> Adjust the slider to commit to a Win Rate percentage gain." }, // 11
+        { id: 'dealSizeImprovement', fieldId: 'dealSizeImprovement', prompt: "<h3>💡 SCENARIO MODELING: LEVER 2 (Value)</h3> Increasing your <strong>Avg. Deal Size</strong> reduces the <em>number of deals</em> you have to close. <strong>How much larger can you make your deals?</strong> Adjust the slider to commit to a percentage gain." }, // 12
+        { id: 'meetingImprovement', fieldId: 'meetingImprovement', prompt: "<h3>💡 SCENARIO MODELING: LEVER 3 (Activity)</h3> Commit to increasing your <strong>Quarterly In-Person Meetings</strong>. Then, set the <strong>Implied New Win Rate (%)</strong> you believe this increased activity will deliver. This sets your activity target!" }, // 13
+        { id: 'primaryGoal', fieldId: 'primaryGoal', prompt: "<h3>🚀 ACTION PLAN: PRIMARY FOCUS</h3> Based on the modeling you just completed, <strong>which lever(s) will be your primary focus in 2026?</strong> Choose the one that gives you the best return on effort." }, // 14
+        { id: 'action-people', fieldId: 'action-people', prompt: "<h3>🚀 ACTION PLAN: PEOPLE</h3> Commit to a <strong>measurable action</strong> focused on <strong>PEOPLE</strong> (e.g., training, coaching, skill development). What is your growth action for 2026?" }, // 15
+        { id: 'action-pipeline', fieldId: 'action-pipeline', prompt: "<h3>🚀 ACTION PLAN: PIPELINE</h3> Commit to a <strong>measurable action</strong> focused on <strong>PIPELINE</strong> (e.g., qualification, deal flow, prospecting). What action improves your deal quality?" }, // 16
+        { id: 'action-productivity', fieldId: 'action-productivity', prompt: "<h3>🚀 ACTION PLAN: PRODUCTIVITY</h3> Commit to a <strong>measurable action</strong> focused on <strong>PRODUCTIVITY</strong> (e.g., tech stack use, time management). What action saves you time or increases efficiency?" }, // 17
+        { id: 'action-forecast', fieldId: 'action-forecast', prompt: "<h3>🚀 ACTION PLAN: FORECASTING</h3> <strong>My Rep Commit will be 95-105% accurate every quarter.</strong> What is the <strong>Key Action</strong> you will take to guarantee this predictability?" }, // 18
+        { id: 'action-account-plan', fieldId: 'action-account-plan', prompt: "<h3>🚀 ACTION PLAN: GROWTH</h3> Define your plan for <strong>Account Planning</strong>. What measurable step will you take to manage strategic accounts better?" }, // 19
+        { id: 'action-cross-sell', fieldId: 'action-cross-sell', prompt: "<h3>🚀 ACTION PLAN: GROWTH</h3> Define your plan for <strong>Cross Selling</strong>. What measurable step will you take to expand business within existing accounts?" }, // 20
+        { id: 'review', fieldId: 'review', prompt: "<h3>✅ COMMITMENT REVIEW</h3> Congratulations! You have defined your 2026 Success Plan. Review the final commitment summary below, and when you are ready, click <strong>Export JSON Data</strong> to submit your plan to your manager.", group: $('group-review') } // 21
     ];
     
     // Groups that need validation (excluding intro and review)
@@ -595,11 +636,9 @@
 
     let currentStepIndex = 0;
     
-    // --- Validation Logic ---
+    // --- Validation Logic (Retained) ---
     function validateField(fieldId) {
         const input = $(fieldId);
-        // Handle fields that are synced (like the visible input for implied win rate)
-        const effectiveFieldId = input && input.dataset.syncId ? input.dataset.syncId : fieldId;
         const errorElement = $(`error-${fieldId}`);
         const value = getStringValue(fieldId);
         
@@ -618,7 +657,6 @@
         
         // Check for required numeric inputs (must be > 0 and a number)
         else if (isNumeric && (numValue <= 0 || !isFinite(numValue))) {
-             // Exception: Bookings can be 0, but usually not for an active rep. We'll keep the > 0 check for revenue/quota/deal size for business logic reasons.
             if (fieldId !== 'bookings2025' && fieldId !== 'meetingsImpliedWinRate_visible') {
                 isValid = false;
             }
@@ -633,7 +671,6 @@
         if (input && input.classList.contains('required-radio')) {
             const radioName = input.name;
             if (!getSelectedValue(radioName)) {
-                // We use the group error element for radio buttons
                 const radioError = $(`error-${radioName}`);
                 if (radioError) radioError.classList.remove('hidden');
                 isValid = false;
@@ -652,10 +689,9 @@
         const step = steps[currentStepIndex];
         const fieldId = step.fieldId;
         
-        if (!fieldId) return true; // Intro/Review have no fields
+        if (!fieldId) return true;
 
         if (fieldId.includes('action-') || fieldId === 'primaryGoal') {
-             // For action/goal steps, we validate the whole group if needed (Step 4 fields)
              const requiredGroupFields = document.querySelectorAll(`#group-${fieldId} .required-field, #group-${fieldId} .required-radio`);
              let groupValid = true;
              requiredGroupFields.forEach(field => {
@@ -674,33 +710,27 @@
     }
 
 
-    // --- Core Calculation Function ---
+    // --- Core Calculation Function (Retained) ---
     function calculatePlan() {
-        // Step 1 Inputs
         const quota2025 = getNumberValue('quota2025');
         const bookings2025 = getNumberValue('bookings2025');
         const winRate2025 = getNumberValue('winRate2025');
         const avgDealSize2025 = getNumberValue('avgDealSize2025');
         const avgMeetings2025 = getNumberValue('avgMeetings2025');
         
-        // Step 2/3 Inputs
         const quota2026 = getNumberValue('quota2026');
         const winRateImprovement = getNumberValue('winRateImprovement');
         const dealSizeImprovement = getNumberValue('dealSizeImprovement');
         const meetingImprovement = getNumberValue('meetingImprovement');
         
-        // Sync the visible meetings implied win rate to the hidden one for JSON export
         const meetingsImpliedWinRateVisible = getNumberValue('meetingsImpliedWinRate_visible');
         const meetingsImpliedWinRateHidden = $('meetingsImpliedWinRate');
         if(meetingsImpliedWinRateHidden) meetingsImpliedWinRateHidden.value = meetingsImpliedWinRateVisible;
         const meetingsImpliedWinRate = meetingsImpliedWinRateVisible;
 
-
-        // Step 1 Calculations
         const attainment2025 = quota2025 > 0 ? (bookings2025 / quota2025) * 100 : 0;
         if($('attainment2025')) $('attainment2025').textContent = formatPercent(attainment2025);
 
-        // Step 2 Calculations (Baseline required pipeline)
         const winRateDecimal = winRate2025 / 100;
         const pipelineToClose2026 = winRateDecimal > 0 ? quota2026 / winRateDecimal : 0;
         const dealsToClose2026 = avgDealSize2025 > 0 ? pipelineToClose2026 / avgDealSize2025 : 0;
@@ -708,12 +738,9 @@
         if($('pipelineToClose2026')) $('pipelineToClose2026').textContent = formatCurrency(pipelineToClose2026);
         if($('dealsToClose2026')) $('dealsToClose2026').textContent = formatNumber(dealsToClose2026);
         
-        // Store baseline data
         window.planData.pipelineToClose2026 = pipelineToClose2026;
         window.planData.dealsToClose2026 = dealsToClose2026;
 
-
-        // Step 3 - A (Win Rate Scenario)
         const newWinRate = winRate2025 + winRateImprovement;
         const newWinRateDecimal = newWinRate / 100;
         const newPipelineNeeded = newWinRateDecimal > 0 ? quota2026 / newWinRateDecimal : 0;
@@ -722,7 +749,6 @@
         if($('newWinRateLabel')) $('newWinRateLabel').textContent = formatPercent(newWinRate);
         if($('newPipelineNeeded')) $('newPipelineNeeded').textContent = formatCurrency(newPipelineNeeded);
 
-        // Step 3 - B (Deal Size Scenario)
         const newAvgDealSize = avgDealSize2025 * (1 + (dealSizeImprovement / 100));
         const newDealsNeeded = newAvgDealSize > 0 ? quota2026 / newAvgDealSize : dealsToClose2026;
         
@@ -730,7 +756,6 @@
         if($('newAvgDealSizeLabel')) $('newAvgDealSizeLabel').textContent = formatCurrency(newAvgDealSize);
         if($('newDealsNeeded')) $('newDealsNeeded').textContent = formatNumber(newDealsNeeded);
         
-        // Step 3 - C (Meetings Scenario)
         const newMeetingAvg = avgMeetings2025 + meetingImprovement;
         const meetingsImpliedWinRateDecimal = meetingsImpliedWinRate / 100;
         const meetingsPipelineNeeded = meetingsImpliedWinRateDecimal > 0 ? quota2026 / meetingsImpliedWinRateDecimal : pipelineToClose2026;
@@ -739,16 +764,14 @@
         if($('newMeetingAvgLabel')) $('newMeetingAvgLabel').textContent = `${newMeetingAvg.toFixed(0)}`;
         if($('meetingsPipelineNeeded')) $('meetingsPipelineNeeded').textContent = formatCurrency(meetingsPipelineNeeded);
         
-        // Final targeted Win Rate (Highest of Lever 1 or Lever 3) - for JSON & Summary
         const finalTargetWinRate = Math.max(newWinRate, meetingsImpliedWinRate);
         window.planData.finalTargetWinRate = finalTargetWinRate;
         window.planData.finalTargetPipeline = finalTargetWinRate > 0 ? quota2026 / (finalTargetWinRate / 100) : pipelineToClose2026;
 
-        // Update summary if on the final step
         if (steps[currentStepIndex].id === 'review') generateCommitmentSummary();
     }
 
-    // --- Step 21 Summary Generation ---
+    // --- Step 21 Summary Generation (Retained) ---
     function generateCommitmentSummary() {
         // Collect all data
         const personName = getStringValue('personName');
@@ -819,12 +842,12 @@
         return summaryText;
     }
 
-    // --- JSON Export ---
+    // --- JSON Export (Retained) ---
     function generateJSONData() {
         calculatePlan(); 
         
         const metadata = {
-            plan_version: "2026.4",
+            plan_version: "2026.5",
             date_exported: new Date().toISOString(),
             rep_name: getStringValue('personName'),
             manager_name: getStringValue('managerName'),
@@ -866,9 +889,8 @@
         return { metadata, inputs, actions };
     }
 
-    // --- Wizard Logic ---
+    // --- Wizard Logic (Retained) ---
     function showStep(stepIndex) {
-        // Hide all field groups and reset error messages
         document.querySelectorAll('.form-group').forEach(group => {
             group.style.display = 'none';
         });
@@ -879,27 +901,22 @@
         currentStepIndex = stepIndex;
         const step = steps[stepIndex];
         
-        // Update conversation bubble
         $('conversation-bubble').innerHTML = step.prompt;
 
-        // Show current field group(s)
         const groupElements = document.querySelectorAll(`#group-${step.fieldId}`);
         groupElements.forEach(el => {
             el.style.display = 'block';
         });
         
-        // Special case: Lever groups (11, 12, 13) are grouped together conceptually for Scenario Modeling
         if (stepIndex >= 11 && stepIndex <= 13) {
             $('group-winRateImprovement').style.display = 'block';
             $('group-dealSizeImprovement').style.display = 'block';
             $('group-meetingImprovement').style.display = 'block';
         }
 
-        // Final step actions
         const isReviewStep = step.id === 'review';
         if (isReviewStep) generateCommitmentSummary();
 
-        // Update buttons
         $('prevButton').style.display = stepIndex > 0 ? 'inline-block' : 'none';
         $('nextButton').style.display = isReviewStep ? 'none' : 'inline-block';
         
@@ -908,11 +925,9 @@
         $('copyCommitmentButton').style.display = finalActionsVisible ? 'inline-block' : 'none';
         $('printButton').style.display = finalActionsVisible ? 'inline-block' : 'none';
 
-        // Set focus to the first input of the current step (for accessibility)
         const currentInput = step.fieldId ? $(step.fieldId) || document.querySelector(`#group-${step.fieldId} input, #group-${step.fieldId} select, #group-${step.fieldId} textarea`) : null;
         if (currentInput) currentInput.focus();
 
-        // Check validation state for the Next button
         updateNextButtonState();
     }
 
@@ -920,7 +935,6 @@
         const nextButton = $('nextButton');
         if (!nextButton || steps[currentStepIndex].id === 'review') return;
         
-        // Scenarios (11, 12, 13) do not have mandatory validation before proceeding
         if (currentStepIndex >= 11 && currentStepIndex <= 13) {
             nextButton.disabled = false;
             return;
@@ -931,10 +945,8 @@
     }
 
     function nextStep() {
-        // Validate before moving forward (unless it's the intro or a scenario step)
         if (currentStepIndex >= 11 && currentStepIndex <= 13) {
-             // Special case: Scenarios (steps 11, 12, 13) allow skipping but move us to the next sequential step index.
-             currentStepIndex = 14; // Skip directly to Primary Goal
+             currentStepIndex = 14; 
              showStep(currentStepIndex);
              return;
         }
@@ -944,17 +956,15 @@
                 currentStepIndex++;
                 showStep(currentStepIndex);
             }
-        } else {
-             // Error messages are shown by validateCurrentStep()
         }
     }
 
     function previousStep() {
         if (currentStepIndex > 0) {
             if (currentStepIndex > 14) {
-                 currentStepIndex = 14; // Go directly back to primary goal selection from any P-P-P action
+                 currentStepIndex = 14;
             } else if (currentStepIndex >= 11 && currentStepIndex <= 13) {
-                currentStepIndex = 10; // Go directly back to reflection from any scenario
+                currentStepIndex = 10;
             } else {
                 currentStepIndex--;
             }
@@ -962,7 +972,7 @@
         }
     }
 
-    // --- Data Download & Copy Handlers ---
+    // --- Data Download & Copy Handlers (Retained) ---
     function copyToClipboard(text) {
         navigator.clipboard.writeText(text).then(() => {
             const button = $('copyCommitmentButton');
@@ -990,7 +1000,7 @@
         URL.revokeObjectURL(url);
     }
     
-    // --- Initialization ---
+    // --- Initialization (Retained) ---
     document.addEventListener('DOMContentLoaded', () => {
         
         const inputsToTrack = [
@@ -1005,7 +1015,6 @@
             if (el) {
                 const handler = () => {
                     calculatePlan();
-                    // Check validation state ONLY for the current active step group
                     if (currentStepIndex === steps.findIndex(s => s.fieldId === id) || (currentStepIndex >= 14)) {
                          updateNextButtonState();
                     }
@@ -1015,7 +1024,6 @@
             }
         });
         
-        // Special handler for radio buttons (reflection and primaryGoal)
         const radioNames = ['reflection', 'primaryGoal'];
         radioNames.forEach(name => {
             document.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
@@ -1026,7 +1034,6 @@
             });
         });
 
-        // Navigation button listeners
         $('nextButton').addEventListener('click', nextStep);
         $('prevButton').addEventListener('click', previousStep);
         
@@ -1055,8 +1062,7 @@
             downloadJSON(data, fileName);
         });
 
-        // Initial setup on page load
         calculatePlan();
-        showStep(0); // Start on the intro step
+        showStep(0);
     });
 </script>
