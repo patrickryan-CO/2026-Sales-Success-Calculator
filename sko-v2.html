@@ -605,15 +605,6 @@
 
             </div>
             
-            <div class="progress-bar" id="progress-bar-container">
-                <div id="progress-1" class="progress-segment">BASELINE</div>
-                <div id="progress-2" class="progress-segment">THE GAP</div>
-                <div id="progress-3" class="progress-segment">PIPE PLAN</div>
-                <div id="progress-4" class="progress-segment">SCENARIOS</div>
-                <div id="progress-5" class="progress-segment">ACTION PLAN</div>
-                <div id="progress-6" class="progress-segment">REVIEW</div>
-            </div>
-
             <div id="navigation-buttons" class="mt-8 pt-4 border-t border-gray-300 flex justify-between items-center">
                 <button type="button" id="prevButton" class="nav-button nav-button-default" style="display: none;">
                     ← Previous
@@ -691,44 +682,48 @@
         };
         
         // --- Step Definitions (The Core Conversation) ---
-        // NEW: Friendly tone, Phase "Front Pages" added
+        // NEW: 6 Phases, new intro text, friendlier tone, better examples
         const steps = [
             // --- Intro (Step 0) ---
-            { id: 'intro', fieldId: null, phase: 1, prompt: "Alright, let's get started. This wizard is your personal coach for building a measurable 2026 Success Plan. We'll walk through three phases: looking at your 2025 data, finding your 2026 gap, and then building a smart action plan to close it. Ready? Hit <strong>Next</strong>." }, // 0
+            { id: 'intro', fieldId: null, phase: 1, prompt: "Alright, let's get started. This wizard is your personal coach for building a measurable 2026 Success Plan. We'll walk through this together, one step at a time. Ready? Hit <strong>Next</strong>." }, // 0
             
-            // --- Phase 1: See the Data (Steps 1-9) ---
-            { id: 'phase1-welcome', fieldId: null, phase: 1, prompt: "<h3>PHASE 1: SEE THE DATA (Your Baseline)</h3><p class='prompt-why'>First, let's get an honest look at your starting point. You can't plan a new journey until you know where you are on the map.</p><p class='prompt-example'>For this section, please have your <strong>Sales Scorecard</strong> open. This is your 'cheat sheet' for all your 2025 performance data.</p>" }, // 1
+            // --- Phase 1: BASELINE (Steps 1-9) ---
+            { id: 'phase1-welcome', fieldId: null, phase: 1, prompt: "<h3>PHASE 1: Your 2025 Baseline</h3><p class='prompt-why'>First, let's get an honest look at your starting point. You can't set a new course until you know where you are on the map.</p><p class='prompt-example'>For this section, please have your <strong>Sales Scorecard</strong> open. This is your 'cheat sheet' for all your 2025 performance data.</p>" }, // 1
             { id: 'personName', fieldId: 'personName', phase: 1, prompt: "First things first, <strong>what's your full name?</strong>" }, // 2
             { id: 'managerName', fieldId: 'managerName', phase: 1, prompt: "Great. Now, <strong>who is your manager?</strong> This plan is a commitment you'll both work on, so their name is important." }, // 3
             { id: 'region', fieldId: 'region', phase: 1, prompt: "Geography check! <strong>Which region are you primarily responsible for?</strong> (This will customize your workshop content later)." }, // 4
             { id: 'quota2025', fieldId: 'quota2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>Alright, let's open your <strong>Sales Scorecard</strong>. For the next few steps, you'll be pulling your 2025 numbers from that scorecard. First, what was your <strong>2025 Quota ($)?</strong></p>" }, // 5
             { id: 'bookings2025', fieldId: 'bookings2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>On that same scorecard, find your <strong>2025 Bookings ($)</strong> (your total closed-won revenue).</p><p class='prompt-example'><strong>Why?</strong> This calculates your 2025 Attainment. This plan is about honesty. Be accurate so we can build a realistic path forward.</p>" }, // 6
             { id: 'winRate2025', fieldId: 'winRate2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>This is a key one. <strong>Look at your scorecard</strong> for your <strong>2025 Baseline Win Rate (%)</strong>.</p><p class='prompt-example'><strong>Why?</strong> This is your <em>quality & qualification</em> metric. A low rate might mean you're wasting time on unqualified deals.</p>" }, // 7
-            { id: 'avgDealSize2025', fieldId: 'avgDealSize2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>Next, find your <strong>2025 Avg. Deal Size ($)</strong> on your scorecard.</p><p class='prompt-example'><strong>Why?</strong> This is your <em>value</em> metric. Are you selling single products, or are you selling the full 'Connect & Scale' solution? A higher number here means a more efficient sales motion.</p>" }, // 8
+            { id: 'avgDealSize2025', fieldId: 'avgDealSize2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>Next, find your <strong>2025 Avg. Deal Size ($)</strong> on your scorecard.</p><p class='prompt-example'><strong>Why?</strong> This is your <em>value</em> metric. Are you selling single products, or are you selling the full 'Connect & Scale' solution? For example, are you selling <strong>Viewpoint</strong> to a customer who already uses <strong>Tekla</strong>?</p>" }, // 8
             { id: 'avgMeetings2025', fieldId: 'avgMeetings2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>Last baseline number: Find your <strong>2025 Avg. In-Person Meetings (Quarterly)</strong> on your scorecard's activity tab.</p><p class='prompt-example'><strong>Why?</strong> This is your <em>activity</em> metric. In our complex industries, face-time with customers is directly linked to success.</p>" }, // 9
 
-            // --- Phase 2: See the Gap (Steps 10-15) ---
-            { id: 'phase2-welcome', fieldId: null, phase: 2, prompt: "<h3>PHASE 2: SEE THE GAP (Your 2026 Challenge)</h3><p class='prompt-why'>Great, that's your 2025 baseline. You can't set a new course until you know where you're starting from.</p><p class='prompt-why'>Now for Phase 2: let's figure out the <em>size* of your 2026 challenge. Hit <strong>Next</strong> to see the gap.</p>" }, // 10
+            // --- Phase 2: THE GAP (Steps 10-12) ---
+            { id: 'phase2-welcome', fieldId: null, phase: 2, prompt: "<h3>PHASE 2: THE GAP (Your 2026 Challenge)</h3><p class='prompt-why'>Great, your 2025 baseline is set. Now for Phase 2: let's figure out the <em>size* of your 2026 challenge.</p><p class='prompt-example'>In this section, you'll enter your new quota and see the gap it creates. This is the 'scary number' we're going to build a plan to conquer.</p>" }, // 10
             { id: 'quota2026', fieldId: 'quota2026', phase: 2, prompt: "<h3>Step 2: The 2026 Formula</h3><p class='prompt-why'>This is the big one: what is your <strong>2026 Quota Commitment ($)?</strong></p><p class='prompt-example'><strong>Why?</strong> Enter your new number. The tool will *immediately* calculate what's required to hit this goal *if you change nothing*. This isn't your plan; it's the *problem* we're about to solve together.</p>" }, // 11
             { id: 'reflection', fieldId: 'reflection', phase: 2, prompt: "<h3>Step 2: The 2026 Formula</h3><p class='prompt-why'>Okay, take a look at those 'Required' numbers. Based on that hard math, <strong>how does your 2026 goal feel right now?</strong></p><p class='prompt-example'><strong>Why?</strong> Be honest. If it feels 'Impossible,' it just means your 2025 efficiency isn't good enough for 2026. That's fine! The next steps are <em>how</em> we fix that.</p>" }, // 12
-            { id: 'recommendedCoverage', fieldId: 'recommendedCoverage', phase: 2, prompt: "<h3>Step 3: Your Pipeline Plan</h3><p class='prompt-why'>On your <strong>Sales Scorecard</strong>, you'll see a <strong>Recommended Pipeline Coverage</strong> (like 1.9x or 2.5x). What is that number?</p><p class='prompt-example'><strong>Why?</strong> This number is your *personal* success formula. It's the total pipeline you *actually* need to hit your number. The tool will now calculate your **Total Pipeline Gap** in real dollars.</p>" }, // 13
-            { id: 'pipelineMix', fieldId: 'pipelineMix', phase: 2, prompt: "<h3>Step 3: Your Pipeline Plan</h3><p class='prompt-why'>Your scorecard shows your *past* pipeline mix. Let's plan your *future* mix. How will you build your 2026 pipeline? (Must total 100%).</p><p class='prompt-example'><strong>Why?</strong> This forces you to think strategically. To hit your number, you can't just rely on new logos. You *must* have a plan for Cross-selling and Upselling.</p>" }, // 14
-            { id: 'pipelineSource', fieldId: 'pipelineSource', phase: 2, prompt: "<h3>Step 3: Your Pipeline Plan</h3><p class='prompt-why'>Your scorecard shows where your pipeline *came from*. Now, plan where it *will come from* in 2026. (Must total 100%).</p><p class='prompt-example'><strong>Why?</strong> This is your accountability pact. If you need 30% from SDRs, you must have a plan to partner with them (we'll get to that in the next section).</p>" }, // 15
+            
+            // --- Phase 3: PIPE PLAN (Steps 13-15) ---
+            { id: 'recommendedCoverage', fieldId: 'recommendedCoverage', phase: 3, prompt: "<h3>PHASE 3: Your Pipeline Plan</h3><p class='prompt-why'>On your <strong>Sales Scorecard</strong>, you'll see a <strong>Recommended Pipeline Coverage</strong> (like 1.9x or 2.5x). What is that number?</p><p class='prompt-example'><strong>Why?</strong> This number is your *personal* success formula. It's the total pipeline you *actually* need to hit your number. The tool will now calculate your **Total Pipeline Gap** in real dollars.</p>" }, // 13
+            { id: 'pipelineMix', fieldId: 'pipelineMix', phase: 3, prompt: "<h3>Step 3: Your Pipeline Plan</h3><p class='prompt-why'>Your scorecard shows your *past* pipeline mix. Let's plan your *future* mix. How will you build your 2026 pipeline? (Must total 100%).</p><p class='prompt-example'><strong>Why?</strong> This forces you to think strategically. To hit your number, you can't just rely on new logos. You *must* have a plan for Cross-selling and Upselling.</p>" }, // 14
+            { id: 'pipelineSource', fieldId: 'pipelineSource', phase: 3, prompt: "<h3>Step 3: Your Pipeline Plan</h3><p class='prompt-why'>Your scorecard shows where your pipeline *came from*. Now, plan where it *will come from* in 2026. (Must total 100%).</p><p class='prompt-example'><strong>Why?</strong> This is your accountability pact. If you need 30% from SDRs, you must have a plan to partner with them (we'll get to that in the next section).</p>" }, // 15
 
-            // --- Phase 3: Create the Solution (Steps 16-24) ---
-            { id: 'phase3-welcome', fieldId: null, phase: 3, prompt: "<h3>PHASE 3: CREATE THE SOLUTION (Your Action Plan)</h3><p class='prompt-why'>You've seen the data. You've defined the gap. Now for the most important part: <strong>creating your solution.</strong></p><p class='prompt-example'>In this section, you'll first see how small improvements can close your gap. Then, you'll use what you learned in the SKO workshops to write your *specific* action plan.</p>" }, // 16
-            { id: 'winRateImprovement', fieldId: 'winRateImprovement', phase: 3, prompt: "<h3>Step 4: How to Improve (The Scenarios)</h3><p class='prompt-why'>Let's find ways to close that gap. First: <strong>Improve your Win Rate (Quality).</strong></p><p class='prompt-example'><strong>Why?</strong> This is your *Quality* plan. Improving your Win Rate means you need <em>less total pipeline</em> to hit your goal. This is about better qualification. Use the slider to see how it affects your 'Pipeline Needed' number.</p>" }, // 17
-            { id: 'dealSizeImprovement', fieldId: 'dealSizeImprovement', phase: 3, prompt: "<h3>Step 4: How to Improve (The Scenarios)</h3><p class='prompt-why'>Second: <strong>Improve your Avg. Deal Size (Value).</strong></p><p class='prompt-example'><strong>Why?</strong> This is your *Value* plan. Increasing your Avg. Deal Size means you need to close <em>fewer total deals</em>. This is about selling the full 'Connect & Scale' solution. Use the slider to see its impact.</p>" }, // 18
-            { id: 'meetingImprovement', fieldId: 'meetingImprovement', phase: 3, prompt: "<h3>Step 4: How to Improve (The Scenarios)</h3><p class='prompt-why'>And third: <strong>Increase your Avg. Quarterly Meetings (Activity).</strong></p><p class='prompt-example'><strong>Why?</strong> This is your *Activity* plan. Committing to more in-person meetings increases your predictability and builds stronger relationships. Use the slider to commit to a new quarterly number.</p>" }, // 19
-            { id: 'primaryGoal', fieldId: 'primaryGoal', phase: 3, prompt: () => { // DYNAMIC
+            // --- Phase 4: SCENARIOS (Steps 16-19) ---
+            { id: 'phase3-welcome', fieldId: null, phase: 4, prompt: "<h3>PHASE 4: Your Improvement Scenarios</h3><p class='prompt-why'>You've defined the gap. Now let's find ways to close it by working smarter, not just harder. </p><p class='prompt-example'>In this section, you'll play with three scenarios. See how small improvements to your sales habits (like better qualification or selling bigger deals) can dramatically reduce the 'Required Pipeline' number.</p>" }, // 16
+            { id: 'winRateImprovement', fieldId: 'winRateImprovement', phase: 4, prompt: "<h3>Scenario 1: Improve Win Rate (Quality)</h3><p class='prompt-why'>Improving your Win Rate means you need <em>less total pipeline</em> to hit your goal. This is about better qualification (like you learned in the **Pipeline Hygiene** workshop for APAC) and wasting less time on bad-fit deals. </p><p class='prompt-example'>Use the slider to see how it affects your 'Pipeline Needed' number.</p>" }, // 17
+            { id: 'dealSizeImprovement', fieldId: 'dealSizeImprovement', phase: 4, prompt: "<h3>Scenario 2: Improve Avg. Deal Size (Value)</h3><p class='prompt-why'>Increasing your Avg. Deal Size means you need to close <em>fewer total deals</em>. This is about selling the full 'Connect & Scale' solution.</p><p class='prompt-example'>Use the skills from the **Cross-Sell Strategies** workshop (for NA/EMEA) to bundle software. Use the slider to see its impact.</p>" }, // 18
+            { id: 'meetingImprovement', fieldId: 'meetingImprovement', phase: 4, prompt: "<h3>Scenario 3: Increase Meetings (Activity)</h3><p class='prompt-why'>Committing to more in-person meetings increases your predictability and builds stronger relationships, which helps both your Win Rate and Deal Size.</p><p class='prompt-example'>Use the slider to commit to a new quarterly number and then enter the new Win Rate you believe this activity will help you achieve.</p>" }, // 19
+            
+            // --- Phase 5: ACTION PLAN (Steps 20-24) ---
+            { id: 'primaryGoal', fieldId: 'primaryGoal', phase: 5, prompt: () => { // DYNAMIC
                 let region = $('region').value;
                 let workshopText = "the <strong>3 Best Practice Workshops</strong> (on Account Planning, Pipeline Hygiene, and Team Selling)."; // Default/APAC
                 if (region === 'NA' || region === 'EMEA') {
                     workshopText = "the <strong>3 Best Practice Workshops</strong> (on Account Planning, Cross-Sell Strategies, and Team Selling).";
                 }
-                return `<h3>Step 5: Your Action Plan (Apply What You've Learned)</h3><p class='prompt-why'>You've seen your data, and you've seen how small improvements can make a huge impact. You also just attended ${workshopText}</p><p class='prompt-why'>This is where you connect those ideas to your numbers. Based on what you learned, <strong>which improvement will be your primary focus in 2026?</strong></p>`;
+                return `<h3>PHASE 5: Your Action Plan</h3><p class='prompt-why'>You've seen your data and your gap. You've played with scenarios. Now, it's time to commit. You just attended ${workshopText}</p><p class='prompt-why'>This is where you connect those ideas to your numbers. Based on what you learned, <strong>which improvement will be your primary focus in 2026?</strong></p>`;
             }}, // 20
-            { id: 'action-people', fieldId: 'action-people', phase: 3, prompt: () => { // DYNAMIC
+            { id: 'action-people', fieldId: 'action-people', phase: 5, prompt: () => { // DYNAMIC
                 let region = $('region').value;
                 let workshopExample = "If your data shows a low <strong>Win Rate</strong>, your 'People' action (from the <strong>Pipeline Hygiene</strong> workshop) might be: 'I will learn to disqualify deals earlier to protect my win rate.'";
                 if (region === 'NA' || region === 'EMEA') {
@@ -736,16 +731,16 @@
                 }
                 return `<h3>Step 5: Your Action Plan (People)</h3><p class='prompt-why'>This is your <strong>'Get Smarter'</strong> plan. What new skill will you learn to close the gap? Think about the SKO sessions you just attended.</p><p class='prompt-example'><strong>Example:</strong> ${workshopExample}</p>`;
             }}, // 21
-            { id: 'action-productivity', fieldId: 'action-productivity', phase: 3, prompt: () => { // DYNAMIC
+            { id: 'action-productivity', fieldId: 'action-productivity', phase: 5, prompt: () => { // DYNAMIC
                 return `<h3>Step 5: Your Action Plan (Productivity)</h3><p class='prompt-why'>This is your <strong>'Work Smarter'</strong> plan. Think about the <strong>Team Selling, Orchestrating the Sale</strong> workshop. Did your data show that 95% of your pipeline is self-sourced?</p><p class='prompt-example'><strong>How to use this:</strong> Your 'Productivity' action could be: 'I will partner with my SDR to build a Top 10 prospect list to fix my 'SDR-Sourced' gap' or 'I will use the new CRM tool to automate my follow-ups.'</p>`;
             }}, // 22
-            { id: 'action-forecast', fieldId: 'action-forecast', phase: 3, prompt: "<h3>Step 5: Your Commitment</h3><p class='prompt-why'>Predictability is critical. Your commitment is a <strong>95-105% accurate forecast</strong>. What is the Key Action you will take to ensure this?</p><p class='prompt-example'><strong>Example:</strong> 'I will 'murder-board' my own commit list before submitting my forecast' or 'I will review my pipeline daily for data hygiene.'</p>" }, // 23
-            { id: 'action-account-plan', fieldId: 'action-account-plan', phase: 3, prompt: () => { // DYNAMIC
+            { id: 'action-forecast', fieldId: 'action-forecast', phase: 5, prompt: "<h3>Step 5: Your Commitment</h3><p class='prompt-why'>Predictability is critical. Your commitment is a <strong>95-105% accurate forecast</strong>. What is the Key Action you will take to ensure this?</p><p class='prompt-example'><strong>Example:</strong> 'I will 'murder-board' my own commit list before submitting my forecast' or 'I will review my pipeline daily for data hygiene.'</p>" }, // 23
+            { id: 'action-account-plan', fieldId: 'action-account-plan', phase: 5, prompt: () => { // DYNAMIC
                 return `<h3>Step 5: Your Commitment</h3><p class='prompt-why'>You just set your new <strong>Cross-sell/Upsell Mix</strong> goals. The <strong>Account Planning & Territory Management</strong> workshop gave you the 'how'. Now, write your specific commitment.</p><p class='prompt-example'><strong>Example:</strong> 'I will build a 4-quarter strategic plan for my Top 10 accounts by Feb 1st, focusing on two cross-sell opportunities for each.'</p>`;
             }}, // 24
             
-            // --- Phase 4: Review (Step 25) ---
-            { id: 'review', fieldId: 'review', phase: 4, prompt: "<h3>✅ Step 6: Final Review & Submission</h3><p class='prompt-why'>This is it! Your 2026 Commitment Plan is complete. Please review the summary below one last time.</p><hr class='my-4'><p class='prompt-why'><strong>1. For your Manager (Required):</strong><br>Click <strong>Export JSON Data</strong>. This saves a small data file. Please email this file to your manager for team compilation.</p><p class='prompt-why mt-4'><strong>2. For You (Final Step):</strong><br>Click <strong>Save as PDF</strong> to keep a personal, printable copy of your full commitment.</p>", group: $('group-review') } // 25
+            // --- Phase 6: Review (Step 25) ---
+            { id: 'review', fieldId: 'review', phase: 6, prompt: "<h3>✅ PHASE 6: Final Review & Submission</h3><p class='prompt-why'>This is it! Your 2026 Commitment Plan is complete. Please review the summary below one last time.</p><hr class='my-4'><p class='prompt-why'><strong>1. For your Manager (Required):</strong><br>Click <strong>Export JSON Data</strong>. This saves a small data file. Please email this file to your manager for team compilation.</p><p class='prompt-why mt-4'><strong>2. For You (Final Step):</strong><br>Click <strong>Save as PDF</strong> to keep a personal, printable copy of your full commitment.</p>", group: $('group-review') } // 25
         ];
         
         let currentStepIndex = 0;
@@ -977,7 +972,7 @@ Generated by the Trimble 2026 Success Planner.
             calculatePlan(); 
             
             const metadata = {
-                plan_version: "2026.16-Friendly-Phases", // New version tag
+                plan_version: "2026.17-6-Phase-Bar", // New version tag
                 date_exported: new Date().toISOString(),
                 rep_name: getStringValue('personName'),
                 manager_name: getStringValue('managerName'),
@@ -1040,11 +1035,11 @@ Generated by the Trimble 2026 Success Planner.
             });
             
             currentStepIndex = stepIndex;
-            const step = steps[stepIndex];
+            const step = steps[currentStepIndex];
             const currentPhase = step.phase;
 
             // Update Progress Bar
-            for (let i = 1; i <= 6; i++) { // UPDATED to 6 segments
+            for (let i = 1; i <= 6; i++) { // 6 segments
                 const seg = $(`progress-${i}`);
                 seg.classList.remove('active', 'complete');
                 if (i < currentPhase) {
