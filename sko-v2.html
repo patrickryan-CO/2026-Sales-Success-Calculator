@@ -312,7 +312,7 @@
     <div class="wizard-container">
         <header class="mb-6 text-center space-y-2">
             <h1 id="main-heading" class="text-2xl md:text-3xl font-bold text-primary">The Trimble 2026 Success Plan</h1>
-            <p class="text-base md:text-lg font-semibold text-primary-text">Personal Commitment Wizard</p>
+            <p class="text-base md:text-lg font-semibold text-primary-text">Personal Commitment Plan</p>
         </header>
 
         <div class="progress-bar" id="progress-bar-container">
@@ -689,10 +689,25 @@
         // NEW: 6 Phases, new intro text, friendlier tone, better examples
         const steps = [
             // --- Intro (Step 0) ---
-            { id: 'intro', fieldId: null, phase: 1, prompt: "Alright, let's get started. This wizard is your personal coach for building a measurable 2026 Success Plan. We'll walk through this together, one step at a time. Ready? Hit <strong>Next</strong>." }, // 0
+            { id: 'intro', fieldId: null, phase: 1, 
+              prompt: `<h3><strong>Welcome to Your 2026 Success Plan!</strong></h3>
+                       <p class='prompt-why'>This isn't just another form; this is your <strong>personal roadmap to hitting your 2026 number.</strong></p>
+                       <p class='prompt-why'><strong>What's In It For Me? (The WIIFM)</strong><br>This tool is your personal coach, designed to be simple and supportive. We will help you turn your quota into a set of clear, measurable actions you can take every day. The goal is to create a plan <em>you</em> own, one that helps you and your manager stay aligned on how to win all year.</p>
+                       <p class='prompt-why'><strong>How to Use This Tool:</strong></p>
+                       <ul class='list-disc list-inside ml-4 text-sm'>
+                         <li>Use the 'Next' and 'Previous' buttons to navigate.</li>
+                         <li>You can also press 'Enter' on your keyboard to advance.</li>
+                         <li>The progress bar at the top shows your location. You can click any *completed* phase to go back and edit.</li>
+                       </ul>
+                       <p class='prompt-example'><strong>What You'll Need (Your "Cheat Sheet"):</strong><br>To make this easy, please have your <strong>Sales Scorecard</strong> open. You'll need it for the first few steps to pull your historical data.</p>`
+            }, // 0
             
             // --- Phase 1: BASELINE (Steps 1-9) ---
-            { id: 'phase1-welcome', fieldId: null, phase: 1, prompt: "<h3>PHASE 1: Your 2025 Baseline</h3><p class='prompt-why'>First, let's get an honest look at your starting point. You can't set a new course until you know where you are on the map.</p><p class='prompt-example'>For this section, please have your <strong>Sales Scorecard</strong> open. This is your 'cheat sheet' for all your 2025 performance data.</p>" }, // 1
+            { id: 'phase1-welcome', fieldId: null, phase: 1, 
+              prompt: `<h3>PHASE 1: Your 2025 Baseline</h3>
+                       <p class='prompt-why'>First, let's get an honest look at your starting point. You can't set a new course until you know where you are on the map.</p>
+                       <p class='prompt-example'>For this section, you'll use your <strong>Sales Scorecard</strong> (your 'cheat sheet') to enter your 2025 performance data. Let's start with the basics.</p>` 
+            }, // 1
             { id: 'personName', fieldId: 'personName', phase: 1, prompt: "First things first, <strong>what's your full name?</strong>" }, // 2
             { id: 'managerName', fieldId: 'managerName', phase: 1, prompt: "Great. Now, <strong>who is your manager?</strong> This plan is a commitment you'll both work on, so their name is important." }, // 3
             { id: 'region', fieldId: 'region', phase: 1, prompt: "Geography check! <strong>Which region are you primarily responsible for?</strong> (This will customize your workshop content later)." }, // 4
@@ -703,17 +718,29 @@
             { id: 'avgMeetings2025', fieldId: 'avgMeetings2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>Last baseline number: Find your <strong>2025 Avg. In-Person Meetings (Quarterly)</strong> on your scorecard's activity tab.</p><p class='prompt-example'><strong>Why?</strong> This is your <em>activity</em> metric. In our complex industries, face-time with customers is directly linked to success.</p>" }, // 9
 
             // --- Phase 2: THE GAP (Steps 10-12) ---
-            { id: 'phase2-welcome', fieldId: null, phase: 2, prompt: "<h3>PHASE 2: THE GAP (Your 2026 Challenge)</h3><p class='prompt-why'>Great, your 2025 baseline is set. You can't set a new course until you know where you're starting from.</p><p class='prompt-why'>Now for Phase 2: let's figure out the <strong>size</strong> of your 2026 challenge. Hit <strong>Next</strong> to see the gap.</p>" }, // 10
+            { id: 'phase2-welcome', fieldId: null, phase: 2, 
+              prompt: `<h3>PHASE 2: THE GAP (Your 2026 Challenge)</h3>
+                       <p class='prompt-why'>Great, your 2025 baseline is set. You can't set a new course until you know where you're starting from.</p>
+                       <p class='prompt-why'>Now for Phase 2: let's figure out the <strong>size</strong> of your 2026 challenge. In this section, you'll enter your new quota and see the gap it creates. This is the "scary number" we're going to build a plan to conquer.</p>` 
+            }, // 10
             { id: 'quota2026', fieldId: 'quota2026', phase: 2, prompt: "<h3>Step 2: The 2026 Formula</h3><p class='prompt-why'>This is the big one: what is your <strong>2026 Quota Commitment ($)?</strong></p><p class='prompt-example'><strong>Why?</strong> Enter your new number. The tool will *immediately* calculate what's required to hit this goal *if you change nothing*. This isn't your plan; it's the *problem* we're about to solve together.</p>" }, // 11
             { id: 'reflection', fieldId: 'reflection', phase: 2, prompt: "<h3>Step 2: The 2026 Formula</h3><p class='prompt-why'>Okay, take a look at those 'Required' numbers. Based on that hard math, <strong>how does your 2026 goal feel right now?</strong></p><p class='prompt-example'><strong>Why?</strong> Be honest. If it feels 'Impossible,' it just means your 2025 efficiency isn't good enough for 2026. That's fine! The next steps are <em>how</em> we fix that.</p>" }, // 12
             
             // --- Phase 3: PIPE PLAN (Steps 13-15) ---
-            { id: 'recommendedCoverage', fieldId: 'recommendedCoverage', phase: 3, prompt: "<h3>PHASE 3: Your Pipeline Plan</h3><p class='prompt-why'>On your <strong>Sales Scorecard</strong>, you'll see a <strong>Recommended Pipeline Coverage</strong> (like 1.9x or 2.5x). What is that number?</p><p class='prompt-example'><strong>Why?</strong> This number is your *personal* success formula. It's the total pipeline you *actually* need to hit your number. The tool will now calculate your **Total Pipeline Gap** in real dollars.</p>" }, // 13
+            { id: 'recommendedCoverage', fieldId: 'recommendedCoverage', phase: 3, 
+              prompt: `<h3>PHASE 3: Your Pipeline Plan</h3>
+                       <p class='prompt-why'>On your <strong>Sales Scorecard</strong>, you'll see a <strong>Recommended Pipeline Coverage</strong> (like 1.9x or 2.5x). What is that number?</p>
+                       <p class='prompt-example'><strong>Why?</strong> This number is your *personal* success formula. It's the total pipeline you *actually* need to hit your number. The tool will now calculate your **Total Pipeline Gap** in real dollars.</p>` 
+            }, // 13
             { id: 'pipelineMix', fieldId: 'pipelineMix', phase: 3, prompt: "<h3>Step 3: Your Pipeline Plan</h3><p class='prompt-why'>Your scorecard shows your *past* pipeline mix. Let's plan your *future* mix. How will you build your 2026 pipeline? (Must total 100%).</p><p class='prompt-example'><strong>Why?</strong> This forces you to think strategically. To hit your number, you can't just rely on new logos. You *must* have a plan for Cross-selling and Upselling.</p>" }, // 14
             { id: 'pipelineSource', fieldId: 'pipelineSource', phase: 3, prompt: "<h3>Step 3: Your Pipeline Plan</h3><p class='prompt-why'>Your scorecard shows where your pipeline *came from*. Now, plan where it *will come from* in 2026. (Must total 100%).</p><p class='prompt-example'><strong>Why?</strong> This is your accountability pact. If you need 30% from SDRs, you must have a plan to partner with them (we'll get to that in the next section).</p>" }, // 15
 
             // --- Phase 4: SCENARIOS (Steps 16-19) ---
-            { id: 'phase3-welcome', fieldId: null, phase: 4, prompt: "<h3>PHASE 4: Your Improvement Scenarios</h3><p class='prompt-why'>You've defined the gap. Now let's find ways to close it by working smarter, not just harder. </p><p class='prompt-example'>In this section, you'll play with three scenarios. See how small improvements to your sales habits (like better qualification or selling bigger deals) can dramatically reduce the 'Required Pipeline' number.</p>" }, // 16
+            { id: 'phase3-welcome', fieldId: null, phase: 4, 
+              prompt: `<h3>PHASE 4: Your Improvement Scenarios</h3>
+                       <p class='prompt-why'>You've defined the gap. Now let's find ways to close it by working smarter, not just harder. </p>
+                       <p class='prompt-example'>In this section, you'll play with three scenarios. See how small improvements to your sales habits (like better qualification or selling bigger deals) can dramatically reduce the 'Required Pipeline' number.</p>` 
+            }, // 16
             { id: 'winRateImprovement', fieldId: 'winRateImprovement', phase: 4, prompt: "<h3>Scenario 1: Improve Win Rate (Quality)</h3><p class='prompt-why'>Improving your Win Rate means you need <em>less total pipeline</em> to hit your goal. This is about better qualification (like you learned in the **Pipeline Hygiene** workshop for APAC) and wasting less time on bad-fit deals. </p><p class='prompt-example'>Use the slider to see how it affects your 'Pipeline Needed' number.</p>" }, // 17
             { id: 'dealSizeImprovement', fieldId: 'dealSizeImprovement', phase: 4, prompt: "<h3>Scenario 2: Improve Avg. Deal Size (Value)</h3><p class='prompt-why'>Increasing your Avg. Deal Size means you need to close <em>fewer total deals</em>. This is about selling the full 'Connect & Scale' solution.</p><p class='prompt-example'>Use the skills from the **Cross-Sell Strategies** workshop (for NA/EMEA) to bundle software. Use the slider to see its impact.</p>" }, // 18
             { id: 'meetingImprovement', fieldId: 'meetingImprovement', phase: 4, prompt: "<h3>Scenario 3: Increase Meetings (Activity)</h3><p class='prompt-why'>Committing to more in-person meetings increases your predictability and builds stronger relationships, which helps both your Win Rate and Deal Size.</p><p class='prompt-example'>Use the slider to commit to a new quarterly number and then enter the new Win Rate you believe this activity will help you achieve.</p>" }, // 19
@@ -746,6 +773,17 @@
             // --- Phase 6: Review (Step 25) ---
             { id: 'review', fieldId: 'review', phase: 6, prompt: "<h3>✅ PHASE 6: Final Review & Submission</h3><p class='prompt-why'>This is it! Your 2026 Commitment Plan is complete. Please review the summary below one last time.</p><hr class='my-4'><p class='prompt-why'><strong>1. For your Manager (Required):</strong><br>Click <strong>Export JSON Data</strong>. This saves a small data file. Please email this file to your manager for team compilation.</p><p class='prompt-why mt-4'><strong>2. For You (Final Step):</strong><br>Click <strong>Save as PDF</strong> to keep a personal, printable copy of your full commitment.</p>", group: $('group-review') } // 25
         ];
+        
+        // --- Maps Phase numbers to the *first step index* of that phase ---
+        // Used for clickable progress bar
+        const phaseStartSteps = {
+            1: 1, // Phase 1 (Baseline) starts at step 1 (Phase 1 Welcome)
+            2: 10, // Phase 2 (The Gap) starts at step 10 (Phase 2 Welcome)
+            3: 13, // Phase 3 (Pipe Plan) starts at step 13
+            4: 16, // Phase 4 (Scenarios) starts at step 16 (Phase 3 Welcome... wait, I'll rename that)
+            5: 20, // Phase 5 (Action Plan) starts at step 20
+            6: 25  // Phase 6 (Review) starts at step 25
+        };
         
         let currentStepIndex = 0;
         
@@ -976,7 +1014,7 @@ Generated by the Trimble 2026 Success Planner.
             calculatePlan(); 
             
             const metadata = {
-                plan_version: "2026.17-6-Phase-Bar", // New version tag
+                plan_version: "2026.18-Clickable-Bar", // New version tag
                 date_exported: new Date().toISOString(),
                 rep_name: getStringValue('personName'),
                 manager_name: getStringValue('managerName'),
@@ -1133,6 +1171,8 @@ Generated by the Trimble 2026 Success Planner.
                     currentStepIndex = 16; // Go back to Phase 3 Welcome
                 } else if (currentStepIndex == 16) { // If on Phase 3 Welcome
                     currentStepIndex = 15; // Go back to Sourcing
+                } else if (currentStepIndex == 13) { // If on Phase 3 start
+                    currentStepIndex = 12; // Go back to reflection
                 } else if (currentStepIndex == 10) { // If on Phase 2 Welcome
                     currentStepIndex = 9; // Go back to Avg Meetings
                 } else if (currentStepIndex == 1) { // If on Phase 1 Welcome
@@ -1176,6 +1216,24 @@ Generated by the Trimble 2026 Success Planner.
         // --- Initialization ---
         document.addEventListener('DOMContentLoaded', () => {
             
+            // NEW: Global Enter Key listener
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    // Don't submit if in a multi-line text area
+                    if (event.target.tagName === 'TEXTAREA') {
+                        return;
+                    }
+                    
+                    event.preventDefault(); // Stop default form submission
+                    
+                    // Programmatically click the "Next" button if it's visible and enabled
+                    const nextButton = $('nextButton');
+                    if (nextButton && nextButton.style.display !== 'none' && !nextButton.disabled) {
+                        nextButton.click();
+                    }
+                }
+            });
+
             const inputsToTrack = [
                 'quota2025', 'bookings2025', 'avgDealSize2025', 'region', 'personName', 'managerName', 'avgMeetings2025',
                 'quota2026', 'recommendedCoverage',
@@ -1194,15 +1252,7 @@ Generated by the Trimble 2026 Success Planner.
                     };
                     el.addEventListener('input', changeHandler);
                     el.addEventListener('change', changeHandler);
-
-                    if (el.tagName !== 'TEXTAREA' && el.type !== 'range') {
-                        el.addEventListener('keydown', (event) => {
-                            if (event.key === 'Enter') {
-                                event.preventDefault();
-                                $('nextButton').click(); // Simulate click to trigger validation
-                            }
-                        });
-                    }
+                    // OLD keydown listener removed, replaced by global one
                 }
             });
             
@@ -1214,15 +1264,7 @@ Generated by the Trimble 2026 Success Planner.
                         updateNextButtonState();
                     };
                     radio.addEventListener('change', radioChangeHandler);
-                    
-                     radio.addEventListener('keydown', (event) => {
-                        if (event.key === 'Enter') {
-                            event.preventDefault(); 
-                            radio.checked = true;
-                            radio.dispatchEvent(new Event('change'));
-                            setTimeout(() => $('nextButton').click(), 100); 
-                        }
-                    });
+                     // OLD keydown listener removed, replaced by global one
                 });
             });
 
@@ -1234,10 +1276,12 @@ Generated by the Trimble 2026 Success Planner.
                     
                     // Only allow clicking on *completed* phases (cannot click current or future)
                     if (clickedPhase < currentPhase) {
-                        const targetStepIndex = steps.findIndex(step => step.phase === clickedPhase);
-                        if (targetStepIndex !== -1) {
-                            showStep(targetStepIndex);
-                        }
+                        // Find the "front page" step for that phase
+                        const targetStepIndex = steps.findIndex(step => step.phase === clickedPhase && step.id.includes('welcome'));
+                        // If no "front page" (like for phase 3, 4, 5, 6), find the first step of that phase
+                        const fallbackStepIndex = steps.findIndex(step => step.phase === clickedPhase);
+                        
+                        showStep(targetStepIndex !== -1 ? targetStepIndex : fallbackStepIndex);
                     }
                 });
             });
