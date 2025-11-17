@@ -1,285 +1,308 @@
-<script>
-    tailwind.config = {
-        theme: {
-            extend: {
-                colors: {
-                    'primary': '#0063a3',      // Trimble primary blue
-                    'accent': '#fbad26',       // Trimble accent orange/amber
-                    'primary-text': '#252a2e', // Trimble primary dark text
-                    'system-bg': '#f3f6f9',    // Light background for conversation box
-                },
-                fontFamily: {
-                    'sans': ['Open Sans', 'sans-serif'] // Set default font
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trimble 2026 Success Plan</title>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#0063a3',      // Trimble primary blue
+                        'accent': '#fbad26',       // Trimble accent orange/amber
+                        'primary-text': '#252a2e', // Trimble primary dark text
+                        'system-bg': '#f3f6f9',    // Light background for conversation box
+                    },
+                    fontFamily: {
+                        'sans': ['Open Sans', 'sans-serif'] // Set default font
+                    }
                 }
             }
         }
-    }
-</script>
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<script src="https://cdn.tailwindcss.com"></script>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-<style>
-    /* Set base font and text color */
-    body {
-        font-family: 'Open Sans', sans-serif;
-        color: #252a2e; /* primary-text */
-    }
-    
-    /* Wizard Container & Conversational Style */
-    .wizard-container {
-        /* Mobile First: Tight Padding, Smaller Max Width */
-        max-width: 100%;
-        margin-left: 0.5rem;
-        margin-right: 0.5rem;
-        padding: 1rem; /* p-4 on mobile */
-        background-color: #ffffff;
-        border-radius: 0.5rem; /* rounded-lg */
-        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); 
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-    }
-    /* Larger Screens: Restore original size */
-    @media (min-width: 768px) {
+    <style>
+        /* Set base font and text color */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #252a2e; /* primary-text */
+        }
+        
+        /* Wizard Container & Conversational Style */
         .wizard-container {
-            max-width: 48rem; /* Equivalent to max-w-4xl */
-            margin-left: auto;
-            margin-right: auto;
-            padding: 2.5rem; /* p-10 */
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            margin-top: 3rem;
-            margin-bottom: 3rem;
+            /* Mobile First: Tight Padding, Smaller Max Width */
+            max-width: 100%;
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+            padding: 1rem; /* p-4 on mobile */
+            background-color: #ffffff;
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); 
+            margin-top: 1rem;
+            margin-bottom: 1rem;
         }
-    }
+        /* Larger Screens: Restore original size */
+        @media (min-width: 768px) {
+            .wizard-container {
+                max-width: 48rem; /* Equivalent to max-w-4xl */
+                margin-left: auto;
+                margin-right: auto;
+                padding: 2.5rem; /* p-10 */
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+                margin-top: 3rem;
+                margin-bottom: 3rem;
+            }
+        }
 
-    .conversation-bubble {
-        background-color: #f3f6f9; /* system-bg */
-        border: 1px solid #e5e7eb;
-        padding: 1rem; /* Reduced padding for mobile */
-        margin-bottom: 1.5rem;
-        border-radius: 0.5rem;
-        font-size: 0.95rem; /* Smaller text on mobile */
-        line-height: 1.5;
-    }
-    @media (min-width: 768px) {
         .conversation-bubble {
-            padding: 1.5rem;
-            font-size: 1.05rem;
-            line-height: 1.6;
-            margin-bottom: 2rem;
+            background-color: #f3f6f9; /* system-bg */
+            border: 1px solid #e5e7eb;
+            padding: 1rem; /* Reduced padding for mobile */
+            margin-bottom: 1.5rem;
+            border-radius: 0.5rem;
+            font-size: 1rem; /* INCREASED: Was 0.95rem, now 16px base for mobile */
+            line-height: 1.5;
         }
-    }
-
-    .conversation-bubble strong {
-        color: #0063a3; /* primary */
-        font-weight: 700;
-    }
-
-    /* Input Styling (Retained from base code) */
-    .input-label {
-        display: block;
-        font-size: 0.875rem;
-        font-weight: 600;
-        color: #252a2e;
-        margin-bottom: 0.25rem;
-    }
-    
-    .input-field {
-        display: block;
-        width: 100%;
-        border-radius: 0.375rem;
-        border: 1px solid #D1D5DB;
-        padding: 0.5rem 0.75rem;
-        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-        color: #252a2e;
-        font-family: 'Open Sans', sans-serif;
-    }
-    .input-field:focus {
-        outline: 2px solid transparent;
-        outline-offset: 2px;
-        border-color: #0063a3;
-        box-shadow: 0 0 0 2px rgba(0, 99, 163, 0.3);
-    }
-    
-    /* Validation Error Style */
-    .input-field.error {
-        border-color: #B91C1C; /* border-red-700 */
-        box-shadow: 0 0 0 2px rgba(185, 28, 28, 0.3);
-    }
-    .error-message {
-        color: #B91C1C;
-        font-size: 0.75rem; /* text-xs */
-        margin-top: 0.25rem;
-    }
-    
-    /* Calculation & Results Boxes */
-    .calc-box {
-        background-color: #F9FAFB;
-        border: 1px solid #E5E7EB;
-        border-radius: 0.5rem;
-        padding: 0.75rem; /* Reduced padding for mobile */
-    }
-    
-    .calc-output {
-        display: block;
-        font-size: 1.5rem; /* Smaller font for mobile */
-        font-weight: 700;
-        color: #0063a3;
-        margin-top: 0.25rem;
-    }
-    @media (min-width: 768px) {
-        .calc-output {
-            font-size: 1.875rem;
+        @media (min-width: 768px) {
+            .conversation-bubble {
+                padding: 1.5rem;
+                font-size: 1.05rem;
+                line-height: 1.6;
+                margin-bottom: 2rem;
+            }
         }
-    }
 
-    /* Slider Styles (Retained) */
-    input[type=range] {
-        -webkit-appearance: none;
-        width: 100%;
-        height: 8px;
-        border-radius: 5px;
-        background: #d3d3d3;
-        outline: none;
-        opacity: 0.9;
-        -webkit-transition: .2s;
-        transition: opacity .2s;
-        margin-top: 1rem;
-        margin-bottom: 0.5rem;
-    }
-    input[type=range]::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background: #0063a3;
-        cursor: pointer;
-        box-shadow: 0 0 5px rgba(0,0,0,0.2);
-    }
-    /* Hide number input arrows (Retained) */
-    input[type=number]::-webkit-inner-spin-button,
-    input[type=number]::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-    input[type=number] {
-        -moz-appearance: textfield;
-    }
-    
-    /* Navigation Buttons (Optimized for Mobile) */
-    .nav-button-group {
-        display: flex;
-        gap: 0.5rem; /* Reduced gap */
-        flex-wrap: wrap; /* Allow wrapping if necessary */
-        justify-content: flex-end;
-    }
+        .conversation-bubble strong {
+            color: #0063a3; /* primary */
+            font-weight: 700;
+        }
 
-    .nav-button {
-        display: inline-block;
-        padding: 0.5rem 1rem; /* Reduced padding for mobile */
-        border-radius: 0.375rem;
-        font-size: 0.8rem; /* Smaller font on mobile */
-        font-weight: 600;
-        text-align: center;
-        border: 1px solid transparent;
-        transition: all 0.2s;
-        cursor: pointer;
-        white-space: nowrap; /* Prevent buttons from splitting words */
-    }
-    @media (min-width: 768px) {
-        .nav-button {
-            padding: 0.625rem 1.25rem;
+        /* NEW: Style for the example text in prompts */
+        .prompt-why {
+            margin-top: 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .prompt-example {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #4B5563; /* gray-600 */
+            margin-top: 0.75rem;
+            padding: 0.5rem 1rem;
+            border-left: 3px solid #fbad26; /* accent */
+            background-color: #fcfcfc;
+        }
+
+        /* Input Styling */
+        .input-label {
+            display: block;
             font-size: 0.875rem;
+            font-weight: 600;
+            color: #252a2e;
+            margin-bottom: 0.25rem;
         }
-    }
+        
+        .input-field {
+            display: block;
+            width: 100%;
+            border-radius: 0.375rem;
+            border: 1px solid #D1D5DB;
+            padding: 0.5rem 0.75rem;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            color: #252a2e;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1rem; /* NEW: Prevents iOS zoom-on-focus */
+        }
+        .input-field:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            border-color: #0063a3;
+            box-shadow: 0 0 0 2px rgba(0, 99, 163, 0.3);
+        }
+        
+        /* Validation Error Style */
+        .input-field.error {
+            border-color: #B91C1C; /* border-red-700 */
+            box-shadow: 0 0 0 2px rgba(185, 28, 28, 0.3);
+        }
+        .error-message {
+            color: #B91C1C;
+            font-size: 0.75rem; /* text-xs */
+            margin-top: 0.25rem;
+        }
+        
+        /* Calculation & Results Boxes */
+        .calc-box {
+            background-color: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            border-radius: 0.5rem;
+            padding: 0.75rem; /* Reduced padding for mobile */
+        }
+        
+        .calc-output {
+            display: block;
+            font-size: 1.75rem; /* INCREASED: Was 1.5rem */
+            font-weight: 700;
+            color: #0063a3;
+            margin-top: 0.25rem;
+        }
+        @media (min-width: 768px) {
+            .calc-output {
+                font-size: 1.875rem;
+            }
+        }
 
-    .nav-button-primary {
-        background-color: #0063a3;
-        color: #FFFFFF;
-    }
-    .nav-button-primary:hover {
-        background-color: #004a7c;
-    }
-    .nav-button-primary:disabled {
-        background-color: #D1D5DB;
-        cursor: not-allowed;
-    }
-    .nav-button-default {
-        background-color: #E5E7EB;
-        color: #252a2e;
-    }
-    .nav-button-default:hover {
-        background-color: #D1D5DB;
-    }
-    
-    /* Tooltip Styles (Retained) */
-    .tooltip-trigger {
-        position: relative;
-        display: inline-block;
-        width: 1rem;
-        height: 1rem;
-        line-height: 1rem;
-        margin-left: 0.25rem;
-        background-color: #D1D5DB;
-        color: #ffffff;
-        font-weight: 700;
-        font-style: italic;
-        font-family: 'Georgia', serif;
-        font-size: 0.8rem;
-        text-align: center;
-        border-radius: 50%;
-        cursor: help;
-        user-select: none;
-        -webkit-user-select: none;
-    }
-    .tooltip-trigger::after {
-        content: attr(data-tooltip);
-        position: absolute;
-        bottom: 125%;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: #252a2e;
-        color: #FFFFFF;
-        font-family: 'Open Sans', sans-serif;
-        font-style: normal;
-        font-size: 0.875rem;
-        font-weight: 500;
-        padding: 0.5rem 0.75rem;
-        border-radius: 0.375rem;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.2s, visibility 0.2s;
-        width: 250px;
-        z-index: 10;
-        pointer-events: none;
-    }
-    .tooltip-trigger:hover::after {
-        opacity: 1;
-        visibility: visible;
-    }
-    
-    /* Print styles (Retained) */
-    @media print {
-        body { background-color: white !important; color: #252a2e !important; }
-        .wizard-container { box-shadow: none !important; margin: 0 !important; padding: 0 !important; width: 100% !important; max-width: 100% !important; }
-        #navigation-buttons, #progress-bar-container, .conversation-bubble, .error-message, .tooltip-trigger { display: none !important; }
-        .step-heading { margin-top: 2rem; page-break-before: auto; page-break-inside: avoid; }
-        .form-group, .hidden-step-content { display: block !important; visibility: visible !important; }
-        input, select, textarea { border: 1px solid #ccc !important; }
-        /* Show the entire content, regardless of JS visibility status */
-        #form-fields > div { display: block !important; }
-        .calc-output { color: #000 !important; } /* Black text for print */
-        /* Show tooltip content in print */
-        .tooltip-trigger::after { content: " (" attr(data-tooltip) ")"; position: static; transform: none; background-color: transparent; color: #4B5563; font-style: normal; font-size: 0.8rem; padding: 0; margin: 0; margin-left: 2px; box-shadow: none; opacity: 1; visibility: visible; width: auto; display: inline; }
-    }
-</style>
+        /* Slider Styles */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.9;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #0063a3;
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+        /* Hide number input arrows */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+        
+        /* Navigation Buttons (Optimized for Mobile) */
+        .nav-button-group {
+            display: flex;
+            gap: 0.5rem; /* Reduced gap */
+            flex-wrap: wrap; /* Allow wrapping if necessary */
+            justify-content: flex-end;
+        }
 
-<div class="bg-gray-100" style="font-family: 'Open Sans', sans-serif;">
+        .nav-button {
+            display: inline-block;
+            padding: 0.625rem 1.25rem; /* INCREASED: Was 0.5rem 1rem */
+            border-radius: 0.375rem;
+            font-size: 0.875rem; /* INCREASED: Was 0.8rem */
+            font-weight: 600;
+            text-align: center;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+            cursor: pointer;
+            white-space: nowrap; /* Prevent buttons from splitting words */
+        }
+        @media (min-width: 768px) {
+            .nav-button {
+                padding: 0.625rem 1.25rem;
+                font-size: 0.875rem;
+            }
+        }
+
+        .nav-button-primary {
+            background-color: #0063a3;
+            color: #FFFFFF;
+        }
+        .nav-button-primary:hover {
+            background-color: #004a7c;
+        }
+        .nav-button-primary:disabled {
+            background-color: #D1D5DB;
+            cursor: not-allowed;
+        }
+        .nav-button-default {
+            background-color: #E5E7EB;
+            color: #252a2e;
+        }
+        .nav-button-default:hover {
+            background-color: #D1D5DB;
+        }
+        
+        /* Tooltip Styles (Retained) */
+        .tooltip-trigger {
+            position: relative;
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            line-height: 1rem;
+            margin-left: 0.25rem;
+            background-color: #D1D5DB;
+            color: #ffffff;
+            font-weight: 700;
+            font-style: italic;
+            font-family: 'Georgia', serif;
+            font-size: 0.8rem;
+            text-align: center;
+            border-radius: 50%;
+            cursor: help;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .tooltip-trigger::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #252a2e;
+            color: #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            font-style: normal;
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.375rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s, visibility 0.2s;
+            width: 250px;
+            z-index: 10;
+            pointer-events: none;
+        }
+        .tooltip-trigger:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Print styles (Retained) */
+        @media print {
+            body { background-color: white !important; color: #252a2e !important; }
+            .wizard-container { box-shadow: none !important; margin: 0 !important; padding: 0 !important; width: 100% !important; max-width: 100% !important; }
+            #navigation-buttons, #progress-bar-container, .conversation-bubble, .error-message, .tooltip-trigger { display: none !important; }
+            .step-heading { margin-top: 2rem; page-break-before: auto; page-break-inside: avoid; }
+            .form-group, .hidden-step-content { display: block !important; visibility: visible !important; }
+            input, select, textarea { border: 1px solid #ccc !important; }
+            /* Show the entire content, regardless of JS visibility status */
+            #form-fields > div { display: block !important; }
+            .calc-output { color: #000 !important; } /* Black text for print */
+            /* Show tooltip content in print */
+            .tooltip-trigger::after { content: " (" attr(data-tooltip) ")"; position: static; transform: none; background-color: transparent; color: #4B5563; font-style: normal; font-size: 0.8rem; padding: 0; margin: 0; margin-left: 2px; box-shadow: none; opacity: 1; visibility: visible; width: auto; display: inline; }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
     <div class="wizard-container">
         <header class="mb-6 text-center space-y-2">
             <h1 id="main-heading" class="text-2xl md:text-3xl font-bold text-primary">The Trimble 2026 Success Plan</h1>
@@ -397,7 +420,7 @@
                 </div>
                 
                 <div class="form-group" id="group-winRateImprovement">
-                    <div class="space-y-4 p-6 rounded-lg bg-primary/10 border border-primary/20">
+                    <div class="space-y-4 p-4 md:p-6 rounded-lg bg-primary/10 border border-primary/20">
                         <h3 class="text-xl font-semibold text-primary">Lever 1: Improve Win Rate (Quality)</h3>
                         <label for="winRateImprovement" class="block text-sm font-medium text-primary-text">
                             Commit to improving Win Rate by: <span id="winRateImprovementLabel" class="font-bold text-primary">5.0%</span>
@@ -413,7 +436,7 @@
                 </div>
 
                 <div class="form-group" id="group-dealSizeImprovement">
-                    <div class="space-y-4 p-6 rounded-lg bg-gray-100 border border-gray-300">
+                    <div class="space-y-4 p-4 md:p-6 rounded-lg bg-gray-100 border border-gray-300">
                         <h3 class="text-xl font-semibold text-primary-text">Lever 2: Improve Avg. Deal Size (Value)</h3>
                         <label for="dealSizeImprovement" class="block text-sm font-medium text-primary-text">
                             Commit to improving Avg. Deal Size by: <span id="dealSizeImprovementLabel" class="font-bold text-primary-text">15%</span>
@@ -429,7 +452,7 @@
                 </div>
                 
                 <div class="form-group" id="group-meetingImprovement">
-                    <div class="space-y-4 p-6 rounded-lg bg-gray-100 border border-gray-300">
+                    <div class="space-y-4 p-4 md:p-6 rounded-lg bg-gray-100 border border-gray-300">
                         <h3 class="text-xl font-semibold text-primary-text">Lever 3: Increase Meetings (Activity)</h3>
                         <p class="text-sm text-primary-text/80">Context: More face-time = more predictable deals.</p>
                         
@@ -484,25 +507,25 @@
 
                 <div class="form-group" id="group-action-people">
                     <label class="input-label">Action: Focus on <strong>People</strong> (Training, Coaching, Skill-building):</label>
-                    <input type="text" id="action-people" class="input-field required-field" placeholder="e.g., I will complete PIC certification by Q2, or I will 'murder-board' my deals with my manager...">
+                    <input type="text" id="action-people" class="input-field required-field" placeholder="e.g., I will complete PIC certification by Q2...">
                     <span id="error-action-people" class="error-message hidden">People action is required.</span>
                 </div>
                 
                 <div class="form-group" id="group-action-pipeline">
                     <label class="input-label">Action: Focus on <strong>Pipeline</strong> (Qualification, Prospecting, Deal Flow):</label>
-                    <input type="text" id="action-pipeline" class="input-field required-field" placeholder="e.g., I will disqualify 20% more deals before the demo stage, or I will run one targeted outreach campaign per month...">
+                    <input type="text" id="action-pipeline" class="input-field required-field" placeholder="e.g., I will disqualify 20% more deals before the demo stage...">
                     <span id="error-action-pipeline" class="error-message hidden">Pipeline action is required.</span>
                 </div>
 
                 <div class="form-group" id="group-action-productivity">
                     <label class="input-label">Action: Focus on <strong>Productivity</strong> (Tech Stack Use, Time Management):</label>
-                    <input type="text" id="action-productivity" class="input-field required-field" placeholder="e.g., I will block 2 hours on my calendar every Friday for administrative tasks, or I will utilize the pricing tool for all deals under $15k...">
+                    <input type="text" id="action-productivity" class="input-field required-field" placeholder="e.g., I will block 2 hours on my calendar every Friday for admin...">
                     <span id="error-action-productivity" class="error-message hidden">Productivity action is required.</span>
                 </div>
 
                 <div class="form-group" id="group-action-forecast">
                     <label class="input-label">Key Action: Forecasting Commitment (How will you ensure 95-105% accuracy?)</label>
-                    <input type="text" id="action-forecast" class="input-field required-field" placeholder="e.g., I will 'murder-board' my own commit list before submitting my forecast...">
+                    <input type="text" id="action-forecast" class="input-field required-field" placeholder="e.g., I will 'murder-board' my own commit list before submitting...">
                     <span id="error-action-forecast" class="error-message hidden">Forecasting action is required.</span>
                 </div>
 
@@ -559,251 +582,252 @@
 
         </form>
     </div>
-</div>
 
-<script>
-    // Global variable to store calculated data
-    if (!window.planData) window.planData = {};
-
-    // --- Helper Functions ---
-    const $ = (selector) => document.getElementById(selector);
+    <script>
+        // Global variable to store calculated data
+        if (!window.planData) window.planData = {};
     
-    const getNumberValue = (id) => {
-        const el = $(id);
-        if (!el) return 0;
-        return parseFloat(el.value.replace(/[$,]/g, '')) || 0;
-    };
-
-    const getStringValue = (id) => {
-        const el = $(id);
-        if (!el) return '';
-        return el.value.trim();
-    };
-    
-    const getSelectedValue = (name) => {
-        const checked = document.querySelector(`input[name="${name}"]:checked`);
-        return checked ? checked.value : '';
-    };
-
-    const getSelectedLabel = (name) => {
-        const checked = document.querySelector(`input[name="${name}"]:checked`);
-        return checked ? checked.labels[0].textContent.trim().replace(/\s+/g, ' ') : '[Not Selected]';
-    };
-
-    const formatCurrency = (val) => {
-        if (isNaN(val) || !isFinite(val)) return '$0';
-        return '$' + val.toLocaleString('en-US', { maximumFractionDigits: 0 });
-    };
-
-    const formatPercent = (val) => {
-        if (isNaN(val) || !isFinite(val)) return '0%';
-        return val.toFixed(1) + '%';
-    };
-    const formatNumber = (val) => {
-        if (isNaN(val) || !isFinite(val)) return '0';
-        return val.toLocaleString('en-US', { maximumFractionDigits: 1 });
-    };
-    
-    // --- Step Definitions (The Core Conversation) ---
-    // All bolding uses HTML <strong> tags. Markdown has been removed from all prompts.
-    const steps = [
-        { id: 'intro', fieldId: null, prompt: "Welcome to the <strong>Trimble 2026 Success Plan Wizard</strong>! We're here to turn your ambition into measurable results. Hit <strong>Next</strong> to start establishing your baseline." }, // 0
-        { id: 'personName', fieldId: 'personName', prompt: "Let's start with the hero of this story! <strong>What is your full name?</strong> This ensures your plan gets properly credited to you." }, // 1
-        { id: 'managerName', fieldId: 'managerName', prompt: "Who's your co-pilot? <strong>Please enter your manager's full name.</strong> We need to know who to share your legendary commitment with!" }, // 2
-        { id: 'region', fieldId: 'region', prompt: "Geography check! <strong>Which region are you primarily responsible for?</strong> This helps us analyze regional trends." }, // 3
-        { id: 'quota2025', fieldId: 'quota2025', prompt: "Time for the look-back. <strong>What was your total assigned Quota for 2025?</strong> Enter the dollar amount only (no commas needed)." }, // 4
-        { id: 'bookings2025', fieldId: 'bookings2025', prompt: "And the result? <strong>What were your total Bookings (Closed-Won Revenue) in 2025?</strong> Enter the dollar amount. (Watch the Attainment calculator update!)" }, // 5
-        { id: 'winRate2025', fieldId: 'winRate2025', prompt: "Efficiency matters! <strong>What was your average Win Rate (%) in 2025?</strong> This is your baseline effectiveness. Enter the percentage (e.g., 25)." }, // 6
-        { id: 'avgDealSize2025', fieldId: 'avgDealSize2025', prompt: "Value check! <strong>What was your average Deal Size ($) in 2025?</strong> This metric defines the volume of business you typically handle." }, // 7
-        { id: 'avgMeetings2025', fieldId: 'avgMeetings2025', prompt: "Activity check! <strong>On average, how many <em>in-person</em> customer meetings did you conduct each quarter?</strong> This metric links activity to success." }, // 8
-        { id: 'quota2026', fieldId: 'quota2026', prompt: "Forward look! <strong>What is your new 2026 Quota Commitment?</strong> Enter the amount. The system will now calculate the massive pipeline and deal volume required <em>if</em> your 2025 efficiency remains the same." }, // 9
-        { id: 'reflection', fieldId: 'reflection', prompt: "Based on the intimidating required pipeline and deal count above, <strong>how do you feel about your 2026 goal?</strong> Be honest—this sets the stage for where you need to focus!" }, // 10
-        { id: 'winRateImprovement', fieldId: 'winRateImprovement', prompt: "<h3>💡 SCENARIO MODELING: LEVER 1 (Quality)</h3> Improving your <strong>Win Rate</strong> reduces the sheer amount of pipeline you need. <strong>How much better can you get?</strong> Adjust the slider to commit to a Win Rate percentage gain." }, // 11
-        { id: 'dealSizeImprovement', fieldId: 'dealSizeImprovement', prompt: "<h3>💡 SCENARIO MODELING: LEVER 2 (Value)</h3> Increasing your <strong>Avg. Deal Size</strong> reduces the <em>number of deals</em> you have to close. <strong>How much larger can you make your deals?</strong> Adjust the slider to commit to a percentage gain." }, // 12
-        { id: 'meetingImprovement', fieldId: 'meetingImprovement', prompt: "<h3>💡 SCENARIO MODELING: LEVER 3 (Activity)</h3> Commit to increasing your <strong>Quarterly In-Person Meetings</strong>. Then, set the <strong>Implied New Win Rate (%)</strong> you believe this increased activity will deliver. This sets your activity target!" }, // 13
-        { id: 'primaryGoal', fieldId: 'primaryGoal', prompt: "<h3>🚀 ACTION PLAN: PRIMARY FOCUS</h3> Based on the modeling you just completed, <strong>which lever(s) will be your primary focus in 2026?</strong> Choose the one that gives you the best return on effort." }, // 14
-        { id: 'action-people', fieldId: 'action-people', prompt: "<h3>🚀 ACTION PLAN: PEOPLE</h3> Commit to a <strong>measurable action</strong> focused on <strong>PEOPLE</strong> (e.g., training, coaching, skill development). What is your growth action for 2026?" }, // 15
-        { id: 'action-pipeline', fieldId: 'action-pipeline', prompt: "<h3>🚀 ACTION PLAN: PIPELINE</h3> Commit to a <strong>measurable action</strong> focused on <strong>PIPELINE</strong> (e.g., qualification, deal flow, prospecting). What action improves your deal quality?" }, // 16
-        { id: 'action-productivity', fieldId: 'action-productivity', prompt: "<h3>🚀 ACTION PLAN: PRODUCTIVITY</h3> Commit to a <strong>measurable action</strong> focused on <strong>PRODUCTIVITY</strong> (e.g., tech stack use, time management). What action saves you time or increases efficiency?" }, // 17
-        { id: 'action-forecast', fieldId: 'action-forecast', prompt: "<h3>🚀 ACTION PLAN: FORECASTING</h3> <strong>My Rep Commit will be 95-105% accurate every quarter.</strong> What is the <strong>Key Action</strong> you will take to guarantee this predictability?" }, // 18
-        { id: 'action-account-plan', fieldId: 'action-account-plan', prompt: "<h3>🚀 ACTION PLAN: GROWTH</h3> Define your plan for <strong>Account Planning</strong>. What measurable step will you take to manage strategic accounts better?" }, // 19
-        { id: 'action-cross-sell', fieldId: 'action-cross-sell', prompt: "<h3>🚀 ACTION PLAN: GROWTH</h3> Define your plan for <strong>Cross Selling</strong>. What measurable step will you take to expand business within existing accounts?" }, // 20
-        { id: 'review', fieldId: 'review', prompt: "<h3>✅ COMMITMENT REVIEW</h3> Congratulations! You have defined your 2026 Success Plan. Review the final commitment summary below, and when you are ready, click <strong>Export JSON Data</strong> to submit your plan to your manager.", group: $('group-review') } // 21
-    ];
-    
-    // Groups that need validation (excluding intro and review)
-    const fieldGroups = steps.filter(s => s.fieldId && s.fieldId !== 'review').map(s => $(`group-${s.fieldId}`)).filter(Boolean);
-
-    let currentStepIndex = 0;
-    
-    // --- Validation Logic (Retained) ---
-    function validateField(fieldId) {
-        const input = $(fieldId);
-        const errorElement = $(`error-${fieldId}`);
-        const value = getStringValue(fieldId);
+        // --- Helper Functions ---
+        const $ = (selector) => document.getElementById(selector);
         
-        let isValid = true;
-        let isNumeric = input && input.classList.contains('numeric-field');
-        let numValue = isNumeric ? getNumberValue(fieldId) : 0;
-
-        // Clear previous errors
-        if (input) input.classList.remove('error');
-        if (errorElement) errorElement.classList.add('hidden');
-
-        // Check for required text/select inputs
-        if (input && input.classList.contains('required-field') && !value) {
-            isValid = false;
-        } 
-        
-        // Check for required numeric inputs (must be > 0 and a number)
-        else if (isNumeric && (numValue <= 0 || !isFinite(numValue))) {
-            if (fieldId !== 'bookings2025' && fieldId !== 'meetingsImpliedWinRate_visible') {
-                isValid = false;
-            }
-        }
-        
-        // Specific checks for Win Rate bounds (0-100)
-        else if (fieldId === 'winRate2025' && (numValue < 0 || numValue > 100)) {
-            isValid = false;
-        }
-
-        // Check for required radio buttons
-        if (input && input.classList.contains('required-radio')) {
-            const radioName = input.name;
-            if (!getSelectedValue(radioName)) {
-                const radioError = $(`error-${radioName}`);
-                if (radioError) radioError.classList.remove('hidden');
-                isValid = false;
-            }
-        }
-
-        if (!isValid) {
-            if (input) input.classList.add('error');
-            if (errorElement) errorElement.classList.remove('hidden');
-        }
-
-        return isValid;
-    }
-    
-    function validateCurrentStep() {
-        const step = steps[currentStepIndex];
-        const fieldId = step.fieldId;
-        
-        if (!fieldId) return true;
-
-        if (fieldId.includes('action-') || fieldId === 'primaryGoal') {
-             const requiredGroupFields = document.querySelectorAll(`#group-${fieldId} .required-field, #group-${fieldId} .required-radio`);
-             let groupValid = true;
-             requiredGroupFields.forEach(field => {
-                 if (!validateField(field.id)) {
-                     groupValid = false;
-                 }
-             });
-             return groupValid;
-        } else if (fieldId === 'reflection') {
-             return !!getSelectedValue('reflection');
-        } else if (fieldId === 'meetingsImpliedWinRate_visible') {
-             return validateField(fieldId);
-        } else {
-            return validateField(fieldId);
-        }
-    }
-
-
-    // --- Core Calculation Function (Retained) ---
-    function calculatePlan() {
-        const quota2025 = getNumberValue('quota2025');
-        const bookings2025 = getNumberValue('bookings2025');
-        const winRate2025 = getNumberValue('winRate2025');
-        const avgDealSize2025 = getNumberValue('avgDealSize2025');
-        const avgMeetings2025 = getNumberValue('avgMeetings2025');
-        
-        const quota2026 = getNumberValue('quota2026');
-        const winRateImprovement = getNumberValue('winRateImprovement');
-        const dealSizeImprovement = getNumberValue('dealSizeImprovement');
-        const meetingImprovement = getNumberValue('meetingImprovement');
-        
-        const meetingsImpliedWinRateVisible = getNumberValue('meetingsImpliedWinRate_visible');
-        const meetingsImpliedWinRateHidden = $('meetingsImpliedWinRate');
-        if(meetingsImpliedWinRateHidden) meetingsImpliedWinRateHidden.value = meetingsImpliedWinRateVisible;
-        const meetingsImpliedWinRate = meetingsImpliedWinRateVisible;
-
-        const attainment2025 = quota2025 > 0 ? (bookings2025 / quota2025) * 100 : 0;
-        if($('attainment2025')) $('attainment2025').textContent = formatPercent(attainment2025);
-
-        const winRateDecimal = winRate2025 / 100;
-        const pipelineToClose2026 = winRateDecimal > 0 ? quota2026 / winRateDecimal : 0;
-        const dealsToClose2026 = avgDealSize2025 > 0 ? pipelineToClose2026 / avgDealSize2025 : 0;
-        
-        if($('pipelineToClose2026')) $('pipelineToClose2026').textContent = formatCurrency(pipelineToClose2026);
-        if($('dealsToClose2026')) $('dealsToClose2026').textContent = formatNumber(dealsToClose2026);
-        
-        window.planData.pipelineToClose2026 = pipelineToClose2026;
-        window.planData.dealsToClose2026 = dealsToClose2026;
-
-        const newWinRate = winRate2025 + winRateImprovement;
-        const newWinRateDecimal = newWinRate / 100;
-        const newPipelineNeeded = newWinRateDecimal > 0 ? quota2026 / newWinRateDecimal : 0;
-        
-        if($('winRateImprovementLabel')) $('winRateImprovementLabel').textContent = `${winRateImprovement.toFixed(1)}%`;
-        if($('newWinRateLabel')) $('newWinRateLabel').textContent = formatPercent(newWinRate);
-        if($('newPipelineNeeded')) $('newPipelineNeeded').textContent = formatCurrency(newPipelineNeeded);
-
-        const newAvgDealSize = avgDealSize2025 * (1 + (dealSizeImprovement / 100));
-        const newDealsNeeded = newAvgDealSize > 0 ? quota2026 / newAvgDealSize : dealsToClose2026;
-        
-        if($('dealSizeImprovementLabel')) $('dealSizeImprovementLabel').textContent = `${dealSizeImprovement.toFixed(0)}%`;
-        if($('newAvgDealSizeLabel')) $('newAvgDealSizeLabel').textContent = formatCurrency(newAvgDealSize);
-        if($('newDealsNeeded')) $('newDealsNeeded').textContent = formatNumber(newDealsNeeded);
-        
-        const newMeetingAvg = avgMeetings2025 + meetingImprovement;
-        const meetingsImpliedWinRateDecimal = meetingsImpliedWinRate / 100;
-        const meetingsPipelineNeeded = meetingsImpliedWinRateDecimal > 0 ? quota2026 / meetingsImpliedWinRateDecimal : pipelineToClose2026;
-        
-        if($('meetingImprovementLabel')) $('meetingImprovementLabel').textContent = `${meetingImprovement.toFixed(0)}`;
-        if($('newMeetingAvgLabel')) $('newMeetingAvgLabel').textContent = `${newMeetingAvg.toFixed(0)}`;
-        if($('meetingsPipelineNeeded')) $('meetingsPipelineNeeded').textContent = formatCurrency(meetingsPipelineNeeded);
-        
-        const finalTargetWinRate = Math.max(newWinRate, meetingsImpliedWinRate);
-        window.planData.finalTargetWinRate = finalTargetWinRate;
-        window.planData.finalTargetPipeline = finalTargetWinRate > 0 ? quota2026 / (finalTargetWinRate / 100) : pipelineToClose2026;
-
-        if (steps[currentStepIndex].id === 'review') generateCommitmentSummary();
-    }
-
-    // --- Step 21 Summary Generation (Retained) ---
-    function generateCommitmentSummary() {
-        // Collect all data
-        const personName = getStringValue('personName');
-        const managerName = getStringValue('managerName');
-        const region = $('region').value || '[Not Provided]';
-        const reflection = getSelectedLabel('reflection');
-        const goalSelection = getSelectedLabel('primaryGoal');
-        
-        // Calculation outputs
-        const winRate2025 = getNumberValue('winRate2025');
-        const avgDealSize2025 = getNumberValue('avgDealSize2025');
-        const attainment2025 = $('attainment2025').textContent;
-        const quota2026 = formatCurrency(getNumberValue('quota2026'));
-
-        // Scenario outputs (using the harmonized target for clarity)
-        const targetWinRate = formatPercent(window.planData.finalTargetWinRate || winRate2025);
-        const targetDealSize = $('newAvgDealSizeLabel').textContent;
-        const baselinePipeline = formatCurrency(window.planData.pipelineToClose2026 || 0);
-        const targetPipeline = formatCurrency(window.planData.finalTargetPipeline || 0);
-        const dealsToClose2026 = formatNumber(window.planData.dealsToClose2026 || 0);
-        
-        // Action Items
-        const actions = {
-            people: getStringValue('action-people'),
-            pipeline: getStringValue('action-pipeline'),
-            productivity: getStringValue('action-productivity'),
-            forecast: getStringValue('action-forecast'),
-            accountPlan: getStringValue('action-account-plan'),
-            crossSell: getStringValue('action-cross-sell'),
+        const getNumberValue = (id) => {
+            const el = $(id);
+            if (!el) return 0;
+            return parseFloat(el.value.replace(/[$,]/g, '')) || 0;
         };
-
-        const summaryText = `
+    
+        const getStringValue = (id) => {
+            const el = $(id);
+            if (!el) return '';
+            return el.value.trim();
+        };
+        
+        const getSelectedValue = (name) => {
+            const checked = document.querySelector(`input[name="${name}"]:checked`);
+            return checked ? checked.value : '';
+        };
+    
+        const getSelectedLabel = (name) => {
+            const checked = document.querySelector(`input[name="${name}"]:checked`);
+            return checked ? checked.labels[0].textContent.trim().replace(/\s+/g, ' ') : '[Not Selected]';
+        };
+    
+        const formatCurrency = (val) => {
+            if (isNaN(val) || !isFinite(val)) return '$0';
+            return '$' + val.toLocaleString('en-US', { maximumFractionDigits: 0 });
+        };
+    
+        const formatPercent = (val) => {
+            if (isNaN(val) || !isFinite(val)) return '0%';
+            return val.toFixed(1) + '%';
+        };
+        const formatNumber = (val) => {
+            if (isNaN(val) || !isFinite(val)) return '0';
+            return val.toLocaleString('en-US', { maximumFractionDigits: 1 });
+        };
+        
+        // --- Step Definitions (The Core Conversation) ---
+        // Enhanced with "WHY" explanations and Trimble-specific examples
+        const steps = [
+            { id: 'intro', fieldId: null, prompt: "Welcome to the <strong>Trimble 2026 Success Plan Wizard</strong>! This tool is your personal coach to build a measurable, achievable plan. We'll start with your 2025 baseline, calculate your 2026 goal, and define the <em>actions</em> to close the gap. Hit <strong>Next</strong> to start." }, // 0
+            { id: 'personName', fieldId: 'personName', prompt: "Let's start with the hero of this story! <strong>What is your full name?</strong> This ensures your commitment is credited to you." }, // 1
+            { id: 'managerName', fieldId: 'managerName', prompt: "Who's your co-pilot? <strong>Please enter your manager's full name.</strong> Your manager will review this plan with you to ensure you have the support you need to succeed." }, // 2
+            { id: 'region', fieldId: 'region', prompt: "Geography check! <strong>Which region are you primarily responsible for?</strong> This helps us align resources and analyze regional trends." }, // 3
+            
+            { id: 'quota2025', fieldId: 'quota2025', prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>First, we need to understand your starting point. Let's enter your <strong>2025 Quota ($)</strong>.</p><p class='prompt-example'><strong>Why?</strong> Your quota is the baseline for your performance. We need this to calculate your 2025 Attainment.</p>" }, // 4
+            { id: 'bookings2025', fieldId: 'bookings2025', prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>Great. Now, what were your <strong>2025 Bookings ($)</strong>? (Your total closed-won revenue).</p><p class='prompt-example'><strong>Why?</strong> This calculates your 2025 Attainment. This plan is about honesty. Be accurate so we can build a realistic path forward.</p>" }, // 5
+            { id: 'winRate2025', fieldId: 'winRate2025', prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>This is a key one. What was your <strong>2025 Baseline Win Rate (%)</strong>?</p><p class='prompt-example'><strong>Why?</strong> This is your <em>quality & qualification</em> metric (Won Deals / (Won + Lost Deals)). A low rate might mean you're wasting time on unqualified deals. A high rate means you're an efficient closer.</p>" }, // 6
+            { id: 'avgDealSize2025', fieldId: 'avgDealSize2025', prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>What was your <strong>2025 Avg. Deal Size ($)</strong>?</p><p class='prompt-example'><strong>Why?</strong> This is your <em>value</em> metric. It tells us if you're selling products or complex solutions. At Trimble, we want to drive this number up by bundling software (like Viewpoint or Tekla) with our hardware and services.</p>" }, // 7
+            { id: 'avgMeetings2025', fieldId: 'avgMeetings2025', prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>Last baseline number: What was your <strong>2025 Avg. In-Person Meetings (Quarterly)</strong>?</p><p class='prompt-example'><strong>Why?</strong> This is your <em>activity</em> metric. In our complex industries (Construction, Ag), face-time with customers to demo our \"Connect & Scale\" solutions is directly linked to success.</p>" }, // 8
+            
+            { id: 'quota2026', fieldId: 'quota2026', prompt: "<h3>Step 2: The 2026 Formula</h3><p class='prompt-why'>Okay, you've set your baseline. Now for the new goal: What is your <strong>2026 Quota Commitment ($)</strong>?</p><p class='prompt-example'><strong>Why?</strong> Enter your new number. The tool will <em>immediately</em> calculate the gap. It will show you the massive pipeline and deal volume you'd need if you change <em>nothing</em> from 2025. Don't panic! This isn't the plan; this is the <em>problem</em> we're about to solve.</p>" }, // 9
+            { id: 'reflection', fieldId: 'reflection', prompt: "<h3>Step 2: The 2026 Formula</h3><p class='prompt-why'>Look at those 'Required' numbers. Based on this initial calculation, <strong>how do you feel about your 2026 goal?</strong></p><p class='prompt-example'><strong>Why?</strong> Be honest. If it feels 'Impossible,' it just means your 2025 efficiency isn't good enough for 2026. That's fine! The next step is <em>how</em> we fix that.</p>" }, // 10
+            
+            { id: 'winRateImprovement', fieldId: 'winRateImprovement', prompt: "<h3>Step 3: Scenario Modeling (The Levers)</h3><p class='prompt-why'>This is where you take control. We will model improvements. First, the <strong>Quality Lever (Win Rate)</strong>.</p><p class='prompt-example'><strong>Why?</strong> Improving your Win Rate means you need <em>less total pipeline</em> to hit your goal. This is about better qualification, not wasting time on bad-fit deals, and mastering your demo. Adjust the slider to commit to a new, higher Win Rate.</p>" }, // 11
+            { id: 'dealSizeImprovement', fieldId: 'dealSizeImprovement', prompt: "<h3>Step 3: Scenario Modeling (The Levers)</h3><p class='prompt-why'>Next, the <strong>Value Lever (Avg. Deal Size)</strong>.</p><p class='prompt-example'><strong>Why?</strong> Increasing your Avg. Deal Size means you need to close <em>fewer total deals</em>. This is about selling the full 'Connect & Scale' solution, not just a product. How will you bundle SaaS subscriptions with hardware? Adjust the slider to commit to a higher dollar value.</p>" }, // 12
+            { id: 'meetingImprovement', fieldId: 'meetingImprovement', prompt: "<h3>Step 3: Scenario Modeling (The Levers)</h3><p class='prompt-why'>Finally, the <strong>Activity Lever (Meetings)</strong>.</p><p class='prompt-example'><strong>Why?</strong> Committing to more in-person meetings increases your predictability. Commit to a higher <em>quarterly meeting average</em>. Then, in the box below, enter the <em>Implied New Win Rate</em> you believe this increased activity will help you achieve.</p>" }, // 13
+            
+            { id: 'primaryGoal', fieldId: 'primaryGoal', prompt: "<h3>Step 4: Your Action Plan</h3><p class='prompt-why'>You've modeled the 'what,' now it's time for the 'how.' Based on the levers, <strong>which will be your primary focus in 2026?</strong></p><p class='prompt-example'><strong>Why?</strong> You must have a primary focus. Are you a \"Win Rate\" specialist (better qualification) or an \"Avg. Deal Size\" expert (better cross-sell)? This choice will guide your actions.</p>" }, // 14
+            { id: 'action-people', fieldId: 'action-people', prompt: "<h3>Step 4: Your Action Plan (People)</h3><p class='prompt-why'>This is your <strong>'Get Smarter'</strong> plan. What new skill will you learn to close the gap? Write one specific, measurable action.</p><p class='prompt-example'><strong>Example:</strong> 'I will get certified on the new Viewpoint/Tekla integration by Q2' or 'I will master the 'Connect & Scale' pitch for large-scale construction clients by March.'</p>" }, // 15
+            { id: 'action-pipeline', fieldId: 'action-pipeline', prompt: "<h3>Step 4: Your Action Plan (Pipeline)</h3><p class='prompt-why'>This is your <strong>'Qualify Harder'</strong> plan. How will you improve the quality of your deal flow? Write one specific, measurable action.</p><p class='prompt-example'><strong>Example:</strong> 'I will disqualify 20% more deals before the demo stage' or 'I will identify 10 accounts in my territory that haven't adopted our SaaS solutions and run a targeted campaign.'</p>" }, // 16
+            { id: 'action-productivity', fieldId: 'action-productivity', prompt: "<h3>Step 4: Your Action Plan (Productivity)</h3><p class='prompt-why'>This is your <strong>'Work Smarter'</strong> plan. How will you use technology or time management to be more efficient? Write one specific, measurable action.</p><p class='prompt-example'><strong>Example:</strong> 'I will use Salesforce for all site visit logging' or 'I will block 2 hours every Friday for prospecting and admin, no exceptions.'</p>" }, // 17
+            
+            { id: 'action-forecast', fieldId: 'action-forecast', prompt: "<h3>Step 4: Your Commitment</h3><p class='prompt-why'>Predictability is critical. Your commitment is a <strong>95-105% accurate forecast</strong>. What is the Key Action you will take to ensure this?</p><p class='prompt-example'><strong>Example:</strong> 'I will 'murder-board' my own commit list before submitting my forecast' or 'I will review my pipeline daily for data hygiene.'</p>" }, // 18
+            { id: 'action-account-plan', fieldId: 'action-account-plan', prompt: "<h3>Step 4: Your Commitment</h3><p class='prompt-why'>Growth comes from existing customers. What is your <strong>Account Planning</strong> action?</p><p class='prompt-example'><strong>Example:</strong> 'I will create a 4-quarter strategic plan for my Top 10 accounts by Feb 1st.'</p>" }, // 19
+            { id: 'action-cross-sell', fieldId: 'action-cross-sell', prompt: "<h3>Step 4: Your Commitment</h3><p class='prompt-why'>Finally, how will you expand our footprint? What is your <strong>Cross Selling</strong> action?</p><p class='prompt-example'><strong>Example:</strong> 'I will identify 2 cross-sell opportunities (e.g., adding fleet management to an existing construction client) in my Top 10 accounts this quarter.'</p>" }, // 20
+            
+            { id: 'review', fieldId: 'review', prompt: "<h3>✅ Step 5: Commitment Review</h3><p class='prompt-why'>Congratulations! You have defined your 2026 Success Plan. This is your personal commitment to yourself, your team, and your manager.</p><p class='prompt-example'>Review the final summary. When you are ready, click <strong>Export JSON Data</strong> and send the file to your manager.</p>", group: $('group-review') } // 21
+        ];
+        
+        // Groups that need validation (excluding intro and review)
+        const fieldGroups = steps.filter(s => s.fieldId && s.fieldId !== 'review').map(s => $(`group-${s.fieldId}`)).filter(Boolean);
+    
+        let currentStepIndex = 0;
+        
+        // --- Validation Logic ---
+        function validateField(fieldId) {
+            const input = $(fieldId);
+            const errorElement = $(`error-${fieldId}`);
+            const value = getStringValue(fieldId);
+            
+            let isValid = true;
+            let isNumeric = input && input.classList.contains('numeric-field');
+            let numValue = isNumeric ? getNumberValue(fieldId) : 0;
+    
+            // Clear previous errors
+            if (input) input.classList.remove('error');
+            if (errorElement) errorElement.classList.add('hidden');
+    
+            // Check for required text/select inputs
+            if (input && input.classList.contains('required-field') && !value) {
+                isValid = false;
+            } 
+            
+            // Check for required numeric inputs (must be > 0 and a number)
+            else if (isNumeric && (numValue <= 0 || !isFinite(numValue))) {
+                if (fieldId !== 'bookings2025' && fieldId !== 'meetingsImpliedWinRate_visible') {
+                    isValid = false;
+                }
+            }
+            
+            // Specific checks for Win Rate bounds (0-100)
+            else if (fieldId === 'winRate2025' && (numValue < 0 || numValue > 100)) {
+                isValid = false;
+            }
+    
+            // Check for required radio buttons
+            if (input && input.classList.contains('required-radio')) {
+                const radioName = input.name;
+                if (!getSelectedValue(radioName)) {
+                    const radioError = $(`error-${radioName}`);
+                    if (radioError) radioError.classList.remove('hidden');
+                    isValid = false;
+                }
+            }
+    
+            if (!isValid) {
+                if (input) input.classList.add('error');
+                if (errorElement) errorElement.classList.remove('hidden');
+            }
+    
+            return isValid;
+        }
+        
+        function validateCurrentStep() {
+            const step = steps[currentStepIndex];
+            const fieldId = step.fieldId;
+            
+            if (!fieldId) return true;
+    
+            if (fieldId.includes('action-') || fieldId === 'primaryGoal') {
+                 const requiredGroupFields = document.querySelectorAll(`#group-${step.fieldId} .required-field, #group-${step.fieldId} .required-radio`);
+                 let groupValid = true;
+                 requiredGroupFields.forEach(field => {
+                     if (!validateField(field.id)) {
+                         groupValid = false;
+                     }
+                 });
+                 return groupValid;
+            } else if (fieldId === 'reflection') {
+                 return !!getSelectedValue('reflection');
+            } else if (fieldId === 'meetingsImpliedWinRate_visible') {
+                 return validateField(fieldId);
+            } else {
+                return validateField(fieldId);
+            }
+        }
+    
+    
+        // --- Core Calculation Function ---
+        function calculatePlan() {
+            const quota2025 = getNumberValue('quota2025');
+            const bookings2025 = getNumberValue('bookings2025');
+            const winRate2025 = getNumberValue('winRate2025');
+            const avgDealSize2025 = getNumberValue('avgDealSize2025');
+            const avgMeetings2025 = getNumberValue('avgMeetings2025');
+            
+            const quota2026 = getNumberValue('quota2026');
+            const winRateImprovement = getNumberValue('winRateImprovement');
+            const dealSizeImprovement = getNumberValue('dealSizeImprovement');
+            const meetingImprovement = getNumberValue('meetingImprovement');
+            
+            const meetingsImpliedWinRateVisible = getNumberValue('meetingsImpliedWinRate_visible');
+            const meetingsImpliedWinRateHidden = $('meetingsImpliedWinRate');
+            if(meetingsImpliedWinRateHidden) meetingsImpliedWinRateHidden.value = meetingsImpliedWinRateVisible;
+            const meetingsImpliedWinRate = meetingsImpliedWinRateVisible;
+    
+            const attainment2025 = quota2025 > 0 ? (bookings2025 / quota2025) * 100 : 0;
+            if($('attainment2025')) $('attainment2025').textContent = formatPercent(attainment2025);
+    
+            const winRateDecimal = winRate2025 / 100;
+            const pipelineToClose2026 = winRateDecimal > 0 ? quota2026 / winRateDecimal : 0;
+            const dealsToClose2026 = avgDealSize2025 > 0 ? pipelineToClose2026 / avgDealSize2025 : 0;
+            
+            if($('pipelineToClose2026')) $('pipelineToClose2026').textContent = formatCurrency(pipelineToClose2026);
+            if($('dealsToClose2026')) $('dealsToClose2026').textContent = formatNumber(dealsToClose2026);
+            
+            window.planData.pipelineToClose2026 = pipelineToClose2026;
+            window.planData.dealsToClose2026 = dealsToClose2026;
+    
+            const newWinRate = winRate2025 + winRateImprovement;
+            const newWinRateDecimal = newWinRate / 100;
+            const newPipelineNeeded = newWinRateDecimal > 0 ? quota2026 / newWinRateDecimal : 0;
+            
+            if($('winRateImprovementLabel')) $('winRateImprovementLabel').textContent = `${winRateImprovement.toFixed(1)}%`;
+            if($('newWinRateLabel')) $('newWinRateLabel').textContent = formatPercent(newWinRate);
+            if($('newPipelineNeeded')) $('newPipelineNeeded').textContent = formatCurrency(newPipelineNeeded);
+    
+            const newAvgDealSize = avgDealSize2025 * (1 + (dealSizeImprovement / 100));
+            const newDealsNeeded = newAvgDealSize > 0 ? quota2026 / newAvgDealSize : dealsToClose2026;
+            
+            if($('dealSizeImprovementLabel')) $('dealSizeImprovementLabel').textContent = `${dealSizeImprovement.toFixed(0)}%`;
+            if($('newAvgDealSizeLabel')) $('newAvgDealSizeLabel').textContent = formatCurrency(newAvgDealSize);
+            if($('newDealsNeeded')) $('newDealsNeeded').textContent = formatNumber(newDealsNeeded);
+            
+            const newMeetingAvg = avgMeetings2025 + meetingImprovement;
+            const meetingsImpliedWinRateDecimal = meetingsImpliedWinRate / 100;
+            const meetingsPipelineNeeded = meetingsImpliedWinRateDecimal > 0 ? quota2026 / meetingsImpliedWinRateDecimal : pipelineToClose2026;
+            
+            if($('meetingImprovementLabel')) $('meetingImprovementLabel').textContent = `${meetingImprovement.toFixed(0)}`;
+            if($('newMeetingAvgLabel')) $('newMeetingAvgLabel').textContent = `${newMeetingAvg.toFixed(0)}`;
+            if($('meetingsPipelineNeeded')) $('meetingsPipelineNeeded').textContent = formatCurrency(meetingsPipelineNeeded);
+            
+            const finalTargetWinRate = Math.max(newWinRate, meetingsImpliedWinRate);
+            window.planData.finalTargetWinRate = finalTargetWinRate;
+            window.planData.finalTargetPipeline = finalTargetWinRate > 0 ? quota2026 / (finalTargetWinRate / 100) : pipelineToClose2026;
+    
+            if (steps[currentStepIndex].id === 'review') generateCommitmentSummary();
+        }
+    
+        // --- Step 21 Summary Generation ---
+        function generateCommitmentSummary() {
+            const personName = getStringValue('personName');
+            const managerName = getStringValue('managerName');
+            const region = $('region').value || '[Not Provided]';
+            const reflection = getSelectedLabel('reflection');
+            const goalSelection = getSelectedLabel('primaryGoal');
+            
+            const winRate2025 = getNumberValue('winRate2025');
+            const avgDealSize2025 = getNumberValue('avgDealSize2025');
+            const attainment2025 = $('attainment2025').textContent;
+            const quota2026 = formatCurrency(getNumberValue('quota2026'));
+    
+            const targetWinRate = formatPercent(window.planData.finalTargetWinRate || winRate2025);
+            const targetDealSize = $('newAvgDealSizeLabel').textContent;
+            const baselinePipeline = formatCurrency(window.planData.pipelineToClose2026 || 0);
+            const targetPipeline = formatCurrency(window.planData.finalTargetPipeline || 0);
+            const dealsToClose2026 = formatNumber(window.planData.dealsToClose2026 || 0);
+            
+            const actions = {
+                people: getStringValue('action-people'),
+                pipeline: getStringValue('action-pipeline'),
+                productivity: getStringValue('action-productivity'),
+                forecast: getStringValue('action-forecast'),
+                accountPlan: getStringValue('action-account-plan'),
+                crossSell: getStringValue('action-cross-sell'),
+            };
+    
+            const summaryText = `
 TRIMBLE 2026 SALES COMMITMENT PLAN (FINAL)
 
 1. Personal & Financial Baseline (Look Back)
@@ -836,233 +860,236 @@ TRIMBLE 2026 SALES COMMITMENT PLAN (FINAL)
 
 ---
 Generated by the Trimble 2026 Success Planner.
-        `.trim();
-        
-        $('commitmentSummaryOutput').textContent = summaryText;
-        return summaryText;
-    }
-
-    // --- JSON Export (Cleaned Comments) ---
-    function generateJSONData() {
-        calculatePlan(); 
-        
-        const metadata = {
-            plan_version: "2026.6", // New version tag
-            date_exported: new Date().toISOString(),
-            rep_name: getStringValue('personName'),
-            manager_name: getStringValue('managerName'),
-            region: $('region').value || 'Unknown',
-            quota_2025: getNumberValue('quota2025'),
-            bookings_2025: getNumberValue('bookings2025'),
-        };
-
-        const inputs = {
-            quota_2026: getNumberValue('quota2026'),
-            win_rate_2025: getNumberValue('winRate2025'),
-            avg_deal_size_2025: getNumberValue('avgDealSize2025'),
-            meetings_2025_avg: getNumberValue('avgMeetings2025'),
+            `.trim();
             
-            lever_selected: getSelectedValue('primaryGoal'),
-            reflection: getSelectedValue('reflection'),
+            $('commitmentSummaryOutput').textContent = summaryText;
+            return summaryText;
+        }
+    
+        // --- JSON Export ---
+        function generateJSONData() {
+            calculatePlan(); 
             
-            // Scenario Inputs
-            win_rate_improvement_pct: getNumberValue('winRateImprovement'),
-            deal_size_improvement_pct: getNumberValue('dealSizeImprovement'),
-            meetings_increase_abs: getNumberValue('meetingImprovement'),
-            implied_win_rate_l3: getNumberValue('meetingsImpliedWinRate'),
-
-            // Harmonized Outputs
-            win_rate_target_pct: window.planData.finalTargetWinRate || getNumberValue('winRate2025'), 
-            deal_size_target_value: getNumberValue('avgDealSize2025') * (1 + (getNumberValue('dealSizeImprovement') / 100)),
-            pipeline_required_target: window.planData.finalTargetPipeline || 0
-        };
-
-        const actions = {
-            people: getStringValue('action-people'),
-            pipeline: getStringValue('action-pipeline'),
-            productivity: getStringValue('action-productivity'),
-            forecast: getStringValue('action-forecast'),
-            account_plan: getStringValue('action-account-plan'),
-            cross_sell: getStringValue('action-cross-sell'),
-        };
-
-        return { metadata, inputs, actions };
-    }
-
-    // --- Wizard Logic (Retained) ---
-    function showStep(stepIndex) {
-        document.querySelectorAll('.form-group').forEach(group => {
-            group.style.display = 'none';
-        });
-        document.querySelectorAll('.error-message').forEach(error => {
-            error.classList.add('hidden');
-        });
-        
-        currentStepIndex = stepIndex;
-        const step = steps[stepIndex];
-        
-        $('conversation-bubble').innerHTML = step.prompt;
-
-        const groupElements = document.querySelectorAll(`#group-${step.fieldId}`);
-        groupElements.forEach(el => {
-            el.style.display = 'block';
-        });
-        
-        if (stepIndex >= 11 && stepIndex <= 13) {
-            $('group-winRateImprovement').style.display = 'block';
-            $('group-dealSizeImprovement').style.display = 'block';
-            $('group-meetingImprovement').style.display = 'block';
+            const metadata = {
+                plan_version: "2026.8", // New version tag
+                date_exported: new Date().toISOString(),
+                rep_name: getStringValue('personName'),
+                manager_name: getStringValue('managerName'),
+                region: $('region').value || 'Unknown',
+                quota_2025: getNumberValue('quota2025'),
+                bookings_2025: getNumberValue('bookings2025'),
+            };
+    
+            const inputs = {
+                quota_2026: getNumberValue('quota2026'),
+                win_rate_2025: getNumberValue('winRate2025'),
+                avg_deal_size_2025: getNumberValue('avgDealSize2025'),
+                meetings_2025_avg: getNumberValue('avgMeetings2025'),
+                
+                lever_selected: getSelectedValue('primaryGoal'),
+                reflection: getSelectedValue('reflection'),
+                
+                // Scenario Inputs
+                win_rate_improvement_pct: getNumberValue('winRateImprovement'),
+                deal_size_improvement_pct: getNumberValue('dealSizeImprovement'),
+                meetings_increase_abs: getNumberValue('meetingImprovement'),
+                implied_win_rate_l3: getNumberValue('meetingsImpliedWinRate'),
+    
+                // Harmonized Outputs
+                win_rate_target_pct: window.planData.finalTargetWinRate || getNumberValue('winRate2025'), 
+                deal_size_target_value: getNumberValue('avgDealSize2025') * (1 + (getNumberValue('dealSizeImprovement') / 100)),
+                pipeline_required_target: window.planData.finalTargetPipeline || 0
+            };
+    
+            const actions = {
+                people: getStringValue('action-people'),
+                pipeline: getStringValue('action-pipeline'),
+                productivity: getStringValue('action-productivity'),
+                forecast: getStringValue('action-forecast'),
+                account_plan: getStringValue('action-account-plan'),
+                cross_sell: getStringValue('action-cross-sell'),
+            };
+    
+            return { metadata, inputs, actions };
         }
-
-        const isReviewStep = step.id === 'review';
-        if (isReviewStep) generateCommitmentSummary();
-
-        $('prevButton').style.display = stepIndex > 0 ? 'inline-block' : 'none';
-        $('nextButton').style.display = isReviewStep ? 'none' : 'inline-block';
-        
-        const finalActionsVisible = isReviewStep;
-        $('exportJSONButton').style.display = finalActionsVisible ? 'inline-block' : 'none';
-        $('copyCommitmentButton').style.display = finalActionsVisible ? 'inline-block' : 'none';
-        $('printButton').style.display = finalActionsVisible ? 'inline-block' : 'none';
-
-        const currentInput = step.fieldId ? $(step.fieldId) || document.querySelector(`#group-${step.fieldId} input, #group-${step.fieldId} select, #group-${step.fieldId} textarea`) : null;
-        if (currentInput) currentInput.focus();
-
-        updateNextButtonState();
-    }
-
-    function updateNextButtonState() {
-        const nextButton = $('nextButton');
-        if (!nextButton || steps[currentStepIndex].id === 'review') return;
-        
-        if (currentStepIndex >= 11 && currentStepIndex <= 13) {
-            nextButton.disabled = false;
-            return;
+    
+        // --- Wizard Logic ---
+        function showStep(stepIndex) {
+            document.querySelectorAll('.form-group').forEach(group => {
+                group.style.display = 'none';
+            });
+            document.querySelectorAll('.error-message').forEach(error => {
+                error.classList.add('hidden');
+            });
+            
+            currentStepIndex = stepIndex;
+            const step = steps[stepIndex];
+            
+            $('conversation-bubble').innerHTML = step.prompt;
+    
+            const groupElements = document.querySelectorAll(`#group-${step.fieldId}`);
+            groupElements.forEach(el => {
+                el.style.display = 'block';
+            });
+            
+            if (stepIndex >= 11 && stepIndex <= 13) {
+                $('group-winRateImprovement').style.display = 'block';
+                $('group-dealSizeImprovement').style.display = 'block';
+                $('group-meetingImprovement').style.display = 'block';
+            }
+    
+            const isReviewStep = step.id === 'review';
+            if (isReviewStep) generateCommitmentSummary();
+    
+            $('prevButton').style.display = stepIndex > 0 ? 'inline-block' : 'none';
+            $('nextButton').style.display = isReviewStep ? 'none' : 'inline-block';
+            
+            const finalActionsVisible = isReviewStep;
+            $('exportJSONButton').style.display = finalActionsVisible ? 'inline-block' : 'none';
+            $('copyCommitmentButton').style.display = finalActionsVisible ? 'inline-block' : 'none';
+            $('printButton').style.display = finalActionsVisible ? 'inline-block' : 'none';
+    
+            const currentInput = step.fieldId ? $(step.fieldId) || document.querySelector(`#group-${step.fieldId} input, #group-${step.fieldId} select, #group-${step.fieldId} textarea`) : null;
+            if (currentInput) currentInput.focus();
+    
+            updateNextButtonState();
         }
-
-        const isValid = validateCurrentStep();
-        nextButton.disabled = !isValid;
-    }
-
-    function nextStep() {
-        if (currentStepIndex >= 11 && currentStepIndex <= 13) {
-             currentStepIndex = 14;
-             showStep(currentStepIndex);
-             return;
+    
+        function updateNextButtonState() {
+            const nextButton = $('nextButton');
+            if (!nextButton || steps[currentStepIndex].id === 'review') return;
+            
+            if (currentStepIndex >= 11 && currentStepIndex <= 13) {
+                nextButton.disabled = false;
+                return;
+            }
+    
+            const isValid = validateCurrentStep();
+            nextButton.disabled = !isValid;
         }
-        
-        if (validateCurrentStep()) {
-            if (currentStepIndex < steps.length - 1) {
-                currentStepIndex++;
+    
+        function nextStep() {
+            if (currentStepIndex >= 11 && currentStepIndex <= 13) {
+                 currentStepIndex = 14; 
+                 showStep(currentStepIndex);
+                 return;
+            }
+            
+            if (validateCurrentStep()) {
+                if (currentStepIndex < steps.length - 1) {
+                    currentStepIndex++;
+                    showStep(currentStepIndex);
+                }
+            }
+        }
+    
+        function previousStep() {
+            if (currentStepIndex > 0) {
+                if (currentStepIndex > 14) {
+                     currentStepIndex = 14;
+                } else if (currentStepIndex >= 11 && currentStepIndex <= 13) {
+                    currentStepIndex = 10;
+                } else {
+                    currentStepIndex--;
+                }
                 showStep(currentStepIndex);
             }
         }
-    }
-
-    function previousStep() {
-        if (currentStepIndex > 0) {
-            if (currentStepIndex > 14) {
-                 currentStepIndex = 14;
-            } else if (currentStepIndex >= 11 && currentStepIndex <= 13) {
-                currentStepIndex = 10;
-            } else {
-                currentStepIndex--;
-            }
-            showStep(currentStepIndex);
-        }
-    }
-
-    // --- Data Download & Copy Handlers (Retained) ---
-    function copyToClipboard(text) {
-        navigator.clipboard.writeText(text).then(() => {
-            const button = $('copyCommitmentButton');
-            const originalText = button.textContent;
-            
-            button.textContent = 'COPIED!';
-            setTimeout(() => {
-                button.textContent = originalText;
-            }, 1500);
-        }).catch(err => {
-            alert("Failed to copy text. Please manually copy the text from the box above.");
-        });
-    }
-
-    function downloadJSON(data, filename) {
-        const json = JSON.stringify(data, null, 2);
-        const blob = new Blob([json], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    }
     
-    // --- Initialization (Retained) ---
-    document.addEventListener('DOMContentLoaded', () => {
+        // --- Data Download & Copy Handlers ---
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const button = $('copyCommitmentButton');
+                const originalText = button.textContent;
+                
+                button.textContent = 'COPIED!';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 1500);
+            }).catch(err => {
+                alert("Failed to copy text. Please manually copy the text from the box above.");
+            });
+        }
+    
+        function downloadJSON(data, filename) {
+            const json = JSON.stringify(data, null, 2);
+            const blob = new Blob([json], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
         
-        const inputsToTrack = [
-            'quota2025', 'bookings2025', 'avgDealSize2025', 'region', 'personName', 'managerName', 'avgMeetings2025',
-            'quota2026', 'winRate2025', 'winRateImprovement', 
-            'dealSizeImprovement', 'meetingImprovement', 'meetingsImpliedWinRate_visible',
-            'action-people', 'action-pipeline', 'action-productivity', 'action-forecast', 'action-account-plan', 'action-cross-sell'
-        ];
-        
-        inputsToTrack.forEach(id => {
-            const el = $(id);
-            if (el) {
-                const handler = () => {
-                    calculatePlan();
-                    if (currentStepIndex === steps.findIndex(s => s.fieldId === id) || (currentStepIndex >= 14)) {
-                         updateNextButtonState();
-                    }
-                };
-                el.addEventListener('input', handler);
-                el.addEventListener('change', handler);
-            }
-        });
-        
-        const radioNames = ['reflection', 'primaryGoal'];
-        radioNames.forEach(name => {
-            document.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
-                radio.addEventListener('change', () => {
-                    calculatePlan();
-                    updateNextButtonState();
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const inputsToTrack = [
+                'quota2025', 'bookings2025', 'avgDealSize2025', 'region', 'personName', 'managerName', 'avgMeetings2025',
+                'quota2026', 'winRate2025', 'winRateImprovement', 
+                'dealSizeImprovement', 'meetingImprovement', 'meetingsImpliedWinRate_visible',
+                'action-people', 'action-pipeline', 'action-productivity', 'action-forecast', 'action-account-plan', 'action-cross-sell'
+            ];
+            
+            inputsToTrack.forEach(id => {
+                const el = $(id);
+                if (el) {
+                    const handler = () => {
+                        calculatePlan();
+                        if (currentStepIndex === steps.findIndex(s => s.fieldId === id) || (currentStepIndex >= 14)) {
+                             updateNextButtonState();
+                        }
+                    };
+                    el.addEventListener('input', handler);
+                    el.addEventListener('change', handler);
+                }
+            });
+            
+            const radioNames = ['reflection', 'primaryGoal'];
+            radioNames.forEach(name => {
+                document.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
+                    radio.addEventListener('change', () => {
+                        calculatePlan();
+                        updateNextButtonState();
+                    });
                 });
             });
+    
+            $('nextButton').addEventListener('click', nextStep);
+            $('prevButton').addEventListener('click', previousStep);
+            
+            $('resetButton').addEventListener('click', () => {
+                if(confirm("Are you sure you want to start over? All entered data will be lost.")) {
+                    if($('skoForm')) $('skoForm').reset();
+                    calculatePlan();
+                    showStep(0);
+                    if($('main-heading')) $('main-heading').focus();
+                }
+            });
+    
+            $('printButton').addEventListener('click', () => {
+                window.print();
+            });
+            
+            $('copyCommitmentButton').addEventListener('click', () => {
+                const summary = generateCommitmentSummary();
+                copyToClipboard(summary);
+            });
+            
+            $('exportJSONButton').addEventListener('click', () => {
+                const data = generateJSONData();
+                const repName = getStringValue('personName') || 'SalesRep';
+                const fileName = `Trimble_2026_Plan_${repName.replace(/\s/g, '_')}.json`;
+                downloadJSON(data, fileName);
+            });
+    
+            calculatePlan();
+            showStep(0);
         });
+    </script>
 
-        $('nextButton').addEventListener('click', nextStep);
-        $('prevButton').addEventListener('click', previousStep);
-        
-        $('resetButton').addEventListener('click', () => {
-            if(confirm("Are you sure you want to start over? All entered data will be lost.")) {
-                if($('skoForm')) $('skoForm').reset();
-                calculatePlan();
-                showStep(0);
-                if($('main-heading')) $('main-heading').focus();
-            }
-        });
-
-        $('printButton').addEventListener('click', () => {
-            window.print();
-        });
-        
-        $('copyCommitmentButton').addEventListener('click', () => {
-            const summary = generateCommitmentSummary();
-            copyToClipboard(summary);
-        });
-        
-        $('exportJSONButton').addEventListener('click', () => {
-            const data = generateJSONData();
-            const repName = getStringValue('personName') || 'SalesRep';
-            const fileName = `Trimble_2026_Plan_${repName.replace(/\s/g, '_')}.json`;
-            downloadJSON(data, fileName);
-        });
-
-        calculatePlan();
-        showStep(0);
-    });
-</script>
+</body>
+</html>
