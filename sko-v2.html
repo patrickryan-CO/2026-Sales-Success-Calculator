@@ -177,16 +177,18 @@
             border-left: 3px solid #fbad26;
             background-color: #fcfcfc;
         }
+        
         /* UPDATED Splash Callout Box */
         .splash-callout {
-            background-color: #0063a3; /* primary */
-            color: #ffffff; /* White text */
+            background-color: rgba(0, 99, 163, 0.1); /* bg-primary/10 */
+            color: #252a2e; /* primary-text */
+            border: 1px solid #0063a3; /* 1pt primary border */
             padding: 1rem;
             border-radius: 0.5rem;
             margin-top: 1.5rem;
         }
         .splash-callout strong {
-            color: #ffffff !important; /* White text */
+            color: #0063a3 !important; /* primary */
             font-weight: 700;
         }
 
@@ -725,8 +727,8 @@
                        <p class='prompt-why text-center'>This is your <strong>personal roadmap to hitting your 2026 number.</strong></p>
                        <p class='prompt-why'><strong>What's the Goal?</strong><br>This tool is your personal coach. We will help you turn your quota into a set of clear, measurable actions you can take every day. The goal is to create a plan <em>you</em> own, one that helps you and your manager stay aligned on how to win all year.</p>
                        <div class='splash-callout'>
-                         <strong>What You'll Need (Your "Cheat Sheet"):</strong><br>
-                         To make this easy, please have your <strong>Sales Scorecard</strong> open. You'll need it for the first few steps.
+                         <strong>What You'll Need:</strong><br>
+                         To make this easy, please have your <strong>Sales Scorecard</strong> open. You'll need it for the first few steps to pull your 2025 performance numbers (like Quota, Bookings, and Win Rate).
                        </div>`
             }, // 0
             
@@ -842,7 +844,7 @@
             if (input && input.classList.contains('required-field') && !value) {
                 isValid = false;
             } 
-            // UPDATED VALIDATION: Allow 0 for win rate, meetings, and bookings, but not for quota or deal size
+            // UPDATED VALIDATION: Allow 0 for some fields
             else if (isNumeric) {
                 if (!isFinite(numValue) || numValue < 0) {
                      isValid = false; // Always fail if negative or not a number
