@@ -14,7 +14,7 @@
                         'primary': '#0063a3',      // Trimble Blue
                         'primary-hover': '#004a7c',
                         'accent': '#fbad26',       // Trimble Yellow
-                        'primary-text': '#252a2e', // Dark Gray
+                        'primary-text': '#252a2e', // Dark Gray (Headings)
                         'soft-bg': '#f3f6f9',      // Light Gray
                         'error-red': '#e11d48',    // Softer Red
                     },
@@ -42,35 +42,35 @@
         .guide-box {
             @apply bg-blue-50 border-l-4 border-primary text-primary-text p-4 mb-8 rounded-r-md text-sm leading-relaxed;
         }
-        .guide-box strong { color: #0063a3; }
 
-        /* SIMPLE TOOLTIPS */
+        /* ANIMATED TOOLTIPS */
         .tooltip-container {
             position: relative;
-            display: inline-flex;
-            vertical-align: middle;
+            display: inline-block;
             margin-left: 8px;
+            vertical-align: middle;
             z-index: 50;
         }
         .tooltip-trigger {
             display: inline-flex; align-items: center; justify-content: center;
-            width: 18px; height: 18px;
+            width: 20px; height: 20px;
             background-color: #d1d5db; color: white; border-radius: 50%;
-            cursor: help; font-size: 11px; font-weight: bold;
-            transition: background-color 0.2s;
+            cursor: help; transition: background-color 0.2s;
+            font-size: 12px; font-weight: bold;
         }
         .tooltip-trigger:hover { background-color: #0063a3; }
         
         .tooltip-popup {
             visibility: hidden; opacity: 0;
-            position: absolute; bottom: 140%; left: 50%;
+            position: absolute; bottom: 130%; left: 50%;
             transform: translateX(-50%) translateY(5px);
             background-color: #1f2937; color: white;
-            text-align: center; padding: 8px 12px;
-            border-radius: 6px; font-size: 0.75rem; font-weight: 500;
-            line-height: 1.4; white-space: normal; width: 200px;
+            text-align: center; padding: 10px 14px;
+            border-radius: 6px; font-size: 0.8rem; font-weight: 500;
+            line-height: 1.4; white-space: normal; width: 220px;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            transition: all 0.2s ease-out; pointer-events: none;
+            transition: all 0.2s ease-out;
+            pointer-events: none;
         }
         .tooltip-popup::after {
             content: ""; position: absolute; top: 100%; left: 50%;
@@ -79,7 +79,8 @@
             border-color: #1f2937 transparent transparent transparent;
         }
         .tooltip-container:hover .tooltip-popup {
-            visibility: visible; opacity: 1; transform: translateX(-50%) translateY(0);
+            visibility: visible; opacity: 1;
+            transform: translateX(-50%) translateY(0);
         }
 
         /* INPUT FIELDS */
@@ -90,35 +91,53 @@
         .input-field {
             display: block; width: 100%;
             border-radius: 0.5rem; border: 1px solid #d1d5db;
-            padding: 0.75rem 1rem; font-size: 1rem; transition: all 0.2s;
+            padding: 0.75rem 1rem; font-size: 1rem;
+            transition: all 0.2s;
         }
         .input-field:focus {
             outline: none; border-color: #0063a3; ring: 3px; ring-color: #e0f2fe;
             box-shadow: 0 0 0 3px rgba(0, 99, 163, 0.1);
         }
         
+        /* SLIDERS */
+        input[type=range] {
+            -webkit-appearance: none; width: 100%; height: 6px;
+            border-radius: 5px; background: #d1d5db; outline: none;
+            margin: 1rem 0;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none; width: 20px; height: 20px;
+            border-radius: 50%; background: #0063a3; cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2); transition: transform 0.1s;
+        }
+        input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.1); }
+
         /* VALIDATION STATES */
         .input-error { border-color: #e11d48 !important; background-color: #fff1f2; }
         .error-text {
             display: none; color: #e11d48; font-size: 0.8rem; margin-top: 0.4rem; font-weight: 600;
         }
         .error-text.show { display: block; animation: fadeIn 0.3s; }
+
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
         /* SWOOP HEADER */
         .header-swoop {
-            background-color: #0063a3; width: 100%; height: 220px;
-            position: absolute; top: 0; left: 0; z-index: 0; overflow: hidden;
+            background-color: #0063a3;
+            width: 100%; height: 220px;
+            position: absolute; top: 0; left: 0; z-index: 0;
+            overflow: hidden;
         }
         .header-swoop svg {
-            width: 100%; height: 100%; position: absolute; bottom: -1px; left: 0;
+            width: 100%; height: 100%;
+            position: absolute; bottom: -1px; left: 0;
         }
 
         /* PROGRESS TABS */
         .progress-container { display: flex; border-bottom: 1px solid #e5e7eb; margin-bottom: 0; }
         .progress-step {
             flex: 1; text-align: center; padding: 1rem;
-            font-size: 0.75rem; font-weight: 700; color: #9ca3af; letter-spacing: 0.05em;
+            font-size: 0.8rem; font-weight: 700; color: #9ca3af; letter-spacing: 0.05em;
             border-bottom: 4px solid transparent; transition: all 0.3s;
         }
         .progress-step.active { color: #0063a3; border-bottom-color: #0063a3; }
@@ -177,42 +196,35 @@
 
                     <div id="step-0" class="step-content">
                         <div class="text-center max-w-3xl mx-auto space-y-8">
-                            <div class="prose max-w-none text-gray-600">
-                                <h2 class="text-2xl font-bold text-gray-800 mb-4">Your Plan. Your Year.</h2>
-                                <p class="text-lg leading-relaxed">
-                                    Success isn't just about hitting a target; it's about having a clear path to get there. 
-                                    We built this tool to help you translate your 2026 goals into a personal roadmap you can own.
-                                </p>
-                            </div>
+                            <h2 class="text-2xl font-bold text-gray-800 mb-4">Your Plan. Your Year.</h2>
+                            <p class="text-lg text-gray-600 leading-relaxed">
+                                Success isn't just about hitting a target; it's about having a clear path to get there. 
+                                We built this tool to help you translate your 2026 goals into a personal roadmap you can own.
+                            </p>
 
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 text-left">
                                 <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
                                     <div class="text-primary text-2xl mb-2">👥</div>
-                                    <h3 class="font-bold text-gray-800 mb-2">People</h3>
-                                    <p class="text-sm text-gray-600">Identify the skills and coaching you need to level up.</p>
+                                    <h3 class="font-bold text-gray-800 mb-1">People</h3>
+                                    <p class="text-sm text-gray-600">Identify skills and coaching needs.</p>
                                 </div>
                                 <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
                                     <div class="text-primary text-2xl mb-2">📈</div>
-                                    <h3 class="font-bold text-gray-800 mb-2">Pipeline</h3>
-                                    <p class="text-sm text-gray-600">Calculate the exact coverage required to hit your number.</p>
+                                    <h3 class="font-bold text-gray-800 mb-1">Pipeline</h3>
+                                    <p class="text-sm text-gray-600">Calculate the coverage you need.</p>
                                 </div>
                                 <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
                                     <div class="text-primary text-2xl mb-2">⚡</div>
-                                    <h3 class="font-bold text-gray-800 mb-2">Productivity</h3>
-                                    <p class="text-sm text-gray-600">Commit to working smarter with the right tools.</p>
+                                    <h3 class="font-bold text-gray-800 mb-1">Productivity</h3>
+                                    <p class="text-sm text-gray-600">Commit to working smarter.</p>
                                 </div>
                             </div>
 
                             <div class="bg-gray-50 rounded-lg p-6 text-left border border-gray-200 mt-8">
                                 <h3 class="font-bold text-primary mb-2">What You'll Need:</h3>
-                                <div class="text-sm text-gray-600 mb-0 space-y-2">
-                                    <p>
-                                        <strong>If you have a Sales Scorecard:</strong> Please verify you have access to your 2025 Quota, Bookings, and Win Rate.
-                                    </p>
-                                    <p>
-                                        <strong>If your role doesn't use a scorecard:</strong> Don't worry. You can still use this tool to set objectives and build your action plan.
-                                    </p>
-                                </div>
+                                <p class="text-sm text-gray-600">
+                                    Please have your <strong>Sales Scorecard</strong> open (if you have one).
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -231,15 +243,6 @@
                                     <option value="ECOMM">eCommerce</option>
                                 </select>
                             </div>
-
-                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mt-8 text-left">
-                                <h3 class="text-md font-bold text-primary mb-2">Data You Will Need:</h3>
-                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1" id="dynamic-req-list">
-                                    <li>2025 Quota & Bookings</li>
-                                    <li>Win Rate %</li>
-                                    <li>Average Deal Size</li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
 
@@ -253,12 +256,12 @@
                             <div>
                                 <label class="input-label">My Name</label>
                                 <input type="text" id="personName" class="input-field required" placeholder="First and Last Name">
-                                <p class="error-text" id="err-personName">Please enter your name.</p>
+                                <p class="error-text">Please help us identify you.</p>
                             </div>
                             <div>
                                 <label class="input-label">My Manager</label>
                                 <input type="text" id="managerName" class="input-field required" placeholder="Manager Name">
-                                <p class="error-text" id="err-managerName">Required for the report.</p>
+                                <p class="error-text">Required for the report.</p>
                             </div>
                             <div class="md:col-span-2">
                                 <label class="input-label">My Region</label>
@@ -268,7 +271,7 @@
                                     <option value="EMEA">EMEA</option>
                                     <option value="APAC">APAC</option>
                                 </select>
-                                <p class="error-text" id="err-region">Please select your region.</p>
+                                <p class="error-text">Please select your region.</p>
                             </div>
 
                             <div>
@@ -280,7 +283,7 @@
                                     </div>
                                 </label>
                                 <input type="text" id="val-quota25" class="input-field required" placeholder="0">
-                                <p class="error-text" id="err-quota25">Please add this value.</p>
+                                <p class="error-text">Please add this value.</p>
                             </div>
 
                             <div>
@@ -292,7 +295,7 @@
                                     </div>
                                 </label>
                                 <input type="text" id="val-actual25" class="input-field required" placeholder="0">
-                                <p class="error-text" id="err-actual25">Please add this value.</p>
+                                <p class="error-text">Please add this value.</p>
                             </div>
 
                             <div>
@@ -307,7 +310,7 @@
                                     <input type="number" id="val-efficiency25" class="input-field pr-8 required" placeholder="0">
                                     <span class="absolute right-3 top-3 text-gray-400 font-bold">%</span>
                                 </div>
-                                <p class="error-text" id="err-efficiency25">Please add this value.</p>
+                                <p class="error-text">Please add this value.</p>
                             </div>
 
                             <div>
@@ -319,18 +322,12 @@
                                     </div>
                                 </label>
                                 <input type="text" id="val-dealSize25" class="input-field required" placeholder="0">
-                                <p class="error-text" id="err-dealSize25">Please add this value.</p>
+                                <p class="error-text">Please add this value.</p>
                             </div>
 
                             <div class="md:col-span-2 mt-2">
                                 <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 flex items-center justify-between">
-                                    <div class="flex items-center">
-                                        <span class="text-sm font-bold text-gray-600 uppercase tracking-wide mr-2">2025 Attainment</span>
-                                        <div class="tooltip-container">
-                                            <span class="tooltip-trigger">?</span>
-                                            <div class="tooltip-popup">Your total actuals divided by your target. This shows your performance percentage.</div>
-                                        </div>
-                                    </div>
+                                    <span class="text-sm font-bold text-gray-600 uppercase tracking-wide">2025 Attainment</span>
                                     <span id="calc-attainment" class="text-2xl font-extrabold text-primary">0%</span>
                                 </div>
                             </div>
@@ -340,7 +337,7 @@
                     <div id="step-3" class="step-content hidden">
                         <div class="guide-box">
                             <h3 class="font-bold mb-1">YOUR GUIDE: The 2026 Opportunity</h3>
-                            <p>Now, enter your <strong>2026 Target</strong>. We will use your baseline data to calculate exactly what activity or pipeline volume you need to hit this new number.</p>
+                            <p>Now, enter your <strong>2026 Target</strong>. We'll use your baseline efficiency to show what's required to hit this new number.</p>
                         </div>
 
                         <div id="calc-section">
@@ -354,31 +351,20 @@
                                         </div>
                                     </label>
                                     <input type="text" id="val-quota26" class="input-field required text-lg font-semibold text-primary" placeholder="0">
-                                    <p class="error-text" id="err-quota26">Please enter your new target.</p>
+                                    <p class="error-text">Please enter your new target.</p>
                                 </div>
                                 
                                 <div class="bg-blue-50 border border-blue-100 rounded-lg p-6 md:row-span-2">
                                     <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-4">Required to Hit Goal</h4>
                                     
                                     <div class="mb-6">
-                                        <div class="flex items-center mb-1">
-                                            <span id="lbl-resultA" class="text-sm text-gray-600 font-bold mr-2">Pipeline Needed</span>
-                                            <div class="tooltip-container">
-                                                <span class="tooltip-trigger">?</span>
-                                                <div class="tooltip-popup">The total volume (Pipeline or Activity) you need to generate to hit your target at your current efficiency.</div>
-                                            </div>
-                                        </div>
+                                        <span id="lbl-resultA" class="block text-sm text-gray-600 mb-1 font-bold">Pipeline Needed</span>
                                         <span id="calc-resultA" class="block text-3xl font-extrabold text-primary">0</span>
+                                        <span class="text-xs text-gray-500">Based on 2025 efficiency</span>
                                     </div>
                                     
                                     <div>
-                                        <div class="flex items-center mb-1">
-                                            <span id="lbl-resultB" class="text-sm text-gray-600 font-bold mr-2">Deals Needed</span>
-                                            <div class="tooltip-container">
-                                                <span class="tooltip-trigger">?</span>
-                                                <div class="tooltip-popup">The number of closed deals (or transactions) required to reach your revenue goal.</div>
-                                            </div>
-                                        </div>
+                                        <span id="lbl-resultB" class="block text-sm text-gray-600 mb-1 font-bold">Deals Needed</span>
                                         <span id="calc-resultB" class="block text-3xl font-extrabold text-primary">0</span>
                                     </div>
                                 </div>
@@ -414,26 +400,54 @@
                     <div id="step-4" class="step-content hidden">
                         <div class="guide-box">
                             <h3 class="font-bold mb-1">YOUR GUIDE: The Action Plan</h3>
-                            <p>The math showed us the "What." Now we decide the "How." Please commit to one specific action for each pillar to close your gap.</p>
+                            <p>Use the sliders to model "What If" scenarios. Then, review your notes from the <strong>Best Practice Sessions</strong> to commit to specific actions that will make those improvements real.</p>
+                        </div>
+
+                        <div class="mb-10 bg-gray-50 p-6 rounded-lg border border-gray-200">
+                            <h4 class="text-primary font-bold mb-4 uppercase text-xs tracking-wide">Scenario Modeling</h4>
+                            
+                            <div class="mb-6">
+                                <div class="flex justify-between text-sm font-bold text-gray-700 mb-2">
+                                    <span id="lbl-slider1">Improve Win Rate</span>
+                                    <span id="val-slider1" class="text-primary">0%</span>
+                                </div>
+                                <input type="range" id="slide-efficiency" min="0" max="20" value="0" step="1">
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-sm font-bold text-gray-700 mb-2">
+                                    <span id="lbl-slider2">Increase Deal Size</span>
+                                    <span id="val-slider2" class="text-primary">0%</span>
+                                </div>
+                                <input type="range" id="slide-value" min="0" max="30" value="0" step="5">
+                            </div>
+
+                            <div class="mt-6 pt-4 border-t border-gray-200">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-bold text-gray-600">New Volume Required:</span>
+                                    <span id="calc-new-volume" class="text-2xl font-extrabold text-primary">0</span>
+                                </div>
+                                <p class="text-xs text-gray-500 text-right mt-1">Impact of your improvements</p>
+                            </div>
                         </div>
 
                         <div class="space-y-6">
                             <div>
                                 <label class="input-label">
                                     Action 1: People (Training & Coaching)
-                                    <div class="tooltip-container"><span class="tooltip-trigger">?</span><div class="tooltip-popup">What skill will you improve? e.g., "Complete Negotiation Certification." (Reference Team Selling Best Practice Session)</div></div>
+                                    <div class="tooltip-container"><span class="tooltip-trigger">?</span><div class="tooltip-popup">What skill will you improve? e.g., "Complete Negotiation Certification." (Reference Team Selling Session)</div></div>
                                 </label>
                                 <input type="text" id="act-people" class="input-field required" placeholder="I will...">
-                                <p class="error-text" id="err-act-people">Please add a People action.</p>
+                                <p class="error-text">Please add a People action.</p>
                             </div>
 
                             <div>
                                 <label class="input-label">
                                     Action 2: Process (Pipeline & Quality)
-                                    <div class="tooltip-container"><span class="tooltip-trigger">?</span><div class="tooltip-popup">How will you improve deal quality? e.g., "Disqualify bad deals earlier." (Reference Account Planning Best Practice Session)</div></div>
+                                    <div class="tooltip-container"><span class="tooltip-trigger">?</span><div class="tooltip-popup">How will you improve deal quality? e.g., "Disqualify bad deals earlier." (Reference Account Planning Session)</div></div>
                                 </label>
                                 <input type="text" id="act-process" class="input-field required" placeholder="I will...">
-                                <p class="error-text" id="err-act-process">Please add a Process action.</p>
+                                <p class="error-text">Please add a Process action.</p>
                             </div>
 
                             <div>
@@ -442,7 +456,7 @@
                                     <div class="tooltip-container"><span class="tooltip-trigger">?</span><div class="tooltip-popup">How will you work smarter? e.g., "Block 2 hours daily for prospecting."</div></div>
                                 </label>
                                 <input type="text" id="act-prod" class="input-field required" placeholder="I will...">
-                                <p class="error-text" id="err-act-prod">Please add a Productivity action.</p>
+                                <p class="error-text">Please add a Productivity action.</p>
                             </div>
 
                             <div class="pt-6 border-t">
@@ -450,9 +464,8 @@
                                     My Accuracy Commitment
                                     <div class="tooltip-container"><span class="tooltip-trigger">?</span><div class="tooltip-popup">How will you ensure your forecast is accurate?</div></div>
                                 </label>
-                                <p class="text-xs text-gray-500 mb-2">"My Rep Commit will be 95-105% accurate every quarter."</p>
                                 <input type="text" id="act-forecast" class="input-field required" placeholder="Key action to ensure accuracy...">
-                                <p class="error-text" id="err-act-forecast">Please add your commitment.</p>
+                                <p class="error-text">Please add your commitment.</p>
                             </div>
                         </div>
                     </div>
@@ -492,63 +505,60 @@
     const ROLE_DATA = {
         'AE': {
             lbl: {
-                q25: '2025 Quota ($)', q25tip: 'Your total assigned revenue quota for 2025.',
-                a25: '2025 Bookings ($)', a25tip: 'Your total closed/booked revenue for the year.',
+                q25: '2025 Quota', q25tip: 'Your total assigned revenue quota for 2025.',
+                a25: '2025 Bookings', a25tip: 'Your total closed/booked revenue for the year.',
                 e25: 'Win Rate %', e25tip: 'The percentage of opportunities you won.',
-                d25: 'Avg Deal Size ($)', d25tip: 'Your average dollar value per closed deal.',
-                q26: '2026 Quota ($)',
-                resA: 'Pipeline Needed',
-                resB: 'Deals Needed'
+                d25: 'Avg Deal Size', d25tip: 'Your average value per closed deal.',
+                q26: '2026 Quota',
+                resA: 'Pipeline Needed', resB: 'Deals Needed',
+                sl1: 'Improve Win Rate', sl2: 'Increase Deal Size'
             },
-            isMoney: true,
-            docs: ["2025 Quota & Bookings", "Win Rate %", "Average Deal Size"]
+            isMoney: true
         },
         'SDR': {
             lbl: {
-                q25: '2025 Target (#)', q25tip: 'Your target number of Meetings or SQLs.',
-                a25: '2025 Actuals (#)', a25tip: 'The actual number of Meetings/SQLs you achieved.',
+                q25: '2025 Target', q25tip: 'Your target number of Meetings or SQLs.',
+                a25: '2025 Actuals', a25tip: 'The actual number of Meetings/SQLs you achieved.',
                 e25: 'Conversion %', e25tip: 'Your conversion rate from Lead to Meeting.',
-                d25: 'Avg Opp Size ($)', d25tip: 'Optional: The average size of opps you generate.',
-                q26: '2026 Target (#)',
-                resA: 'Activity Volume Needed',
-                resB: 'Est. Pipeline Generated'
+                d25: 'Avg Opp Size', d25tip: 'Optional: The average size of opps you generate.',
+                q26: '2026 Target',
+                resA: 'Activity Needed', resB: 'Est. Pipeline',
+                sl1: 'Improve Conversion', sl2: 'Increase Opp Size'
             },
-            isMoney: false,
-            docs: ["2025 Activity/Meeting Targets", "Conversion Rates", "2026 Target"]
+            isMoney: false
         },
         'SE': {
              lbl: {
-                q25: '2025 Rev Target ($)', q25tip: 'The total revenue target you supported.',
-                a25: '2025 Actuals ($)', a25tip: 'The actual revenue closed that you supported.',
+                q25: '2025 Rev Target', q25tip: 'The total revenue target you supported.',
+                a25: '2025 Actuals', a25tip: 'The actual revenue closed that you supported.',
                 e25: 'Tech Win Rate %', e25tip: 'Percentage of deals where you secured the Technical Win.',
-                d25: 'Avg Deal Size ($)', d25tip: 'The average size of deals you support.',
-                q26: '2026 Rev Target ($)',
-                resA: 'Coverage Needed',
-                resB: 'Deals to Support'
+                d25: 'Avg Deal Size', d25tip: 'The average size of deals you support.',
+                q26: '2026 Rev Target',
+                resA: 'Coverage Needed', resB: 'Deals to Support',
+                sl1: 'Improve Tech Win', sl2: 'Increase Deal Size'
             },
-            isMoney: true,
-            docs: ["2025 Supported Revenue", "Technical Win Rate", "2026 Revenue Target"]
+            isMoney: true
         },
         'ECOMM': {
              lbl: {
-                q25: '2025 Revenue ($)', q25tip: 'Total eCommerce revenue target.',
-                a25: '2025 Actuals ($)', a25tip: 'Total revenue actually achieved.',
+                q25: '2025 Revenue', q25tip: 'Total eCommerce revenue target.',
+                a25: '2025 Actuals', a25tip: 'Total revenue actually achieved.',
                 e25: 'Conversion Rate %', e25tip: 'Website visitor to purchaser conversion rate.',
-                d25: 'Avg Order Value ($)', d25tip: 'Average dollar value per transaction.',
-                q26: '2026 Revenue ($)',
-                resA: 'Traffic/Leads Needed',
-                resB: 'Transactions Needed'
+                d25: 'Avg Order Value', d25tip: 'Average dollar value per transaction.',
+                q26: '2026 Revenue',
+                resA: 'Traffic Needed', resB: 'Transactions Needed',
+                sl1: 'Improve Conversion', sl2: 'Increase Order Value'
             },
-            isMoney: true,
-            docs: ["2025 Revenue & Actuals", "Site Conversion Rate", "Average Order Value"]
+            isMoney: true
         }
     };
 
     const $ = (id) => document.getElementById(id);
     const getVal = (id) => parseFloat($(id).value.replace(/,/g, '')) || 0;
     const setTxt = (id, txt) => { if($(id)) $(id).textContent = txt; };
-    const fmt$ = (n) => '$' + n.toLocaleString('en-US', {maximumFractionDigits:0});
-    const fmtN = (n) => n.toLocaleString('en-US', {maximumFractionDigits:1});
+    const fmtN = (n, isMon) => isMon ? 
+        n.toLocaleString('en-US', {maximumFractionDigits:0}) : 
+        n.toLocaleString('en-US', {maximumFractionDigits:1});
 
     // --- APP LOGIC ---
     let step = 0; 
@@ -556,25 +566,20 @@
 
     function updateLabels() {
         const r = $('userRole').value;
-        const data = ROLE_DATA[r];
+        const d = ROLE_DATA[r].lbl;
         
         // Update Labels & Tooltips
-        setTxt('lbl-quota25', data.lbl.q25); $('tip-quota25').textContent = data.lbl.q25tip;
-        setTxt('lbl-actual25', data.lbl.a25); $('tip-actual25').textContent = data.lbl.a25tip;
-        setTxt('lbl-efficiency25', data.lbl.e25); $('tip-efficiency25').textContent = data.lbl.e25tip;
-        setTxt('lbl-dealSize25', data.lbl.d25); $('tip-dealSize25').textContent = data.lbl.d25tip;
-        setTxt('lbl-quota26', data.lbl.q26); $('tip-quota26').textContent = 'Your new target for 2026.';
-        setTxt('lbl-resultA', data.lbl.resA);
-        setTxt('lbl-resultB', data.lbl.resB);
-
-        // Update "What You Need" list dynamically on Step 1
-        const docList = $('dynamic-req-list');
-        docList.innerHTML = '';
-        data.docs.forEach(doc => {
-            const li = document.createElement('li');
-            li.textContent = doc;
-            docList.appendChild(li);
-        });
+        setTxt('lbl-quota25', d.q25); $('tip-quota25').textContent = d.q25tip;
+        setTxt('lbl-actual25', d.a25); $('tip-actual25').textContent = d.a25tip;
+        setTxt('lbl-efficiency25', d.e25); $('tip-efficiency25').textContent = d.e25tip;
+        setTxt('lbl-dealSize25', d.d25); $('tip-dealSize25').textContent = d.d25tip;
+        setTxt('lbl-quota26', d.q26);
+        setTxt('lbl-resultA', d.resA);
+        setTxt('lbl-resultB', d.resB);
+        
+        // Update Slider Labels
+        setTxt('lbl-slider1', d.sl1);
+        setTxt('lbl-slider2', d.sl2);
     }
 
     function doMath() {
@@ -588,47 +593,57 @@
         const att = q25 > 0 ? (a25 / q25) * 100 : 0;
         setTxt('calc-attainment', att.toFixed(1) + '%');
 
-        const eff = getVal('val-efficiency25') / 100;
+        const eff = getVal('val-efficiency25');
         const size = getVal('val-dealSize25');
         const q26 = getVal('val-quota26');
 
-        // Calc A: "Pipeline/Volume Needed" = Target / Efficiency
-        const valA = eff > 0 ? q26 / eff : 0;
+        // Slider Inputs
+        const impEff = parseFloat($('slide-efficiency').value);
+        const impVal = parseFloat($('slide-value').value);
         
-        // Calc B: "Deals/Trans Needed"
+        // Update Slider Displays
+        setTxt('val-slider1', '+' + impEff + '%');
+        setTxt('val-slider2', '+' + impVal + '%');
+
+        // New Simulated Metrics
+        const newEff = (eff + impEff) / 100;
+        const newSize = size * (1 + (impVal / 100));
+
+        // Calc A: "Volume Needed" = Target / New Efficiency
+        const valA = newEff > 0 ? q26 / newEff : 0;
+        
+        // Calc B: "Count Needed"
         let valB = 0;
-        if(size > 0) {
-            valB = valA / size; 
+        if(newSize > 0) {
+            valB = valA / newSize; // Rev / Size = Count
         } else {
-            valB = valA; 
+            valB = valA; // SDR Fallback
         }
 
-        setTxt('calc-resultA', conf.isMoney ? fmt$(valA) : fmtN(valA));
-        setTxt('calc-resultB', fmtN(valB));
+        // Update Step 3 Displays (Base Gap)
+        // Note: Step 3 uses base metrics, Step 4 uses slider metrics. 
+        // For simplicity, we update the Gap based on current efficiency (sliders=0) first
+        const baseA = (eff/100) > 0 ? q26 / (eff/100) : 0;
+        const baseB = size > 0 ? baseA / size : baseA;
+        
+        setTxt('calc-resultA', fmtN(baseA, conf.isMoney));
+        setTxt('calc-resultB', fmtN(baseB, false));
+
+        // Update Step 4 Display (Slider Impact)
+        // This shows the REDUCED volume needed thanks to improvements
+        setTxt('calc-new-volume', fmtN(valA, conf.isMoney));
     }
 
     function validate() {
         let valid = true;
         const currentPanel = $(`step-${step}`);
-        
-        // Robustly find all required fields in current panel
         const inputs = currentPanel.querySelectorAll('.required');
         
         inputs.forEach(inp => {
-            // Robust error finding using ID mapping
-            const errId = 'err-' + inp.id.replace('val-', '').replace('act-', ''); 
-            // Fallback to sibling if ID mapping misses (for name/manager)
-            let err = document.getElementById(errId) || inp.nextElementSibling;
-            
-            // Special cases for IDs that don't match perfectly
-            if(inp.id === 'personName') err = $('err-personName');
-            if(inp.id === 'managerName') err = $('err-managerName');
-            if(inp.id === 'region') err = $('err-region');
-            if(inp.id === 'val-efficiency25') err = $('err-efficiency25'); // Fix for relative parent
-            
+            const err = inp.nextElementSibling;
             if(!inp.value.trim()) {
                 inp.classList.add('input-error');
-                if(err) err.classList.add('show');
+                if(err && err.classList.contains('error-text')) err.classList.add('show');
                 valid = false;
             } else {
                 inp.classList.remove('input-error');
@@ -636,7 +651,6 @@
             }
         });
 
-        // Radio Check (Step 3 only)
         if(step === 3) {
             const checked = document.querySelector('input[name="reflection"]:checked');
             const err = $('err-reflection');
@@ -647,7 +661,6 @@
                 err.classList.remove('show');
             }
         }
-
         return valid;
     }
 
@@ -666,8 +679,9 @@ BASELINE (2025)
 
 2026 GOALS
 - New Target: ${$('val-quota26').value}
-- Required Volume: ${$('calc-resultA').textContent}
-- Reflection: ${document.querySelector('input[name="reflection"]:checked')?.value || 'N/A'}
+- Gap Volume: ${$('calc-resultA').textContent}
+- Modeled Volume (After Improvements): ${$('calc-new-volume').textContent}
+- Reflection: ${document.querySelector('input[name="reflection"]:checked')?.value}
 
 ACTION PLAN
 1. People: ${$('act-people').value}
@@ -680,30 +694,23 @@ ACTION PLAN
     function navigate(dir) {
         if(dir === 1 && !validate()) return;
 
-        // Hide current
         $(`step-${step}`).classList.add('hidden');
-        
         step += dir;
-
-        // Show new
         $(`step-${step}`).classList.remove('hidden');
 
-        // Update UI
         const isStart = (step === 0);
         const isFinal = (step === maxStep);
 
-        // Progress Bar
         $('progress-bar').style.display = (step >= 2) ? 'flex' : 'none';
         if(step >= 2) {
             ['baseline','gap','solution','review'].forEach((id, i) => {
                 const el = $(`tab-${id}`);
                 el.className = 'progress-step';
-                if(i + 2 === step) el.classList.add('active'); // current
-                if(i + 2 < step) el.classList.add('completed'); // past
+                if(i + 2 === step) el.classList.add('active'); 
+                if(i + 2 < step) el.classList.add('completed'); 
             });
         }
 
-        // Nav Buttons
         const nextBtn = $('btn-next');
         const prevBtn = $('btn-prev');
         const navArea = $('nav-area');
@@ -712,7 +719,7 @@ ACTION PLAN
         if(isStart) {
             prevBtn.classList.add('hidden');
             nextBtn.textContent = 'Start';
-            navArea.classList.add('justify-center'); // Center button on welcome
+            navArea.classList.add('justify-center'); 
         } else {
             prevBtn.classList.remove('hidden');
             navArea.classList.remove('justify-center');
@@ -728,46 +735,26 @@ ACTION PLAN
             nextBtn.classList.remove('hidden');
             finalBtns.classList.add('hidden');
         }
-
-        // Scroll to top
         window.scrollTo(0,0);
     }
 
-    // --- EVENT LISTENERS ---
+    // --- EVENTS ---
     $('btn-next').onclick = () => navigate(1);
     $('btn-prev').onclick = () => navigate(-1);
     
-    // Live Math & Role Updates
     $('userRole').onchange = () => { updateLabels(); doMath(); };
-    document.querySelectorAll('input').forEach(i => {
-        i.oninput = doMath;
-    });
+    document.querySelectorAll('input').forEach(i => { i.oninput = doMath; });
 
-    // Final Buttons
-    $('btn-restart').onclick = () => {
-        if(confirm("Start over?")) location.reload();
-    };
-    $('btn-copy').onclick = () => {
-        navigator.clipboard.writeText($('summary-display').textContent);
-        alert("Copied to clipboard!");
-    };
+    $('btn-restart').onclick = () => { if(confirm("Start over?")) location.reload(); };
+    $('btn-copy').onclick = () => { navigator.clipboard.writeText($('summary-display').textContent); alert("Copied!"); };
     $('btn-pdf').onclick = () => window.print();
     $('btn-json').onclick = () => {
-        const data = {
-            user: $('personName').value,
-            role: $('userRole').value,
-            date: new Date().toISOString(),
-            plan: $('summary-display').textContent
-        };
-        const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'trimble-plan.json';
-        a.click();
+        const blob = new Blob([JSON.stringify({ plan: $('summary-display').textContent }, null, 2)], {type:'application/json'});
+        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'plan.json'; a.click();
     };
 
     // Init
-    // updateLabels(); // Removed to allow default hardcoded list to show on load
+    updateLabels();
 </script>
 
 </body>
