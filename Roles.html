@@ -14,7 +14,7 @@
                         'primary': '#0063a3',      // Trimble Blue
                         'primary-hover': '#004a7c',
                         'accent': '#fbad26',       // Trimble Yellow
-                        'primary-text': '#252a2e', // Dark Gray (Headings)
+                        'primary-text': '#252a2e', // Dark Gray
                         'soft-bg': '#f3f6f9',      // Light Gray
                         'error-red': '#e11d48',    // Softer Red
                     },
@@ -43,65 +43,16 @@
             @apply bg-blue-50 border-l-4 border-primary text-primary-text p-6 mb-8 rounded-r-md text-sm leading-relaxed shadow-sm;
         }
         .guide-box h3 {
-            @apply font-bold text-primary text-base mb-2 flex items-center;
-        }
-        .guide-box p {
-            @apply text-gray-700 mb-2;
-        }
-        .guide-box p:last-child {
-            @apply mb-0;
-        }
-
-        /* ANIMATED TOOLTIPS */
-        .tooltip-container {
-            position: relative;
-            display: inline-flex;
-            vertical-align: middle;
-            margin-left: 8px;
-            z-index: 50;
-        }
-        
-        .tooltip-trigger {
-            display: inline-flex; align-items: center; justify-content: center;
-            width: 20px; height: 20px;
-            background-color: #d1d5db; color: white; border-radius: 50%;
-            cursor: help; transition: background-color 0.2s;
-            font-size: 12px; font-weight: bold;
-        }
-        
-        .tooltip-trigger:hover {
-            background-color: #0063a3;
-        }
-        
-        .tooltip-popup {
-            visibility: hidden; opacity: 0;
-            position: absolute; bottom: 140%; left: 50%;
-            transform: translateX(-50%) translateY(5px);
-            background-color: #1f2937; color: white;
-            text-align: center; padding: 10px 14px;
-            border-radius: 6px; font-size: 0.75rem; font-weight: 500;
-            line-height: 1.4; white-space: normal; width: 220px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            transition: all 0.2s ease-out;
-            pointer-events: none;
-        }
-        
-        .tooltip-popup::after {
-            content: ""; position: absolute; top: 100%; left: 50%;
-            margin-left: -5px; border-width: 5px;
-            border-style: solid;
-            border-color: #1f2937 transparent transparent transparent;
-        }
-        
-        .tooltip-container:hover .tooltip-popup {
-            visibility: visible; opacity: 1;
-            transform: translateX(-50%) translateY(0);
+            @apply font-bold text-primary text-base mb-2;
         }
 
         /* INPUT FIELDS */
         .input-label {
-            display: flex; align-items: center;
-            font-size: 0.9rem; font-weight: 700; color: #374151; margin-bottom: 0.5rem;
+            display: block;
+            font-size: 0.95rem; font-weight: 700; color: #374151; margin-bottom: 0.25rem;
+        }
+        .input-sublabel {
+            display: block; font-size: 0.85rem; color: #6b7280; margin-bottom: 0.5rem; font-style: italic;
         }
         .input-field {
             display: block; width: 100%;
@@ -115,9 +66,7 @@
         }
         
         /* SLIDERS */
-        .slider-group {
-            @apply mb-6;
-        }
+        .slider-group { @apply mb-6; }
         input[type=range] {
             -webkit-appearance: none; width: 100%; height: 8px;
             border-radius: 5px; background: #e5e7eb; outline: none;
@@ -126,13 +75,8 @@
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none; width: 24px; height: 24px;
             border-radius: 50%; background: #0063a3; cursor: pointer;
-            border: 2px solid white;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2); transition: transform 0.1s;
+            border: 2px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.2); 
             margin-top: -8px; 
-        }
-        input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.1); }
-        input[type=range]::-webkit-slider-runnable-track {
-            width: 100%; height: 8px; background: #e5e7eb; border-radius: 5px;
         }
 
         /* VALIDATION STATES */
@@ -147,12 +91,10 @@
         .header-swoop {
             background-color: #0063a3;
             width: 100%; height: 220px;
-            position: absolute; top: 0; left: 0; z-index: 0;
-            overflow: hidden;
+            position: absolute; top: 0; left: 0; z-index: 0; overflow: hidden;
         }
         .header-swoop svg {
-            width: 100%; height: 100%;
-            position: absolute; bottom: -1px; left: 0;
+            width: 100%; height: 100%; position: absolute; bottom: -1px; left: 0;
         }
 
         /* PROGRESS TABS */
@@ -171,15 +113,14 @@
             transition: all 0.2s; cursor: pointer; text-align: center;
         }
         .btn-primary { background-color: #0063a3; color: white; box-shadow: 0 4px 6px -1px rgba(0, 99, 163, 0.2); }
-        .btn-primary:hover { background-color: #004a7c; transform: translateY(-1px); box-shadow: 0 6px 8px -1px rgba(0, 99, 163, 0.3); }
+        .btn-primary:hover { background-color: #004a7c; transform: translateY(-1px); }
         .btn-accent { background-color: #fbad26; color: #252a2e; }
-        .btn-accent:hover { background-color: #e59b1a; }
         .btn-ghost { background-color: transparent; color: #6b7280; }
         .btn-ghost:hover { background-color: #f3f4f6; color: #1f2937; }
 
         /* Print adjustments */
         @media print {
-            .header-swoop, .tooltip-container, #nav-area { display: none !important; }
+            .header-swoop, #nav-area { display: none !important; }
             body { background: white; }
             .shadow-2xl { box-shadow: none; }
             .step-panel { display: block !important; }
@@ -198,7 +139,6 @@
     </div>
 
     <div class="relative z-10 max-w-5xl mx-auto mt-16 mb-12 px-4">
-        
         <div class="bg-white rounded-xl shadow-2xl min-h-[650px] flex flex-col relative">
             
             <div class="p-8 pb-0 text-center rounded-t-xl bg-white">
@@ -218,36 +158,15 @@
 
                     <div id="step-0" class="step-content">
                         <div class="text-center max-w-3xl mx-auto space-y-8">
-                            <div class="prose max-w-none text-gray-600">
-                                <h2 class="text-2xl font-bold text-gray-800 mb-4">Your Plan. Your Year.</h2>
-                                <p class="text-lg leading-relaxed">
-                                    Success isn't just about hitting a target; it's about having a clear path to get there. 
-                                    We built this tool to help you translate your 2026 goals into a personal roadmap you can own.
-                                </p>
-                            </div>
-
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 text-left">
-                                <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
-                                    <div class="text-primary text-2xl mb-2">👥</div>
-                                    <h3 class="font-bold text-gray-800 mb-1">People</h3>
-                                    <p class="text-sm text-gray-600">Identify skills and coaching needs.</p>
-                                </div>
-                                <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
-                                    <div class="text-primary text-2xl mb-2">📈</div>
-                                    <h3 class="font-bold text-gray-800 mb-1">Pipeline</h3>
-                                    <p class="text-sm text-gray-600">Calculate the coverage you need.</p>
-                                </div>
-                                <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
-                                    <div class="text-primary text-2xl mb-2">⚡</div>
-                                    <h3 class="font-bold text-gray-800 mb-1">Productivity</h3>
-                                    <p class="text-sm text-gray-600">Commit to working smarter.</p>
-                                </div>
-                            </div>
-
-                            <div class="bg-gray-50 rounded-lg p-6 text-left border border-gray-200 mt-8">
-                                <h3 class="font-bold text-primary mb-2">What You'll Need:</h3>
+                            <h2 class="text-2xl font-bold text-gray-800">Your Plan. Your Year.</h2>
+                            <p class="text-lg text-gray-600">
+                                This tool connects your corporate target to your personal actions. By the end, you will have a specific roadmap for <strong>People, Pipeline, and Productivity</strong>.
+                            </p>
+                            
+                            <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                                <h3 class="font-bold text-primary mb-2">Before you start:</h3>
                                 <p class="text-sm text-gray-600">
-                                    Please have your <strong>Sales Scorecard</strong> open (if you have one for your role).
+                                    Please have your <strong>Sales Scorecard</strong> open (if your role has one) to reference your 2025 actuals.
                                 </p>
                             </div>
                         </div>
@@ -255,11 +174,9 @@
 
                     <div id="step-1" class="step-content hidden">
                         <div class="max-w-xl mx-auto text-center py-10">
-                            <h2 class="text-2xl font-bold text-gray-800 mb-4">Let's customize your plan.</h2>
-                            <p class="text-gray-600 mb-8">Select your primary role below so we can adjust the metrics to match your business.</p>
-                            
-                            <div class="text-left bg-white p-8 rounded-lg border border-gray-200 shadow-sm">
-                                <label class="input-label text-lg mb-2">I am a:</label>
+                            <h2 class="text-2xl font-bold text-gray-800 mb-4">Select Your Role</h2>
+                            <p class="text-gray-600 mb-6">We will customize the metrics and language for you.</p>
+                            <div class="text-left bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
                                 <select id="userRole" class="input-field text-lg py-3 cursor-pointer bg-gray-50">
                                     <option value="AE">Account Executive (AE)</option>
                                     <option value="SDR">Sales Development (SDR)</option>
@@ -272,20 +189,20 @@
 
                     <div id="step-2" class="step-content hidden">
                         <div class="guide-box">
-                            <h3 class="mb-2">YOUR GUIDE: Establishing the Baseline</h3>
-                            <p>We can't build a path forward without knowing where we stand. Please enter your <strong>2025 actuals</strong>. This calculates your personal efficiency baseline.</p>
+                            <h3>YOUR GUIDE: Establishing the Baseline</h3>
+                            <p>We can't build a path forward without knowing where we stand. Use your <strong>2025 Scorecard</strong> to fill in these actuals. This establishes your "Efficiency Baseline."</p>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label class="input-label">My Name</label>
-                                <input type="text" id="personName" class="input-field required" placeholder="First and Last Name">
-                                <p class="error-text" id="err-personName">Please enter your name.</p>
+                                <input type="text" id="personName" class="input-field required" placeholder="Full Name">
+                                <p class="error-text" id="err-personName">Required.</p>
                             </div>
                             <div>
                                 <label class="input-label">My Manager</label>
                                 <input type="text" id="managerName" class="input-field required" placeholder="Manager Name">
-                                <p class="error-text" id="err-managerName">Required for the report.</p>
+                                <p class="error-text" id="err-managerName">Required.</p>
                             </div>
                             <div class="md:col-span-2">
                                 <label class="input-label">My Region</label>
@@ -295,51 +212,36 @@
                                     <option value="EMEA">EMEA</option>
                                     <option value="APAC">APAC</option>
                                 </select>
-                                <p class="error-text" id="err-region">Please select your region.</p>
+                                <p class="error-text" id="err-region">Required.</p>
                             </div>
 
                             <div>
-                                <label class="input-label">
-                                    <span id="lbl-quota25">2025 Quota</span>
-                                    <div class="tooltip-container"><span class="tooltip-trigger">?</span><div id="tip-quota25" class="tooltip-popup">...</div></div>
-                                </label>
+                                <label class="input-label" id="lbl-quota25">2025 Quota</label>
                                 <input type="text" id="val-quota25" class="input-field required" placeholder="0">
-                                <p class="error-text" id="err-quota25">Please add this value.</p>
+                                <p class="error-text" id="err-quota25">Required.</p>
                             </div>
-
                             <div>
-                                <label class="input-label">
-                                    <span id="lbl-actual25">2025 Actuals</span>
-                                    <div class="tooltip-container"><span class="tooltip-trigger">?</span><div id="tip-actual25" class="tooltip-popup">...</div></div>
-                                </label>
+                                <label class="input-label" id="lbl-actual25">2025 Actuals</label>
                                 <input type="text" id="val-actual25" class="input-field required" placeholder="0">
-                                <p class="error-text" id="err-actual25">Please add this value.</p>
+                                <p class="error-text" id="err-actual25">Required.</p>
                             </div>
-
                             <div>
-                                <label class="input-label">
-                                    <span id="lbl-efficiency25">Win Rate %</span>
-                                    <div class="tooltip-container"><span class="tooltip-trigger">?</span><div id="tip-efficiency25" class="tooltip-popup">...</div></div>
-                                </label>
+                                <label class="input-label" id="lbl-efficiency25">Win Rate %</label>
                                 <div class="relative">
                                     <input type="number" id="val-efficiency25" class="input-field pr-8 required" placeholder="0">
                                     <span class="absolute right-3 top-3 text-gray-400 font-bold">%</span>
                                 </div>
-                                <p class="error-text" id="err-efficiency25">Please add this value.</p>
+                                <p class="error-text" id="err-efficiency25">Required.</p>
                             </div>
-
                             <div>
-                                <label class="input-label">
-                                    <span id="lbl-dealSize25">Avg Deal Size</span>
-                                    <div class="tooltip-container"><span class="tooltip-trigger">?</span><div id="tip-dealSize25" class="tooltip-popup">...</div></div>
-                                </label>
+                                <label class="input-label" id="lbl-dealSize25">Avg Deal Size</label>
                                 <input type="text" id="val-dealSize25" class="input-field required" placeholder="0">
-                                <p class="error-text" id="err-dealSize25">Please add this value.</p>
+                                <p class="error-text" id="err-dealSize25">Required.</p>
                             </div>
 
                             <div class="md:col-span-2 mt-2">
                                 <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 flex items-center justify-between">
-                                    <span class="text-sm font-bold text-gray-600 uppercase tracking-wide mr-2">2025 Attainment</span>
+                                    <span class="text-sm font-bold text-gray-600 uppercase tracking-wide">2025 Attainment</span>
                                     <span id="calc-attainment" class="text-2xl font-extrabold text-primary">0%</span>
                                 </div>
                             </div>
@@ -348,96 +250,78 @@
 
                     <div id="step-3" class="step-content hidden">
                         <div class="guide-box">
-                            <h3 class="mb-2">YOUR GUIDE: The 2026 Opportunity</h3>
-                            <p>Now, enter your <strong>2026 Target</strong>. We will use your baseline efficiency to show exactly what's required to hit this new number if nothing changes.</p>
+                            <h3>YOUR GUIDE: The 2026 Opportunity</h3>
+                            <p>Enter your <strong>2026 Target</strong>. We will calculate exactly what pipeline or activity volume you need to hit this number, assuming your efficiency stays the same as 2025.</p>
                         </div>
 
-                        <div id="calc-section">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <div>
-                                    <label class="input-label">
-                                        <span id="lbl-quota26">2026 Quota</span>
-                                        <div class="tooltip-container"><span class="tooltip-trigger">?</span><div id="tip-quota26" class="tooltip-popup">Your new target.</div></div>
-                                    </label>
-                                    <input type="text" id="val-quota26" class="input-field required text-lg font-semibold text-primary" placeholder="0">
-                                    <p class="error-text" id="err-quota26">Please enter your new target.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <label class="input-label" id="lbl-quota26">2026 Quota</label>
+                                <input type="text" id="val-quota26" class="input-field required text-lg font-semibold text-primary" placeholder="0">
+                                <p class="error-text" id="err-quota26">Required.</p>
+                            </div>
+                            
+                            <div class="bg-blue-50 border border-blue-100 rounded-lg p-6 md:row-span-2">
+                                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-4">Calculated Requirement</h4>
+                                <div class="mb-6">
+                                    <span id="lbl-resultA" class="block text-sm text-gray-600 mb-1 font-bold">Pipeline Needed</span>
+                                    <span id="calc-resultA" class="block text-3xl font-extrabold text-primary">0</span>
+                                    <span class="text-xs text-gray-500 mt-1 block">Based on current efficiency</span>
                                 </div>
-                                
-                                <div class="bg-blue-50 border border-blue-100 rounded-lg p-6 md:row-span-2">
-                                    <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-4">Required to Hit Goal</h4>
-                                    
-                                    <div class="mb-6">
-                                        <span id="lbl-resultA" class="block text-sm text-gray-600 mb-1 font-bold">Pipeline Needed</span>
-                                        <span id="calc-resultA" class="block text-3xl font-extrabold text-primary">0</span>
-                                        <span class="text-xs text-gray-500 mt-1 block">At current efficiency</span>
-                                    </div>
-                                    
-                                    <div>
-                                        <span id="lbl-resultB" class="block text-sm text-gray-600 mb-1 font-bold">Deals Needed</span>
-                                        <span id="calc-resultB" class="block text-3xl font-extrabold text-primary">0</span>
-                                    </div>
+                                <div>
+                                    <span id="lbl-resultB" class="block text-sm text-gray-600 mb-1 font-bold">Deals Needed</span>
+                                    <span id="calc-resultB" class="block text-3xl font-extrabold text-primary">0</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="mt-8">
-                            <label class="input-label mb-3">Reflection: Looking at these requirements, how does this goal feel?</label>
+                            <label class="input-label mb-3">Reflection: How does this goal feel right now?</label>
                             <div class="grid grid-cols-3 gap-4">
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="reflection" value="Achievable" class="peer sr-only">
-                                    <div class="p-3 text-center border rounded-md hover:bg-gray-50 peer-checked:border-primary peer-checked:bg-blue-50 peer-checked:text-primary transition">Achievable</div>
-                                </label>
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="reflection" value="Stretch" class="peer sr-only">
-                                    <div class="p-3 text-center border rounded-md hover:bg-gray-50 peer-checked:border-primary peer-checked:bg-blue-50 peer-checked:text-primary transition">Stretch</div>
-                                </label>
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="reflection" value="Impossible" class="peer sr-only">
-                                    <div class="p-3 text-center border rounded-md hover:bg-gray-50 peer-checked:border-primary peer-checked:bg-blue-50 peer-checked:text-primary transition">Ambitious</div>
-                                </label>
+                                <label class="cursor-pointer"><input type="radio" name="reflection" value="Achievable" class="peer sr-only"><div class="p-3 text-center border rounded-md hover:bg-gray-50 peer-checked:border-primary peer-checked:bg-blue-50 peer-checked:text-primary">Achievable</div></label>
+                                <label class="cursor-pointer"><input type="radio" name="reflection" value="Stretch" class="peer sr-only"><div class="p-3 text-center border rounded-md hover:bg-gray-50 peer-checked:border-primary peer-checked:bg-blue-50 peer-checked:text-primary">Stretch</div></label>
+                                <label class="cursor-pointer"><input type="radio" name="reflection" value="Impossible" class="peer sr-only"><div class="p-3 text-center border rounded-md hover:bg-gray-50 peer-checked:border-primary peer-checked:bg-blue-50 peer-checked:text-primary">Ambitious</div></label>
                             </div>
-                            <p id="err-reflection" class="error-text mt-2">Please select how this feels.</p>
+                            <p id="err-reflection" class="error-text mt-2">Please make a selection.</p>
                         </div>
                     </div>
 
                     <div id="step-4" class="step-content hidden">
                         <div class="guide-box">
-                            <h3 class="mb-2">YOUR GUIDE: The Action Plan</h3>
-                            <p class="mb-3"><strong>Part 1: The Math.</strong> Use the sliders below to model "What If" scenarios. Notice how improving your metrics by even 1% can significantly reduce the volume you need to chase.</p>
-                            <p><strong>Part 2: The Method.</strong> Use the action fields below to commit to the *specific* behaviors (from your Best Practice Sessions) that will drive these improvements.</p>
+                            <h3>YOUR GUIDE: The Action Plan</h3>
+                            <p><strong>Step 1: The Math.</strong> Use the sliders to model "What If" scenarios. See how small improvements (like 1-2%) reduce the pipeline/activity you need.</p>
+                            <p class="mt-2"><strong>Step 2: The Method.</strong> Connect the math to reality. Use the fields below to commit to specific actions from the <strong>Best Practice Sessions</strong> that will drive these improvements.</p>
                         </div>
 
                         <div class="mb-10 bg-gray-50 p-6 rounded-lg border border-gray-200">
-                            <h4 class="text-primary font-bold mb-6 uppercase text-xs tracking-wide">Scenario Modeling (What If?)</h4>
+                            <h4 class="text-primary font-bold mb-6 uppercase text-xs tracking-wide">Scenario Modeling</h4>
                             
                             <div class="slider-group">
                                 <div class="flex justify-between text-sm font-bold text-gray-700 mb-1">
                                     <span id="lbl-slider1">Improve Win Rate</span>
                                     <span id="val-slider1" class="text-primary">+0%</span>
                                 </div>
-                                <input type="range" id="slide-efficiency" min="0" max="50" value="0" step="1">
+                                <input type="range" id="slide-efficiency" min="0" max="15" value="0" step="1">
                             </div>
-
                             <div class="slider-group">
                                 <div class="flex justify-between text-sm font-bold text-gray-700 mb-1">
                                     <span id="lbl-slider2">Increase Deal Size</span>
                                     <span id="val-slider2" class="text-primary">+0%</span>
                                 </div>
-                                <input type="range" id="slide-value" min="0" max="50" value="0" step="1">
+                                <input type="range" id="slide-value" min="0" max="25" value="0" step="1">
                             </div>
-                            
                             <div class="slider-group">
                                 <div class="flex justify-between text-sm font-bold text-gray-700 mb-1">
                                     <span id="lbl-slider3">Increase Activity Volume</span>
                                     <span id="val-slider3" class="text-primary">+0%</span>
                                 </div>
-                                <input type="range" id="slide-volume" min="0" max="100" value="0" step="5">
+                                <input type="range" id="slide-volume" min="0" max="50" value="0" step="5">
                             </div>
 
                             <div class="mt-6 pt-4 border-t border-gray-200 bg-white p-4 rounded-md shadow-sm border">
                                 <div class="flex justify-between items-center">
                                     <div>
-                                        <span class="text-sm font-bold text-gray-600 block">New Volume Required:</span>
+                                        <span id="lbl-new-vol" class="text-sm font-bold text-gray-600 block">New Pipeline Required:</span>
                                         <span class="text-xs text-gray-400">(After your improvements)</span>
                                     </div>
                                     <span id="calc-new-volume" class="text-2xl font-extrabold text-primary">0</span>
@@ -447,117 +331,94 @@
 
                         <div class="space-y-8">
                             <div>
-                                <label class="input-label mb-2 block">
-                                    People & Skills: What specific competency or behavior do you need to improve to hit the higher rates you modeled above?
-                                </label>
-                                <input type="text" id="act-people" class="input-field required" placeholder="e.g., I will complete the Negotiation Certification to improve my deal size...">
-                                <p class="error-text" id="err-act-people">Please add a People action.</p>
+                                <label class="input-label">People & Skills</label>
+                                <span class="input-sublabel">Think back to the <strong>Team Selling</strong> session. What specific competency will you improve to hit the win rate modeled above?</span>
+                                <input type="text" id="act-people" class="input-field required" placeholder="e.g., I will complete the Negotiation Certification by Q2...">
+                                <p class="error-text" id="err-act-people">Required.</p>
                             </div>
 
                             <div>
-                                <label class="input-label mb-2 block">
-                                    Pipeline & Process: What process change will you make to ensure better deal quality?
-                                </label>
+                                <label class="input-label">Process & Pipeline</label>
+                                <span class="input-sublabel">Think back to the <strong>Account Planning</strong> session. What process change will ensure better deal quality?</span>
                                 <input type="text" id="act-process" class="input-field required" placeholder="e.g., I will disqualify bad deals earlier using the new rubric...">
-                                <p class="error-text" id="err-act-process">Please add a Process action.</p>
+                                <p class="error-text" id="err-act-process">Required.</p>
                             </div>
 
                             <div>
-                                <label class="input-label mb-2 block">
-                                    Productivity: How will you organize your time to ensure you hit your activity targets?
-                                </label>
+                                <label class="input-label">Productivity</label>
+                                <span class="input-sublabel">Think back to <strong>Territory Management</strong>. How will you organize your time to ensure you hit your activity targets?</span>
                                 <input type="text" id="act-prod" class="input-field required" placeholder="e.g., I will block 2 hours every Tuesday for prospecting...">
-                                <p class="error-text" id="err-act-prod">Please add a Productivity action.</p>
+                                <p class="error-text" id="err-act-prod">Required.</p>
                             </div>
 
                             <div class="pt-6 border-t">
-                                <label class="input-label mb-2 block">
-                                    Accuracy Commitment: How will you ensure your manager can trust your forecast every week?
-                                </label>
-                                <input type="text" id="act-forecast" class="input-field required" placeholder="e.g. My Rep Commit will be 95-105% accurate every quarter...">
-                                <p class="error-text" id="err-act-forecast">Please add your commitment.</p>
+                                <label class="input-label">Forecasting Commitment</label>
+                                <span class="input-sublabel">Predictability is critical. The standard is 95-105% accuracy. What is your personal commitment to achieving this?</span>
+                                <input type="text" id="act-forecast" class="input-field required" placeholder="e.g. I will update my commit dates every Friday before 2pm...">
+                                <p class="error-text" id="err-act-forecast">Required.</p>
                             </div>
                         </div>
                     </div>
 
                     <div id="step-5" class="step-content hidden">
                         <div class="guide-box">
-                            <h3 class="mb-2">YOUR GUIDE: Final Commitment</h3>
-                            <p>Review your plan below. This is your roadmap for 2026. Please export the data for your manager and save a PDF copy for yourself.</p>
+                            <h3>YOUR GUIDE: Final Commitment</h3>
+                            <p>This is your roadmap for 2026. Please export the data for your manager and save a PDF copy for yourself.</p>
                         </div>
-
-                        <div id="summary-display" class="bg-gray-50 p-6 rounded-lg text-sm text-gray-700 font-mono whitespace-pre-wrap border border-gray-200 h-96 overflow-y-auto shadow-inner">
-                            </div>
+                        <div id="summary-display" class="bg-gray-50 p-6 rounded-lg text-sm text-gray-700 font-mono whitespace-pre-wrap border border-gray-200 h-96 overflow-y-auto shadow-inner"></div>
                     </div>
-
                 </form>
             </div>
 
             <div id="nav-area" class="p-6 border-t bg-gray-50 flex justify-between items-center rounded-b-xl">
                 <button id="btn-prev" class="btn btn-ghost hidden">← Back</button>
                 <div class="flex-grow"></div>
-                
                 <div id="final-buttons" class="hidden flex gap-3">
                     <button id="btn-restart" class="btn btn-ghost text-red-600 hover:bg-red-50">Start Over</button>
                     <button id="btn-pdf" class="btn btn-ghost border border-gray-300 bg-white">Save PDF</button>
                     <button id="btn-copy" class="btn btn-primary">Copy Text</button>
                     <button id="btn-json" class="btn btn-accent">Export Data</button>
                 </div>
-
                 <button id="btn-next" class="btn btn-primary min-w-[120px] shadow-lg">Start</button>
             </div>
-
         </div>
     </div>
 
 <script>
-    // --- DATA & CONFIG ---
     const ROLE_DATA = {
         'AE': {
             lbl: {
-                q25: '2025 Quota', q25tip: 'Your total assigned revenue quota for 2025.',
-                a25: '2025 Bookings', a25tip: 'Your total closed/booked revenue for the year.',
-                e25: 'Win Rate %', e25tip: 'The percentage of opportunities you won.',
-                d25: 'Average Deal Size', d25tip: 'Your average value per closed deal.',
-                q26: '2026 Quota',
-                resA: 'Pipeline Needed', resB: 'Deals Needed',
-                sl1: 'Improve Win Rate', sl2: 'Increase Deal Size', sl3: 'Increase Meetings'
+                q25: '2025 Quota', a25: '2025 Bookings', e25: 'Win Rate %', d25: 'Average Deal Size',
+                q26: '2026 Quota', resA: 'Pipeline Required', resB: 'Deals Required',
+                sl1: 'Improve Win Rate', sl2: 'Increase Deal Size', sl3: 'Increase Activity',
+                newVol: 'New Pipeline Required'
             },
             isMoney: true
         },
         'SDR': {
             lbl: {
-                q25: '2025 Target', q25tip: 'Your target number of Meetings or SQLs.',
-                a25: '2025 Actuals', a25tip: 'The actual number of Meetings/SQLs you achieved.',
-                e25: 'Conversion %', e25tip: 'Your conversion rate from Lead to Meeting.',
-                d25: 'Average Opportunity Size', d25tip: 'Optional: The average size of opps you generate.',
-                q26: '2026 Target',
-                resA: 'Activity Needed', resB: 'Est. Pipeline',
-                sl1: 'Improve Conversion', sl2: 'Increase Opp Size', sl3: 'Increase Volume'
+                q25: '2025 Target', a25: '2025 Actuals', e25: 'Conversion Rate %', d25: 'Average Opportunity Size',
+                q26: '2026 Target', resA: 'Activity Required', resB: 'Est. Pipeline',
+                sl1: 'Improve Conversion', sl2: 'Increase Opp Size', sl3: 'Increase Volume',
+                newVol: 'New Activity Required'
             },
             isMoney: false
         },
         'SE': {
              lbl: {
-                q25: '2025 Revenue Target', q25tip: 'The total revenue target you supported.',
-                a25: '2025 Actuals', a25tip: 'The actual revenue closed that you supported.',
-                e25: 'Tech Win Rate %', e25tip: 'Percentage of deals where you secured the Technical Win.',
-                d25: 'Average Deal Size', d25tip: 'The average size of deals you support.',
-                q26: '2026 Revenue Target',
-                resA: 'Coverage Needed', resB: 'Deals to Support',
-                sl1: 'Improve Tech Win', sl2: 'Increase Deal Size', sl3: 'Support More Deals'
+                q25: '2025 Rev Target', a25: '2025 Actuals', e25: 'Tech Win Rate %', d25: 'Average Deal Size',
+                q26: '2026 Rev Target', resA: 'Coverage Needed', resB: 'Deals to Support',
+                sl1: 'Improve Tech Win', sl2: 'Increase Deal Size', sl3: 'Support More Deals',
+                newVol: 'New Coverage Needed'
             },
             isMoney: true
         },
         'ECOMM': {
              lbl: {
-                q25: '2025 Revenue', q25tip: 'Total eCommerce revenue target.',
-                a25: '2025 Actuals', a25tip: 'Total revenue actually achieved.',
-                e25: 'Conversion Rate %', e25tip: 'Website visitor to purchaser conversion rate.',
-                d25: 'Average Order Value', d25tip: 'Average dollar value per transaction.',
-                q26: '2026 Revenue',
-                resA: 'Traffic Needed', resB: 'Transactions Needed',
-                sl1: 'Improve Conversion', sl2: 'Increase Order Value', sl3: 'Increase Traffic'
+                q25: '2025 Revenue', a25: '2025 Actuals', e25: 'Conversion Rate %', d25: 'Average Order Value',
+                q26: '2026 Revenue', resA: 'Traffic Needed', resB: 'Transactions Needed',
+                sl1: 'Improve Conversion', sl2: 'Increase Order Value', sl3: 'Increase Traffic',
+                newVol: 'New Traffic Needed'
             },
             isMoney: true
         }
@@ -566,73 +427,48 @@
     const $ = (id) => document.getElementById(id);
     const getVal = (id) => parseFloat($(id).value.replace(/,/g, '')) || 0;
     const setTxt = (id, txt) => { if($(id)) $(id).textContent = txt; };
-    const fmtN = (n, isMon) => isMon ? 
-        n.toLocaleString('en-US', {maximumFractionDigits:0}) : 
-        n.toLocaleString('en-US', {maximumFractionDigits:1});
+    const fmtN = (n, isMon) => isMon ? n.toLocaleString('en-US', {maximumFractionDigits:0}) : n.toLocaleString('en-US', {maximumFractionDigits:1});
 
-    // --- APP LOGIC ---
-    let step = 0; 
-    const maxStep = 5;
+    let step = 0; const maxStep = 5;
 
     function updateLabels() {
         const r = $('userRole').value;
         const d = ROLE_DATA[r].lbl;
         
-        // Update Labels & Tooltips
-        setTxt('lbl-quota25', d.q25); $('tip-quota25').textContent = d.q25tip;
-        setTxt('lbl-actual25', d.a25); $('tip-actual25').textContent = d.a25tip;
-        setTxt('lbl-efficiency25', d.e25); $('tip-efficiency25').textContent = d.e25tip;
-        setTxt('lbl-dealSize25', d.d25); $('tip-dealSize25').textContent = d.d25tip;
-        setTxt('lbl-quota26', d.q26); $('tip-quota26').textContent = 'Your new target for 2026.';
-        setTxt('lbl-resultA', d.resA);
+        setTxt('lbl-quota25', d.q25); setTxt('lbl-actual25', d.a25);
+        setTxt('lbl-efficiency25', d.e25); setTxt('lbl-dealSize25', d.d25);
+        setTxt('lbl-quota26', d.q26); setTxt('lbl-resultA', d.resA);
         setTxt('lbl-resultB', d.resB);
-        
-        // Update Slider Labels
-        setTxt('lbl-slider1', d.sl1);
-        setTxt('lbl-slider2', d.sl2);
-        setTxt('lbl-slider3', d.sl3);
+        setTxt('lbl-slider1', d.sl1); setTxt('lbl-slider2', d.sl2); setTxt('lbl-slider3', d.sl3);
+        setTxt('lbl-new-vol', d.newVol);
     }
 
     function doMath() {
         const r = $('userRole').value;
         const conf = ROLE_DATA[r];
 
-        const q25 = getVal('val-quota25');
-        const a25 = getVal('val-actual25');
-        
-        // Attainment
+        const q25 = getVal('val-quota25'); const a25 = getVal('val-actual25');
         const att = q25 > 0 ? (a25 / q25) * 100 : 0;
         setTxt('calc-attainment', att.toFixed(1) + '%');
 
-        const eff = getVal('val-efficiency25');
-        const size = getVal('val-dealSize25');
+        const eff = getVal('val-efficiency25'); const size = getVal('val-dealSize25');
         const q26 = getVal('val-quota26');
 
-        // Slider Inputs
         const impEff = parseFloat($('slide-efficiency').value);
         const impVal = parseFloat($('slide-value').value);
-        const impVol = parseFloat($('slide-volume').value);
+        const impVol = parseFloat($('slide-volume').value); // Just visual for now
         
-        // Update Slider Displays
-        setTxt('val-slider1', '+' + impEff + '%');
-        setTxt('val-slider2', '+' + impVal + '%');
-        setTxt('val-slider3', '+' + impVol + '%');
+        setTxt('val-slider1', '+' + impEff + '%'); setTxt('val-slider2', '+' + impVal + '%'); setTxt('val-slider3', '+' + impVol + '%');
 
         // New Simulated Metrics
         const newEff = (eff + impEff) / 100;
         const newSize = size * (1 + (impVal / 100));
 
-        // Calc A: "Volume Needed" = Target / New Efficiency
+        // Calc A: Volume Needed
         let valA = newEff > 0 ? q26 / newEff : 0;
-        
-        // Apply Volume Slider logic: 
-        // Increasing volume reduces the "Requirement" gap in user's mind, 
-        // but strictly math-wise, volume is an output.
-        // For this tool: We show the required volume assuming the EFFICIENCY gains.
-        
         setTxt('calc-new-volume', fmtN(valA, conf.isMoney));
 
-        // Base Gap (Step 3)
+        // Base Gap
         const baseA = (eff/100) > 0 ? q26 / (eff/100) : 0;
         const baseB = size > 0 ? baseA / size : baseA;
         setTxt('calc-resultA', fmtN(baseA, conf.isMoney));
@@ -641,12 +477,13 @@
 
     function validate() {
         let valid = true;
-        const currentPanel = $(`step-${step}`);
-        const inputs = currentPanel.querySelectorAll('.required');
+        const panel = $(`step-${step}`);
+        const inputs = Array.from(panel.querySelectorAll('.required')).filter(el => el.offsetParent !== null);
         
         inputs.forEach(inp => {
             const errId = 'err-' + inp.id.replace('val-', '').replace('act-', ''); 
             let err = document.getElementById(errId) || inp.nextElementSibling;
+            
             if(inp.id === 'personName') err = $('err-personName');
             if(inp.id === 'managerName') err = $('err-managerName');
             if(inp.id === 'region') err = $('err-region');
@@ -662,43 +499,11 @@
         });
 
         if(step === 3) {
-            const checked = document.querySelector('input[name="reflection"]:checked');
-            const err = $('err-reflection');
-            if(!checked) {
-                err.classList.add('show');
-                valid = false;
-            } else {
-                err.classList.remove('show');
-            }
+            if(!document.querySelector('input[name="reflection"]:checked')) {
+                $('err-reflection').classList.add('show'); valid = false;
+            } else { $('err-reflection').classList.remove('show'); }
         }
         return valid;
-    }
-
-    function generateSummary() {
-        return `TRIMBLE 2026 SUCCESS PLAN
----------------------------
-Name: ${$('personName').value}
-Role: ${$('userRole').value}
-Region: ${$('region').value}
-
-BASELINE (2025)
-- Target: ${$('val-quota25').value}
-- Actual: ${$('val-actual25').value}
-- Attainment: ${$('calc-attainment').textContent}
-- Efficiency: ${$('val-efficiency25').value}%
-
-2026 GOALS
-- New Target: ${$('val-quota26').value}
-- Gap Volume: ${$('calc-resultA').textContent}
-- Modeled Volume (With Improvements): ${$('calc-new-volume').textContent}
-- Reflection: ${document.querySelector('input[name="reflection"]:checked')?.value}
-
-ACTION PLAN
-1. People: ${$('act-people').value}
-2. Process: ${$('act-process').value}
-3. Productivity: ${$('act-prod').value}
-4. Accuracy: ${$('act-forecast').value}
-`;
     }
 
     function navigate(dir) {
@@ -735,26 +540,54 @@ ACTION PLAN
             navArea.classList.remove('justify-center');
         }
 
-        if(step === 1) nextBtn.textContent = 'Next';
+        nextBtn.textContent = 'Next';
         
         if(isFinal) {
             nextBtn.classList.add('hidden');
             finalBtns.classList.remove('hidden');
-            $('summary-display').textContent = generateSummary();
+            generateSummary();
         } else {
             nextBtn.classList.remove('hidden');
             finalBtns.classList.add('hidden');
         }
         window.scrollTo(0,0);
+        if(step > 1) doMath();
     }
 
-    // --- EVENTS ---
+    function generateSummary() {
+        const txt = `TRIMBLE 2026 SUCCESS PLAN
+---------------------------
+Name: ${$('personName').value}
+Role: ${$('userRole').value}
+Region: ${$('region').value}
+
+BASELINE (2025)
+- Target: ${$('val-quota25').value}
+- Actual: ${$('val-actual25').value}
+- Attainment: ${$('calc-attainment').textContent}
+- Efficiency: ${$('val-efficiency25').value}%
+
+2026 GOALS
+- New Target: ${$('val-quota26').value}
+- Gap Volume: ${$('calc-resultA').textContent}
+- Modeled Volume: ${$('calc-new-volume').textContent}
+- Reflection: ${document.querySelector('input[name="reflection"]:checked')?.value}
+
+ACTION PLAN
+1. People: ${$('act-people').value}
+2. Process: ${$('act-process').value}
+3. Productivity: ${$('act-prod').value}
+4. Accuracy: ${$('act-forecast').value}
+`;
+        $('summary-display').textContent = txt;
+    }
+
+    // EVENTS
     $('btn-next').onclick = () => navigate(1);
     $('btn-prev').onclick = () => navigate(-1);
-    
     $('userRole').onchange = () => { updateLabels(); doMath(); };
     document.querySelectorAll('input').forEach(i => { i.oninput = doMath; });
-
+    
     $('btn-restart').onclick = () => { if(confirm("Start over?")) location.reload(); };
     $('btn-copy').onclick = () => { navigator.clipboard.writeText($('summary-display').textContent); alert("Copied!"); };
     $('btn-pdf').onclick = () => window.print();
@@ -763,8 +596,7 @@ ACTION PLAN
         const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'plan.json'; a.click();
     };
 
-    // Init
-    // updateLabels(); 
+    updateLabels();
 </script>
 
 </body>
