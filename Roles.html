@@ -80,7 +80,7 @@
             font-size: 1rem; font-weight: 700; color: #1f2937; margin-bottom: 0.25rem;
         }
         .input-prompt {
-            display: block; font-size: 0.85rem; color: #4b5563; margin-bottom: 0.5rem; line-height: 1.4; font-weight: 500;
+            display: block; font-size: 0.9rem; color: #4b5563; margin-bottom: 0.5rem; line-height: 1.5;
         }
         .input-field {
             display: block; width: 100%;
@@ -91,6 +91,20 @@
         .input-field:focus {
             outline: none; border-color: #0063a3; ring: 3px; ring-color: #e0f2fe;
             box-shadow: 0 0 0 3px rgba(0, 99, 163, 0.1);
+        }
+        
+        /* ACTION BLOCKS */
+        .action-block {
+            @apply border-l-4 border-gray-300 pl-5 py-2 mb-8 transition-colors;
+        }
+        .action-block:focus-within {
+            @apply border-primary;
+        }
+        .action-block h4 {
+            @apply text-lg font-bold text-gray-800 mb-1;
+        }
+        .action-context {
+            @apply text-sm text-gray-600 mb-3 bg-gray-50 p-3 rounded-md border border-gray-100;
         }
         
         /* SLIDERS */
@@ -186,15 +200,42 @@
 
                     <div id="step-0" class="step-content">
                         <div class="text-center max-w-3xl mx-auto space-y-8">
-                            <h2 class="text-2xl font-bold text-gray-800">Your Plan. Your Year.</h2>
-                            <p class="text-lg text-gray-600 leading-relaxed">
-                                This tool connects your corporate target to your personal actions. By the end, you will have a specific roadmap for <strong>People, Pipeline, and Productivity</strong>.
-                            </p>
-                            
-                            <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
-                                <h3 class="font-bold text-primary mb-2">Before you start:</h3>
+                            <div class="prose max-w-none text-gray-600">
+                                <h2 class="text-2xl font-bold text-gray-800 mb-4">Your Plan. Your Year.</h2>
+                                <p class="text-lg leading-relaxed mb-6">
+                                    This tool is your personal coach. It helps you translate your quota into a set of clear, measurable actions you can take every day.
+                                </p>
+                                
+                                <div class="text-left bg-blue-50 p-6 rounded-lg border border-blue-100 mb-6">
+                                    <h3 class="text-lg font-bold text-primary mb-2">Why This Matters:</h3>
+                                    <p class="text-sm text-gray-700 leading-relaxed">
+                                        This is not a one-time exercise. This plan creates the <strong>"Contract for Success"</strong> that you and your manager will use to track progress, identify gaps, and celebrate wins throughout 2026.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 text-left">
+                                <div class="p-4 border rounded-lg hover:border-primary transition">
+                                    <div class="text-primary text-2xl mb-2">👥</div>
+                                    <h3 class="font-bold text-gray-800 mb-1">People</h3>
+                                    <p class="text-xs text-gray-600">Upskill yourself.</p>
+                                </div>
+                                <div class="p-4 border rounded-lg hover:border-primary transition">
+                                    <div class="text-primary text-2xl mb-2">📈</div>
+                                    <h3 class="font-bold text-gray-800 mb-1">Pipeline</h3>
+                                    <p class="text-xs text-gray-600">Ensure coverage.</p>
+                                </div>
+                                <div class="p-4 border rounded-lg hover:border-primary transition">
+                                    <div class="text-primary text-2xl mb-2">⚡</div>
+                                    <h3 class="font-bold text-gray-800 mb-1">Productivity</h3>
+                                    <p class="text-xs text-gray-600">Work smarter.</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-gray-50 rounded-lg p-6 text-left border border-gray-200 mt-8">
+                                <h3 class="font-bold text-primary mb-2">What You'll Need:</h3>
                                 <p class="text-sm text-gray-600">
-                                    Please have your <strong>Sales Scorecard</strong> open (if you have one available for your role).
+                                    To make this easy, please have your <strong>Sales Scorecard</strong> open (if your role has one) to reference your 2025 actuals.
                                 </p>
                             </div>
                         </div>
@@ -203,7 +244,7 @@
                     <div id="step-1" class="step-content hidden">
                         <div class="max-w-xl mx-auto text-center py-10">
                             <h2 class="text-2xl font-bold text-gray-800 mb-4">Select Your Role</h2>
-                            <p class="text-gray-600 mb-6">We will customize the metrics and language for you.</p>
+                            <p class="text-gray-600 mb-8">Select your primary role below so we can adjust the metrics to match your business.</p>
                             <div class="text-left bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
                                 <select id="userRole" class="input-field text-lg py-3 cursor-pointer bg-gray-50">
                                     <option value="AE">Account Executive (AE)</option>
@@ -318,12 +359,12 @@
                     <div id="step-4" class="step-content hidden">
                         <div class="guide-box">
                             <h3>YOUR GUIDE: The Action Plan</h3>
-                            <p><strong>Part 1: The Math.</strong> Use the sliders to model "What If" scenarios. See how small efficiency gains reduce the pipeline/volume you need.</p>
-                            <p><strong>Part 2: The Commitment.</strong> Use the fields below to build your <strong>Year-Long Plan</strong>. These are the specific actions you will track with your manager in every 1:1 and QBR.</p>
+                            <p><strong>This is your plan of record for 2026.</strong></p>
+                            <p>Don't just check the box. The commitments you write below will define your weekly and quarterly rhythm. Be specific, be bold, and make them SMART (Specific, Measurable, Achievable, Relevant, Time-bound).</p>
                         </div>
 
                         <div class="mb-10 bg-gray-50 p-6 rounded-lg border border-gray-200">
-                            <h4 class="text-primary font-bold mb-6 uppercase text-xs tracking-wide">Scenario Modeling</h4>
+                            <h4 class="text-primary font-bold mb-6 uppercase text-xs tracking-wide">Part 1: Scenario Modeling (What If?)</h4>
                             
                             <div class="slider-group">
                                 <div class="flex justify-between text-sm font-bold text-gray-700 mb-1">
@@ -367,36 +408,43 @@
                             </div>
                         </div>
 
-                        <div class="space-y-8">
-                            <div class="bg-yellow-50 border-l-4 border-accent p-4 text-sm text-gray-700 mb-6">
-                                <strong>Make it SMART:</strong> Ensure your goals below are Specific, Measurable, Achievable, Relevant, and Time-bound.
+                        <div class="space-y-10">
+                            <h4 class="text-primary font-bold uppercase text-xs tracking-wide">Part 2: Your Commitments</h4>
+
+                            <div class="action-block">
+                                <h4>1. People & Skills Commitment</h4>
+                                <div class="action-context">
+                                    <strong>Why:</strong> Growth requires new capabilities. <br>
+                                    <strong>The Ask:</strong> Based on the <em>Team Selling</em> session, what is the one specific competency you will master in Q1 to hit the win rate modeled above?
+                                </div>
+                                <input type="text" id="act-people" class="input-field required" placeholder="e.g., 'I will complete the Negotiation Certification by Feb 28th to improve my close rate...'">
+                                <p class="error-text" id="err-act-people">Please define your People commitment.</p>
                             </div>
 
-                            <div>
-                                <label class="input-label text-lg">1. People & Skills Commitment</label>
-                                <p class="input-prompt mb-2">To hit your new targets, you must upgrade your skills. Identify one specific competency gap (e.g. Negotiation, Technical Demo) to master this quarter.</p>
-                                <input type="text" id="act-people" class="input-field required" placeholder="I will complete the [Certification Name] by [Date] to improve my [Metric]...">
-                                <p class="error-text" id="err-act-people">Required.</p>
+                            <div class="action-block">
+                                <h4>2. Process & Pipeline Commitment</h4>
+                                <div class="action-context">
+                                    <strong>Why:</strong> Pipeline quality determines forecast accuracy. <br>
+                                    <strong>The Ask:</strong> Based on the <em>Account Planning</em> session, what specific weekly routine will you start to ensure your deals are real and advancing?
+                                </div>
+                                <input type="text" id="act-process" class="input-field required" placeholder="e.g., 'I will conduct a formal 'Murder Board' review of my Top 10 deals every Friday at 9am...'">
+                                <p class="error-text" id="err-act-process">Please define your Process commitment.</p>
                             </div>
 
-                            <div>
-                                <label class="input-label text-lg">2. Process & Pipeline Commitment</label>
-                                <p class="input-prompt mb-2">Pipeline quality determines forecast accuracy. Define a specific weekly routine you will start to clean your data and remove bad deals early.</p>
-                                <input type="text" id="act-process" class="input-field required" placeholder="I will conduct a 'Murder Board' review of my Top 10 deals every Friday at 9am...">
-                                <p class="error-text" id="err-act-process">Required.</p>
+                            <div class="action-block">
+                                <h4>3. Productivity Commitment</h4>
+                                <div class="action-context">
+                                    <strong>Why:</strong> Time is your scarcest resource. <br>
+                                    <strong>The Ask:</strong> Based on the <em>Territory Management</em> session, exactly how will you structure your calendar to protect your "Golden Hours" for selling?
+                                </div>
+                                <input type="text" id="act-prod" class="input-field required" placeholder="e.g., 'I will block 8:00am-10:00am every Tuesday/Thursday for net-new prospecting...'">
+                                <p class="error-text" id="err-act-prod">Please define your Productivity commitment.</p>
                             </div>
 
-                            <div>
-                                <label class="input-label text-lg">3. Productivity Commitment</label>
-                                <p class="input-prompt mb-2">Time is your scarcest resource. Define a specific "Golden Hour" block you will protect on your calendar every week for net-new prospecting.</p>
-                                <input type="text" id="act-prod" class="input-field required" placeholder="I will block 8am-10am every Tue/Thu for prospecting and decline all internal meetings...">
-                                <p class="error-text" id="err-act-prod">Required.</p>
-                            </div>
-
-                            <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
-                                <label class="input-label text-lg text-primary">Final Pledge: Forecast Accuracy</label>
-                                <p class="input-prompt mb-2">Predictability builds trust. The standard is <strong>95-105% accuracy</strong> on your Rep Commit. What is your personal routine to ensure this?</p>
-                                <input type="text" id="act-forecast" class="input-field required bg-white" placeholder="I will update my commit dates and next steps every Friday before 2pm...">
+                            <div class="bg-blue-50 p-6 rounded-lg border border-blue-100 mt-8">
+                                <label class="text-lg font-bold text-primary block mb-2">Final Pledge: Forecast Accuracy</label>
+                                <p class="text-sm text-gray-700 mb-3">Predictability builds trust. The standard is <strong>95-105% accuracy</strong> on your Rep Commit. What is your personal routine to ensure this?</p>
+                                <input type="text" id="act-forecast" class="input-field required bg-white" placeholder="e.g. I will update my commit dates and next steps every Friday before 2pm...">
                                 <p class="error-text" id="err-act-forecast">Required.</p>
                             </div>
                         </div>
@@ -674,7 +722,9 @@ ${$('act-forecast').value}
         const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'plan.json'; a.click();
     };
 
-    updateLabels();
+    // Init: Using simpler CSS tooltips (wrapper::after) which don't rely on updateLabels for data
+    // But we do need to update labels on first load
+    updateLabels(); 
 </script>
 
 </body>
