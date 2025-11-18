@@ -14,7 +14,7 @@
                         'primary': '#0063a3',      // Trimble Blue
                         'primary-hover': '#004a7c',
                         'accent': '#fbad26',       // Trimble Yellow
-                        'primary-text': '#252a2e', // Dark Gray (Headings)
+                        'primary-text': '#252a2e', // Dark Gray
                         'soft-bg': '#f3f6f9',      // Light Gray
                         'error-red': '#e11d48',    // Softer Red
                     },
@@ -42,8 +42,9 @@
         .guide-box {
             @apply bg-blue-50 border-l-4 border-primary text-primary-text p-4 mb-8 rounded-r-md text-sm leading-relaxed;
         }
+        .guide-box strong { color: #0063a3; }
 
-        /* ANIMATED TOOLTIPS */
+        /* SIMPLE TOOLTIPS */
         .tooltip-container {
             position: relative;
             display: inline-flex;
@@ -51,42 +52,34 @@
             margin-left: 8px;
             z-index: 50;
         }
-        
         .tooltip-trigger {
             display: inline-flex; align-items: center; justify-content: center;
-            width: 20px; height: 20px;
+            width: 18px; height: 18px;
             background-color: #d1d5db; color: white; border-radius: 50%;
-            cursor: help; transition: background-color 0.2s;
-            font-size: 12px; font-weight: bold;
+            cursor: help; font-size: 11px; font-weight: bold;
+            transition: background-color 0.2s;
         }
-        
-        .tooltip-trigger:hover {
-            background-color: #0063a3;
-        }
+        .tooltip-trigger:hover { background-color: #0063a3; }
         
         .tooltip-popup {
             visibility: hidden; opacity: 0;
-            position: absolute; bottom: 130%; left: 50%;
+            position: absolute; bottom: 140%; left: 50%;
             transform: translateX(-50%) translateY(5px);
             background-color: #1f2937; color: white;
-            text-align: center; padding: 10px 14px;
-            border-radius: 6px; font-size: 0.8rem; font-weight: 500;
-            line-height: 1.4; white-space: normal; width: 220px;
+            text-align: center; padding: 8px 12px;
+            border-radius: 6px; font-size: 0.75rem; font-weight: 500;
+            line-height: 1.4; white-space: normal; width: 200px;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            transition: all 0.2s ease-out;
-            pointer-events: none;
+            transition: all 0.2s ease-out; pointer-events: none;
         }
-        
         .tooltip-popup::after {
             content: ""; position: absolute; top: 100%; left: 50%;
             margin-left: -5px; border-width: 5px;
             border-style: solid;
             border-color: #1f2937 transparent transparent transparent;
         }
-        
         .tooltip-container:hover .tooltip-popup {
-            visibility: visible; opacity: 1;
-            transform: translateX(-50%) translateY(0);
+            visibility: visible; opacity: 1; transform: translateX(-50%) translateY(0);
         }
 
         /* INPUT FIELDS */
@@ -97,8 +90,7 @@
         .input-field {
             display: block; width: 100%;
             border-radius: 0.5rem; border: 1px solid #d1d5db;
-            padding: 0.75rem 1rem; font-size: 1rem;
-            transition: all 0.2s;
+            padding: 0.75rem 1rem; font-size: 1rem; transition: all 0.2s;
         }
         .input-field:focus {
             outline: none; border-color: #0063a3; ring: 3px; ring-color: #e0f2fe;
@@ -106,44 +98,31 @@
         }
         
         /* VALIDATION STATES */
-        .input-error {
-            border-color: #e11d48 !important;
-            background-color: #fff1f2;
-        }
+        .input-error { border-color: #e11d48 !important; background-color: #fff1f2; }
         .error-text {
             display: none; color: #e11d48; font-size: 0.8rem; margin-top: 0.4rem; font-weight: 600;
         }
         .error-text.show { display: block; animation: fadeIn 0.3s; }
-
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
         /* SWOOP HEADER */
         .header-swoop {
-            background-color: #0063a3;
-            width: 100%; height: 220px;
-            position: absolute; top: 0; left: 0; z-index: 0;
-            overflow: hidden;
+            background-color: #0063a3; width: 100%; height: 220px;
+            position: absolute; top: 0; left: 0; z-index: 0; overflow: hidden;
         }
         .header-swoop svg {
-            width: 100%; height: 100%;
-            position: absolute; bottom: -1px; left: 0;
+            width: 100%; height: 100%; position: absolute; bottom: -1px; left: 0;
         }
 
         /* PROGRESS TABS */
-        .progress-container {
-            display: flex; border-bottom: 1px solid #e5e7eb; margin-bottom: 0;
-        }
+        .progress-container { display: flex; border-bottom: 1px solid #e5e7eb; margin-bottom: 0; }
         .progress-step {
             flex: 1; text-align: center; padding: 1rem;
-            font-size: 0.8rem; font-weight: 700; color: #9ca3af; letter-spacing: 0.05em;
+            font-size: 0.75rem; font-weight: 700; color: #9ca3af; letter-spacing: 0.05em;
             border-bottom: 4px solid transparent; transition: all 0.3s;
         }
-        .progress-step.active {
-            color: #0063a3; border-bottom-color: #0063a3;
-        }
-        .progress-step.completed {
-            color: #0063a3; opacity: 0.6;
-        }
+        .progress-step.active { color: #0063a3; border-bottom-color: #0063a3; }
+        .progress-step.completed { color: #0063a3; opacity: 0.6; }
 
         /* BUTTONS */
         .btn {
@@ -198,7 +177,6 @@
 
                     <div id="step-0" class="step-content">
                         <div class="text-center max-w-3xl mx-auto space-y-8">
-                            
                             <div class="prose max-w-none text-gray-600">
                                 <h2 class="text-2xl font-bold text-gray-800 mb-4">Your Plan. Your Year.</h2>
                                 <p class="text-lg leading-relaxed">
@@ -275,12 +253,12 @@
                             <div>
                                 <label class="input-label">My Name</label>
                                 <input type="text" id="personName" class="input-field required" placeholder="First and Last Name">
-                                <p class="error-text">Please help us identify you.</p>
+                                <p class="error-text" id="err-personName">Please enter your name.</p>
                             </div>
                             <div>
                                 <label class="input-label">My Manager</label>
                                 <input type="text" id="managerName" class="input-field required" placeholder="Manager Name">
-                                <p class="error-text">Required for the report.</p>
+                                <p class="error-text" id="err-managerName">Required for the report.</p>
                             </div>
                             <div class="md:col-span-2">
                                 <label class="input-label">My Region</label>
@@ -290,7 +268,7 @@
                                     <option value="EMEA">EMEA</option>
                                     <option value="APAC">APAC</option>
                                 </select>
-                                <p class="error-text">Please select your region.</p>
+                                <p class="error-text" id="err-region">Please select your region.</p>
                             </div>
 
                             <div>
@@ -302,7 +280,7 @@
                                     </div>
                                 </label>
                                 <input type="text" id="val-quota25" class="input-field required" placeholder="0">
-                                <p class="error-text">Please add this value.</p>
+                                <p class="error-text" id="err-quota25">Please add this value.</p>
                             </div>
 
                             <div>
@@ -314,7 +292,7 @@
                                     </div>
                                 </label>
                                 <input type="text" id="val-actual25" class="input-field required" placeholder="0">
-                                <p class="error-text">Please add this value.</p>
+                                <p class="error-text" id="err-actual25">Please add this value.</p>
                             </div>
 
                             <div>
@@ -329,7 +307,7 @@
                                     <input type="number" id="val-efficiency25" class="input-field pr-8 required" placeholder="0">
                                     <span class="absolute right-3 top-3 text-gray-400 font-bold">%</span>
                                 </div>
-                                <p class="error-text">Please add this value.</p>
+                                <p class="error-text" id="err-efficiency25">Please add this value.</p>
                             </div>
 
                             <div>
@@ -341,7 +319,7 @@
                                     </div>
                                 </label>
                                 <input type="text" id="val-dealSize25" class="input-field required" placeholder="0">
-                                <p class="error-text">Please add this value.</p>
+                                <p class="error-text" id="err-dealSize25">Please add this value.</p>
                             </div>
 
                             <div class="md:col-span-2 mt-2">
@@ -362,7 +340,7 @@
                     <div id="step-3" class="step-content hidden">
                         <div class="guide-box">
                             <h3 class="font-bold mb-1">YOUR GUIDE: The 2026 Opportunity</h3>
-                            <p>Now, enter your <strong>2026 Target</strong>. based on your baseline efficiency, we'll calculate what it will take to hit this new number.</p>
+                            <p>Now, enter your <strong>2026 Target</strong>. We will use your baseline data to calculate exactly what activity or pipeline volume you need to hit this new number.</p>
                         </div>
 
                         <div id="calc-section">
@@ -376,7 +354,7 @@
                                         </div>
                                     </label>
                                     <input type="text" id="val-quota26" class="input-field required text-lg font-semibold text-primary" placeholder="0">
-                                    <p class="error-text">Please enter your new target.</p>
+                                    <p class="error-text" id="err-quota26">Please enter your new target.</p>
                                 </div>
                                 
                                 <div class="bg-blue-50 border border-blue-100 rounded-lg p-6 md:row-span-2">
@@ -446,7 +424,7 @@
                                     <div class="tooltip-container"><span class="tooltip-trigger">?</span><div class="tooltip-popup">What skill will you improve? e.g., "Complete Negotiation Certification." (Reference Team Selling Best Practice Session)</div></div>
                                 </label>
                                 <input type="text" id="act-people" class="input-field required" placeholder="I will...">
-                                <p class="error-text">Please add a People action.</p>
+                                <p class="error-text" id="err-act-people">Please add a People action.</p>
                             </div>
 
                             <div>
@@ -455,7 +433,7 @@
                                     <div class="tooltip-container"><span class="tooltip-trigger">?</span><div class="tooltip-popup">How will you improve deal quality? e.g., "Disqualify bad deals earlier." (Reference Account Planning Best Practice Session)</div></div>
                                 </label>
                                 <input type="text" id="act-process" class="input-field required" placeholder="I will...">
-                                <p class="error-text">Please add a Process action.</p>
+                                <p class="error-text" id="err-act-process">Please add a Process action.</p>
                             </div>
 
                             <div>
@@ -464,7 +442,7 @@
                                     <div class="tooltip-container"><span class="tooltip-trigger">?</span><div class="tooltip-popup">How will you work smarter? e.g., "Block 2 hours daily for prospecting."</div></div>
                                 </label>
                                 <input type="text" id="act-prod" class="input-field required" placeholder="I will...">
-                                <p class="error-text">Please add a Productivity action.</p>
+                                <p class="error-text" id="err-act-prod">Please add a Productivity action.</p>
                             </div>
 
                             <div class="pt-6 border-t">
@@ -474,7 +452,7 @@
                                 </label>
                                 <p class="text-xs text-gray-500 mb-2">"My Rep Commit will be 95-105% accurate every quarter."</p>
                                 <input type="text" id="act-forecast" class="input-field required" placeholder="Key action to ensure accuracy...">
-                                <p class="error-text">Please add your commitment.</p>
+                                <p class="error-text" id="err-act-forecast">Please add your commitment.</p>
                             </div>
                         </div>
                     </div>
@@ -585,7 +563,7 @@
         setTxt('lbl-actual25', data.lbl.a25); $('tip-actual25').textContent = data.lbl.a25tip;
         setTxt('lbl-efficiency25', data.lbl.e25); $('tip-efficiency25').textContent = data.lbl.e25tip;
         setTxt('lbl-dealSize25', data.lbl.d25); $('tip-dealSize25').textContent = data.lbl.d25tip;
-        setTxt('lbl-quota26', data.lbl.q26); $('tip-quota26').textContent = data.lbl.q26tip || 'Your new target for the coming year.';
+        setTxt('lbl-quota26', data.lbl.q26); $('tip-quota26').textContent = 'Your new target for 2026.';
         setTxt('lbl-resultA', data.lbl.resA);
         setTxt('lbl-resultB', data.lbl.resB);
 
@@ -633,15 +611,24 @@
         let valid = true;
         const currentPanel = $(`step-${step}`);
         
-        const inputs = Array.from(currentPanel.querySelectorAll('.required')).filter(el => {
-            return el.offsetParent !== null;
-        });
+        // Robustly find all required fields in current panel
+        const inputs = currentPanel.querySelectorAll('.required');
         
         inputs.forEach(inp => {
-            const err = inp.nextElementSibling;
+            // Robust error finding using ID mapping
+            const errId = 'err-' + inp.id.replace('val-', '').replace('act-', ''); 
+            // Fallback to sibling if ID mapping misses (for name/manager)
+            let err = document.getElementById(errId) || inp.nextElementSibling;
+            
+            // Special cases for IDs that don't match perfectly
+            if(inp.id === 'personName') err = $('err-personName');
+            if(inp.id === 'managerName') err = $('err-managerName');
+            if(inp.id === 'region') err = $('err-region');
+            if(inp.id === 'val-efficiency25') err = $('err-efficiency25'); // Fix for relative parent
+            
             if(!inp.value.trim()) {
                 inp.classList.add('input-error');
-                if(err && err.classList.contains('error-text')) err.classList.add('show');
+                if(err) err.classList.add('show');
                 valid = false;
             } else {
                 inp.classList.remove('input-error');
@@ -780,9 +767,7 @@ ACTION PLAN
     };
 
     // Init
-    document.addEventListener('DOMContentLoaded', () => {
-        updateLabels(); 
-    });
+    // updateLabels(); // Removed to allow default hardcoded list to show on load
 </script>
 
 </body>
