@@ -27,8 +27,13 @@
     body {
         font-family: 'Open Sans', sans-serif;
         color: #252a2e; /* primary-text */
-        /* FIXED: Body is now light gray, matching Trimble's web design */
-        background-color: #F3F4F6; /* bg-gray-100 */
+        
+        /* FIXED: "Designed" Trimble Blue background */
+        background-color: #0063a3; /* bg-primary */
+        
+        /* A subtle, mobile-friendly geometric pattern */
+        background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.05) 75%, transparent 75%, transparent);
+        background-size: 40px 40px;
     }
     
     /* Instruction Box Style */
@@ -288,11 +293,9 @@
     @media print {
         body {
             background-color: white !important;
+            background-image: none !important; /* Hide pattern in print */
             font-family: 'Open Sans', sans-serif !important;
             color: #252a2e !important;
-        }
-        .app-header-bar { /* Hide new header in print */
-            display: none !important;
         }
         .max-w-4xl {
             box-shadow: none !important; margin: 0 !important; padding: 0 !important; width: 100% !important; max-width: 100% !important;
@@ -336,9 +339,7 @@
     }
 </style>
 
-<div class="app-header-bar bg-primary h-40 w-full"></div>
-
-<div class="relative z-10 max-w-4xl mx-auto p-6 md:p-10 bg-white rounded-lg shadow-2xl -mt-20 mb-12">
+<div class="relative z-10 max-w-4xl mx-auto p-6 md:p-10 bg-white rounded-lg shadow-2xl my-12">
     <header class="mb-10 text-center space-y-4">
         <h1 id="main-heading" tabindex="-1" class="text-4xl font-bold text-primary">The Trimble 2026 Success Plan</h1>
         <p class="text-xl font-bold text-primary">Personal Commitment Plan</p>
@@ -884,7 +885,7 @@
     // --- Compilation Function for Managers ---
     function generateJSONData() {
         const metadata = {
-            plan_version: "2026.5-Full-Validation", // NEW: Updated version
+            plan_version: "2026.6-DesignedBG-Full-Validation", // NEW: Updated version
             date_exported: new Date().toISOString(),
             rep_name: getStringValue('personName'),
             manager_name: getStringValue('managerName'),
