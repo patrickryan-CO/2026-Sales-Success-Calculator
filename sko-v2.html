@@ -79,27 +79,33 @@
             left: 0;
         }
         
-        /* Progress Bar (4 Segments) */
+        /* Progress Bar (6 Segments) */
         .progress-bar {
             display: flex;
             width: 100%;
-            background-color: #e5e7eb;
+            background-color: #e5e7eb; /* gray-200 */
             border-radius: 0.5rem;
             overflow: hidden;
-            margin-bottom: 2rem;
+            margin-bottom: 2rem; /* MOVED TO TOP */
         }
         .progress-segment {
             flex: 1;
-            padding: 0.75rem 0.5rem;
+            padding: 0.5rem 0.25rem; /* Tighter padding for 6 segments */
             text-align: center;
-            font-size: 0.8rem;
+            font-size: 0.65rem; /* Smaller text for 6 segments */
             font-weight: 700;
-            color: #4b5563;
+            color: #4b5563; /* gray-600 */
             border-right: 2px solid #ffffff;
             transition: all 0.3s ease;
         }
         .progress-segment:last-child {
             border-right: none;
+        }
+        @media (min-width: 768px) {
+            .progress-segment {
+                font-size: 0.8rem;
+                padding: 0.75rem 0.5rem;
+            }
         }
         .progress-segment.active {
             color: #ffffff;
@@ -107,15 +113,18 @@
         .progress-segment.complete {
             color: #ffffff;
             opacity: 0.7;
-            cursor: pointer;
+            cursor: pointer; /* NEW: Clickable */
         }
         .progress-segment.complete:hover {
-             opacity: 1.0;
+             opacity: 1.0; /* NEW: Hover effect */
         }
-        #progress-1.active, #progress-1.complete { background-color: #0063a3; } /* BASELINE */
-        #progress-2.active, #progress-2.complete { background-color: #fbad26; } /* THE GAP */
-        #progress-3.active, #progress-3.complete { background-color: #02542e; } /* SOLUTION */
-        #progress-4.active, #progress-4.complete { background-color: #252a2e; } /* REVIEW */
+        /* Phase-specific colors */
+        #progress-1.active, #progress-1.complete { background-color: #0063a3; /* primary */ }
+        #progress-2.active, #progress-2.complete { background-color: #fbad26; /* accent */ }
+        #progress-3.active, #progress-3.complete { background-color: #0063a3; /* primary */ }
+        #progress-4.active, #progress-4.complete { background-color: #fbad26; /* accent */ }
+        #progress-5.active, #progress-5.complete { background-color: #02542e; /* success */ }
+        #progress-6.active, #progress-6.complete { background-color: #252a2e; /* primary-text */ }
 
 
         /* Conversation Bubble */
@@ -133,8 +142,10 @@
         /* Phase-specific bubble colors */
         .phase-1-bubble { border-left-color: #0063a3; }
         .phase-2-bubble { border-left-color: #fbad26; }
-        .phase-3-bubble { border-left-color: #02542e; }
-        .phase-4-bubble { border-left-color: #252a2e; }
+        .phase-3-bubble { border-left-color: #0063a3; }
+        .phase-4-bubble { border-left-color: #fbad26; }
+        .phase-5-bubble { border-left-color: #02542e; }
+        .phase-6-bubble { border-left-color: #252a2e; }
 
         @media (min-width: 768px) {
             .conversation-bubble {
@@ -185,10 +196,11 @@
             font-weight: 600;
             margin-top: 1.5rem;
         }
+        /* NEW: Override for strong tag inside callout */
         .splash-callout strong {
-            color: #252a2e !important; /* FIX: Override blue strong tag */
+            color: #252a2e !important;
         }
-        
+
         /* NEW: Phase Welcome Card */
         .phase-welcome-card {
             display: flex;
@@ -282,6 +294,19 @@
             .calc-output {
                 font-size: 1.875rem;
             }
+        }
+        .calc-box-accent {
+            background-color: #fbad26; /* accent */
+            color: #252a2e;
+            border-radius: 0.5rem;
+            padding: 1rem;
+        }
+        .calc-output-accent {
+            display: block;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #252a2e;
+            margin-top: 0.25rem;
         }
         
         /* Slider Styles */
@@ -387,8 +412,10 @@
         <div class="progress-bar" id="progress-bar-container">
             <div id="progress-1" class="progress-segment" data-phase="1">BASELINE</div>
             <div id="progress-2" class="progress-segment" data-phase="2">THE GAP</div>
-            <div id="progress-3" class="progress-segment" data-phase="3">SOLUTION</div>
-            <div id="progress-4" class="progress-segment" data-phase="4">REVIEW</div>
+            <div id="progress-3" class="progress-segment" data-phase="3">PIPE GOALS</div>
+            <div id="progress-4" class="progress-segment" data-phase="4">SCENARIOS</div>
+            <div id="progress-5" class="progress-segment" data-phase="5">ACTION PLAN</div>
+            <div id="progress-6" class="progress-segment" data-phase="6">REVIEW</div>
         </div>
 
         <form id="skoForm" onsubmit="return false;">
@@ -504,7 +531,58 @@
                     <span id="error-reflection" class="error-message hidden">Please select an assessment of the goal.</span>
                 </div>
                 
-                <div class="form-group" id="group-phase3-welcome"></div>
+                <div class="form-group" id="group-recommendedCoverage">
+                    <label for="recommendedCoverage" class="input-label">My Recommended Pipeline Coverage (from Scorecard):</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">x</span>
+                        <input type="number" id="recommendedCoverage" class="input-field required-field numeric-field pr-7" placeholder="e.g., 1.9">
+                    </div>
+                    <span id="error-recommendedCoverage" class="error-message hidden">A coverage number (e.g., 1.9) is required.</span>
+                    
+                    <div class="calc-box-accent mt-4">
+                        <span class="text-sm font-medium">Your Total Pipeline Gap:</span>
+                        <span id="pipelineGap" class="calc-output-accent">0</span>
+                        <span class="text-xs">(2026 Quota * Rec. Coverage) - (Current Pipeline)</span>
+                    </div>
+                </div>
+
+                <div class="form-group" id="group-pipelineMix">
+                    <div class="grid grid-cols-3 gap-4">
+                        <div>
+                            <label for="mixNewLogo" class="input-label">New Logo %</label>
+                            <input type="number" id="mixNewLogo" class="input-field required-field numeric-field" placeholder="e.g., 20">
+                        </div>
+                        <div>
+                            <label for="mixCrossSell" class="input-label">Cross-Sell %</label>
+                            <input type="number" id="mixCrossSell" class="input-field required-field numeric-field" placeholder="e.g., 50">
+                        </div>
+                        <div>
+                            <label for="mixUpsell" class="input-label">Upsell %</label>
+                            <input type="number" id="mixUpsell" class="input-field required-field numeric-field" placeholder="e.g., 30">
+                        </div>
+                    </div>
+                    <span id="error-pipelineMix" class="error-message hidden">All three values are required and must total 100%.</span>
+                </div>
+                
+                <div class="form-group" id="group-pipelineSource">
+                    <div class="grid grid-cols-3 gap-4">
+                        <div>
+                            <label for="sourceSelf" class="input-label">Self-Sourced %</label>
+                            <input type="number" id="sourceSelf" class="input-field required-field numeric-field" placeholder="e.g., 70">
+                        </div>
+                        <div>
+                            <label for="sourceSDR" class="input-label">SDR-Sourced %</label>
+                            <input type="number" id="sourceSDR" class="input-field required-field numeric-field" placeholder="e.g., 20">
+                        </div>
+                        <div>
+                            <label for="sourceMarketing" class="input-label">Marketing-Sourced %</label>
+                            <input type="number" id="sourceMarketing" class="input-field required-field numeric-field" placeholder="e.g., 10">
+                        </div>
+                    </div>
+                    <span id="error-pipelineSource" class="error-message hidden">All three values are required and must total 100%.</span>
+                </div>
+
+                <div class="form-group" id="group-phase4-welcome"></div>
 
                 <div class="form-group" id="group-winRateImprovement">
                     <div class="space-y-4 p-4 md:p-6 rounded-lg bg-primary/10 border border-primary/20">
@@ -712,7 +790,7 @@
         const iconBaseline = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-16 w-16 md:h-24 md:w-24"><path fill="#0063a3" fill-opacity="0.2" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25z" /><path stroke="#0063a3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 18a.75.75 0 00.75-.75V8.668l3.374 1.948a.75.75 0 10.75-1.3l-4.5-2.6a.75.75 0 00-.75 0l-4.5 2.6a.75.75 0 10.75 1.3L11.25 8.67v8.58a.75.75 0 00.75.75z" /></svg>`;
         const iconGap = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-16 w-16 md:h-24 md:w-24"><path fill="#fbad26" fill-opacity="0.2" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25z" /><path stroke="#fbad26" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M15.364 15.364l-1.06-1.06a.75.75 0 01-1.06 1.06l-4.243 4.242a.75.75 0 01-1.06-1.06l4.242-4.243a.75.75 0 011.06-1.06l1.06 1.06zM9.75 12a2.25 2.25 0 114.5 0 2.25 2.25 0 01-4.5 0z" /><path stroke="#fbad26" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>`;
         const iconSolution = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-16 w-16 md:h-24 md:w-24"><path fill="#02542e" fill-opacity="0.2" d="M12.75 3.1a.75.75 0 00-1.5 0v5.844l-2.47-2.47a.75.75 0 00-1.06 1.06L12 11.78l4.28-4.28a.75.75 0 00-1.06-1.06L12.75 8.934V3.1z" /><path fill="#02542e" fill-opacity="0.2" d="M12 21.75a9.75 9.75 0 01-9.75-9.75c0-3.268 1.593-6.19 4.07-7.974a.75.75 0 011.06 1.06A8.25 8.25 0 003.75 12c0 4.54 3.71 8.25 8.25 8.25s8.25-3.71 8.25-8.25a8.25 8.25 0 00-3.63-6.814.75.75 0 111.06-1.06C19.907 5.81 21.5 8.732 21.5 12a9.75 9.75 0 01-9.75 9.75H12z" /><path stroke="#02542e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 11.78l-4.28-4.28a.75.75 0 00-1.06 1.06L10.94 13.06l-4.22 4.22a.75.75 0 101.06 1.06L12 14.12l4.22 4.22a.75.75 0 101.06-1.06l-4.22-4.22 4.28-4.28a.75.75 0 00-1.06-1.06L12 11.78z" /></svg>`;
-        const iconReview = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-primary-text"><path fill-rule="evenodd" d="M10.5 3A1.501 1.501 0 009 4.5V5.378a4.5 4.5 0 00-3.328 1.4c-.697.697-.999 1.631-.999 2.599V15a3 3 0 003 3h9a3 3 0 003-3V9.377a4.5 4.5 0 00-1-2.599 4.5 4.5 0 00-3.328-1.4V4.5A1.5 1.5 0 0013.5 3h-3zm.22 4.22a.75.75 0 011.06 0l1.25 1.25a.75.75 0 01-1.06 1.06L10.5 8.06l-1.47 1.47a.75.75 0 01-1.06-1.06l2.75-2.75z" clip-rule="evenodd" /><path d="M6 19.5a3 3 0 013-3h6a3 3 0 013 3v.75a.75.75 0 01-1.5 0V19.5a1.5 1.5 0 00-1.5-1.5h-6A1.5 1.5 0 007.5 19.5v.75a.75.75 0 01-1.5 0v-.75z" /></svg>`;
+        const iconReview = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-16 w-16 md:h-24 md:w-24"><path fill="#252a2e" fill-opacity="0.2" d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v11.25C1.5 17.16 2.34 18 3.375 18h9.75a3 3 0 003-3V9.375c0-.866-.354-1.658-.93-2.235l-3.03-3.03A3.001 3.001 0 009.875 3H3.375z" /><path stroke="#252a2e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M9 3.75v3.875c0 .414.336.75.75.75h3.875m-6-1.5h6m-6 3h6m-6 3h4.5m4.5 6H21a.75.75 0 00.75-.75V11.812a3 3 0 00-.878-2.121l-3.878-3.878A3 3 0 0015.188 5H15v3.75c0 .414.336.75.75.75h3.75v9.75a1.5 1.5 0 01-1.5 1.5H9.375a3 3 0 01-2.822-2H15v.001z" /></svg>`;
 
         
         // --- Step Definitions (The Core Conversation) ---
@@ -746,7 +824,7 @@
             { id: 'quota2025', fieldId: 'quota2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>Alright, let's open your <strong>Sales Scorecard</strong>. For the next few steps, you'll be pulling your 2025 numbers from that scorecard. First, what was your <strong>2025 Quota?</strong></p>" }, // 5
             { id: 'bookings2025', fieldId: 'bookings2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>On that same scorecard, find your <strong>2025 Bookings</strong> (your total closed-won revenue).</p><p class='prompt-example'><strong>Why?</strong> This calculates your 2025 Attainment. This plan is about honesty. Be accurate so we can build a realistic path forward.</p>" }, // 6
             { id: 'winRate2025', fieldId: 'winRate2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>This is a key one. <strong>Look at your scorecard</strong> for your <strong>2025 Baseline Win Rate %</strong>.</p><p class='prompt-example'><strong>Why?</strong> This is your <em>quality & qualification</em> metric. A low rate might mean you're wasting time on unqualified deals.</p>" }, // 7
-            { id: 'avgDealSize2025', fieldId: 'avgDealSize2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>Next, find your <strong>2025 Avg. Deal Size</strong> on your scorecard.</p><p class='prompt-example'><strong>Why?</strong> This is your <em>value</em> metric. Are you selling single products, or are you selling the full 'Connect & Scale' solution? (e.g., selling Viewpoint to a customer who already uses Tekla).</p>" }, // 8
+            { id: 'avgDealSize2025', fieldId: 'avgDealSize2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>Next, find your <strong>2025 Avg. Deal Size</strong> on your scorecard.</p><p class='prompt-example'><strong>Why?</strong> This is your <em>value</em> metric. Are you selling single products, or are you selling the full 'Connect & Scale' solution? (e.g., selling more software modules to an existing customer).</p>" }, // 8
             { id: 'avgMeetings2025', fieldId: 'avgMeetings2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>Last baseline number: Find your <strong>2025 Avg. Quarterly In-Person Meetings</strong> on your scorecard's activity tab.</p><p class='prompt-example'><strong>Why?</strong> This is your <em>activity</em> metric. In our complex industries, face-time with customers is directly linked to success.</p>" }, // 9
 
             // --- Phase 2: THE GAP (Steps 10-12) ---
@@ -833,8 +911,8 @@
             if (input && input.classList.contains('required-field') && !value) {
                 isValid = false;
             } 
-            else if (isNumeric && (numValue < 0 || !isFinite(numValue))) { 
-                // Allow 0 for bookings and avg meetings, but not others
+            else if (isNumeric && (numValue <= 0 || !isFinite(numValue))) {
+                // Allow 0 for bookings and avg meetings
                 if (fieldId !== 'bookings2025' && fieldId !== 'meetingsImpliedWinRate_visible' && fieldId !== 'avgMeetings2025') {
                     // Check if it's 0, which is invalid for quota/deal size/win rate
                     if (numValue === 0) isValid = false;
@@ -1008,7 +1086,7 @@ Generated by the Trimble 2026 Success Planner.
             calculatePlan(); 
             
             const metadata = {
-                plan_version: "2026.25-Final-UX-Fixes", // New version tag
+                plan_version: "2026.26-Bug-Fixes", // New version tag
                 date_exported: new Date().toISOString(),
                 rep_name: getStringValue('personName'),
                 manager_name: getStringValue('managerName'),
@@ -1061,7 +1139,7 @@ Generated by the Trimble 2026 Success Planner.
             });
             
             currentStepIndex = stepIndex;
-            const step = steps[stepIndex];
+            const step = steps[currentStepIndex];
             const currentPhase = step.phase;
 
             // Update Progress Bar
