@@ -62,7 +62,7 @@
             }
         }
 
-        /* NEW: SVG Header Wrapper */
+        /* SVG Header Wrapper */
         .header-graphic-wrapper {
             background-color: #0063a3;
             width: 100%;
@@ -157,9 +157,9 @@
             color: #252a2e;
         }
         .conversation-bubble h3 svg {
-            width: 1.25rem;
-            height: 1.25rem;
-            margin-right: 0.5rem;
+            width: 1.5rem; /* 24px */
+            height: 1.5rem; /* 24px */
+            margin-right: 0.75rem; /* 12px */
             flex-shrink: 0;
         }
         
@@ -179,7 +179,7 @@
         }
         .splash-callout {
             background-color: #fbad26;
-            color: #252a2e;
+            color: #252a2e; /* ADA Compliant Text */
             padding: 1rem;
             border-radius: 0.5rem;
             font-weight: 600;
@@ -407,7 +407,7 @@
                 </div>
                 
                 <div class="form-group" id="group-winRate2025">
-                    <label for="winRate2025" class="input-label">My 2025 Baseline Win Rate (%):</label>
+                    <label for="winRate2025" class="input-label">My 2025 Baseline Win Rate %:</label>
                     <div class="relative">
                         <span class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">%</span>
                         <input type="number" id="winRate2025" class="input-field required-field numeric-field" placeholder="e.g., 25">
@@ -422,7 +422,7 @@
                 </div>
                 
                 <div class="form-group" id="group-avgMeetings2025">
-                    <label for="avgMeetings2025" class="input-label">My 2025 Avg. In-Person Meetings (Quarterly):</label>
+                    <label for="avgMeetings2025" class="input-label">My 2025 Avg. Quarterly In-Person Meetings:</label>
                     <input type="number" id="avgMeetings2025" class="input-field required-field numeric-field" placeholder="e.g., 15">
                     <span id="error-avgMeetings2025" class="error-message hidden">Average meetings number is required.</span>
                 </div>
@@ -435,12 +435,12 @@
                     <span id="error-quota2026" class="error-message hidden">2026 Quota is required.</span>
                     
                     <div class="calc-box mt-6">
-                        <span class="text-sm font-medium text-gray-700">Required Pipeline (at 2025 efficiency):</span>
+                        <span class="text-sm font-medium text-gray-700">Required Pipeline at 2025 efficiency:</span>
                         <span id="pipelineToClose2026" class="calc-output">0</span>
                         <span class="text-xs text-gray-500">Based on Quota / 2025 Win Rate</span>
                     </div>
                     <div class="calc-box mt-4">
-                        <span class="text-sm font-medium text-gray-700">Required Deals (at 2025 efficiency):</span>
+                        <span class="text-sm font-medium text-gray-700">Required Deals at 2025 efficiency:</span>
                         <span id="dealsToClose2026" class="calc-output">0</span>
                         <span class="text-xs text-gray-500">Based on Required Pipeline / 2025 Avg. Deal Size</span>
                     </div>
@@ -670,15 +670,13 @@
 
         // --- SVG Icons ---
         const iconSplash = `<svg class="text-primary mx-auto h-16 w-16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
-        const iconBaseline = `<svg class="text-primary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" /><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" /></svg>`;
-        const iconGap = `<svg class="text-accent" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" /></svg>`;
-        const iconScenarios = `<svg class="text-accent" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M10 3.75a2 2 0 100 4 2 2 0 000-4zM8 8.75a2 2 0 100 4 2 2 0 000-4zM12 8.75a2 2 0 100 4 2 2 0 000-4zM10 13.75a2 2 0 100 4 2 2 0 000-4zM4.75 8a2 2 0 104 0 2 2 0 00-4 0zM15.25 8a2 2 0 104 0 2 2 0 00-4 0zM4.75 12a2 2 0 104 0 2 2 0 00-4 0zM15.25 12a2 2 0 104 0 2 2 0 00-4 0z" /></svg>`;
-        const iconActions = `<svg class="text-success" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>`;
+        const iconBaseline = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-primary"><path d="M11.25 4.5a.75.75 0 00-1.5 0v8.25em(13.5, 4.5)"></path><path d="M12.75 4.5a.75.75 0 011.5 0v8.25em(13.5, 4.5)"></path><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM3.5 12a8.5 8.5 0 1117 0 8.5 8.5 0 01-17 0z" clip-rule="evenodd" /></svg>`;
+        const iconGap = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-accent"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-1.47a.75.75 0 00-1.06-1.06L10.5 11.56l-1.068-1.068a.75.75 0 00-1.06 1.06l1.5 1.5a.75.75 0 001.06 0l2.5-2.5z" clip-rule="evenodd" /><path fill-rule="evenodd" d="M10.5 6a.75.75 0 01.75.75v4.59l1.97 1.97a.75.75 0 01-1.06 1.06L10.5 13.06l-2.47 2.47a.75.75 0 01-1.06-1.06L8.53 13.5H4.5a.75.75 0 010-1.5h3.03l-1.06-1.06a.75.75 0 011.06-1.06L10.5 11.56l1.068-1.068a.75.75 0 011.06 1.06l-1.5 1.5a.75.75 0 01-1.06 0L8 11.97v-3.72a.75.75 0 01.75-.75h1.75z" clip-rule="evenodd" /></svg>`;
+        const iconSolution = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-success"><path fill-rule="evenodd" d="M10.5 1.5a.75.75 0 01.75.75V3h1.5a.75.75 0 010 1.5H12v1.5a.75.75 0 01-1.5 0V4.5H9a.75.75 0 010-1.5h1.5V2.25a.75.75 0 01.75-.75zM8.25 4.5A.75.75 0 019 3.75h6a.75.75 0 010 1.5H9a.75.75 0 01-.75-.75zM12 7.5a.75.75 0 01.75.75V9h1.5a.75.75 0 010 1.5H12v1.5a.75.75 0 01-1.5 0V10.5H9a.75.75 0 010-1.5h1.5V8.25A.75.75 0 0112 7.5zM10.5 12A.75.75 0 0111.25 11.25h1.5a.75.75 0 010 1.5h-1.5A.75.75 0 0110.5 12zM10.5 15a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75zM12 16.5a.75.75 0 01.75.75V18h1.5a.75.75 0 010 1.5H12v1.5a.75.75 0 01-1.5 0V19.5H9a.75.75 0 010-1.5h1.5v-1.5A.75.75 0 0112 16.5zM15 15a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5h-1.5A.75.75 0 0115 15zM15 12a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5h-1.5A.75.75 0 0115 12zM18 8.25a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5h-1.5A.75.75 0 0118 8.25zM18 11.25a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75zM6 15a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5H6.75A.75.75 0 016 15zM6 12a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5H6.75A.75.75 0 016 12zM3.75 8.25a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5H4.5a.75.75 0 01-.75-.75zM3.75 11.25a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5H4.5a.75.75 0 01-.75-.75z" /></svg>`;
         const iconReview = `<svg class="text-primary-text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M10.75 2.75a.75.75 0 00-1.5 0v8.586l-2.293-2.293a.75.75 0 00-1.06 1.06l3.5 3.5a.75.75 0 001.06 0l3.5-3.5a.75.75 0 10-1.06-1.06L10.75 11.336V2.75z" /><path d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" /></svg>`;
 
         
         // --- Step Definitions (The Core Conversation) ---
-        // NEW: 4-Phase flow, simplified, no "Pipe Plan"
         const steps = [
             // --- Intro (Step 0) ---
             { id: 'intro', fieldId: null, phase: 1, 
@@ -703,9 +701,9 @@
             { id: 'region', fieldId: 'region', phase: 1, prompt: "Geography check! <strong>Which region are you primarily responsible for?</strong> (This will customize your workshop content later)." }, // 4
             { id: 'quota2025', fieldId: 'quota2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>Alright, let's open your <strong>Sales Scorecard</strong>. For the next few steps, you'll be pulling your 2025 numbers from that scorecard. First, what was your <strong>2025 Quota?</strong></p>" }, // 5
             { id: 'bookings2025', fieldId: 'bookings2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>On that same scorecard, find your <strong>2025 Bookings</strong> (your total closed-won revenue).</p><p class='prompt-example'><strong>Why?</strong> This calculates your 2025 Attainment. This plan is about honesty. Be accurate so we can build a realistic path forward.</p>" }, // 6
-            { id: 'winRate2025', fieldId: 'winRate2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>This is a key one. <strong>Look at your scorecard</strong> for your <strong>2025 Baseline Win Rate (%)</strong>.</p><p class='prompt-example'><strong>Why?</strong> This is your <em>quality & qualification</em> metric. A low rate might mean you're wasting time on unqualified deals.</p>" }, // 7
+            { id: 'winRate2025', fieldId: 'winRate2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>This is a key one. <strong>Look at your scorecard</strong> for your <strong>2025 Baseline Win Rate %</strong>.</p><p class='prompt-example'><strong>Why?</strong> This is your <em>quality & qualification</em> metric. A low rate might mean you're wasting time on unqualified deals.</p>" }, // 7
             { id: 'avgDealSize2025', fieldId: 'avgDealSize2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>Next, find your <strong>2025 Avg. Deal Size</strong> on your scorecard.</p><p class='prompt-example'><strong>Why?</strong> This is your <em>value</em> metric. Are you selling single products, or are you selling the full 'Connect & Scale' solution? For example, are you selling <strong>Viewpoint</strong> to a customer who already uses <strong>Tekla</strong>?</p>" }, // 8
-            { id: 'avgMeetings2025', fieldId: 'avgMeetings2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>Last baseline number: Find your <strong>2025 Avg. In-Person Meetings (Quarterly)</strong> on your scorecard's activity tab.</p><p class='prompt-example'><strong>Why?</strong> This is your <em>activity</em> metric. In our complex industries, face-time with customers is directly linked to success.</p>" }, // 9
+            { id: 'avgMeetings2025', fieldId: 'avgMeetings2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>Last baseline number: Find your <strong>2025 Avg. Quarterly In-Person Meetings</strong> on your scorecard's activity tab.</p><p class='prompt-example'><strong>Why?</strong> This is your <em>activity</em> metric. In our complex industries, face-time with customers is directly linked to success.</p>" }, // 9
 
             // --- Phase 2: THE GAP (Steps 10-12) ---
             { id: 'phase2-welcome', fieldId: null, phase: 2, 
@@ -716,9 +714,9 @@
             { id: 'quota2026', fieldId: 'quota2026', phase: 2, prompt: "<h3>Step 2: The 2026 Formula</h3><p class='prompt-why'>This is the big one: what is your <strong>2026 Quota Commitment?</strong></p><p class='prompt-example'><strong>Why?</strong> Enter your new number. The tool will *immediately* calculate what's required to hit this goal *if you change nothing*. This isn't your plan; it's the *challenge* we're about to solve together.</p>" }, // 11
             { id: 'reflection', fieldId: 'reflection', phase: 2, prompt: "<h3>Step 2: The 2026 Formula</h3><p class='prompt-why'>Okay, take a look at those 'Required' numbers. Based on that hard math, <strong>how does your 2026 goal feel right now?</strong></p><p class='prompt-example'><strong>Why?</strong> Be honest. If it feels 'Impossible,' it just means your 2025 efficiency isn't good enough for 2026. That's fine! The next steps are <em>how</em> we fix that.</p>" }, // 12
             
-            // --- Phase 3: SOLUTION (Steps 13-21) ---
+            // --- Phase 3: SOLUTION (Steps 13-22) ---
             { id: 'phase3-welcome', fieldId: null, phase: 3, 
-              prompt: `<h3>${iconActions} PHASE 3: Your Solution (Scenarios & Actions)</h3>
+              prompt: `<h3>${iconSolution} PHASE 3: Your Solution (Scenarios & Actions)</h3>
                        <p class='prompt-why'>You've seen the data. You've defined the gap. Now for the most important part: <strong>creating your solution.</strong></p>
                        <p class='prompt-example'>In this section, you'll first play with scenarios to see how small improvements can close your gap. Then, you'll use what you learned in the SKO workshops to write your *specific* action plan.</p>` 
             }, // 13
@@ -956,7 +954,7 @@ Generated by the Trimble 2026 Success Planner.
             calculatePlan(); 
             
             const metadata = {
-                plan_version: "2026.22-Final-Original-Fields", // New version tag
+                plan_version: "2026.23-Splash-Page-Fix", // New version tag
                 date_exported: new Date().toISOString(),
                 rep_name: getStringValue('personName'),
                 manager_name: getStringValue('managerName'),
@@ -1051,24 +1049,33 @@ Generated by the Trimble 2026 Success Planner.
             if (isReviewStep) generateCommitmentSummary();
     
             // --- NEW Button Logic for Splash Page ---
+            const navButtonContainer = $('navigation-buttons');
             const navButtonGroup = $('nav-button-group-main');
             const nextButton = $('nextButton');
             const resetButton = $('resetButton');
 
             if (stepIndex === 0) { // Splash page
+                navButtonContainer.classList.add('justify-center'); // Center the whole bar
                 $('prevButton').style.display = 'none';
                 resetButton.style.display = 'none';
                 nextButton.textContent = 'Get Started';
-                navButtonGroup.classList.add('nav-center'); // Center the button
-                // Show all other buttons as 'none'
+                // Hide all other buttons as 'none'
                 $('printButton').style.display = 'none';
                 $('copyCommitmentButton').style.display = 'none';
                 $('exportJSONButton').style.display = 'none';
             } else {
+                navButtonContainer.classList.remove('justify-center'); // Revert to default
                 $('prevButton').style.display = 'inline-block';
                 resetButton.style.display = 'inline-block';
-                nextButton.textContent = 'Next →';
-                navButtonGroup.classList.remove('nav-center'); // Un-center it
+
+                // Set button text based on if it's a "welcome" step
+                if (step.id.includes('welcome')) {
+                    if (step.id.includes('phase1')) nextButton.textContent = 'Start Baseline →';
+                    else if (step.id.includes('phase2')) nextButton.textContent = 'See My Gap →';
+                    else if (step.id.includes('phase3')) nextButton.textContent = 'Start My Solution →';
+                } else {
+                    nextButton.textContent = 'Next →';
+                }
                 
                 // Regular button visibility logic
                 nextButton.style.display = isReviewStep ? 'none' : 'inline-block';
