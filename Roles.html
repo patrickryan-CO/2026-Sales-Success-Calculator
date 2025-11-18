@@ -80,7 +80,7 @@
             font-size: 1rem; font-weight: 700; color: #1f2937; margin-bottom: 0.25rem;
         }
         .input-prompt {
-            display: block; font-size: 0.85rem; color: #4b5563; margin-bottom: 0.5rem; line-height: 1.4; font-style: italic;
+            display: block; font-size: 0.9rem; color: #4b5563; margin-bottom: 0.5rem; line-height: 1.5;
         }
         .input-field {
             display: block; width: 100%;
@@ -218,17 +218,17 @@
                                 <div class="bg-white p-4 border rounded-lg shadow-sm hover:border-primary transition">
                                     <div class="text-primary text-2xl mb-2">👥</div>
                                     <h3 class="font-bold text-gray-800 mb-1">People</h3>
-                                    <p class="text-sm text-gray-600">Identify the skills and coaching you need to level up.</p>
+                                    <p class="text-sm text-gray-600">Identify specific skill gaps and commit to a coaching plan.</p>
                                 </div>
                                 <div class="bg-white p-4 border rounded-lg shadow-sm hover:border-primary transition">
                                     <div class="text-primary text-2xl mb-2">📈</div>
                                     <h3 class="font-bold text-gray-800 mb-1">Pipeline</h3>
-                                    <p class="text-sm text-gray-600">Calculate the exact coverage required to hit your number.</p>
+                                    <p class="text-sm text-gray-600">Calculate your coverage gap and define a generation strategy.</p>
                                 </div>
                                 <div class="bg-white p-4 border rounded-lg shadow-sm hover:border-primary transition">
                                     <div class="text-primary text-2xl mb-2">⚡</div>
                                     <h3 class="font-bold text-gray-800 mb-1">Productivity</h3>
-                                    <p class="text-sm text-gray-600">Commit to working smarter with the right tools.</p>
+                                    <p class="text-sm text-gray-600">Audit your calendar and protect time for high-value selling.</p>
                                 </div>
                             </div>
 
@@ -720,22 +720,8 @@ ${$('act-forecast').value}
         const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'plan.json'; a.click();
     };
 
-    // FIX: Use textContent instead of attribute for tooltips
-    function updateLabels() {
-        const r = $('userRole').value;
-        const d = ROLE_DATA[r].lbl;
-        
-        setTxt('lbl-quota25', d.q25); $('tip-quota25').textContent = d.q25tip;
-        setTxt('lbl-actual25', d.a25); $('tip-actual25').textContent = d.a25tip;
-        setTxt('lbl-efficiency25', d.e25); $('tip-efficiency25').textContent = d.e25tip;
-        setTxt('lbl-dealSize25', d.d25); $('tip-dealSize25').textContent = d.d25tip;
-        setTxt('lbl-quota26', d.q26); $('tip-quota26').textContent = 'Your new target for 2026.';
-        setTxt('lbl-resultA', d.resA); setTxt('lbl-resultB', d.resB);
-        setTxt('lbl-slider1', d.sl1); setTxt('lbl-slider2', d.sl2); setTxt('lbl-slider3', d.sl3);
-        setTxt('lbl-new-vol', d.newVol); setTxt('lbl-new-count', d.newCount);
-    }
-
-    updateLabels();
+    // Init
+    updateLabels(); 
 </script>
 
 </body>
