@@ -80,7 +80,7 @@
             font-size: 1rem; font-weight: 700; color: #1f2937; margin-bottom: 0.25rem;
         }
         .input-prompt {
-            display: block; font-size: 0.9rem; color: #4b5563; margin-bottom: 0.5rem; line-height: 1.5;
+            display: block; font-size: 0.85rem; color: #4b5563; margin-bottom: 0.5rem; line-height: 1.4; font-style: italic;
         }
         .input-field {
             display: block; width: 100%;
@@ -91,20 +91,6 @@
         .input-field:focus {
             outline: none; border-color: #0063a3; ring: 3px; ring-color: #e0f2fe;
             box-shadow: 0 0 0 3px rgba(0, 99, 163, 0.1);
-        }
-        
-        /* ACTION BLOCKS */
-        .action-block {
-            @apply border-l-4 border-gray-300 pl-5 py-2 mb-8 transition-colors;
-        }
-        .action-block:focus-within {
-            @apply border-primary;
-        }
-        .action-block h4 {
-            @apply text-lg font-bold text-gray-800 mb-1;
-        }
-        .action-context {
-            @apply text-sm text-gray-600 mb-3 bg-gray-50 p-3 rounded-md border border-gray-100;
         }
         
         /* SLIDERS */
@@ -121,6 +107,20 @@
             margin-top: -8px; transition: transform 0.1s;
         }
         input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.1); }
+
+        /* ACTION BLOCKS */
+        .action-block {
+            @apply border-l-4 border-gray-300 pl-5 py-2 mb-8 transition-colors;
+        }
+        .action-block:focus-within {
+            @apply border-primary;
+        }
+        .action-block h4 {
+            @apply text-lg font-bold text-gray-800 mb-1;
+        }
+        .action-context {
+            @apply text-sm text-gray-600 mb-3 bg-gray-50 p-3 rounded-md border border-gray-100;
+        }
 
         /* VALIDATION STATES */
         .input-error { border-color: #e11d48 !important; background-color: #fff1f2; }
@@ -215,20 +215,20 @@
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 text-left">
-                                <div class="p-4 border rounded-lg hover:border-primary transition">
+                                <div class="bg-white p-4 border rounded-lg shadow-sm hover:border-primary transition">
                                     <div class="text-primary text-2xl mb-2">👥</div>
                                     <h3 class="font-bold text-gray-800 mb-1">People</h3>
-                                    <p class="text-xs text-gray-600">Upskill yourself.</p>
+                                    <p class="text-sm text-gray-600">Identify the skills and coaching you need to level up.</p>
                                 </div>
-                                <div class="p-4 border rounded-lg hover:border-primary transition">
+                                <div class="bg-white p-4 border rounded-lg shadow-sm hover:border-primary transition">
                                     <div class="text-primary text-2xl mb-2">📈</div>
                                     <h3 class="font-bold text-gray-800 mb-1">Pipeline</h3>
-                                    <p class="text-xs text-gray-600">Ensure coverage.</p>
+                                    <p class="text-sm text-gray-600">Calculate the exact coverage required to hit your number.</p>
                                 </div>
-                                <div class="p-4 border rounded-lg hover:border-primary transition">
+                                <div class="bg-white p-4 border rounded-lg shadow-sm hover:border-primary transition">
                                     <div class="text-primary text-2xl mb-2">⚡</div>
                                     <h3 class="font-bold text-gray-800 mb-1">Productivity</h3>
-                                    <p class="text-xs text-gray-600">Work smarter.</p>
+                                    <p class="text-sm text-gray-600">Commit to working smarter with the right tools.</p>
                                 </div>
                             </div>
 
@@ -265,8 +265,8 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label class="input-label">My Name</label>
-                                <input type="text" id="personName" class="input-field required" placeholder="Full Name">
-                                <p class="error-text" id="err-personName">Please enter your name.</p>
+                                <input type="text" id="personName" class="input-field required" placeholder="First and Last Name">
+                                <p class="error-text" id="err-personName">Required.</p>
                             </div>
                             <div>
                                 <label class="input-label">My Manager</label>
@@ -359,12 +359,12 @@
                     <div id="step-4" class="step-content hidden">
                         <div class="guide-box">
                             <h3>YOUR GUIDE: The Action Plan</h3>
-                            <p><strong>This is your plan of record for 2026.</strong></p>
-                            <p>Don't just check the box. The commitments you write below will define your weekly and quarterly rhythm. Be specific, be bold, and make them SMART (Specific, Measurable, Achievable, Relevant, Time-bound).</p>
+                            <p><strong>Part 1: The Math.</strong> Use the sliders below to model "What If" scenarios. See how small improvements (like 1-2%) drastically reduce the volume you need to chase.</p>
+                            <p><strong>Part 2: The Commitment.</strong> Then, define exactly <em>how</em> you will achieve those improvements using the frameworks from the Best Practice Sessions.</p>
                         </div>
 
                         <div class="mb-10 bg-gray-50 p-6 rounded-lg border border-gray-200">
-                            <h4 class="text-primary font-bold mb-6 uppercase text-xs tracking-wide">Part 1: Scenario Modeling (What If?)</h4>
+                            <h4 class="text-primary font-bold mb-6 uppercase text-xs tracking-wide">Scenario Modeling</h4>
                             
                             <div class="slider-group">
                                 <div class="flex justify-between text-sm font-bold text-gray-700 mb-1">
@@ -722,9 +722,7 @@ ${$('act-forecast').value}
         const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'plan.json'; a.click();
     };
 
-    // Init: Using simpler CSS tooltips (wrapper::after) which don't rely on updateLabels for data
-    // But we do need to update labels on first load
-    updateLabels(); 
+    updateLabels();
 </script>
 
 </body>
