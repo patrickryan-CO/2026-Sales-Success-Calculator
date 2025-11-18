@@ -43,7 +43,7 @@
             @apply bg-blue-50 border-l-4 border-primary text-primary-text p-4 mb-8 rounded-r-md text-sm leading-relaxed;
         }
 
-        /* ANIMATED TOOLTIPS (FIXED) */
+        /* ANIMATED TOOLTIPS */
         .tooltip-container {
             position: relative;
             display: inline-block;
@@ -71,7 +71,7 @@
             transform: translateX(-50%) translateY(5px);
             background-color: #1f2937; color: white;
             text-align: center; padding: 10px 14px;
-            border-radius: 6px; font-size: 0.8rem; font-weight: 500;
+            border-radius: 6px; font-size: 0.75rem; font-weight: 500;
             line-height: 1.4; white-space: normal; width: 220px;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             transition: all 0.2s ease-out;
@@ -183,7 +183,7 @@
         <div class="bg-white rounded-xl shadow-2xl min-h-[650px] flex flex-col relative">
             
             <div class="p-8 pb-0 text-center rounded-t-xl bg-white">
-                <h1 class="text-3xl font-extrabold text-primary mb-2">Trimble 2026 Success Plan</h1>
+                <h1 class="text-3xl font-extrabold text-primary-text mb-2">Trimble 2026 Success Plan</h1>
                 <p class="text-gray-500 font-medium">Own Your Number. Build Your Path.</p>
             </div>
 
@@ -424,7 +424,7 @@
                             <div>
                                 <label class="input-label">
                                     Action 1: People (Training & Coaching)
-                                    <div class="tooltip-container"><span class="tooltip-trigger">?</span><div class="tooltip-popup">What skill will you improve? (Reference your Team Selling best practice session). e.g., "Complete Negotiation Certification."</div></div>
+                                    <div class="tooltip-container"><span class="tooltip-trigger">?</span><div class="tooltip-popup">What skill will you improve? e.g., "Complete Negotiation Certification." (Reference Team Selling Best Practice Session)</div></div>
                                 </label>
                                 <input type="text" id="act-people" class="input-field required" placeholder="I will...">
                                 <p class="error-text">Please add a People action.</p>
@@ -433,7 +433,7 @@
                             <div>
                                 <label class="input-label">
                                     Action 2: Process (Pipeline & Quality)
-                                    <div class="tooltip-container"><span class="tooltip-trigger">?</span><div class="tooltip-popup">How will you improve deal quality? (Reference your Account Planning best practice session). e.g., "Disqualify bad deals earlier."</div></div>
+                                    <div class="tooltip-container"><span class="tooltip-trigger">?</span><div class="tooltip-popup">How will you improve deal quality? e.g., "Disqualify bad deals earlier." (Reference Account Planning Best Practice Session)</div></div>
                                 </label>
                                 <input type="text" id="act-process" class="input-field required" placeholder="I will...">
                                 <p class="error-text">Please add a Process action.</p>
@@ -746,6 +746,11 @@ ACTION PLAN
         } else {
             nextBtn.classList.remove('hidden');
             finalBtns.classList.add('hidden');
+        }
+
+        // Run updates for context
+        if (step === 1) {
+            updateLabels(); // Forces the labels/list to populate when visible
         }
 
         // Scroll to top
