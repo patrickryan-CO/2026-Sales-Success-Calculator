@@ -43,34 +43,35 @@
             @apply bg-blue-50 border-l-4 border-primary text-primary-text p-4 mb-8 rounded-r-md text-sm leading-relaxed;
         }
 
-        /* --- SIMPLE TOOLTIPS (FIXED) --- */
+        /* ANIMATED TOOLTIPS */
         .tooltip-container {
             position: relative;
             display: inline-block;
             margin-left: 8px;
             vertical-align: middle;
-            cursor: help;
+            z-index: 50;
         }
         
-        .tooltip-trigger-icon {
+        .tooltip-trigger {
             display: inline-flex; align-items: center; justify-content: center;
-            width: 18px; height: 18px;
-            background-color: #9ca3af; color: white; border-radius: 50%;
+            width: 20px; height: 20px;
+            background-color: #d1d5db; color: white; border-radius: 50%;
+            cursor: help; transition: background-color 0.2s;
             font-size: 12px; font-weight: bold;
-            transition: background-color 0.2s;
         }
         
-        .tooltip-trigger-icon:hover { background-color: #0063a3; }
+        .tooltip-trigger:hover {
+            background-color: #0063a3;
+        }
         
         .tooltip-popup {
             visibility: hidden; opacity: 0;
             position: absolute; bottom: 130%; left: 50%;
             transform: translateX(-50%) translateY(5px);
             background-color: #1f2937; color: white;
-            text-align: center; padding: 8px 12px;
-            border-radius: 6px; font-size: 0.75rem; font-weight: 500;
-            line-height: 1.4; white-space: normal; width: 200px;
-            z-index: 100;
+            text-align: center; padding: 10px 14px;
+            border-radius: 6px; font-size: 0.8rem; font-weight: 500;
+            line-height: 1.4; white-space: normal; width: 220px;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             transition: all 0.2s ease-out;
             pointer-events: none;
@@ -199,9 +200,10 @@
                         <div class="text-center max-w-3xl mx-auto space-y-8">
                             
                             <div class="prose max-w-none text-gray-600">
-                                <h2 class="text-2xl font-bold text-gray-800 mb-4">Your Plan. Your Year.</h2>
+                                <h2 class="text-2xl font-bold text-primary-text mb-4">Your Plan. Your Year.</h2>
                                 <p class="text-lg leading-relaxed">
-                                    This year is focused on <strong>Agency</strong>. Success is achieved by translating corporate goals into a personal roadmap you control. This tool is your guide to building that path.
+                                    Success isn't just about hitting a target; it's about having a clear path to get there. 
+                                    We built this tool to help you translate your 2026 goals into a personal roadmap you can own.
                                 </p>
                             </div>
 
@@ -230,7 +232,7 @@
                                         <strong>If you have a Sales Scorecard:</strong> Please verify you have access to your 2025 Quota, Bookings, and Win Rate.
                                     </p>
                                     <p>
-                                        <strong>If your role doesn't use a scorecard:</strong> Don't worry. This tool still helps you set objectives and build your action plan.
+                                        <strong>If your role doesn't use a scorecard:</strong> Don't worry. You can still use this tool to set objectives and build your action plan.
                                     </p>
                                 </div>
                             </div>
