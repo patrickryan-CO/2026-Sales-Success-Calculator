@@ -46,7 +46,10 @@
             @apply font-bold text-primary text-base mb-2 flex items-center;
         }
         .guide-box p {
-            @apply text-gray-700;
+            @apply text-gray-700 mb-2;
+        }
+        .guide-box p:last-child {
+            @apply mb-0;
         }
 
         /* ANIMATED TOOLTIPS */
@@ -60,10 +63,10 @@
         
         .tooltip-trigger {
             display: inline-flex; align-items: center; justify-content: center;
-            width: 18px; height: 18px;
-            background-color: #9ca3af; color: white; border-radius: 50%;
+            width: 20px; height: 20px;
+            background-color: #d1d5db; color: white; border-radius: 50%;
             cursor: help; transition: background-color 0.2s;
-            font-size: 11px; font-weight: bold;
+            font-size: 12px; font-weight: bold;
         }
         
         .tooltip-trigger:hover {
@@ -244,7 +247,7 @@
                             <div class="bg-gray-50 rounded-lg p-6 text-left border border-gray-200 mt-8">
                                 <h3 class="font-bold text-primary mb-2">What You'll Need:</h3>
                                 <p class="text-sm text-gray-600">
-                                    Please have your <strong>Sales Scorecard</strong> open (if you have one available for your role).
+                                    Please have your <strong>Sales Scorecard</strong> open (if you have one for your role).
                                 </p>
                             </div>
                         </div>
@@ -263,15 +266,6 @@
                                     <option value="SE">Sales Engineer (SE)</option>
                                     <option value="ECOMM">eCommerce</option>
                                 </select>
-                            </div>
-
-                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mt-8 text-left">
-                                <h3 class="text-md font-bold text-primary mb-2">Data You Will Need:</h3>
-                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1" id="dynamic-req-list">
-                                    <li>2025 Quota & Bookings</li>
-                                    <li>Win Rate %</li>
-                                    <li>Average Deal Size</li>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -336,7 +330,7 @@
 
                             <div>
                                 <label class="input-label">
-                                    <span id="lbl-dealSize25">Average Deal Size</span>
+                                    <span id="lbl-dealSize25">Avg Deal Size</span>
                                     <div class="tooltip-container"><span class="tooltip-trigger">?</span><div id="tip-dealSize25" class="tooltip-popup">...</div></div>
                                 </label>
                                 <input type="text" id="val-dealSize25" class="input-field required" placeholder="0">
@@ -409,8 +403,8 @@
                     <div id="step-4" class="step-content hidden">
                         <div class="guide-box">
                             <h3 class="mb-2">YOUR GUIDE: The Action Plan</h3>
-                            <p class="mb-2"><strong>Part 1: The Math.</strong> Use the sliders below to model "What If" scenarios. See how small improvements (like 1-2%) drastically reduce the volume you need.</p>
-                            <p><strong>Part 2: The Method.</strong> Then, check your notes from the <strong>Best Practice Sessions</strong> (Account Planning, Team Selling) and define exactly <em>how</em> you will achieve those improvements.</p>
+                            <p class="mb-3"><strong>Part 1: The Math.</strong> Use the sliders below to model "What If" scenarios. Notice how improving your metrics by even 1% can significantly reduce the volume you need to chase.</p>
+                            <p><strong>Part 2: The Method.</strong> Use the action fields below to commit to the *specific* behaviors (from your Best Practice Sessions) that will drive these improvements.</p>
                         </div>
 
                         <div class="mb-10 bg-gray-50 p-6 rounded-lg border border-gray-200">
@@ -421,7 +415,7 @@
                                     <span id="lbl-slider1">Improve Win Rate</span>
                                     <span id="val-slider1" class="text-primary">+0%</span>
                                 </div>
-                                <input type="range" id="slide-efficiency" min="0" max="15" value="0" step="1">
+                                <input type="range" id="slide-efficiency" min="0" max="50" value="0" step="1">
                             </div>
 
                             <div class="slider-group">
@@ -429,7 +423,7 @@
                                     <span id="lbl-slider2">Increase Deal Size</span>
                                     <span id="val-slider2" class="text-primary">+0%</span>
                                 </div>
-                                <input type="range" id="slide-value" min="0" max="25" value="0" step="1">
+                                <input type="range" id="slide-value" min="0" max="50" value="0" step="1">
                             </div>
                             
                             <div class="slider-group">
@@ -437,7 +431,7 @@
                                     <span id="lbl-slider3">Increase Activity Volume</span>
                                     <span id="val-slider3" class="text-primary">+0%</span>
                                 </div>
-                                <input type="range" id="slide-volume" min="0" max="50" value="0" step="5">
+                                <input type="range" id="slide-volume" min="0" max="100" value="0" step="5">
                             </div>
 
                             <div class="mt-6 pt-4 border-t border-gray-200 bg-white p-4 rounded-md shadow-sm border">
@@ -453,39 +447,34 @@
 
                         <div class="space-y-8">
                             <div>
-                                <label class="input-label">
-                                    Strategy 1: People
-                                    <div class="tooltip-container"><span class="tooltip-trigger">?</span><div class="tooltip-popup">How will you upskill yourself? e.g., "I will complete the Negotiation Certification by Q2."</div></div>
+                                <label class="input-label mb-2 block">
+                                    People & Skills: What specific competency or behavior do you need to improve to hit the higher rates you modeled above?
                                 </label>
-                                <input type="text" id="act-people" class="input-field required" placeholder="I will...">
+                                <input type="text" id="act-people" class="input-field required" placeholder="e.g., I will complete the Negotiation Certification to improve my deal size...">
                                 <p class="error-text" id="err-act-people">Please add a People action.</p>
                             </div>
 
                             <div>
-                                <label class="input-label">
-                                    Strategy 2: Pipeline & Process
-                                    <div class="tooltip-container"><span class="tooltip-trigger">?</span><div class="tooltip-popup">How will you improve deal quality? e.g., "I will disqualify bad deals earlier using the new rubric."</div></div>
+                                <label class="input-label mb-2 block">
+                                    Pipeline & Process: What process change will you make to ensure better deal quality?
                                 </label>
-                                <input type="text" id="act-process" class="input-field required" placeholder="I will...">
+                                <input type="text" id="act-process" class="input-field required" placeholder="e.g., I will disqualify bad deals earlier using the new rubric...">
                                 <p class="error-text" id="err-act-process">Please add a Process action.</p>
                             </div>
 
                             <div>
-                                <label class="input-label">
-                                    Strategy 3: Productivity
-                                    <div class="tooltip-container"><span class="tooltip-trigger">?</span><div class="tooltip-popup">How will you work smarter? e.g., "I will block 2 hours every Tuesday for prospecting."</div></div>
+                                <label class="input-label mb-2 block">
+                                    Productivity: How will you organize your time to ensure you hit your activity targets?
                                 </label>
-                                <input type="text" id="act-prod" class="input-field required" placeholder="I will...">
+                                <input type="text" id="act-prod" class="input-field required" placeholder="e.g., I will block 2 hours every Tuesday for prospecting...">
                                 <p class="error-text" id="err-act-prod">Please add a Productivity action.</p>
                             </div>
 
                             <div class="pt-6 border-t">
-                                <label class="input-label">
-                                    My Forecasting Commitment
-                                    <div class="tooltip-container"><span class="tooltip-trigger">?</span><div class="tooltip-popup">How will you ensure your forecast is accurate?</div></div>
+                                <label class="input-label mb-2 block">
+                                    Accuracy Commitment: How will you ensure your manager can trust your forecast every week?
                                 </label>
-                                <p class="text-xs text-gray-500 mb-2 italic">"My Rep Commit will be 95-105% accurate every quarter."</p>
-                                <input type="text" id="act-forecast" class="input-field required" placeholder="Key action to ensure accuracy...">
+                                <input type="text" id="act-forecast" class="input-field required" placeholder="e.g. My Rep Commit will be 95-105% accurate every quarter...">
                                 <p class="error-text" id="err-act-forecast">Please add your commitment.</p>
                             </div>
                         </div>
@@ -534,8 +523,7 @@
                 resA: 'Pipeline Needed', resB: 'Deals Needed',
                 sl1: 'Improve Win Rate', sl2: 'Increase Deal Size', sl3: 'Increase Meetings'
             },
-            isMoney: true,
-            docs: ["2025 Quota & Bookings", "Win Rate %", "Average Deal Size"]
+            isMoney: true
         },
         'SDR': {
             lbl: {
@@ -547,8 +535,7 @@
                 resA: 'Activity Needed', resB: 'Est. Pipeline',
                 sl1: 'Improve Conversion', sl2: 'Increase Opp Size', sl3: 'Increase Volume'
             },
-            isMoney: false,
-            docs: ["2025 Activity/Meeting Targets", "Conversion Rates", "2026 Target"]
+            isMoney: false
         },
         'SE': {
              lbl: {
@@ -560,8 +547,7 @@
                 resA: 'Coverage Needed', resB: 'Deals to Support',
                 sl1: 'Improve Tech Win', sl2: 'Increase Deal Size', sl3: 'Support More Deals'
             },
-            isMoney: true,
-            docs: ["2025 Supported Revenue", "Technical Win Rate", "2026 Revenue Target"]
+            isMoney: true
         },
         'ECOMM': {
              lbl: {
@@ -573,8 +559,7 @@
                 resA: 'Traffic Needed', resB: 'Transactions Needed',
                 sl1: 'Improve Conversion', sl2: 'Increase Order Value', sl3: 'Increase Traffic'
             },
-            isMoney: true,
-            docs: ["2025 Revenue & Actuals", "Site Conversion Rate", "Average Order Value"]
+            isMoney: true
         }
     };
 
@@ -606,17 +591,6 @@
         setTxt('lbl-slider1', d.sl1);
         setTxt('lbl-slider2', d.sl2);
         setTxt('lbl-slider3', d.sl3);
-
-        // Update List
-        const docList = $('dynamic-req-list');
-        if(docList) {
-            docList.innerHTML = '';
-            ROLE_DATA[r].docs.forEach(doc => {
-                const li = document.createElement('li');
-                li.textContent = doc;
-                docList.appendChild(li);
-            });
-        }
     }
 
     function doMath() {
@@ -651,11 +625,10 @@
         // Calc A: "Volume Needed" = Target / New Efficiency
         let valA = newEff > 0 ? q26 / newEff : 0;
         
-        // Apply Volume Slider (reduces need? No, increases capacity? 
-        // Actually, for simplicity: Volume slider usually implies "I will do X% more activity".
-        // So, let's say the Volume slider REDUCES the calculated gap purely for modeling "Effort".
-        // Or better: Shows impact. Let's keep it simple:
-        // The 'New Volume Required' display is meant to show how Efficiency lowers the bar.
+        // Apply Volume Slider logic: 
+        // Increasing volume reduces the "Requirement" gap in user's mind, 
+        // but strictly math-wise, volume is an output.
+        // For this tool: We show the required volume assuming the EFFICIENCY gains.
         
         setTxt('calc-new-volume', fmtN(valA, conf.isMoney));
 
@@ -716,7 +689,7 @@ BASELINE (2025)
 
 2026 GOALS
 - New Target: ${$('val-quota26').value}
-- Required Volume: ${$('calc-resultA').textContent}
+- Gap Volume: ${$('calc-resultA').textContent}
 - Modeled Volume (With Improvements): ${$('calc-new-volume').textContent}
 - Reflection: ${document.querySelector('input[name="reflection"]:checked')?.value}
 
