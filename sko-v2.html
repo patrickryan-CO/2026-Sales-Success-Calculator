@@ -1,656 +1,621 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trimble 2026 Success Plan</title>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'primary': '#0063a3',      // Trimble primary blue
-                        'accent': '#fbad26',       // Trimble accent orange/amber
-                        'success': '#02542e',      // Trimble Green
-                        'primary-text': '#252a2e', // Trimble primary dark text
-                        'system-bg': '#f3f6f9',    // Light background
-                    },
-                    fontFamily: {
-                        'sans': ['Open Sans', 'sans-serif'] // Set default font
-                    }
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    'primary': '#0063a3',      // Trimble primary blue
+                    'accent': '#fbad26',       // Trimble accent orange/amber
+                    'primary-text': '#252a2e', // Trimble primary dark text
+                },
+                fontFamily: {
+                    'sans': ['Open Sans', 'sans-serif'] // Set default font
                 }
             }
         }
-    </script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    }
+</script>
 
-    <style>
-        /* Base Styles */
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    /* Set base font and text color */
+    body {
+        font-family: 'Open Sans', sans-serif;
+        color: #252a2e; /* primary-text */
+    }
+    
+    /* NEW Instruction Box Style */
+    .instruction-box {
+        @apply bg-accent/10 border-l-4 border-accent text-primary-text p-4 mb-8 rounded-md text-sm;
+    }
+    .instruction-box strong {
+        color: #0063a3;
+    }
+
+    /* --- Tooltip Icon (the 'i') --- */
+    .tooltip-trigger {
+        position: relative;
+        display: inline-block;
+        width: 1rem;            /* 16px */
+        height: 1rem;           /* 16px */
+        line-height: 1rem;      /* Center text vertically */
+        margin-left: 0.25rem;   /* 4px space */
+        
+        background-color: #D1D5DB; /* gray-300 */
+        color: #ffffff;
+        font-weight: 700;
+        font-style: italic;
+        font-family: 'Georgia', serif; /* A classic 'i' */
+        font-size: 0.8rem;
+        text-align: center;
+        border-radius: 50%;     /* Make it a circle */
+        cursor: help;
+        
+        /* Prevents text selection on click */
+        user-select: none;
+        -webkit-user-select: none;
+    }
+    
+    /* --- Tooltip Pop-up (Attached to the icon) --- */
+    .tooltip-trigger::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: 125%; /* Position above the icon */
+        left: 50%;
+        transform: translateX(-50%);
+        
+        background-color: #252a2e; /* primary-text */
+        color: #FFFFFF;
+        font-family: 'Open Sans', sans-serif; /* Use correct font */
+        font-style: normal;
+        font-size: 0.875rem; /* 14px */
+        font-weight: 500;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.375rem; /* rounded-md */
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        
+        opacity: 0; /* Hidden by default */
+        visibility: hidden;
+        transition: opacity 0.2s, visibility 0.2s;
+        width: 250px; /* Set a good width */
+        z-index: 10;
+        
+        pointer-events: none; /* Don't let the tooltip block clicks */
+    }
+    
+    .tooltip-trigger:hover::after {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Custom styles for number inputs (hide arrows) */
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    /* --- Re-defined Utility Classes (Branded) --- */
+    .input-label {
+        display: block;
+        font-size: 0.875rem; /* 14px */
+        font-weight: 600; /* Bolder for clarity */
+        color: #252a2e; /* primary-text */
+        margin-bottom: 0.25rem; /* mb-1 */
+    }
+    
+    .input-field {
+        display: block;
+        width: 100%;
+        border-radius: 0.375rem; /* rounded-md */
+        border: 1px solid #D1D5DB; /* border-gray-300 */
+        padding: 0.5rem 0.75rem; /* py-2 px-3 */
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+        color: #252a2e; /* primary-text */
+        font-family: 'Open Sans', sans-serif; /* Ensure font */
+    }
+    .input-field:focus {
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+        border-color: #0063a3; /* focus:border-primary */
+        box-shadow: 0 0 0 2px rgba(0, 99, 163, 0.3); /* focus:ring-primary/30 */
+    }
+    
+    .calc-box {
+        background-color: #F9FAFB; /* bg-gray-50 */
+        border: 1px solid #E5E7EB; /* border-gray-200 */
+        border-radius: 0.5rem; /* rounded-lg */
+        padding: 1rem; /* p-4 */
+    }
+    
+    .calc-output {
+        display: block;
+        font-size: 1.875rem; /* text-3xl */
+        font-weight: 700;
+        color: #0063a3; /* text-primary */
+        margin-top: 0.25rem; /* mt-1 */
+    }
+
+    .step-heading {
+        font-size: 1.5rem; /* text-2xl */
+        font-weight: 700;
+        color: #0063a3; /* text-primary */
+        margin-bottom: 1.5rem; /* mb-6 */
+        padding-bottom: 0.5rem; /* pb-2 */
+        border-bottom: 1px solid #E5E7EB; /* border-b border-gray-200 */
+    }
+    
+    .step-heading:focus, #main-heading:focus {
+        outline: none;
+    }
+    
+    .progress-step {
+        flex: 1;
+        padding: 0.5rem; /* py-2 */
+        text-align: center;
+        font-size: 0.875rem; /* text-sm */
+        font-weight: 600;
+        color: #4B5563; /* text-gray-600 */
+        border-bottom: 4px solid transparent;
+    }
+    
+    .progress-step-active {
+        color: #0063a3; /* text-primary */
+        border-bottom-color: #0063a3; /* border-primary */
+    }
+    
+    /* --- Branded Navigation Buttons --- */
+    .nav-button {
+        display: inline-block;
+        padding: 0.625rem 1.25rem; /* py-2.5 px-5 */
+        border-radius: 0.375rem; /* rounded-md */
+        font-size: 0.875rem; /* text-sm */
+        font-weight: 600;
+        text-align: center;
+        border: 1px solid transparent;
+        transition: all 0.2s;
+        cursor: pointer;
+    }
+    
+    .nav-button-primary {
+        background-color: #0063a3; /* bg-primary */
+        color: #FFFFFF;
+    }
+    .nav-button-primary:hover {
+        background-color: #004a7c; /* Darker shade of primary */
+    }
+    
+    /* Used for the final "Save" button */
+    .nav-button-accent {
+        background-color: #fbad26; /* bg-accent */
+        color: #252a2e; /* primary-text */
+    }
+    .nav-button-accent:hover {
+        background-color: #e19a16; /* Darker shade of accent */
+    }
+
+    .nav-button-secondary {
+        background-color: #FFFFFF;
+        color: #B91C1C; /* text-red-700 for "Start Over" */
+        border-color: #D1D5DB;
+    }
+    .nav-button-secondary:hover {
+        background-color: #F9FAFB;
+    }
+    
+    .nav-button-default {
+        background-color: #E5E7EB;
+        color: #252a2e; /* primary-text */
+    }
+    .nav-button-default:hover {
+        background-color: #D1D5DB;
+    }
+
+    /* --- Branded Slider Styles --- */
+    input[type=range] {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 8px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    input[type=range]:hover {
+        opacity: 1;
+    }
+    input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #0063a3; /* BRANDED: primary */
+        cursor: pointer;
+        box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
+    input[type=range]::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #0063a3; /* BRANDED: primary */
+        cursor: pointer;
+        border: none;
+        box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
+
+    /* Print styles */
+    @media print {
         body {
+            background-color: white !important;
+            font-family: 'Open Sans', sans-serif !important;
+            color: #252a2e !important;
+        }
+        .max-w-4xl {
+            box-shadow: none !important; margin: 0 !important; padding: 0 !important; width: 100% !important; max-width: 100% !important;
+        }
+        .step-panel, .hidden {
+            display: block !important; visibility: visible !important;
+        }
+        input, select, textarea {
+            border: 1px solid #ccc !important;
+        }
+        #navigation-buttons, #progress-bar-container, #header-logo, .tooltip-trigger {
+            display: none !important; /* Hide tooltip icons in print */
+        }
+        .step-heading {
+            margin-top: 2rem; page-break-before: auto; page-break-inside: avoid;
+        }
+        
+        /* Show tooltip content in print */
+        .tooltip-trigger::after {
+            content: " (" attr(data-tooltip) ")";
+            position: static;
+            transform: none;
+            background-color: transparent;
+            color: #4B5563; /* gray-600 */
             font-family: 'Open Sans', sans-serif;
-            color: #252a2e;
-            background-color: #f3f6f9;
-        }
-        
-        /* Wizard Container */
-        .wizard-container {
-            max-width: 100%;
-            margin-left: 0.5rem;
-            margin-right: 0.5rem;
-            padding: 1rem;
-            background-color: #ffffff;
-            border-radius: 0.5rem;
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); 
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 10;
-        }
-        @media (min-width: 768px) {
-            .wizard-container {
-                max-width: 48rem;
-                margin-left: auto;
-                margin-right: auto;
-                padding: 2.5rem;
-                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-                margin-top: 3rem;
-                margin-bottom: 3rem;
-            }
-        }
-
-        /* SVG Header Wrapper */
-        .header-graphic-wrapper {
-            background-color: #0063a3;
-            width: 100%;
-            height: 150px;
-            z-index: 1;
-            overflow: hidden;
-            position: relative;
-        }
-        .header-graphic-wrapper svg {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-        }
-        
-        /* Progress Bar (4 Segments) */
-        .progress-bar {
-            display: flex;
-            width: 100%;
-            background-color: #e5e7eb;
-            border-radius: 0.5rem;
-            overflow: hidden;
-            margin-bottom: 2rem;
-        }
-        .progress-segment {
-            flex: 1;
-            padding: 0.75rem 0.5rem;
-            text-align: center;
+            font-style: normal;
             font-size: 0.8rem;
-            font-weight: 700;
-            color: #4b5563;
-            border-right: 2px solid #ffffff;
-            transition: all 0.3s ease;
-        }
-        .progress-segment:last-child {
-            border-right: none;
-        }
-        .progress-segment.active {
-            color: #ffffff;
-        }
-        .progress-segment.complete {
-            color: #ffffff;
-            opacity: 0.7;
-            cursor: pointer;
-        }
-        .progress-segment.complete:hover {
-             opacity: 1.0;
-        }
-        #progress-1.active, #progress-1.complete { background-color: #0063a3; } /* BASELINE */
-        #progress-2.active, #progress-2.complete { background-color: #fbad26; } /* THE GAP */
-        #progress-3.active, #progress-3.complete { background-color: #02542e; } /* SOLUTION */
-        #progress-4.active, #progress-4.complete { background-color: #252a2e; } /* REVIEW */
-
-
-        /* Conversation Bubble */
-        .conversation-bubble {
-            background-color: #f3f6f9;
-            border: 1px solid #e5e7eb;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            line-height: 1.5;
-            border-left-width: 4px;
-            border-left-color: #e5e7eb;
-        }
-        /* Phase-specific bubble colors */
-        .phase-1-bubble { border-left-color: #0063a3; }
-        .phase-2-bubble { border-left-color: #fbad26; }
-        .phase-3-bubble { border-left-color: #02542e; }
-        .phase-4-bubble { border-left-color: #252a2e; }
-
-        @media (min-width: 768px) {
-            .conversation-bubble {
-                padding: 1.5rem;
-                font-size: 1.05rem;
-                line-height: 1.6;
-                margin-bottom: 2rem;
-            }
-        }
-        .conversation-bubble strong {
-            color: #0063a3;
-            font-weight: 700;
-        }
-        
-        .conversation-bubble h3 {
-            display: flex;
-            align-items: center;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #252a2e;
-        }
-        .conversation-bubble h3 svg {
-            width: 1.5rem; /* 24px */
-            height: 1.5rem; /* 24px */
-            margin-right: 0.75rem; /* 12px */
-            flex-shrink: 0;
-        }
-        
-        .prompt-why {
-            margin-top: 0.75rem;
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-        .prompt-example {
-            font-size: 0.9rem;
-            font-style: italic;
-            color: #4B5563;
-            margin-top: 0.75rem;
-            padding: 0.5rem 1rem;
-            border-left: 3px solid #fbad26;
-            background-color: #fcfcfc;
-        }
-        
-        /* UPDATED Splash Callout Box */
-        .splash-callout {
-            background-color: rgba(0, 99, 163, 0.1); /* bg-primary/10 */
-            color: #252a2e; /* primary-text */
-            border: 1px solid #0063a3; /* 1pt primary border */
-            padding: 1rem;
-            border-radius: 0.5rem;
-            margin-top: 1.5rem;
-        }
-        .splash-callout strong {
-            color: #0063a3 !important; /* primary */
-            font-weight: 700;
-        }
-        .splash-callout ul {
-            list-style-type: disc;
-            list-style-position: inside;
-            margin-left: 0.5rem;
-            margin-top: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-
-        /* Phase Welcome Card */
-        .phase-welcome-card {
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #e5e7eb;
-            border-radius: 0.5rem;
-            overflow: hidden;
-        }
-        .phase-icon-bg {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem 1rem;
-        }
-        .phase-text-content {
-            padding: 1rem;
-        }
-        @media (min-width: 768px) {
-            .phase-welcome-card {
-                flex-direction: row;
-            }
-            .phase-icon-bg {
-                padding: 2rem;
-                width: 33.33%;
-            }
-            .phase-text-content {
-                padding: 2rem;
-                width: 66.67%;
-            }
-        }
-        .phase-welcome-card h3 {
-            font-size: 1.5rem;
-            font-weight: 800;
-        }
-        .phase-welcome-card p {
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-top: 0.75rem;
-        }
-
-        /* Input Styling */
-        .input-label {
-            display: block;
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: #252a2e;
-            margin-bottom: 0.25rem;
-        }
-        .input-field {
-            display: block;
-            width: 100%;
-            border-radius: 0.375rem;
-            border: 1px solid #D1D5DB;
-            padding: 0.5rem 0.75rem;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            color: #252a2e;
-            font-family: 'Open Sans', sans-serif;
-            font-size: 1rem;
-        }
-        .input-field:focus {
-            outline: 2px solid transparent;
-            outline-offset: 2px;
-            border-color: #0063a3;
-            box-shadow: 0 0 0 2px rgba(0, 99, 163, 0.3);
-        }
-        .input-field.error {
-            border-color: #B91C1C;
-            box-shadow: 0 0 0 2px rgba(185, 28, 28, 0.3);
-        }
-        .error-message {
-            color: #B91C1C;
-            font-size: 0.75rem;
-            margin-top: 0.25rem;
-        }
-        
-        /* Calculation & Results Boxes */
-        .calc-box {
-            background-color: #ffffff;
-            border: 1px solid #E5E7EB;
-            border-radius: 0.5rem;
-            padding: 0.75rem;
-        }
-        .calc-output {
-            display: block;
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: #0063a3;
-            margin-top: 0.25rem;
-        }
-        @media (min-width: 768px) {
-            .calc-output {
-                font-size: 1.875rem;
-            }
-        }
-        
-        /* Slider Styles */
-        input[type=range] {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 8px;
-            border-radius: 5px;
-            background: #d3d3d3;
-            outline: none;
-            opacity: 0.9;
-            transition: opacity .2s;
-            margin-top: 1rem;
-            margin-bottom: 0.5rem;
-        }
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #0063a3;
-            cursor: pointer;
-            box-shadow: 0 0 5px rgba(0,0,0,0.2);
-        }
-        
-        /* Hide number input arrows */
-        input[type=number]::-webkit-inner-spin-button,
-        input[type=number]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
+            font-weight: 400;
+            padding: 0;
             margin: 0;
+            margin-left: 2px;
+            box-shadow: none;
+            opacity: 1;
+            visibility: visible;
+            width: auto;
+            display: inline;
         }
-        input[type=number] {
-            -moz-appearance: textfield;
-        }
-        
-        /* Navigation Buttons */
-        .nav-button-group {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            justify-content: flex-end;
-        }
-        
-        .nav-button {
-            display: inline-block;
-            padding: 0.625rem 1.25rem;
-            border-radius: 0.375rem;
-            font-size: 0.875rem;
-            font-weight: 600;
-            text-align: center;
-            border: 1px solid transparent;
-            transition: all 0.2s;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-        .nav-button-primary {
-            background-color: #0063a3;
-            color: #FFFFFF;
-        }
-        .nav-button-primary:hover {
-            background-color: #004a7c;
-        }
-        .nav-button-primary:disabled {
-            background-color: #D1D5DB;
-            cursor: not-allowed;
-        }
-        .nav-button-default {
-            background-color: #E5E7EB;
-            color: #252a2e;
-        }
-        .nav-button-default:hover {
-            background-color: #D1D5DB;
-        }
-        
-        /* Print styles */
-        @media print {
-            body { background-color: white !important; color: #252a2e !important; }
-            .wizard-container { box-shadow: none !important; margin: 0 !important; padding: 0 !important; width: 100% !important; max-width: 100% !important; }
-            #navigation-buttons, .progress-bar, .conversation-bubble, .error-message, .tooltip-trigger, .header-graphic-wrapper { display: none !important; }
-            .step-heading { margin-top: 2rem; page-break-before: auto; page-break-inside: avoid; }
-            .form-group, .hidden-step-content { display: block !important; visibility: visible !important; }
-            input, select, textarea { border: 1px solid #ccc !important; }
-            #form-fields > div { display: block !important; }
-            .calc-output { color: #000 !important; }
-        }
-    </style>
-</head>
+    }
+</style>
 
-<body class="bg-system-bg">
-
-    <div class="header-graphic-wrapper">
-        <svg viewbox="0 0 100 100" preserveAspectRatio="none">
-            <path d="M0,100 C40,50 60,50 100,100 L100,100 L0,100 Z" fill="#f3f6f9" />
-        </svg>
-    </div>
-
-    <div class="wizard-container" style="margin-top: -80px;"> <header class="mb-6 text-center space-y-2">
-            <h1 id="main-heading" class="text-2xl md:text-3xl font-bold text-primary">The Trimble 2026 Success Plan</h1>
-            <p class="text-base md:text-lg font-semibold text-primary-text">Personal Commitment Plan</p>
+<div class="bg-gray-100" style="font-family: 'Open Sans', sans-serif;">
+    <div class="max-w-4xl mx-auto p-6 md:p-10 bg-white rounded-lg shadow-2xl my-12">
+        <header class="mb-10 text-center space-y-4">
+            <h1 id="main-heading" tabindex="-1" class="text-4xl font-bold text-primary">The Trimble 2026 Success Plan</h1>
+            <p class="text-xl font-bold text-primary">Personal Success Plan for 2026 (My Commitment)</p>
+            <p class="text-lg text-primary-text italic mt-2">PEOPLE, PIPELINE & PRODUCTIVITY</p>
         </header>
 
-        <div class="progress-bar" id="progress-bar-container">
-            <div id="progress-1" class="progress-segment" data-phase="1">BASELINE</div>
-            <div id="progress-2" class="progress-segment" data-phase="2">THE GAP</div>
-            <div id="progress-3" class="progress-segment" data-phase="3">SOLUTION</div>
-            <div id="progress-4" class="progress-segment" data-phase="4">REVIEW</div>
+        <div id="progress-bar-container" class="mb-8 border-b-2 border-gray-200">
+            <div class="flex gap-x-2">
+                <div id="progress-1" class="progress-step progress-step-active">Step 1 : Look Back</div>
+                <div id="progress-2" class="progress-step">Step 2 : The Formula</div>
+                <div id="progress-3" class="progress-step">Step 3 : Scenarios</div>
+                <div id="progress-4" class="progress-step">Step 4 : Action Plan</div>
+                <div id="progress-5" class="progress-step">Step 5 : Commitment</div>
+            </div>
         </div>
 
         <form id="skoForm" onsubmit="return false;">
 
-            <div id="conversation-bubble" class="conversation-bubble">
-                </div>
-            
-            <div id="hidden-step-content" style="display: none;">
-                <input type="number" id="meetingsImpliedWinRate" value="0">
-            </div>
-
-            <div id="form-fields" class="space-y-6">
-
-                <div class="form-group" id="group-intro"></div>
-                
-                <div class="form-group" id="group-phase1-welcome"></div>
-
-                <div class="form-group" id="group-personName">
-                    <label for="personName" class="input-label">My Full Name:</label>
-                    <input type="text" id="personName" class="input-field required-field" placeholder="e.g., Jane Doe">
-                    <span id="error-personName" class="error-message hidden">Your name is required.</span>
-                </div>
-
-                <div class="form-group" id="group-managerName">
-                    <label for="managerName" class="input-label">My Manager's Name:</label>
-                    <input type="text" id="managerName" class="input-field required-field" placeholder="e.g., John Smith">
-                    <span id="error-managerName" class="error-message hidden">Your manager's name is required.</span>
-                </div>
-
-                <div class="form-group" id="group-region">
-                    <label for="region" class="input-label">My Region:</label>
-                    <select id="region" class="input-field required-field">
-                        <option value="" disabled selected>Select your region</option>
-                        <option value="NA">NA (North America)</option>
-                        <option value="EMEA">EMEA</option>
-                        <option value="APAC">APAC</option>
-                    </select>
-                    <span id="error-region" class="error-message hidden">Region selection is required.</span>
-                </div>
-
-                <div class="form-group" id="group-quota2025">
-                    <label for="quota2025" class="input-label">My 2025 Quota:</label>
-                    <input type="text" id="quota2025" class="input-field required-field numeric-field" placeholder="e.g., 1000000">
-                    <span id="error-quota2025" class="error-message hidden">Valid quota amount is required.</span>
-                </div>
-                
-                <div class="form-group" id="group-bookings2025">
-                    <label for="bookings2025" class="input-label">My 2025 Bookings:</label>
-                    <input type="text" id="bookings2025" class="input-field required-field numeric-field" placeholder="e.g., 1100000">
-                    <span id="error-bookings2025" class="error-message hidden">Valid bookings amount is required.</span>
-                    <div class="calc-box mt-4">
-                        <span class="text-sm font-medium text-gray-700">Calculated 2025 Attainment:</span>
-                        <span id="attainment2025" class="calc-output">0%</span>
-                    </div>
-                </div>
-                
-                <div class="form-group" id="group-winRate2025">
-                    <label for="winRate2025" class="input-label">My 2025 Baseline Win Rate %:</label>
-                    <div class="relative">
-                        <span class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">%</span>
-                        <input type="number" id="winRate2025" class="input-field required-field numeric-field" placeholder="e.g., 25">
-                    </div>
-                    <span id="error-winRate2025" class="error-message hidden">Valid win rate is required (0-100).</span>
-                </div>
-
-                <div class="form-group" id="group-avgDealSize2025">
-                    <label for="avgDealSize2025" class="input-label">My 2025 Avg. Deal Size:</label>
-                    <input type="text" id="avgDealSize2025" class="input-field required-field numeric-field" placeholder="e.g., 50000">
-                    <span id="error-avgDealSize2025" class="error-message hidden">Valid average deal size is required.</span>
-                </div>
-                
-                <div class="form-group" id="group-avgMeetings2025">
-                    <label for="avgMeetings2025" class="input-label">My 2025 Avg. Quarterly In-Person Meetings:</label>
-                    <input type="number" id="avgMeetings2025" class="input-field required-field numeric-field" placeholder="e.g., 15">
-                    <span id="error-avgMeetings2025" class="error-message hidden">Average meetings number is required.</span>
-                </div>
-                
-                <div class="form-group" id="group-phase2-welcome"></div>
-
-                <div class="form-group" id="group-quota2026">
-                    <label for="quota2026" class="input-label">My 2026 Quota Commitment:</label>
-                    <input type="text" id="quota2026" class="input-field required-field numeric-field" placeholder="e.g., 1200000">
-                    <span id="error-quota2026" class="error-message hidden">2026 Quota is required.</span>
+            <div id="step-1-content" class="step-panel">
+                <section>
+                    <h2 class="step-heading" tabindex="-1">Step 1 : My Look Back 2025</h2>
                     
-                    <div class="calc-box mt-6">
-                        <span class="text-sm font-medium text-gray-700">Required Pipeline at 2025 efficiency:</span>
-                        <span id="pipelineToClose2026" class="calc-output">0</span>
-                        <span class="text-xs text-gray-500">Based on Quota / 2025 Win Rate</span>
+                    <div class="instruction-box">
+                        <strong>INSTRUCTION:</strong> Enter your historical 2025 data and contact details. This establishes your personal baseline efficiency (Attainment, Win Rate, and Avg. Deal Size).
                     </div>
-                    <div class="calc-box mt-4">
-                        <span class="text-sm font-medium text-gray-700">Required Deals at 2025 efficiency:</span>
-                        <span id="dealsToClose2026" class="calc-output">0</span>
-                        <span class="text-xs text-gray-500">Based on Required Pipeline / 2025 Avg. Deal Size</span>
-                    </div>
-                </div>
 
-                <div class="form-group" id="group-reflection">
-                    <label class="input-label">My Reflection:</label>
-                    <div class="flex flex-wrap gap-x-6 gap-y-2 mt-2">
-                        <div class="flex items-center">
-                            <input id="reflect-1" name="reflection" type="radio" value="Achievable" class="focus:ring-primary h-4 w-4 text-primary border-gray-300 required-radio">
-                            <label for="reflect-1" class="ml-2 block text-sm text-primary-text">Achievable</label>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                        <div>
+                            <label for="personName" class="input-label">My Name: <span class="tooltip-trigger" data-tooltip="Please enter your full name.">i</span></label>
+                            <input type="text" id="personName" class="input-field" placeholder="e.g., Jane Doe">
                         </div>
-                        <div class="flex items-center">
-                            <input id="reflect-2" name="reflection" type="radio" value="Challenging" class="focus:ring-primary h-4 w-4 text-primary border-gray-300 required-radio">
-                            <label for="reflect-2" class="ml-2 block text-sm text-primary-text">Challenging</label>
+                        <div>
+                            <label for="managerName" class="input-label">My Manager's Name: <span class="tooltip-trigger" data-tooltip="Enter your direct manager's full name.">i</span></label>
+                            <input type="text" id="managerName" class="input-field" placeholder="e.g., John Smith">
                         </div>
-                        <div class="flex items-center">
-                            <input id="reflect-3" name="reflection" type="radio" value="Impossible" class="focus:ring-primary h-4 w-4 text-primary border-gray-300 required-radio">
-                            <label for="reflect-3" class="ml-2 block text-sm text-primary-text">Impossible</label>
+                        <div class="md:col-span-2">
+                            <label for="region" class="input-label">My Region: <span class="tooltip-trigger" data-tooltip="Select the primary region you operate in.">i</span></label>
+                            <select id="region" class="input-field">
+                                <option value="" disabled selected>Select your region</option>
+                                <option value="NA">NA (North America)</option>
+                                <option value="EMEA">EMEA</option>
+                                <option value="APAC">APAC</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="quota2025" class="input-label">2025 Quota: <span class="tooltip-trigger" data-tooltip="Your total annual quota assigned for 2025.">i</span></label>
+                            <div class="relative">
+                                <input type="text" id="quota2025" class="input-field" placeholder="e.g., 1,000,000">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="bookings2025" class="input-label">2025 Bookings: <span class="tooltip-trigger" data-tooltip="Your total bookings (closed-won deals) in 2025.">i</span></label>
+                            <div class="relative">
+                                <input type="text" id="bookings2025" class="input-field" placeholder="e.g., 1,100,000">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="winRate2025" class="input-label">My 2025 Win Rate: <span class="tooltip-trigger" data-tooltip="Your historical win rate. (Closed-Won Deals / (Closed-Won + Closed-Lost Deals))">i</span></label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">%</span>
+                                <input type="number" id="winRate2025" class="input-field pr-7" placeholder="e.g., 25">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="avgDealSize2025" class="input-label">My 2025 Avg. Deal Size: <span class="tooltip-trigger" data-tooltip="The average value of your closed-won deals in 2025.">i</span></label>
+                            <div class="relative">
+                                <input type="text" id="avgDealSize2025" class="input-field" placeholder="e.g., 50,000">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="avgMeetings2025" class="input-label">My 2025 Avg. In-Person Meetings (Quarterly): <span class="tooltip-trigger" data-tooltip="On average, how many *in-person* customer meetings did you conduct each quarter?">i</span></label>
+                            <input type="number" id="avgMeetings2025" class="input-field" placeholder="e.g., 15">
+                        </div>
+                        <div class="calc-box md:col-span-1 flex flex-col justify-center">
+                            <span class="text-sm font-medium text-gray-700">2025 Attainment:</span>
+                            <span id="attainment2025" class="calc-output">0%</span>
+                            <span class="text-xs text-gray-500">(Bookings / Quota)</span>
                         </div>
                     </div>
-                    <span id="error-reflection" class="error-message hidden">Please select an assessment of the goal.</span>
-                </div>
-                
-                <div class="form-group" id="group-phase3-welcome"></div>
+                </section>
+            </div>
 
-                <div class="form-group" id="group-winRateImprovement">
-                    <div class="space-y-4 p-4 md:p-6 rounded-lg bg-primary/10 border border-primary/20">
-                        <h3 class="text-xl font-semibold text-primary">Scenario 1: Improve Win Rate (Quality)</h3>
-                        <label for="winRateImprovement" class="block text-sm font-medium text-primary-text">
-                            Commit to improving Win Rate by: <span id="winRateImprovementLabel" class="font-bold text-primary">5.0%</span>
-                            <br>(New Target Win Rate: <span id="newWinRateLabel" class="font-bold">0%</span>)
-                        </label>
-                        <input type="range" id="winRateImprovement" min="0" max="25" value="5" step="0.5" class="w-full">
+            <div id="step-2-content" class="step-panel hidden">
+                <section>
+                    <h2 class="step-heading" tabindex="-1">Step 2 : The Formula</h2>
+                    
+                    <div class="instruction-box">
+                        <strong>INSTRUCTION:</strong> Enter your 2026 quota. The tool will use your 2025 efficiency numbers to calculate the pipeline and number of deals required to hit your 2026 target.
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                        <div>
+                            <label for="quota2026" class="input-label">My 2026 Quota: <span class="text-red-600 font-bold">(A)</span> <span class="tooltip-trigger" data-tooltip="Your new, assigned quota for 2026. This drives the whole plan.">i</span></label>
+                            <div class="relative">
+                                <input type="text" id="quota2026" class="input-field" placeholder="e.g., 1,200,000">
+                            </div>
+                        </div>
+                        <div class="md:col-span-1">
+                            <p class="text-sm text-gray-600 mt-6">If my 2025 efficiency stays the same...</p>
+                        </div>
+                        <div class="calc-box">
+                            <span class="text-sm font-medium text-gray-700">Total Pipeline I Must Close: <span class="font-bold">(B)</span></span>
+                            <span id="pipelineToClose2026" class="calc-output">0</span>
+                            <span class="text-xs text-gray-500">(A) / (My 2025 Win Rate)</span>
+                        </div>
+                        <div class="calc-box">
+                            <span class="text-sm font-medium text-gray-700">Total Deals I Must Close: <span class="font-bold">(C)</span></span>
+                            <span id="dealsToClose2026" class="calc-output">0</span>
+                            <span class="text-xs text-gray-500">(B) / (My 2025 Avg. Deal Size)</span>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <label class="input-label">My Reflection (Based on the numbers above, does your goal feel achievable?):</label>
+                        <div class="flex flex-wrap gap-x-6 gap-y-2 mt-2">
+                            <div class="flex items-center">
+                                <input id="reflect-1" name="reflection" type="radio" value="Achievable" class="focus:ring-primary h-4 w-4 text-primary border-gray-300">
+                                <label for="reflect-1" class="ml-2 block text-sm text-primary-text">"Based on this, my 2026 goal feels <strong>achievable</strong>."</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="reflect-2" name="reflection" type="radio" value="Challenging" class="focus:ring-primary h-4 w-4 text-primary border-gray-300">
+                                <label for="reflect-2" class="ml-2 block text-sm text-primary-text">"Based on this, my 2026 goal feels <strong>challenging</strong>."</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="reflect-3" name="reflection" type="radio" value="Impossible" class="focus:ring-primary h-4 w-4 text-primary border-gray-300">
+                                <label for="reflect-3" class="ml-2 block text-sm text-primary-text">"Based on this, my 2026 goal feels <strong>impossible</strong>."</label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="step-3-content" class="step-panel hidden">
+                <section>
+                    <h2 class="step-heading" tabindex="-1">Step 3 : Scenarios</h2>
+                    
+                    <div class="instruction-box">
+                        <strong>INSTRUCTION:</strong> Use the sliders to model efficiency gains. See which improvement (**Lever**) makes your quota goal the most achievable based on the reduced pipeline needed. **You must choose one or more to proceed.**
+                    </div>
+
+                    <hr class="my-4 border-gray-200">
+                    <p class="text-primary-text/80 mb-6">Model different scenarios by improving one or more levers.</p>
+                    
+                    <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+                                
+                        <div class="space-y-4 p-6 rounded-lg bg-primary/10 border border-primary/20">
+                            <h3 class="text-xl font-semibold text-primary">Lever 1: Improve Win Rate (Quality)</h3>
+                            <label for="winRateImprovement" class="block text-sm font-medium text-primary-text">
+                                Improve Win Rate by: <span id="winRateImprovementLabel" class="font-bold text-primary">5.0%</span>
+                                <span class="tooltip-trigger" data-tooltip="Improving Win Rate reduces the total pipeline required. This is done through better qualification and coaching.">i</span>
+                                <br>(New Win Rate: <span id="newWinRateLabel" class="font-bold">0%</span>)
+                            </label>
+                            <input type="range" id="winRateImprovement" min="0" max="25" value="5" step="0.5" class="w-full">
+                            
+                            <div class="bg-white p-6 rounded-xl border border-primary/20">
+                                <label class="text-base font-medium text-primary">New Pipeline Needed</label>
+                                <p id="newPipelineNeeded" class="text-3xl font-extrabold text-primary mt-2">0</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-xl border border-primary/20">
+                                <label class="text-base font-medium text-primary">New Pipeline Coverage</label>
+                                <p id="newPipelineCoverage" class="text-3xl font-extrabold text-primary mt-2">0.0x</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 p-6 rounded-lg bg-gray-100 border border-gray-300">
+                            <h3 class="text-xl font-semibold text-primary-text">Lever 2: Improve Avg. Deal Size (Value)</h3>
+                            <label for="dealSizeImprovement" class="block text-sm font-medium text-primary-text">
+                                Improve Avg. Deal Size by: <span id="dealSizeImprovementLabel" class="font-bold text-primary-text">15%</span>
+                                <span class="tooltip-trigger" data-tooltip="Increasing deal value reduces the total number of deals you must close. This is achieved through cross-sell/up-sell.">i</span>
+                                <br>(New Avg. Deal Size: <span id="newAvgDealSizeLabel" class="font-bold">0</span>)
+                            </label>
+                            <input type="range" id="dealSizeImprovement" min="0" max="50" value="15" step="1" class="w-full" style="--thumb-color: #252a2e;">
+                            
+                            <div class="bg-white p-6 rounded-xl border border-gray-300">
+                                <label class="text-base font-medium text-primary-text">New Deals Needed</label>
+                                <p id="newDealsNeeded" class="text-3xl font-extrabold text-primary-text mt-2">0</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-xl border border-gray-300">
+                                <label class="text-base font-medium text-primary-text">Pipeline Coverage</label>
+                                <p id="dealsPipelineCoverage" class="text-3xl font-extrabold text-primary-text mt-2">0.0x</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 p-6 rounded-lg bg-gray-100 border border-gray-300">
+                            <h3 class="text-xl font-semibold text-primary-text">Lever 3: Increase Meetings (Activity)</h3>
+                            <p class="text-sm text-primary-text/80">Context: Deals with in-person meetings are 40% more likely to close.</p>
+                            
+                            <label for="meetingImprovement" class="block text-sm font-medium text-primary-text">
+                                Increase Avg. Quarterly Meetings by: <span id="meetingImprovementLabel" class="font-bold text-primary-text">5</span>
+                                <span class="tooltip-trigger" data-tooltip="Increasing face-to-face time directly impacts win rate and deal flow predictability.">i</span>
+                                <br>(New Quarterly Avg: <span id="newMeetingAvgLabel" class="font-bold">0</span>)
+                            </label>
+                            <input type="range" id="meetingImprovement" min="0" max="20" value="5" step="1" class="w-full" style="--thumb-color: #252a2e;">
+                            
+                            <label for="meetingsImpliedWinRate" class="block text-sm font-medium text-primary-text mt-2">
+                                My Implied New Win Rate:
+                                <span class="tooltip-trigger" data-tooltip="Commit to the new Win Rate you believe you can achieve based on increased meeting activity.">i</span>
+                            </label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">%</span>
+                                <input type="number" id="meetingsImpliedWinRate" class="input-field pr-7" placeholder="e.g., 28">
+                            </div>
+
+                            <div class="bg-white p-6 rounded-xl border border-gray-300">
+                                <label class="text-base font-medium text-primary-text">New Pipeline Needed</label>
+                                <p id="meetingsPipelineNeeded" class="text-3xl font-extrabold text-primary-text mt-2">0</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-xl border border-gray-300">
+                                <label class="text-base font-medium text-primary-text">New Pipeline Coverage</label>
+                                <p id="meetingsPipelineCoverage" class="text-3xl font-extrabold text-primary-text mt-2">0.0x</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="step-4-content" class="step-panel hidden">
+                <section>
+                    <h2 class="step-heading" tabindex="-1">Step 4 : My Action Plan for 2026</h2>
+                    
+                    <div class="instruction-box">
+                        <strong>INSTRUCTION:</strong> Complete your commitment by defining the *measurable actions* you will take, aligned with the **People, Pipeline, and Productivity** pillars.
+                    </div>
+
+                    <div class="space-y-6">
+                        <div>
+                            <label class="input-label !font-semibold !text-base !text-primary-text">My Primary Goal (The Lever I will focus on):</label>
+                            <div class="flex flex-wrap gap-x-6 gap-y-2 mt-2">
+                                <div class="flex items-center">
+                                    <input id="goal-win-rate" name="primaryGoal" type="radio" value="Win Rate" class="focus:ring-primary h-4 w-4 text-primary border-gray-300">
+                                    <label for="goal-win-rate" class="ml-2 block text-sm text-primary-text">"I will focus on improving my <strong>Win Rate</strong> (Lever 1)."</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="goal-deal-size" name="primaryGoal" type="radio" value="Avg. Deal Size" class="focus:ring-primary h-4 w-4 text-primary border-gray-300">
+                                    <label for="goal-deal-size" class="ml-2 block text-sm text-primary-text">"I will focus on improving my <strong>Avg. Deal Size</strong> (Lever 2)."</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="goal-meetings" name="primaryGoal" type="radio" value="In-Person Meetings" class="focus:ring-primary h-4 w-4 text-primary border-gray-300">
+                                    <label for="goal-meetings" class="ml-2 block text-sm text-primary-text">"I will focus on increasing my <strong>In-Person Meetings</strong> (Lever 3)."</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="goal-both" name="primaryGoal" type="radio" value="Both (L1 & L2)" class="focus:ring-primary h-4 w-4 text-primary border-gray-300">
+                                    <label for="goal-both" class="ml-2 block text-sm text-primary-text">"I will focus on <strong>Both (Levers 1 & 2)</strong>."</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="goal-all-three" name="primaryGoal" type="radio" value="All Three Levers" class="focus:ring-primary h-4 w-4 text-primary border-gray-300">
+                                    <label for="goal-all-three" class="ml-2 block text-sm text-primary-text">"I will focus on <strong>All Three Levers</strong>."</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="input-label">Action: Focus on **People** (e.g., Training, Coaching): <span class="tooltip-trigger" data-tooltip="What measurable action will you take to improve your skills or leverage internal resources?">i</span></label>
+                            <input type="text" id="action-people" class="input-field" placeholder="e.g., I will complete PIC certification by Q2, or I will 'murder-board' my deals with my manager...">
+                        </div>
+                        <div>
+                            <label class="input-label">Action: Focus on **Pipeline** (e.g., Qualification, Prospecting): <span class="tooltip-trigger" data-tooltip="What measurable action will you take to improve deal quality or flow?">i</span></label>
+                            <input type="text" id="action-pipeline" class="input-field" placeholder="e.g., I will disqualify 20% more deals before the demo stage, or I will run one targeted outreach campaign per month...">
+                        </div>
+                        <div>
+                            <label class="input-label">Action: Focus on **Productivity** (e.g., Tech Stack Use, Time Management): <span class="tooltip-trigger" data-tooltip="What measurable action will you take to save time or increase efficiency?">i</span></label>
+                            <input type="text" id="action-productivity" class="input-field" placeholder="e.g., I will block 2 hours on my calendar every Friday for administrative tasks, or I will utilize the pricing tool for all deals under $15k...">
+                        </div>
                         
-                        <div class="bg-white p-4 rounded-xl border border-primary/20 text-center">
-                            <label class="text-sm font-medium text-primary-text">New Pipeline Needed</label>
-                            <p id="newPipelineNeeded" class="text-2xl font-extrabold text-primary mt-1">0</p>
+                        <div class="pt-4 border-t border-gray-200">
+                            <label class="input-label !font-semibold !text-base !text-primary-text">My Forecasting Commitment (Predictability): "My Rep Commit will be 95-105% accurate every quarter."</label>
+                            <label class="input-label mt-2">Key Action: <span class="tooltip-trigger" data-tooltip="What specific action will you take to improve your forecast accuracy?">i</span></label>
+                            <input type="text" id="action-forecast" class="input-field" placeholder="e.g., I will 'murder-board' my own commit list before submitting my forecast...">
+                        </div>
+
+                        <div class="pt-4 border-t border-gray-200">
+                            <label class="input-label !font-semibold !text-base !text-primary-text">My Personal Improvement Plan (Long-term growth):</label>
+                            <div class="mt-2 space-y-4">
+                                <div>
+                                    <label class="input-label">1. Account Planning: <span class="tooltip-trigger" data-tooltip="What is your plan for strategic account management?">i</span></label>
+                                    <input type="text" id="action-account-plan" class="input-field" placeholder="e.g., I will create a 4-quarter plan for my Top 10 accounts...">
+                                </div>
+                                <div>
+                                    <label class="input-label">2. Cross Selling: <span class="tooltip-trigger" data-tooltip="What is your plan for expanding business within existing accounts?">i</span></label>
+                                    <input type="text" id="action-cross-sell" class="input-field" placeholder="e.g., I will identify 2 cross-sell opportunities in my Top 10 accounts...">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="form-group" id="group-dealSizeImprovement">
-                    <div class="space-y-4 p-4 md:p-6 rounded-lg bg-gray-100 border border-gray-300">
-                        <h3 class="text-xl font-semibold text-primary-text">Scenario 2: Improve Avg. Deal Size (Value)</h3>
-                        <label for="dealSizeImprovement" class="block text-sm font-medium text-primary-text">
-                            Commit to improving Avg. Deal Size by: <span id="dealSizeImprovementLabel" class="font-bold text-primary-text">15%</span>
-                            <br>(New Target Deal Size: <span id="newAvgDealSizeLabel" class="font-bold">0</span>)
-                        </label>
-                        <input type="range" id="dealSizeImprovement" min="0" max="50" value="15" step="1" class="w-full" style="--thumb-color: #252a2e;">
-                        
-                        <div class="bg-white p-4 rounded-xl border border-gray-300 text-center">
-                            <label class="text-sm font-medium text-primary-text">New Deals Needed</label>
-                            <p id="newDealsNeeded" class="text-2xl font-extrabold text-primary-text mt-1">0</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group" id="group-meetingImprovement">
-                    <div class="space-y-4 p-4 md:p-6 rounded-lg bg-gray-100 border border-gray-300">
-                        <h3 class="text-xl font-semibold text-primary-text">Scenario 3: Increase Meetings (Activity)</h3>
-                        <p class="text-sm text-primary-text/80">Context: More face-time = more predictable deals.</p>
-                        
-                        <label for="meetingImprovement" class="block text-sm font-medium text-primary-text">
-                            Commit to increasing Avg. Quarterly Meetings by: <span id="meetingImprovementLabel" class="font-bold text-primary-text">5</span>
-                            <br>(New Quarterly Avg: <span id="newMeetingAvgLabel" class="font-bold">0</span>)
-                        </label>
-                        <input type="range" id="meetingImprovement" min="0" max="20" value="5" step="1" class="w-full" style="--thumb-color: #252a2e;">
-                        
-                        <label for="meetingsImpliedWinRate_visible" class="block text-sm font-medium text-primary-text mt-4">
-                            My Implied New Win Rate %:
-                        </label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">%</span>
-                            <input type="number" id="meetingsImpliedWinRate_visible" class="input-field numeric-field pr-7" placeholder="e.g., 28" data-sync-id="meetingsImpliedWinRate">
-                        </div>
-                        <span id="error-meetingsImpliedWinRate_visible" class="error-message hidden">A valid Win Rate is required for this lever.</span>
-
-                        <div class="bg-white p-4 rounded-xl border border-gray-300 text-center">
-                            <label class="text-sm font-medium text-primary-text">Implied Pipeline Needed</label>
-                            <p id="meetingsPipelineNeeded" class="text-2xl font-extrabold text-primary-text mt-1">0</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group" id="group-primaryGoal">
-                    <label class="input-label !font-semibold !text-base !text-primary-text">My Primary Goal (The Lever I will focus on):</label>
-                    <div class="flex flex-wrap gap-x-6 gap-y-2 mt-2">
-                        <div class="flex items-center">
-                            <input id="goal-win-rate" name="primaryGoal" type="radio" value="Win Rate" class="focus:ring-primary h-4 w-4 text-primary border-gray-300 required-radio">
-                            <label for="goal-win-rate" class="ml-2 block text-sm text-primary-text">Win Rate (Scenario 1)</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="goal-deal-size" name="primaryGoal" type="radio" value="Avg. Deal Size" class="focus:ring-primary h-4 w-4 text-primary border-gray-300 required-radio">
-                            <label for="goal-deal-size" class="ml-2 block text-sm text-primary-text">Avg. Deal Size (Scenario 2)</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="goal-meetings" name="primaryGoal" type="radio" value="In-Person Meetings" class="focus:ring-primary h-4 w-4 text-primary border-gray-300 required-radio">
-                            <label for="goal-meetings" class="ml-2 block text-sm text-primary-text">In-Person Meetings (Scenario 3)</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="goal-both" name="primaryGoal" type="radio" value="Both (L1 & L2)" class="focus:ring-primary h-4 w-4 text-primary border-gray-300 required-radio">
-                            <label for="goal-both" class="ml-2 block text-sm text-primary-text">Both (S1 & S2)</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="goal-all-three" name="primaryGoal" type="radio" value="All Three Levers" class="focus:ring-primary h-4 w-4 text-primary border-gray-300 required-radio">
-                            <label for="goal-all-three" class="ml-2 block text-sm text-primary-text">All Three Scenarios</label>
-                        </div>
-                    </div>
-                    <span id="error-primaryGoal" class="error-message hidden">A primary goal is required.</span>
-                </div>
-
-                <div class="form-group" id="group-action-people">
-                    <label class="input-label">Action: Focus on <strong>People</strong> (Training, Coaching, Skill-building):</label>
-                    <input type="text" id="action-people" class="input-field required-field" placeholder="e.g., I will get certified on...">
-                    <span id="error-action-people" class="error-message hidden">People action is required.</span>
-                </div>
-                
-                <div class="form-group" id="group-action-pipeline">
-                    <label class="input-label">Action: Focus on <strong>Pipeline</strong> (Qualification, Prospecting, Deal Flow):</label>
-                    <input type="text" id="action-pipeline" class="input-field required-field" placeholder="e.g., I will disqualify 20% more deals...">
-                    <span id="error-action-pipeline" class="error-message hidden">Pipeline action is required.</span>
-                </div>
-
-                <div class="form-group" id="group-action-productivity">
-                    <label class="input-label">Action: Focus on <strong>Productivity</strong> (Tech Stack Use, Time Management):</label>
-                    <input type="text" id="action-productivity" class="input-field required-field" placeholder="e.g., I will partner with my SDR...">
-                    <span id="error-action-productivity" class="error-message hidden">Productivity action is required.</span>
-                </div>
-
-                <div class="form-group" id="group-action-forecast">
-                    <label class="input-label">Key Action: Forecasting Commitment (How will you ensure 95-105% accuracy?)</label>
-                    <input type="text" id="action-forecast" class="input-field required-field" placeholder="e.g., I will 'murder-board' my own commit list...">
-                    <span id="error-action-forecast" class="error-message hidden">Forecasting action is required.</span>
-                </div>
-
-                <div class="form-group" id="group-action-account-plan">
-                    <label class="input-label">Personal Improvement: Account Planning Action:</label>
-                    <input type="text" id="action-account-plan" class="input-field required-field" placeholder="e.g., I will build a 4-quarter plan for my Top 10 accounts...">
-                    <span id="error-action-account-plan" class="error-message hidden">Account planning action is required.</span>
-                </div>
-
-                <div class="form-group" id="group-review">
-                    <h2 class="text-2xl font-bold text-primary mb-4">Final Plan Summary</h2>
-                    <div id="commitmentSummaryOutput" class="bg-gray-100 p-4 md:p-6 rounded-lg text-sm text-primary-text whitespace-pre-wrap border border-gray-300 font-mono">
-                        Summary will appear here.
-                    </div>
-                </div>
-
+                </section>
             </div>
             
-            <div id="navigation-buttons" class="mt-8 pt-4 border-t border-gray-300 flex justify-between items-center">
+            <div id="step-5-content" class="step-panel hidden">
+                <section>
+                    <h2 class="step-heading" tabindex="-1">Step 5 : My Commitment Summary</h2>
+                    
+                    <div class="instruction-box">
+                        <strong>INSTRUCTION:</strong> Review your plan. Use the buttons below to finalize your commitment. **For team compilation, click "Export JSON Data" and send the file to your manager.**
+                    </div>
+
+                    <p class="text-primary-text/80 mb-6">Final Plan Review:</p>
+                    
+                    <div id="commitmentSummaryOutput" class="bg-gray-100 p-6 rounded-lg text-sm text-primary-text whitespace-pre-wrap border border-gray-300 font-mono">
+                        Plan details will load here after completing the previous steps.
+                    </div>
+
+                </section>
+            </div>
+
+
+            <div id="navigation-buttons" class="mt-12 pt-6 border-t border-gray-300 flex justify-between items-center">
                 <button type="button" id="prevButton" class="nav-button nav-button-default" style="display: none;">
-                    ← Previous
+                    Previous
                 </button>
                 
-                <div class="flex-grow" id="nav-flex-grow" style="display: none;"></div>
+                <div class="flex-grow"></div>
 
-                <div class="nav-button-group" id="nav-button-group-main">
-                     <button type="button" id="resetButton" class="nav-button nav-button-default" style="display: none;">
+                <div class="flex gap-4">
+                     <button type="button" id="resetButton" class="nav-button nav-button-secondary" style="display: none;">
                          Start Over
                      </button>
                      
@@ -658,362 +623,155 @@
                          Save as PDF
                      </button>
                      
-                     <button type="button" id="copyCommitmentButton" class="nav-button nav-button-default text-center" style="display: none;">
+                     <button type="button" id="copyCommitmentButton" class="nav-button nav-button-primary text-center" style="display: none;">
                          Copy Commitment
                      </button>
 
-                     <button type="button" id="exportJSONButton" class="nav-button nav-button-primary text-center" style="display: none;">
+                     <button type="button" id="exportJSONButton" class="nav-button nav-button-accent text-center" style="display: none;">
                          Export JSON Data
                      </button>
                      
                      <button type="button" id="nextButton" class="nav-button nav-button-primary">
-                         Next →
+                         Next
                      </button>
                 </div>
             </div>
 
         </form>
     </div>
+</div>
 
-    <script>
-        // Global variable to store calculated data
-        if (!window.planData) window.planData = {};
+<script>
+    // --- Helper Functions ---
+    const $ = (selector) => document.getElementById(selector);
     
-        // --- Helper Functions ---
-        const $ = (selector) => document.getElementById(selector);
+    // Function to safely extract numbers from text fields (allows commas)
+    const getNumberValue = (id) => {
+        const el = $(id);
+        if (!el) return 0;
+        return parseFloat(el.value.replace(/[$,]/g, '')) || 0;
+    };
+
+    const getStringValue = (id) => {
+        const el = $(id);
+        if (!el) return '';
+        return el.value.trim();
+    };
+
+    const getSelectedValue = (name) => {
+        const checked = document.querySelector(`input[name="${name}"]:checked`);
+        return checked ? checked.value : '[Not Selected]';
+    };
+    
+    const getSelectedLabel = (name) => {
+        const checked = document.querySelector(`input[name="${name}"]:checked`);
+        return checked ? checked.labels[0].textContent.trim().replace(/\s+/g, ' ') : '[Not Selected]';
+    };
+
+    const formatCurrency = (val) => {
+        if (isNaN(val) || !isFinite(val)) return '$0';
+        return '$' + val.toLocaleString('en-US', { maximumFractionDigits: 0 });
+    };
+
+    const formatPercent = (val) => {
+        if (isNaN(val) || !isFinite(val)) return '0%';
+        return val.toFixed(1) + '%';
+    };
+    const formatNumber = (val) => {
+        if (isNaN(val) || !isFinite(val)) return '0';
+        return val.toLocaleString('en-US', { maximumFractionDigits: 1 });
+    };
+    const formatCoverage = (val) => {
+        if (isNaN(val) || !isFinite(val)) return '0.0x';
+        return val.toFixed(1) + 'x';
+    };
+    
+    // --- Core Calculation Function (Generates values for display and JSON) ---
+    function calculatePlan() {
+        // Step 1 Inputs
+        const quota2025 = getNumberValue('quota2025');
+        const bookings2025 = getNumberValue('bookings2025');
+        const winRate2025 = getNumberValue('winRate2025');
+        const avgDealSize2025 = getNumberValue('avgDealSize2025');
+        const avgMeetings2025 = getNumberValue('avgMeetings2025');
         
-        const getNumberValue = (id) => {
-            const el = $(id);
-            if (!el) return 0;
-            return parseFloat(el.value.replace(/[$,]/g, '')) || 0;
-        };
-    
-        const getStringValue = (id) => {
-            const el = $(id);
-            if (!el) return '';
-            return el.value.trim();
-        };
+        // Step 2/3 Inputs
+        const quota2026 = getNumberValue('quota2026');
+        const winRateImprovement = getNumberValue('winRateImprovement');
+        const dealSizeImprovement = getNumberValue('dealSizeImprovement');
+        const meetingImprovement = getNumberValue('meetingImprovement');
+        const meetingsImpliedWinRate = getNumberValue('meetingsImpliedWinRate');
+
+        // Step 1
+        const attainment2025 = quota2025 > 0 ? (bookings2025 / quota2025) * 100 : 0;
+        if($('attainment2025')) $('attainment2025').textContent = formatPercent(attainment2025);
+
+        // Step 2 Calculations
+        const winRateDecimal = winRate2025 / 100;
+        const pipelineToClose2026 = winRateDecimal > 0 ? quota2026 / winRateDecimal : 0;
+        if($('pipelineToClose2026')) $('pipelineToClose2026').textContent = formatCurrency(pipelineToClose2026);
+        if($('dealsToClose2026')) $('dealsToClose2026').textContent = formatNumber(avgDealSize2025 > 0 ? pipelineToClose2026 / avgDealSize2025 : 0);
+
+        // Step 3 - A (Win Rate)
+        const newWinRate = winRate2025 + winRateImprovement;
+        const newWinRateDecimal = newWinRate / 100;
+        const newPipelineNeeded = newWinRateDecimal > 0 ? quota2026 / newWinRateDecimal : 0;
+        if($('winRateImprovementLabel')) $('winRateImprovementLabel').textContent = `${winRateImprovement.toFixed(1)}%`;
+        if($('newWinRateLabel')) $('newWinRateLabel').textContent = formatPercent(newWinRate);
+        if($('newPipelineNeeded')) $('newPipelineNeeded').textContent = formatCurrency(newPipelineNeeded);
+        if($('newPipelineCoverage')) $('newPipelineCoverage').textContent = formatCoverage(quota2026 > 0 ? newPipelineNeeded / quota2026 : 0);
+
+        // Step 3 - B (Deal Size)
+        const newAvgDealSize = avgDealSize2025 * (1 + (dealSizeImprovement / 100));
+        const newDealsNeeded = newAvgDealSize > 0 ? quota2026 / newAvgDealSize : 0;
+        if($('dealSizeImprovementLabel')) $('dealSizeImprovementLabel').textContent = `${dealSizeImprovement.toFixed(0)}%`;
+        if($('newAvgDealSizeLabel')) $('newAvgDealSizeLabel').textContent = formatCurrency(newAvgDealSize);
+        if($('newDealsNeeded')) $('newDealsNeeded').textContent = formatNumber(newDealsNeeded);
         
-        const getSelectedValue = (name) => {
-            const checked = document.querySelector(`input[name="${name}"]:checked`);
-            return checked ? checked.value : '';
-        };
+        // Step 3 - C (Meetings)
+        const meetingsImpliedWinRateDecimal = meetingsImpliedWinRate / 100;
+        const meetingsPipelineNeeded = meetingsImpliedWinRateDecimal > 0 ? quota2026 / meetingsImpliedWinRateDecimal : 0;
+        if($('meetingsPipelineNeeded')) $('meetingsPipelineNeeded').textContent = formatCurrency(meetingsPipelineNeeded);
+        
+        // Update summary if on the final step
+        if (currentStep === 5) generateCommitmentSummary();
+    }
     
-        const getSelectedLabel = (name) => {
-            const checked = document.querySelector(`input[name="${name}"]:checked`);
-            return checked ? checked.labels[0].textContent.trim().replace(/\s+/g, ' ') : '[Not Selected]';
-        };
-    
-        const formatCurrency = (val) => {
-            if (isNaN(val) || !isFinite(val)) return '0';
-            return val.toLocaleString('en-US', { maximumFractionDigits: 0 });
-        };
-    
-        const formatPercent = (val) => {
-            if (isNaN(val) || !isFinite(val)) return '0%';
-            return val.toFixed(1) + '%';
-        };
-        const formatNumber = (val) => {
-            if (isNaN(val) || !isFinite(val)) return '0';
-            return val.toLocaleString('en-US', { maximumFractionDigits: 1 });
+    // --- Step 5 Summary Generation ---
+    function generateCommitmentSummary() {
+        // Collect all data
+        const personName = getStringValue('personName');
+        const managerName = getStringValue('managerName');
+        const region = $('region').value || '[Not Provided]';
+        const reflection = getSelectedLabel('reflection');
+        const goalSelection = getSelectedLabel('primaryGoal');
+        
+        // Calculation outputs
+        const winRate2025 = getNumberValue('winRate2025');
+        const avgDealSize2025 = getNumberValue('avgDealSize2025');
+        const attainment2025 = $('attainment2025').textContent;
+        const quota2026 = formatCurrency(getNumberValue('quota2026'));
+
+        // Scenario outputs
+        const targetWinRate = $('newWinRateLabel').textContent; 
+        const targetDealSize = $('newAvgDealSizeLabel').textContent;
+        const pipelineToClose2026 = $('pipelineToClose2026').textContent;
+        const dealsToClose2026 = $('dealsToClose2026').textContent;
+        
+        // Action Items
+        const actions = {
+            people: getStringValue('action-people'),
+            pipeline: getStringValue('action-pipeline'),
+            productivity: getStringValue('action-productivity'),
+            forecast: getStringValue('action-forecast'),
+            accountPlan: getStringValue('action-account-plan'),
+            crossSell: getStringValue('action-cross-sell'),
         };
 
-        // --- SVG Icons ---
-        const iconSplash = `<svg class="text-primary mx-auto h-16 w-16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.125 2.25h-4.5c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 019 9v.375M10.125 2.25A3.375 3.375 0 0113.5 5.625v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 013.375 3.375M9 15l2.25 2.25L15 12" /></svg>`;
-        const iconBaseline = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-16 w-16 md:h-24 md:w-24"><path fill="#0063a3" fill-opacity="0.2" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25z" /><path stroke="#0063a3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 18a.75.75 0 00.75-.75V8.668l3.374 1.948a.75.75 0 10.75-1.3l-4.5-2.6a.75.75 0 00-.75 0l-4.5 2.6a.75.75 0 10.75 1.3L11.25 8.67v8.58a.75.75 0 00.75.75z" /></svg>`;
-        const iconGap = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-16 w-16 md:h-24 md:w-24"><path fill="#fbad26" fill-opacity="0.2" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25z" /><path stroke="#fbad26" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M15.364 15.364l-1.06-1.06a.75.75 0 01-1.06 1.06l-4.243 4.242a.75.75 0 01-1.06-1.06l4.242-4.243a.75.75 0 011.06-1.06l1.06 1.06zM9.75 12a2.25 2.25 0 114.5 0 2.25 2.25 0 01-4.5 0z" /><path stroke="#fbad26" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>`;
-        const iconSolution = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-16 w-16 md:h-24 md:w-24"><path fill="#02542e" fill-opacity="0.2" d="M12.75 3.1a.75.75 0 00-1.5 0v5.844l-2.47-2.47a.75.75 0 00-1.06 1.06L12 11.78l4.28-4.28a.75.75 0 00-1.06-1.06L12.75 8.934V3.1z" /><path fill="#02542e" fill-opacity="0.2" d="M12 21.75a9.75 9.75 0 01-9.75-9.75c0-3.268 1.593-6.19 4.07-7.974a.75.75 0 011.06 1.06A8.25 8.25 0 003.75 12c0 4.54 3.71 8.25 8.25 8.25s8.25-3.71 8.25-8.25a8.25 8.25 0 00-3.63-6.814.75.75 0 111.06-1.06C19.907 5.81 21.5 8.732 21.5 12a9.75 9.75 0 01-9.75 9.75H12z" /><path stroke="#02542e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 11.78l-4.28-4.28a.75.75 0 00-1.06 1.06L10.94 13.06l-4.22 4.22a.75.75 0 101.06 1.06L12 14.12l4.22 4.22a.75.75 0 101.06-1.06l-4.22-4.22 4.28-4.28a.75.75 0 00-1.06-1.06L12 11.78z" /></svg>`;
-        const iconReview = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-16 w-16 md:h-24 md:w-24"><path fill="#252a2e" fill-opacity="0.2" d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v11.25C1.5 17.16 2.34 18 3.375 18h9.75a3 3 0 003-3V9.375c0-.866-.354-1.658-.93-2.235l-3.03-3.03A3.001 3.001 0 009.875 3H3.375z" /><path stroke="#252a2e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M9 3.75v3.875c0 .414.336.75.75.75h3.875m-6-1.5h6m-6 3h6m-6 3h4.5m4.5 6H21a.75.75 0 00.75-.75V11.812a3 3 0 00-.878-2.121l-3.878-3.878A3 3 0 0015.188 5H15v3.75c0 .414.336.75.75.75h3.75v9.75a1.5 1.5 0 01-1.5 1.5H9.375a3 3 0 01-2.822-2H15v.001z" /></svg>`;
+        const summaryText = `
+**TRIMBLE 2026 SALES COMMITMENT PLAN**
 
-        
-        // --- Step Definitions (The Core Conversation) ---
-        const steps = [
-            // --- Intro (Step 0) ---
-            { id: 'intro', fieldId: null, phase: 1, 
-              prompt: `<div class="text-center">${iconSplash}</div>
-                       <h3 class="text-center !text-2xl !font-bold !text-primary mt-4">Welcome to Your 2026 Success Plan!</h3>
-                       <p class='prompt-why text-center'>This is your <strong>personal roadmap to hitting your 2026 number.</strong></p>
-                       <p class='prompt-why'><strong>What's the Goal?</strong><br>This tool is your personal coach. We will help you turn your quota into a set of clear, measurable actions you can take every day. The goal is to create a plan <em>you</em> own, one that helps you and your manager stay aligned on how to win all year.</p>
-                       <div class='splash-callout'>
-                         <strong>What You'll Need:</strong>
-                         <p class="font-normal mt-2">To make this easy, please have your <strong>Sales Scorecard</strong> open. You'll need it for the first few steps to pull your 2025 performance numbers:</p>
-                         <ul class="font-normal">
-                            <li>Your 2025 Quota</li>
-                            <li>Your 2025 Bookings</li>
-                            <li>Your Baseline Win Rate %</li>
-                            <li>Your Avg. Deal Size</li>
-                         </ul>
-                       </div>`
-            }, // 0
-            
-            // --- Phase 1: BASELINE (Steps 1-9) ---
-            { id: 'phase1-welcome', fieldId: null, phase: 1, 
-              prompt: `<div class="phase-welcome-card">
-                         <div class="phase-icon-bg bg-primary/10">${iconBaseline}</div>
-                         <div class="phase-text-content">
-                           <h3 class="!text-primary">PHASE 1: Your 2025 Baseline</h3>
-                           <p>First, let's get an honest look at your starting point. You can't set a new course until you know where you are on the map.</p>
-                           <p class="mt-2">For this section, you'll use your <strong>Sales Scorecard</strong> to enter your 2025 performance data. Let's start with the basics.</p>
-                         </div>
-                       </div>` 
-            }, // 1
-            { id: 'personName', fieldId: 'personName', phase: 1, prompt: "First things first, <strong>what's your full name?</strong>" }, // 2
-            { id: 'managerName', fieldId: 'managerName', phase: 1, prompt: "Great. Now, <strong>who is your manager?</strong> This plan is a commitment you'll both work on, so their name is important." }, // 3
-            { id: 'region', fieldId: 'region', phase: 1, prompt: "Geography check! <strong>Which region are you primarily responsible for?</strong> (This will customize your workshop content later)." }, // 4
-            { id: 'quota2025', fieldId: 'quota2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>Alright, let's open your <strong>Sales Scorecard</strong>. For the next few steps, you'll be pulling your 2025 numbers from that scorecard. First, what was your <strong>2025 Quota?</strong></p>" }, // 5
-            { id: 'bookings2025', fieldId: 'bookings2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>On that same scorecard, find your <strong>2025 Bookings</strong>.</p><p class='prompt-example'><strong>Why?</strong> This calculates your 2025 Attainment. This plan is about honesty. Be accurate so we can build a realistic path forward.</p>" }, // 6
-            { id: 'winRate2025', fieldId: 'winRate2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>This is a key one. <strong>Look at your scorecard</strong> for your <strong>2025 Baseline Win Rate %</strong>.</p><p class='prompt-example'><strong>Why?</strong> This is your <em>quality & qualification</em> metric. A low rate might mean you're wasting time on unqualified deals.</p>" }, // 7
-            { id: 'avgDealSize2025', fieldId: 'avgDealSize2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>Next, find your <strong>2025 Avg. Deal Size</strong> on your scorecard.</p><p class='prompt-example'><strong>Why?</strong> This is your <em>value</em> metric. Are you selling single products, or are you selling the full 'Connect & Scale' solution? (e.g., selling more software modules to an existing customer).</p>" }, // 8
-            { id: 'avgMeetings2025', fieldId: 'avgMeetings2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>Last baseline number: Find your <strong>2025 Avg. Quarterly In-Person Meetings</strong> on your scorecard's activity tab.</p><p class='prompt-example'><strong>Why?</strong> This is your <em>activity</em> metric. In our complex industries, face-time with customers is directly linked to success.</p>" }, // 9
-
-            // --- Phase 2: THE GAP (Steps 10-12) ---
-            { id: 'phase2-welcome', fieldId: null, phase: 2, 
-              prompt: `<div class="phase-welcome-card">
-                         <div class="phase-icon-bg bg-accent/10">${iconGap}</div>
-                         <div class="phase-text-content">
-                           <h3 style="color: #fbad26;">PHASE 2: THE GAP (Your 2026 Challenge)</h3>
-                           <p>Great, your 2025 baseline is set. You can't set a new course until you know where you're starting from.</p>
-                           <p class="mt-2">Now for Phase 2: let's figure out the <strong>size</strong> of your 2026 challenge. In this section, you'll enter your new quota and see the gap it creates. This is the challenge we're going to build a plan to conquer.</p>
-                         </div>
-                       </div>` 
-            }, // 10
-            { id: 'quota2026', fieldId: 'quota2026', phase: 2, prompt: "<h3>Step 2: The 2026 Formula</h3><p class='prompt-why'>This is the big one: what is your <strong>2026 Quota Commitment?</strong></p><p class='prompt-example'><strong>Why?</strong> Enter your new number. The tool will *immediately* calculate what's required to hit this goal *if you change nothing*. This isn't your plan; it's the *challenge* we're about to solve together.</p>" }, // 11
-            { id: 'reflection', fieldId: 'reflection', phase: 2, prompt: "<h3>Step 2: The 2026 Formula</h3><p class='prompt-why'>Okay, take a look at those 'Required' numbers. Based on that hard math, <strong>how does your 2026 goal feel right now?</strong></p><p class='prompt-example'><strong>Why?</strong> Be honest. If it feels 'Impossible,' it just means your 2025 efficiency isn't good enough for 2026. That's fine! The next steps are <em>how</em> we fix that.</p>" }, // 12
-            
-            // --- Phase 3: SOLUTION (Steps 13-22) ---
-            { id: 'phase3-welcome', fieldId: null, phase: 3, 
-              prompt: `<div class="phase-welcome-card">
-                         <div class="phase-icon-bg bg-success/10">${iconSolution}</div>
-                         <div class="phase-text-content">
-                           <h3 style="color: #02542e;">PHASE 3: Your Solution</h3>
-                           <p>You've seen the data. You've defined the gap. Now for the most important part: <strong>creating your solution.</strong></p>
-                           <p class="mt-2">In this section, you'll first play with scenarios to see how small improvements can close your gap. Then, you'll use what you learned in the SKO workshops to write your *specific* action plan.</p>
-                         </div>
-                       </div>` 
-            }, // 13
-            { id: 'winRateImprovement', fieldId: 'winRateImprovement', phase: 3, prompt: "<h3>Scenario 1: Improve Win Rate (Quality)</h3><p class='prompt-why'>Improving your Win Rate means you need <em>less total pipeline</em> to hit your goal. This is about better qualification (like you learned in the **Pipeline Hygiene** workshop for APAC) and wasting less time on bad-fit deals. </p><p class='prompt-example'>Use the slider to see how it affects your 'Pipeline Needed' number.</p>" }, // 14
-            { id: 'dealSizeImprovement', fieldId: 'dealSizeImprovement', phase: 3, prompt: "<h3>Scenario 2: Improve Avg. Deal Size (Value)</h3><p class='prompt-why'>Increasing your Avg. Deal Size means you need to close <em>fewer total deals</em>. This is about selling the full 'Connect & Scale' solution.</p><p class='prompt-example'>Use the skills from the **Cross-Sell Strategies** workshop (for NA/EMEA) to sell more software. Use the slider to see its impact.</p>" }, // 15
-            { id: 'meetingImprovement', fieldId: 'meetingImprovement', phase: 3, prompt: "<h3>Scenario 3: Increase Meetings (Activity)</h3><p class='prompt-why'>Committing to more in-person meetings increases your predictability and builds stronger relationships, which helps both your Win Rate and Deal Size.</p><p class='prompt-example'>Use the slider to commit to a new quarterly number and then enter the new Win Rate you believe this activity will help you achieve.</p>" }, // 16
-            
-            { id: 'primaryGoal', fieldId: 'primaryGoal', phase: 3, prompt: () => { // DYNAMIC
-                let region = $('region').value;
-                let workshopText = "the <strong>3 Best Practice Workshops</strong> (on Account Planning, Pipeline Hygiene, and Team Selling)."; // Default/APAC
-                if (region === 'NA' || region === 'EMEA') {
-                    workshopText = "the <strong>3 Best Practice Workshops</strong> (on Account Planning, Cross-Sell Strategies, and Team Selling).";
-                }
-                return `<h3>Step 4: Your Action Plan (Apply What You've Learned)</h3><p class='prompt-why'>You've seen your data and your gap. You've played with scenarios. Now, it's time to commit. You just attended ${workshopText}</p><p class='prompt-why'>This is where you connect those ideas to your numbers. Based on what you learned, <strong>which improvement will be your primary focus in 2026?</strong></p>`;
-            }}, // 17
-            { id: 'action-people', fieldId: 'action-people', phase: 3, prompt: () => { // DYNAMIC
-                let region = $('region').value;
-                let workshopExample = "If your data shows a low <strong>Win Rate</strong>, your 'People' action (from the <strong>Pipeline Hygiene</strong> workshop) might be: 'I will learn to disqualify deals earlier to protect my win rate.'";
-                if (region === 'NA' || region === 'EMEA') {
-                     workshopExample = "If you want to sell bigger deals, your 'People' action (from the <strong>Cross-Sell Strategies</strong> workshop) might be: 'I will master how to position our financial software to my existing design software customers.'";
-                }
-                return `<h3>Step 4: Your Action Plan (People)</h3><p class='prompt-why'>This is your <strong>'Get Smarter'</strong> plan. What new skill will you learn to close the gap? Think about the SKO sessions you just attended.</p><p class='prompt-example'><strong>Example:</strong> ${workshopExample}</p>`;
-            }}, // 18
-            { id: 'action-pipeline', fieldId: 'action-pipeline', phase: 3, prompt: "<h3>Step 4: Your Action Plan (Pipeline)</h3><p class='prompt-why'>This is your <strong>'Qualify Harder'</strong> plan. Based on your workshops, how will you improve the *quality* and *flow* of your deals?</p><p class='prompt-example'><strong>Example:</strong> 'I will disqualify 20% more deals before the demo stage' or 'I will run one targeted campaign per month to my Top 10 accounts.'</p>" }, // 19
-            { id: 'action-productivity', fieldId: 'action-productivity', phase: 3, prompt: () => { // DYNAMIC
-                return `<h3>Step 4: Your Action Plan (Productivity)</h3><p class='prompt-why'>This is your <strong>'Work Smarter'</strong> plan. Think about the <strong>Team Selling, Orchestrating the Sale</strong> workshop. How will you partner with your internal team (SDRs, SEs) more effectively?</p><p class='prompt-example'><strong>How to use this:</strong> Your 'Productivity' action could be: 'I will partner with my SDR to build a Top 10 prospect list' or 'I will use the new CRM tool to automate my follow-ups.'</p>`;
-            }}, // 20
-            { id: 'action-forecast', fieldId: 'action-forecast', phase: 3, prompt: "<h3>Step 4: Your Commitment</h3><p class='prompt-why'>Predictability is critical. Your commitment is a <strong>95-105% accurate forecast</strong>. What is the Key Action you will take to ensure this?</p><p class='prompt-example'><strong>Example:</strong> 'I will 'murder-board' my own commit list before submitting my forecast' or 'I will review my pipeline daily for data hygiene.'</p>" }, // 21
-            { id: 'action-account-plan', fieldId: 'action-account-plan', phase: 3, prompt: () => { // DYNAMIC
-                return `<h3>Step 4: Your Commitment</h3><p class='prompt-why'>Your plan needs to focus on your best accounts. The <strong>Account Planning & Territory Management</strong> workshop gave you the 'how'. Now, write your specific commitment.</p><p class='prompt-example'><strong>Example:</strong> 'I will build a 4-quarter strategic plan for my Top 10 accounts by Feb 1st, focusing on two cross-sell opportunities for each.'</p>`;
-            }}, // 22
-            
-            // --- Phase 4: Review (Step 23) ---
-            { id: 'review', fieldId: 'review', phase: 4, prompt: `<div class="phase-welcome-card">
-                         <div class="phase-icon-bg bg-primary-text/10">${iconReview}</div>
-                         <div class="phase-text-content">
-                           <h3 style="color: #252a2e;">PHASE 4: Final Review & Submission</h3>
-                           <p>This is it! Your 2026 Commitment Plan is complete. Please review the summary below one last time.</p>
-                           <p class="mt-4"><strong>1. For your Manager (Required):</strong><br>Click <strong>Export JSON Data</strong>. This saves a small data file. Please email this file to your manager for team compilation.</p>
-                           <p class="mt-2"><strong>2. For You (Final Step):</strong><br>Click <strong>Save as PDF</strong> to keep a personal, printable copy of your full commitment.</p>
-                         </div>
-                       </div>`, group: $('group-review') } // 23
-        ];
-        
-        // --- Maps Phase numbers to the *first step index* of that phase ---
-        const phaseStartSteps = {
-            1: 1, // Phase 1 (Baseline) starts at step 1
-            2: 10, // Phase 2 (The Gap) starts at step 10
-            3: 13, // Phase 3 (Solution) starts at step 13
-            4: 23  // Phase 4 (Review) starts at step 23
-        };
-        
-        let currentStepIndex = 0;
-        
-        // --- Validation Logic ---
-        function validateField(fieldId) {
-            const input = $(fieldId);
-            const errorElement = $(`error-${fieldId}`);
-            const value = getStringValue(fieldId);
-            
-            let isValid = true;
-            let isNumeric = input && input.classList.contains('numeric-field');
-            let numValue = isNumeric ? getNumberValue(fieldId) : 0;
-    
-            if (input) input.classList.remove('error');
-            if (errorElement) errorElement.classList.add('hidden');
-    
-            if (input && input.classList.contains('required-field') && !value) {
-                // Special check for '0' being a valid entry for some numeric fields
-                if (isNumeric) {
-                    const fieldsThatAllowZero = ['bookings2025', 'winRate2025', 'avgMeetings2025', 'meetingsImpliedWinRate_visible'];
-                    if (fieldsThatAllowZero.includes(fieldId) && input.value === '0') {
-                         isValid = true;
-                    } else {
-                         isValid = false;
-                    }
-                } else {
-                     isValid = false;
-                }
-            } 
-            
-            if (isNumeric) {
-                if (!isFinite(numValue) || numValue < 0) {
-                     isValid = false; // Always fail if negative or not a number
-                } else if (numValue === 0) {
-                    // List of fields that CANNOT be zero
-                    const fieldsThatMustBeGreaterThanZero = ['quota2025', 'avgDealSize2025', 'quota2026'];
-                    if (fieldsThatMustBeGreaterThanZero.includes(fieldId)) {
-                        isValid = false;
-                    }
-                }
-            }
-            
-            if (fieldId === 'winRate2025' && numValue > 100) {
-                 isValid = false; // Specific check for win rate > 100
-            }
-    
-            if (input && input.classList.contains('required-radio')) {
-                const radioName = input.name;
-                if (!getSelectedValue(radioName)) {
-                    const radioError = $(`error-${radioName}`);
-                    if (radioError) radioError.classList.remove('hidden');
-                    isValid = false;
-                }
-            }
-
-            if (!isValid) {
-                if (input) input.classList.add('error');
-                if (errorElement) errorElement.classList.remove('hidden');
-            }
-    
-            return isValid;
-        }
-        
-        function validateCurrentStep() {
-            const step = steps[currentStepIndex];
-            const fieldId = step.fieldId;
-            
-            if (!fieldId) return true; // Intro/Review/Phase Welcome
-    
-            if (fieldId.includes('action-') || fieldId === 'primaryGoal') {
-                 const requiredGroupFields = document.querySelectorAll(`#group-${step.fieldId} .required-field, #group-${step.fieldId} .required-radio`);
-                 let groupValid = true;
-                 requiredGroupFields.forEach(field => {
-                     if (!validateField(field.id)) {
-                         groupValid = false;
-                     }
-                 });
-                 return groupValid;
-            } else if (fieldId === 'reflection') {
-                 return !!getSelectedValue('reflection');
-            } else {
-                return validateField(fieldId);
-            }
-        }
-    
-    
-        // --- Core Calculation Function ---
-        function calculatePlan() {
-            const quota2025 = getNumberValue('quota2025');
-            const bookings2025 = getNumberValue('bookings2025');
-            const winRate2025 = getNumberValue('winRate2025');
-            const avgDealSize2025 = getNumberValue('avgDealSize2025');
-            const avgMeetings2025 = getNumberValue('avgMeetings2025');
-            const quota2026 = getNumberValue('quota2026');
-            const winRateImprovement = getNumberValue('winRateImprovement');
-            const dealSizeImprovement = getNumberValue('dealSizeImprovement');
-            const meetingImprovement = getNumberValue('meetingImprovement');
-            
-            const meetingsImpliedWinRateVisible = getNumberValue('meetingsImpliedWinRate_visible');
-            const meetingsImpliedWinRateHidden = $('meetingsImpliedWinRate');
-            if(meetingsImpliedWinRateHidden) meetingsImpliedWinRateHidden.value = meetingsImpliedWinRateVisible;
-            const meetingsImpliedWinRate = meetingsImpliedWinRateVisible;
-    
-            const attainment2025 = quota2025 > 0 ? (bookings2025 / quota2025) * 100 : 0;
-            if($('attainment2025')) $('attainment2025').textContent = formatPercent(attainment2025);
-    
-            const winRateDecimal = winRate2025 / 100;
-            const pipelineToClose2026 = winRateDecimal > 0 ? quota2026 / winRateDecimal : 0;
-            const dealsToClose2026 = avgDealSize2025 > 0 ? pipelineToClose2026 / avgDealSize2025 : 0;
-            
-            if($('pipelineToClose2026')) $('pipelineToClose2026').textContent = formatCurrency(pipelineToClose2026);
-            if($('dealsToClose2026')) $('dealsToClose2026').textContent = formatNumber(dealsToClose2026);
-            
-            window.planData.pipelineToClose2026 = pipelineToClose2026;
-            window.planData.dealsToClose2026 = dealsToClose2026;
-    
-            const newWinRate = winRate2025 + winRateImprovement;
-            const newWinRateDecimal = newWinRate / 100;
-            const newPipelineNeeded = newWinRateDecimal > 0 ? quota2026 / newWinRateDecimal : 0;
-            
-            if($('winRateImprovementLabel')) $('winRateImprovementLabel').textContent = `${winRateImprovement.toFixed(1)}%`;
-            if($('newWinRateLabel')) $('newWinRateLabel').textContent = formatPercent(newWinRate);
-            if($('newPipelineNeeded')) $('newPipelineNeeded').textContent = formatCurrency(newPipelineNeeded);
-    
-            const newAvgDealSize = avgDealSize2025 * (1 + (dealSizeImprovement / 100));
-            const newDealsNeeded = newAvgDealSize > 0 ? quota2026 / newAvgDealSize : dealsToClose2026;
-            
-            if($('dealSizeImprovementLabel')) $('dealSizeImprovementLabel').textContent = `${dealSizeImprovement.toFixed(0)}%`;
-            if($('newAvgDealSizeLabel')) $('newAvgDealSizeLabel').textContent = formatCurrency(newAvgDealSize);
-            if($('newDealsNeeded')) $('newDealsNeeded').textContent = formatNumber(newDealsNeeded);
-            
-            const newMeetingAvg = avgMeetings2025 + meetingImprovement;
-            const meetingsImpliedWinRateDecimal = meetingsImpliedWinRate / 100;
-            const meetingsPipelineNeeded = meetingsImpliedWinRateDecimal > 0 ? quota2026 / meetingsImpliedWinRateDecimal : pipelineToClose2026;
-            
-            if($('meetingImprovementLabel')) $('meetingImprovementLabel').textContent = `${meetingImprovement.toFixed(0)}`;
-            if($('newMeetingAvgLabel')) $('newMeetingAvgLabel').textContent = `${newMeetingAvg.toFixed(0)}`;
-            if($('meetingsPipelineNeeded')) $('meetingsPipelineNeeded').textContent = formatCurrency(meetingsPipelineNeeded);
-            
-            const finalTargetWinRate = Math.max(newWinRate, meetingsImpliedWinRate);
-            window.planData.finalTargetWinRate = finalTargetWinRate;
-            window.planData.finalTargetPipeline = finalTargetWinRate > 0 ? quota2026 / (finalTargetWinRate / 100) : pipelineToClose2026;
-    
-            if (steps[currentStepIndex].id === 'review') generateCommitmentSummary();
-        }
-    
-        // --- Summary Generation ---
-        function generateCommitmentSummary() {
-            const personName = getStringValue('personName');
-            const managerName = getStringValue('managerName');
-            const region = $('region').value || '[Not Provided]';
-            const reflection = getSelectedLabel('reflection');
-            const goalSelection = getSelectedLabel('primaryGoal');
-            
-            const winRate2025 = getNumberValue('winRate2025');
-            const avgDealSize2025 = getNumberValue('avgDealSize2025');
-            const attainment2025 = $('attainment2025').textContent;
-            const quota2026 = formatCurrency(getNumberValue('quota2026'));
-            
-            const targetWinRate = formatPercent(window.planData.finalTargetWinRate || winRate2025);
-            const targetDealSize = $('newAvgDealSizeLabel').textContent;
-            const targetPipeline = formatCurrency(window.planData.finalTargetPipeline || 0);
-            
-            const actions = {
-                people: getStringValue('action-people'),
-                pipeline: getStringValue('action-pipeline'), 
-                productivity: getStringValue('action-productivity'),
-                forecast: getStringValue('action-forecast'),
-                accountPlan: getStringValue('action-account-plan'),
-            };
-    
-            const summaryText = `
-TRIMBLE 2026 SALES COMMITMENT PLAN (FINAL)
-
-1. Personal & Financial Baseline
+**1. Personal & Financial Baseline**
 - Rep: ${personName}
 - Manager: ${managerName}
 - Region: ${region}
@@ -1021,357 +779,224 @@ TRIMBLE 2026 SALES COMMITMENT PLAN (FINAL)
 - 2025 Attainment: ${attainment2025}
 - 2025 Baseline Win Rate: ${winRate2025}%
 - 2025 Baseline Avg. Deal Size: ${formatCurrency(avgDealSize2025)}
-
-2. Strategy & Targets (Scenarios)
 - Overall Reflection: ${reflection}
-- Primary Focus Lever: ${goalSelection}
-- COMMITTED TARGETED WIN RATE: ${targetWinRate} 
-- Targeted Avg. Deal Size: ${targetDealSize}
-- Target Pipeline Required (After Gains): ${targetPipeline} (Goal)
+- Required Deals (at baseline efficiency): ${dealsToClose2026}
 
-3. Key Action Plan (PEOPLE, PIPELINE & PRODUCTIVITY)
-- PEOPLE Commitment: ${actions.people}
-- PIPELINE Commitment: ${actions.pipeline}
-- PRODUCTIVITY Commitment: ${actions.productivity}
-- Forecasting Action: ${actions.forecast}
-- Account Planning: ${actions.accountPlan}
+**2. Primary Strategy & Targets**
+- Primary Focus Lever: ${goalSelection}
+- Targeted Win Rate: ${targetWinRate} (Current: ${winRate2025}%)
+- Targeted Avg. Deal Size: ${targetDealSize} (Current: ${formatCurrency(avgDealSize2025)})
+- Required Pipeline to Close: ${pipelineToClose2026}
+
+**3. Key Action Plan (PEOPLE, PIPELINE & PRODUCTIVITY)**
+- **PEOPLE Commitment:** ${actions.people}
+- **PIPELINE Commitment:** ${actions.pipeline}
+- **PRODUCTIVITY Commitment:** ${actions.productivity}
+
+**4. Predictability & Growth**
+- **Forecasting Action:** ${actions.forecast}
+- **Account Planning:** ${actions.accountPlan}
+- **Cross Selling:** ${actions.crossSell}
 
 ---
-Generated by the Trimble 2026 Success Planner.
-            `.trim();
-            
-            $('commitmentSummaryOutput').textContent = summaryText;
-            return summaryText;
-        }
+*Generated by the Trimble 2026 Success Planner.*
+        `.trim();
+        
+        $('commitmentSummaryOutput').textContent = summaryText;
+        return summaryText;
+    }
     
-        // --- JSON Export ---
-        function generateJSONData() {
-            calculatePlan(); 
-            
-            const metadata = {
-                plan_version: "2026.36-Final-Bug-Fixes", // New version tag
-                date_exported: new Date().toISOString(),
-                rep_name: getStringValue('personName'),
-                manager_name: getStringValue('managerName'),
-                region: $('region').value || 'Unknown',
-                quota_2025: getNumberValue('quota2025'),
-                bookings_2025: getNumberValue('bookings2025'),
-            };
-    
-            const inputs = {
-                quota_2026: getNumberValue('quota2026'),
-                win_rate_2025: getNumberValue('winRate2025'),
-                avg_deal_size_2025: getNumberValue('avgDealSize2025'),
-                meetings_2025_avg: getNumberValue('avgMeetings2025'),
-                
-                lever_selected: getSelectedValue('primaryGoal'),
-                reflection: getSelectedValue('reflection'),
+    // --- Compilation Function for Managers ---
+    function generateJSONData() {
+        const metadata = {
+            plan_version: "2026.1",
+            date_exported: new Date().toISOString(),
+            rep_name: getStringValue('personName'),
+            manager_name: getStringValue('managerName'),
+        };
 
-                scenarios: {
-                    win_rate_improvement_pct: getNumberValue('winRateImprovement'),
-                    deal_size_improvement_pct: getNumberValue('dealSizeImprovement'),
-                    meetings_increase_abs: getNumberValue('meetingImprovement'),
-                    implied_win_rate_l3: getNumberValue('meetingsImpliedWinRate'),
-                },
-    
-                harmonized_targets: {
-                    win_rate_target_pct: window.planData.finalTargetWinRate || getNumberValue('winRate2025'), 
-                    deal_size_target_value: getNumberValue('avgDealSize2025') * (1 + (getNumberValue('dealSizeImprovement') / 100)),
-                    pipeline_required_target: window.planData.finalTargetPipeline || 0
-                }
-            };
-    
-            const actions = {
-                people: getStringValue('action-people'),
-                pipeline: getStringValue('action-pipeline'), // Re-added
-                productivity: getStringValue('action-productivity'),
-                forecast: getStringValue('action-forecast'),
-                account_plan: getStringValue('action-account-plan'),
-            };
-    
-            return { metadata, inputs, actions };
-        }
-    
-        // --- Wizard Logic ---
-        function showStep(stepIndex) {
-            document.querySelectorAll('.form-group').forEach(group => {
-                group.style.display = 'none';
-            });
-            document.querySelectorAll('.error-message').forEach(error => {
-                error.classList.add('hidden');
-            });
-            
-            currentStepIndex = stepIndex;
-            const step = steps[stepIndex];
-            const currentPhase = step.phase;
+        const inputs = {
+            quota_2026: getNumberValue('quota2026'),
+            win_rate_2025: getNumberValue('winRate2025'),
+            avg_deal_size_2025: getNumberValue('avgDealSize2025'),
+            lever_selected: getSelectedValue('primaryGoal'),
+            reflection: getSelectedValue('reflection'),
+            win_rate_target_pct: getNumberValue('winRate2025') + getNumberValue('winRateImprovement'),
+            deal_size_target_pct: 1 + (getNumberValue('dealSizeImprovement') / 100),
+            meetings_quarterly_target: getNumberValue('avgMeetings2025') + getNumberValue('meetingImprovement'),
+        };
 
-            // Update Progress Bar
-            for (let i = 1; i <= 4; i++) { // 4 segments
-                const seg = $(`progress-${i}`);
-                seg.classList.remove('active', 'complete');
-                if (i < currentPhase) {
-                    seg.classList.add('complete');
-                } else if (i === currentPhase) {
-                    seg.classList.add('active');
-                }
-            }
-            
-            // Update Conversation Bubble
-            const bubble = $('conversation-bubble');
-            bubble.classList.remove('phase-1-bubble', 'phase-2-bubble', 'phase-3-bubble', 'phase-4-bubble');
-            bubble.classList.add(`phase-${currentPhase}-bubble`);
+        const actions = {
+            people: getStringValue('action-people'),
+            pipeline: getStringValue('action-pipeline'),
+            productivity: getStringValue('action-productivity'),
+            forecast: getStringValue('action-forecast'),
+            account_plan: getStringValue('action-account-plan'),
+            cross_sell: getStringValue('action-cross-sell'),
+        };
 
-            if (typeof step.prompt === 'function') {
-                bubble.innerHTML = step.prompt();
-            } else {
-                bubble.innerHTML = step.prompt;
-            }
-    
-            // Show correct form group
-            const groupElements = document.querySelectorAll(`#group-${step.fieldId}`);
-            groupElements.forEach(el => {
-                el.style.display = 'block';
-            });
-            
-            // Special case: Lever groups (14, 15, 16) are grouped
-            if (stepIndex >= 14 && stepIndex <= 16) {
-                $('group-winRateImprovement').style.display = 'block';
-                $('group-dealSizeImprovement').style.display = 'block';
-                $('group-meetingImprovement').style.display = 'block';
-            }
-    
-            const isReviewStep = step.id === 'review';
-            if (isReviewStep) generateCommitmentSummary();
-    
-            // --- NEW Button Logic for Splash Page ---
-            const navContainer = $('navigation-buttons');
-            const navFlexGrow = $('nav-flex-grow'); // The spacer
-            const nextButton = $('nextButton');
-            const resetButton = $('resetButton');
+        return { metadata, inputs, actions };
+    }
 
-            if (stepIndex === 0) { // Splash page
-                navContainer.classList.add('justify-center'); // Center the whole bar
-                $('prevButton').style.display = 'none';
-                resetButton.style.display = 'none';
-                navFlexGrow.style.display = 'none'; // HIDE the spacer
-                nextButton.textContent = 'Get Started';
-                // Hide all other buttons as 'none'
-                $('printButton').style.display = 'none';
-                $('copyCommitmentButton').style.display = 'none';
-                $('exportJSONButton').style.display = 'none';
-            } else {
-                navContainer.classList.remove('justify-center'); // Revert to default
-                $('prevButton').style.display = 'inline-block';
-                resetButton.style.display = 'inline-block';
-                navFlexGrow.style.display = 'block'; // SHOW the spacer
-
-                // Set button text based on if it's a "welcome" step
-                if (step.id.includes('welcome')) {
-                    if (step.id.includes('phase1')) nextButton.textContent = 'Start Baseline →';
-                    else if (step.id.includes('phase2')) nextButton.textContent = 'See My Gap →';
-                    else if (step.id.includes('phase3')) nextButton.textContent = 'Start My Solution →';
-                } else {
-                    nextButton.textContent = 'Next →';
-                }
-                
-                // Regular button visibility logic
-                nextButton.style.display = isReviewStep ? 'none' : 'inline-block';
-                const finalActionsVisible = isReviewStep;
-                $('exportJSONButton').style.display = finalActionsVisible ? 'inline-block' : 'none';
-                $('copyCommitmentButton').style.display = finalActionsVisible ? 'inline-block' : 'none';
-                $('printButton').style.display = finalActionsVisible ? 'inline-block' : 'none';
-            }
-
-            // Focus first input (if it exists)
-            const currentInput = step.fieldId ? $(step.id) || document.querySelector(`#group-${step.fieldId} input, #group-${step.fieldId} select, #group-${step.fieldId} textarea`) : null;
-            if (currentInput) currentInput.focus();
-    
-            updateNextButtonState();
-        }
-    
-        function updateNextButtonState() {
-            const nextButton = $('nextButton');
-            if (!nextButton || steps[currentStepIndex].id === 'review') return;
+    // --- Data Download & Copy Handlers ---
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            const button = $('copyCommitmentButton');
+            const originalText = button.textContent;
             
-            // Scenario steps (14-16) do not have mandatory validation
-            if (currentStepIndex >= 14 && currentStepIndex <= 16) {
-                nextButton.disabled = false;
-                return;
-            }
+            button.textContent = 'COPIED!';
+            setTimeout(() => {
+                button.textContent = originalText;
+            }, 1500);
+        }).catch(err => {
+            console.error('Could not copy text: ', err);
+            alert("Failed to copy text. Please manually copy the text from the box above.");
+        });
+    }
+
+    function downloadJSON(data, filename) {
+        const json = JSON.stringify(data, null, 2);
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
     
-            const isValid = validateCurrentStep();
-            nextButton.disabled = !isValid;
-        }
-    
-        function nextStep() {
-            // Special case for Lever grouping
-            if (currentStepIndex >= 14 && currentStepIndex <= 16) {
-                 currentStepIndex = 17; // Skip directly to Primary Goal
-                 showStep(currentStepIndex);
-                 return;
-            }
-            
-            if (validateCurrentStep()) {
-                if (currentStepIndex < steps.length - 1) {
-                    currentStepIndex++;
-                    showStep(currentStepIndex);
-                }
-            }
-        }
-    
-        function previousStep() {
-            if (currentStepIndex > 0) {
-                // New 4-phase logic
-                if (currentStepIndex > 17) { // If on any action step
-                     currentStepIndex = 17; // Go back to Primary Goal
-                } else if (currentStepIndex >= 14 && currentStepIndex <= 16) { // If on Scenarios
-                    currentStepIndex = 13; // Go back to Phase 3 Welcome
-                } else if (currentStepIndex == 13) { // If on Phase 3 Welcome
-                    currentStepIndex = 12; // Go back to reflection
-                } else if (currentStepIndex == 10) { // If on Phase 2 Welcome
-                    currentStepIndex = 9; // Go back to Avg Meetings
-                } else if (currentStepIndex == 1) { // If on Phase 1 Welcome
-                    currentStepIndex = 0; // Go back to Intro
-                }
-                else {
-                    currentStepIndex--;
-                }
-                showStep(currentStepIndex);
-            }
-        }
-    
-        // --- Data Download & Copy Handlers ---
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                const button = $('copyCommitmentButton');
-                const originalText = button.textContent;
-                
-                button.textContent = 'COPIED!';
-                setTimeout(() => {
-                    button.textContent = originalText;
-                }, 1500);
-            }).catch(err => {
-                alert("Failed to copy text. Please manually copy the text from the box above.");
-            });
-        }
-    
-        function downloadJSON(data, filename) {
-            const json = JSON.stringify(data, null, 2);
-            const blob = new Blob([json], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+
+    // --- Wizard Logic ---
+    let currentStep = 1;
+    const totalSteps = 5; // NEW: 5 steps total
+
+    function showStep(step) {
+        // Run summary generation before navigating to Step 5
+        if (step === 5) {
+            generateCommitmentSummary();
         }
         
-        // --- Initialization ---
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // NEW: Global Enter Key listener
-            document.addEventListener('keydown', (event) => {
-                if (event.key === 'Enter') {
-                    // Don't submit if in a multi-line text area
-                    if (event.target.tagName === 'TEXTAREA') {
-                        return;
-                    }
-                    
-                    event.preventDefault(); // Stop default form submission
-                    
-                    // Programmatically click the "Next" button if it's visible and enabled
-                    const nextButton = $('nextButton');
-                    if (nextButton && nextButton.style.display !== 'none' && !nextButton.disabled) {
-                        nextButton.click();
-                    }
-                }
-            });
+        for (let i = 1; i <= totalSteps; i++) {
+            const stepContentEl = $(`step-${i}-content`);
+            if(stepContentEl) {
+                stepContentEl.classList.add('hidden');
+            }
+            const progressEl = $(`progress-${i}`);
+            if(progressEl) {
+                progressEl.classList.remove('progress-step-active');
+            }
+        }
+        
+        const currentStepContent = $(`step-${step}-content`);
+        if(currentStepContent) {
+            currentStepContent.classList.remove('hidden');
+        }
+        
+        for (let i = 1; i <= step; i++) {
+            const progressEl = $(`progress-${i}`);
+            if(progressEl) {
+                progressEl.classList.add('progress-step-active');
+            }
+        }
+        
+        const isFinalStep = (step === totalSteps);
+        
+        if($('prevButton')) $('prevButton').style.display = (step === 1) ? 'none' : 'inline-block';
+        if($('nextButton')) $('nextButton').style.display = isFinalStep ? 'none' : 'inline-block';
+        
+        // Show all final action buttons only on Step 5
+        if($('copyCommitmentButton')) $('copyCommitmentButton').style.display = isFinalStep ? 'inline-block' : 'none';
+        if($('exportJSONButton')) $('exportJSONButton').style.display = isFinalStep ? 'inline-block' : 'none';
+        if($('printButton')) $('printButton').style.display = isFinalStep ? 'inline-block' : 'none';
+        if($('resetButton')) $('resetButton').style.display = isFinalStep ? 'inline-block' : 'none';
+        
+        const heading = currentStepContent ? currentStepContent.querySelector('.step-heading') : null;
+        if (heading) {
+            heading.focus();
+        }
+    }
 
-            const inputsToTrack = [
-                'quota2025', 'bookings2025', 'avgDealSize2025', 'region', 'personName', 'managerName', 'avgMeetings2025',
-                'quota2026',
-                'winRateImprovement', 'dealSizeImprovement', 'meetingsImpliedWinRate_visible',
-                'action-people', 'action-pipeline', 'action-productivity', 'action-forecast', 'action-account-plan'
-            ];
-            
-            inputsToTrack.forEach(id => {
-                const el = $(id);
-                if (el) {
-                    const changeHandler = () => {
-                        calculatePlan();
-                        updateNextButtonState(); // VALIDATION BUG FIX: Check state on every input
-                    };
-                    el.addEventListener('input', changeHandler);
-                    el.addEventListener('change', changeHandler);
-                }
-            });
-            
-            const radioNames = ['reflection', 'primaryGoal'];
-            radioNames.forEach(name => {
-                document.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
-                    const radioChangeHandler = () => {
-                        calculatePlan();
-                        updateNextButtonState(); // VALIDATION BUG FIX: Check state on change
-                    };
-                    radio.addEventListener('change', radioChangeHandler);
-                });
-            });
+    // --- Event Listeners ---
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        const inputsToTrack = [
+            'quota2025', 'bookings2025', 'avgDealSize2025', 
+            'quota2026', 'winRate2025', 'avgMeetings2025', 'winRateImprovement', 
+            'dealSizeImprovement', 'meetingImprovement', 'meetingsImpliedWinRate'
+        ];
+        
+        inputsToTrack.forEach(id => {
+            const el = $(id);
+            if (el) {
+                el.addEventListener('input', calculatePlan);
+            }
+        });
 
-            // NEW: Clickable Progress Bar Listeners
-            document.querySelectorAll('.progress-segment').forEach(segment => {
-                segment.addEventListener('click', () => {
-                    const clickedPhase = parseInt(segment.dataset.phase);
-                    const currentPhase = steps[currentStepIndex].phase;
-                    
-                    if (clickedPhase < currentPhase) {
-                        // Find the "front page" step for that phase
-                        let targetStepIndex = steps.findIndex(step => step.phase === clickedPhase && (step.id.includes('welcome') || step.id.includes('intro')));
-                        
-                        if (targetStepIndex === -1) { // Failsafe
-                             targetStepIndex = steps.findIndex(step => step.phase === clickedPhase);
-                        }
-                        
-                        showStep(targetStepIndex);
-                    }
-                });
-            });
-    
-            $('nextButton').addEventListener('click', nextStep);
-            $('prevButton').addEventListener('click', previousStep);
-            
-            $('resetButton').addEventListener('click', () => {
-                if(confirm("Are you sure you want to start over? All entered data will be lost.")) {
-                    if($('skoForm')) $('skoForm').reset();
-                    calculatePlan();
-                    showStep(0);
-                    if($('main-heading')) $('main-heading').focus();
+        // Navigation button listeners
+        const nextBtn = $('nextButton');
+        if(nextBtn) {
+            nextBtn.addEventListener('click', (e) => {
+                e.preventDefault(); 
+                if (currentStep < totalSteps) {
+                    currentStep++;
+                    showStep(currentStep);
                 }
             });
-    
-            $('printButton').addEventListener('click', () => {
-                if (confirm("Is this your final, correct plan? This will prepare a PDF copy for your records.")) {
-                    window.print();
+        }
+
+        const prevBtn = $('prevButton');
+        if(prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                if (currentStep > 1) {
+                    currentStep--;
+                    showStep(currentStep);
                 }
             });
-            
-            $('copyCommitmentButton').addEventListener('click', () => {
+        }
+        
+        const resetBtn = $('resetButton');
+        if(resetBtn) {
+            resetBtn.addEventListener('click', () => {
+                if($('skoForm')) $('skoForm').reset();
+                calculatePlan();
+                currentStep = 1;
+                showStep(currentStep);
+                if($('main-heading')) $('main-heading').focus();
+            });
+        }
+
+        // Print button for PDF export
+        const printBtn = $('printButton');
+        if(printBtn) {
+            printBtn.addEventListener('click', () => {
+                window.print();
+            });
+        }
+        
+        // Copy Commitment button handler
+        const copyBtn = $('copyCommitmentButton');
+        if (copyBtn) {
+            copyBtn.addEventListener('click', () => {
                 const summary = generateCommitmentSummary();
                 copyToClipboard(summary);
             });
-            
-            $('exportJSONButton').addEventListener('click', () => {
+        }
+        
+        // JSON Export button handler
+        const jsonBtn = $('exportJSONButton');
+        if (jsonBtn) {
+            jsonBtn.addEventListener('click', () => {
                 const data = generateJSONData();
                 const repName = getStringValue('personName') || 'SalesRep';
                 const fileName = `Trimble_2026_Plan_${repName.replace(/\s/g, '_')}.json`;
                 downloadJSON(data, fileName);
             });
-    
-            calculatePlan();
-            showStep(0);
-        });
-    </script>
+        }
 
-</body>
-</html>
+        // Initial setup on page load
+        calculatePlan();
+        showStep(currentStep);
+    });
+</script>
