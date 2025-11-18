@@ -49,7 +49,7 @@
             @apply text-gray-700 mb-3 text-base;
         }
 
-        /* TOOLTIPS */
+        /* TOOLTIPS (Standardized) */
         .tooltip-container {
             position: relative; display: inline-flex; vertical-align: middle; margin-left: 8px; z-index: 50;
         }
@@ -60,6 +60,7 @@
             transition: background-color 0.2s;
         }
         .tooltip-trigger:hover { background-color: #0063a3; }
+        
         .tooltip-popup {
             visibility: hidden; opacity: 0; position: absolute; bottom: 140%; left: 50%;
             transform: translateX(-50%) translateY(5px);
@@ -68,6 +69,7 @@
             white-space: normal; width: 220px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
             transition: all 0.2s ease-out; pointer-events: none;
         }
+        /* Triangle arrow for tooltip */
         .tooltip-popup::after {
             content: ""; position: absolute; top: 100%; left: 50%; margin-left: -5px;
             border-width: 5px; border-style: solid; border-color: #1f2937 transparent transparent transparent;
@@ -124,6 +126,11 @@
             margin-top: -8px; transition: transform 0.1s;
         }
         input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.1); }
+        
+        /* SLIDER CONTEXT TEXT */
+        .slider-context {
+            @apply text-xs text-gray-500 mt-1 italic;
+        }
 
         /* VALIDATION STATES */
         .input-error { border-color: #e11d48 !important; background-color: #fff1f2; }
@@ -425,30 +432,30 @@
 
                         <div class="space-y-10">
                             <div class="action-block">
-                                <h4>1. People & Skills Commitment</h4>
+                                <h4>1. People & Skills Commitment <div class="tooltip-container"><span class="tooltip-trigger">?</span><div class="tooltip-popup">e.g. "I will complete the Negotiation Certification."</div></div></h4>
                                 <div class="action-context">
                                     <strong>Why this matters:</strong> Growth requires new capabilities. <br>
-                                    <strong>The Ask:</strong> To hit the efficiency gains modeled above, what is the one specific competency you will master in Q1?
+                                    <strong>The Ask:</strong> Identify one specific competency gap (e.g. Negotiation, Technical Demo) and the exact date you will complete coaching/certification for it.
                                 </div>
                                 <input type="text" id="act-people" class="input-field required" placeholder="e.g., 'I will complete the Negotiation Certification by Feb 28th to improve my close rate...'">
                                 <p class="error-text" id="err-act-people">Please define your People commitment.</p>
                             </div>
 
                             <div class="action-block">
-                                <h4>2. Process & Pipeline Commitment</h4>
+                                <h4>2. Process & Pipeline Commitment <div class="tooltip-container"><span class="tooltip-trigger">?</span><div class="tooltip-popup">e.g. "I will disqualify bad deals earlier."</div></div></h4>
                                 <div class="action-context">
                                     <strong>Why this matters:</strong> Pipeline quality determines forecast accuracy. <br>
-                                    <strong>The Ask:</strong> What specific, recurring weekly routine will you start to ensure your deals are real and advancing?
+                                    <strong>The Ask:</strong> Define a specific, weekly routine you will start (e.g. 'Murder Board' reviews) to ensure your deals are real and advancing.
                                 </div>
                                 <input type="text" id="act-process" class="input-field required" placeholder="e.g., 'I will conduct a formal 'Murder Board' review of my Top 10 deals every Friday at 9am...'">
                                 <p class="error-text" id="err-act-process">Please define your Process commitment.</p>
                             </div>
 
                             <div class="action-block">
-                                <h4>3. Productivity Commitment</h4>
+                                <h4>3. Productivity Commitment <div class="tooltip-container"><span class="tooltip-trigger">?</span><div class="tooltip-popup">e.g. "I will block 2 hours for prospecting."</div></div></h4>
                                 <div class="action-context">
                                     <strong>Why this matters:</strong> Time is your scarcest resource. <br>
-                                    <strong>The Ask:</strong> Exactly how will you structure your calendar to protect your "Golden Hours" for high-value selling?
+                                    <strong>The Ask:</strong> How exactly will you structure your calendar to protect your "Golden Hours" for selling? Be specific about days and times.
                                 </div>
                                 <input type="text" id="act-prod" class="input-field required" placeholder="e.g., 'I will block 8:00am-10:00am every Tuesday/Thursday for net-new prospecting...'">
                                 <p class="error-text" id="err-act-prod">Please define your Productivity commitment.</p>
