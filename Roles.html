@@ -14,7 +14,7 @@
                         'primary': '#0063a3',      // Trimble Blue
                         'primary-hover': '#004a7c',
                         'accent': '#fbad26',       // Trimble Yellow
-                        'primary-text': '#252a2e', // Dark Gray (FIXED: Used for Headings)
+                        'primary-text': '#252a2e', // Dark Gray (Headings)
                         'soft-bg': '#f3f6f9',      // Light Gray
                         'error-red': '#e11d48',    // Softer Red
                     },
@@ -43,35 +43,34 @@
             @apply bg-blue-50 border-l-4 border-primary text-primary-text p-4 mb-8 rounded-r-md text-sm leading-relaxed;
         }
 
-        /* ANIMATED TOOLTIPS (FIXED) */
+        /* --- SIMPLE TOOLTIPS (FIXED) --- */
         .tooltip-container {
             position: relative;
             display: inline-block;
             margin-left: 8px;
             vertical-align: middle;
-            z-index: 50;
+            cursor: help;
         }
         
-        .tooltip-trigger {
+        .tooltip-trigger-icon {
             display: inline-flex; align-items: center; justify-content: center;
-            width: 20px; height: 20px;
-            background-color: #d1d5db; color: white; border-radius: 50%;
-            cursor: help; transition: background-color 0.2s;
+            width: 18px; height: 18px;
+            background-color: #9ca3af; color: white; border-radius: 50%;
             font-size: 12px; font-weight: bold;
+            transition: background-color 0.2s;
         }
         
-        .tooltip-trigger:hover {
-            background-color: #0063a3;
-        }
+        .tooltip-trigger-icon:hover { background-color: #0063a3; }
         
         .tooltip-popup {
             visibility: hidden; opacity: 0;
             position: absolute; bottom: 130%; left: 50%;
             transform: translateX(-50%) translateY(5px);
             background-color: #1f2937; color: white;
-            text-align: center; padding: 10px 14px;
-            border-radius: 6px; font-size: 0.8rem; font-weight: 500;
-            line-height: 1.4; white-space: normal; width: 220px;
+            text-align: center; padding: 8px 12px;
+            border-radius: 6px; font-size: 0.75rem; font-weight: 500;
+            line-height: 1.4; white-space: normal; width: 200px;
+            z-index: 100;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             transition: all 0.2s ease-out;
             pointer-events: none;
@@ -200,10 +199,9 @@
                         <div class="text-center max-w-3xl mx-auto space-y-8">
                             
                             <div class="prose max-w-none text-gray-600">
-                                <h2 class="text-2xl font-bold text-primary-text mb-4">Your Plan. Your Year.</h2>
+                                <h2 class="text-2xl font-bold text-gray-800 mb-4">Your Plan. Your Year.</h2>
                                 <p class="text-lg leading-relaxed">
-                                    Success isn't just about hitting a target; it's about having a clear path to get there. 
-                                    We built this tool to help you translate your 2026 goals into a personal roadmap you can own.
+                                    This year is focused on <strong>Agency</strong>. Success is achieved by translating corporate goals into a personal roadmap you control. This tool is your guide to building that path.
                                 </p>
                             </div>
 
@@ -232,7 +230,7 @@
                                         <strong>If you have a Sales Scorecard:</strong> Please verify you have access to your 2025 Quota, Bookings, and Win Rate.
                                     </p>
                                     <p>
-                                        <strong>If your role doesn't use a scorecard:</strong> Don't worry. You can still use this tool to set objectives and build your action plan.
+                                        <strong>If your role doesn't use a scorecard:</strong> Don't worry. This tool still helps you set objectives and build your action plan.
                                     </p>
                                 </div>
                             </div>
@@ -579,7 +577,7 @@
         setTxt('lbl-actual25', data.lbl.a25); $('tip-actual25').textContent = data.lbl.a25tip;
         setTxt('lbl-efficiency25', data.lbl.e25); $('tip-efficiency25').textContent = data.lbl.e25tip;
         setTxt('lbl-dealSize25', data.lbl.d25); $('tip-dealSize25').textContent = data.lbl.d25tip;
-        setTxt('lbl-quota26', data.lbl.q26);
+        setTxt('lbl-quota26', data.lbl.q26); $('tip-quota26').textContent = data.lbl.q26tip || 'Your new target for the coming year.';
         setTxt('lbl-resultA', data.lbl.resA);
         setTxt('lbl-resultB', data.lbl.resB);
 
