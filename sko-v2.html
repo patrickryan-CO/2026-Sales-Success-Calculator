@@ -196,6 +196,7 @@
             list-style-position: inside;
             margin-left: 0.5rem;
             margin-top: 0.5rem;
+            font-size: 0.95rem;
         }
 
 
@@ -722,7 +723,7 @@
         const iconBaseline = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-16 w-16 md:h-24 md:w-24"><path fill="#0063a3" fill-opacity="0.2" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25z" /><path stroke="#0063a3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 18a.75.75 0 00.75-.75V8.668l3.374 1.948a.75.75 0 10.75-1.3l-4.5-2.6a.75.75 0 00-.75 0l-4.5 2.6a.75.75 0 10.75 1.3L11.25 8.67v8.58a.75.75 0 00.75.75z" /></svg>`;
         const iconGap = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-16 w-16 md:h-24 md:w-24"><path fill="#fbad26" fill-opacity="0.2" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25z" /><path stroke="#fbad26" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M15.364 15.364l-1.06-1.06a.75.75 0 01-1.06 1.06l-4.243 4.242a.75.75 0 01-1.06-1.06l4.242-4.243a.75.75 0 011.06-1.06l1.06 1.06zM9.75 12a2.25 2.25 0 114.5 0 2.25 2.25 0 01-4.5 0z" /><path stroke="#fbad26" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>`;
         const iconSolution = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-16 w-16 md:h-24 md:w-24"><path fill="#02542e" fill-opacity="0.2" d="M12.75 3.1a.75.75 0 00-1.5 0v5.844l-2.47-2.47a.75.75 0 00-1.06 1.06L12 11.78l4.28-4.28a.75.75 0 00-1.06-1.06L12.75 8.934V3.1z" /><path fill="#02542e" fill-opacity="0.2" d="M12 21.75a9.75 9.75 0 01-9.75-9.75c0-3.268 1.593-6.19 4.07-7.974a.75.75 0 011.06 1.06A8.25 8.25 0 003.75 12c0 4.54 3.71 8.25 8.25 8.25s8.25-3.71 8.25-8.25a8.25 8.25 0 00-3.63-6.814.75.75 0 111.06-1.06C19.907 5.81 21.5 8.732 21.5 12a9.75 9.75 0 01-9.75 9.75H12z" /><path stroke="#02542e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 11.78l-4.28-4.28a.75.75 0 00-1.06 1.06L10.94 13.06l-4.22 4.22a.75.75 0 101.06 1.06L12 14.12l4.22 4.22a.75.75 0 101.06-1.06l-4.22-4.22 4.28-4.28a.75.75 0 00-1.06-1.06L12 11.78z" /></svg>`;
-        const iconReview = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-16 w-16 md:h-24 md:w-24"><path fill="#252a2e" fill-opacity="0.2" d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v11.25C1.5 17.16 2.34 18 3.375 18h9.75a3 3 0 003-3V9.375c0-.866-.354-1.658-.93-2.235l-3.03-3.03A3.001 3.001 0 009.875 3H3.375z" /><path stroke="#252a2e" stroke-width="1.post" stroke-linecap="round" stroke-linejoin="round" d="M9 3.75v3.875c0 .414.336.75.75.75h3.875m-6-1.5h6m-6 3h6m-6 3h4.5m4.5 6H21a.75.75 0 00.75-.75V11.812a3 3 0 00-.878-2.121l-3.878-3.878A3 3 0 0015.188 5H15v3.75c0 .414.336.75.75.75h3.75v9.75a1.5 1.5 0 01-1.5 1.5H9.375a3 3 0 01-2.822-2H15v.001z" /></svg>`;
+        const iconReview = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-16 w-16 md:h-24 md:w-24"><path fill="#252a2e" fill-opacity="0.2" d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v11.25C1.5 17.16 2.34 18 3.375 18h9.75a3 3 0 003-3V9.375c0-.866-.354-1.658-.93-2.235l-3.03-3.03A3.001 3.001 0 009.875 3H3.375z" /><path stroke="#252a2e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M9 3.75v3.875c0 .414.336.75.75.75h3.875m-6-1.5h6m-6 3h6m-6 3h4.5m4.5 6H21a.75.75 0 00.75-.75V11.812a3 3 0 00-.878-2.121l-3.878-3.878A3 3 0 0015.188 5H15v3.75c0 .414.336.75.75.75h3.75v9.75a1.5 1.5 0 01-1.5 1.5H9.375a3 3 0 01-2.822-2H15v.001z" /></svg>`;
 
         
         // --- Step Definitions (The Core Conversation) ---
@@ -734,8 +735,14 @@
                        <p class='prompt-why text-center'>This is your <strong>personal roadmap to hitting your 2026 number.</strong></p>
                        <p class='prompt-why'><strong>What's the Goal?</strong><br>This tool is your personal coach. We will help you turn your quota into a set of clear, measurable actions you can take every day. The goal is to create a plan <em>you</em> own, one that helps you and your manager stay aligned on how to win all year.</p>
                        <div class='splash-callout'>
-                         <strong>What You'll Need:</strong><br>
-                         To make this easy, please have your <strong>Sales Scorecard</strong> open. You'll need it for the first few steps to pull your 2025 performance numbers (like Quota, Bookings, and Win Rate).
+                         <strong>What You'll Need:</strong>
+                         <p class="font-normal mt-2">To make this easy, please have your <strong>Sales Scorecard</strong> open. You'll need it for the first few steps to pull your 2025 performance numbers:</p>
+                         <ul class="font-normal">
+                            <li>• Your 2025 Quota</li>
+                            <li>• Your 2025 Bookings</li>
+                            <li>• Your Baseline Win Rate %</li>
+                            <li>• Your Avg. Deal Size</li>
+                         </ul>
                        </div>`
             }, // 0
             
@@ -849,10 +856,20 @@
             if (errorElement) errorElement.classList.add('hidden');
     
             if (input && input.classList.contains('required-field') && !value) {
-                isValid = false;
+                // Special check for '0' being a valid entry for some numeric fields
+                if (isNumeric) {
+                    const fieldsThatAllowZero = ['bookings2025', 'winRate2025', 'avgMeetings2025', 'meetingsImpliedWinRate_visible'];
+                    if (fieldsThatAllowZero.includes(fieldId) && input.value === '0') {
+                         isValid = true;
+                    } else {
+                         isValid = false;
+                    }
+                } else {
+                     isValid = false;
+                }
             } 
-            // UPDATED VALIDATION: Allow 0 for some fields
-            else if (isNumeric) {
+            
+            if (isNumeric) {
                 if (!isFinite(numValue) || numValue < 0) {
                      isValid = false; // Always fail if negative or not a number
                 } else if (numValue === 0) {
@@ -861,7 +878,6 @@
                     if (fieldsThatMustBeGreaterThanZero.includes(fieldId)) {
                         isValid = false;
                     }
-                    // Note: winRate2025, bookings2025, avgMeetings2025, etc. ARE allowed to be 0
                 }
             }
             
@@ -1033,7 +1049,7 @@ Generated by the Trimble 2026 Success Planner.
             calculatePlan(); 
             
             const metadata = {
-                plan_version: "2026.32-Final-Bug-Fixes", // New version tag
+                plan_version: "2026.33-Final-Bug-Fixes", // New version tag
                 date_exported: new Date().toISOString(),
                 rep_name: getStringValue('personName'),
                 manager_name: getStringValue('managerName'),
