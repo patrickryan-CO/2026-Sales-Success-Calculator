@@ -120,7 +120,7 @@
         /* SWOOP HEADER */
         .header-swoop {
             background-color: #0063a3;
-            width: 100%; height: 240px;
+            width: 100%; height: 220px;
             position: absolute; top: 0; left: 0; z-index: 0;
             overflow: hidden;
         }
@@ -622,7 +622,6 @@
         if(size > 0) {
             valB = valA / size; 
         } else {
-            // Fallback for SDRs if no deal size
             valB = valA; 
         }
 
@@ -635,7 +634,6 @@
         const currentPanel = $(`step-${step}`);
         
         const inputs = Array.from(currentPanel.querySelectorAll('.required')).filter(el => {
-             // CRITICAL FIX: Only validate visible elements (to skip hidden compliance math fields)
             return el.offsetParent !== null;
         });
         
@@ -652,7 +650,7 @@
         });
 
         // Radio Check (Step 3 only)
-        if(step === 3 && $('userRole').value !== 'COMPLIANCE') {
+        if(step === 3) {
             const checked = document.querySelector('input[name="reflection"]:checked');
             const err = $('err-reflection');
             if(!checked) {
@@ -782,7 +780,9 @@ ACTION PLAN
     };
 
     // Init
-    updateLabels();
+    document.addEventListener('DOMContentLoaded', () => {
+        updateLabels(); 
+    });
 </script>
 
 </body>
