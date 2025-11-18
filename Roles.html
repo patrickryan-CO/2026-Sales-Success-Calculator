@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trimble 2026 Success Plan (Multi-Role)</title>
+    <title>Trimble 2026 Success Plan</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -13,7 +13,7 @@
                     colors: {
                         'primary': '#0063a3',      // Trimble primary blue
                         'accent': '#fbad26',       // Trimble accent orange/amber
-                        'primary-text': '#252a2e', // Trimble primary dark text
+                        'primary-text': '#252a2e', // Trimble primary dark text (Gray)
                         'error-red': '#B91C1C',    // For validation
                         'neutral-bg': '#f3f6f9',   // Light gray background
                     },
@@ -27,7 +27,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         /* BASE STYLES */
@@ -194,7 +194,7 @@
     <div class="relative z-10 max-w-4xl mx-auto p-6 md:p-10 bg-white rounded-lg shadow-2xl -mt-20 mb-12">
         
         <header class="mb-10 text-center space-y-4">
-            <h1 id="main-heading" tabindex="-1" class="text-4xl font-bold text-primary">The Trimble 2026 Success Plan</h1>
+            <h1 id="main-heading" tabindex="-1" class="text-4xl font-bold text-primary-text">The Trimble 2026 Success Plan</h1>
             <p class="text-xl font-bold text-primary">Personal Commitment Plan</p>
         </header>
 
@@ -209,30 +209,62 @@
             <form id="skoForm" onsubmit="return false;">
 
                 <div id="step-0-content" class="step-panel">
-                    <section class="text-center">
-                        <svg class="mx-auto h-16 w-16 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M10.125 2.25h-4.5c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 019 9v.375M10.125 2.25A3.375 3.375 0 0113.5 5.625v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 013.375 3.375M9 15l2.25 2.25L15 12" />
-                        </svg>
+                    <section class="text-center space-y-8">
+                        <div class="flex justify-center">
+                            <div class="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center">
+                                <svg class="h-10 w-10 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                                </svg>
+                            </div>
+                        </div>
 
-                        <h2 class="text-2xl font-bold text-primary mt-4 mb-4">Welcome to Your 2026 Success Plan!</h2>
-                        <p class="text-lg text-primary-text">This is your <span class="font-bold text-primary">personal roadmap to hitting your 2026 number.</span></p>
+                        <div>
+                            <h2 class="text-3xl font-extrabold text-primary-text mb-4">Own Your Number. Build Your Path.</h2>
+                            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                                Welcome to SKO 2026. This isn't just another form—it's your personal roadmap to success.
+                            </p>
+                        </div>
                         
-                        <div class="text-left mt-6 space-y-4">
-                            <div class="bg-blue-50 p-4 rounded-md border border-blue-200 mb-6">
-                                <label for="userRole" class="block text-sm font-bold text-primary mb-2">Select Your Role:</label>
-                                <select id="userRole" class="input-field cursor-pointer">
-                                    <option value="AE">Account Executive (AE)</option>
-                                    <option value="SDR">Sales Development (SDR/BDR)</option>
-                                    <option value="SE">Solutions Engineer (SE)</option>
-                                    <option value="ECOMM">eCommerce</option>
-                                    <option value="COMPLIANCE">Compliance / Ops</option>
-                                </select>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left mt-8">
+                            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                                <h3 class="text-lg font-bold text-primary mb-2">1. The What</h3>
+                                <p class="text-sm text-primary-text">You will build a specific, actionable plan to hit your 2026 target using your own 2025 data.</p>
+                            </div>
+                            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                                <h3 class="text-lg font-bold text-primary mb-2">2. The Why</h3>
+                                <p class="text-sm text-primary-text">Targets are corporate. Plans are personal. This tool helps you take control of your year.</p>
+                            </div>
+                            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                                <h3 class="text-lg font-bold text-primary mb-2">3. The Outcome</h3>
+                                <p class="text-sm text-primary-text">You will leave with a PDF commitment plan to review with your manager.</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="step-1-content" class="step-panel hidden">
+                    <section class="text-center">
+                        <h2 class="text-2xl font-bold text-primary-text mb-6">Let's Get Set Up</h2>
+                        
+                        <div class="text-left max-w-xl mx-auto space-y-6">
+                            <div>
+                                <label for="userRole" class="block text-base font-bold text-primary-text mb-2">First, please select your role:</label>
+                                <div class="relative">
+                                    <select id="userRole" class="input-field cursor-pointer py-3 text-lg bg-white">
+                                        <option value="AE">Account Executive (AE)</option>
+                                        <option value="SDR">Sales Development (SDR)</option>
+                                        <option value="SE">Sales Engineer (SE)</option>
+                                        <option value="ECOMM">eCommerce</option>
+                                        <option value="COMPLIANCE">Compliance / Ops</option>
+                                    </select>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-2">The wizard will adapt the metrics to match your role.</p>
                             </div>
 
-                            <div class="bg-gray-50 border border-gray-300 rounded-lg p-6">
-                                <h3 class="text-lg font-semibold text-primary">What You'll Need:</h3>
-                                <p class="mt-2 text-primary-text">To make this easy, please have your <strong class="text-primary">Scorecard</strong> open.</p>
-                                <ul class="list-disc list-inside mt-3 space-y-1 text-primary-text" id="required-docs-list">
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                                <h3 class="text-lg font-semibold text-primary mb-3">What You'll Need:</h3>
+                                <p class="mb-2 text-primary-text">To make this easy, please have your <strong class="text-primary">Scorecard</strong> open.</p>
+                                <ul class="list-disc list-inside space-y-2 text-primary-text" id="required-docs-list">
                                     <li>Your 2025 Quota & Bookings</li>
                                     <li>Your Win Rate %</li>
                                     <li>Your Avg. Deal Size</li>
@@ -242,8 +274,8 @@
                     </section>
                 </div>
 
-                <div id="step-1-content" class="step-panel hidden">
-                    <h2 class="step-heading" tabindex="-1">Step 1: BASELINE - My 2025 Look Back</h2>
+                <div id="step-2-content" class="step-panel hidden">
+                    <h2 class="step-heading text-primary-text" tabindex="-1">Step 1: BASELINE - My 2025 Look Back</h2>
                     <div class="instruction-box">
                         <strong>INSTRUCTIONS:</strong> Let's establish your starting point. Use your Scorecard to enter your 2025 baseline data.
                     </div>
@@ -302,8 +334,8 @@
                     </div>
                 </div>
 
-                <div id="step-2-content" class="step-panel hidden">
-                    <h2 class="step-heading" tabindex="-1">Step 2: THE GAP - The 2026 Formula</h2>
+                <div id="step-3-content" class="step-panel hidden">
+                    <h2 class="step-heading text-primary-text" tabindex="-1">Step 2: THE GAP - The 2026 Formula</h2>
                     
                     <div class="instruction-box" id="gap-instructions">
                         <strong>INSTRUCTIONS:</strong> Enter your 2026 Target. We will calculate the 'Gap' based on your 2025 efficiency.
@@ -338,8 +370,8 @@
                     </div>
                 </div>
 
-                <div id="step-3-content" class="step-panel hidden">
-                    <h2 class="step-heading" tabindex="-1">Step 3: SOLUTION - My Action Plan</h2>
+                <div id="step-4-content" class="step-panel hidden">
+                    <h2 class="step-heading text-primary-text" tabindex="-1">Step 3: SOLUTION - My Action Plan</h2>
                     <div class="instruction-box">
                         <strong>INSTRUCTIONS:</strong> Commit to specific actions to close your gap.
                     </div>
@@ -368,8 +400,8 @@
                     </div>
                 </div>
                 
-                <div id="step-4-content" class="step-panel hidden">
-                    <h2 class="step-heading" tabindex="-1">Step 4: REVIEW - My Commitment</h2>
+                <div id="step-5-content" class="step-panel hidden">
+                    <h2 class="step-heading text-primary-text" tabindex="-1">Step 4: REVIEW - My Commitment</h2>
                     <div class="instruction-box">
                         <strong>INSTRUCTIONS:</strong> Review your plan. Click <strong>Export JSON</strong> for your manager.
                     </div>
@@ -384,7 +416,7 @@
                          <button type="button" id="printButton" class="nav-button nav-button-default text-center" style="display: none;">Save as PDF</button>
                          <button type="button" id="copyCommitmentButton" class="nav-button nav-button-primary text-center" style="display: none;">Copy</button>
                          <button type="button" id="exportJSONButton" class="nav-button nav-button-accent text-center" style="display: none;">Export JSON</button>
-                         <button type="button" id="nextButton" class="nav-button nav-button-primary">Next</button>
+                         <button type="button" id="nextButton" class="nav-button nav-button-primary">Start</button>
                     </div>
                 </div>
 
@@ -550,13 +582,18 @@
     }
 
     // --- WIZARD NAVIGATION ---
+    // Step 0: Intro
+    // Step 1: Role Select
+    // Step 2: Baseline
+    // Step 3: Gap
+    // Step 4: Solution
+    // Step 5: Review
     let currentStep = 0;
-    const totalSteps = 4;
+    const totalSteps = 5;
 
     function validateStep(step) {
         let valid = true;
         // Validation logic same as before (check .required-field)
-        // Note: For simplified code, basic check:
         const fields = document.querySelectorAll(`#step-${step}-content .required-field`);
         fields.forEach(f => {
             if (!f.value.trim()) {
@@ -571,8 +608,8 @@
             }
         });
         
-        // Radio check for Step 2 (unless Compliance)
-        if(step === 2 && $('userRole').value !== 'COMPLIANCE') {
+        // Radio check for Step 3 (GAP) - (Unless Compliance)
+        if(step === 3 && $('userRole').value !== 'COMPLIANCE') {
              if(!document.querySelector('input[name="reflection"]:checked')) {
                  $('error-reflection').classList.add('show');
                  valid = false;
@@ -584,36 +621,45 @@
     }
 
     function showStep(step) {
-        if (step === 4) $('commitmentSummaryOutput').textContent = generateSummary();
+        if (step === 5) $('commitmentSummaryOutput').textContent = generateSummary();
 
-        for(let i=0; i<=4; i++) {
+        for(let i=0; i<=5; i++) {
             if($(`step-${i}-content`)) $(`step-${i}-content`).classList.add('hidden');
         }
         $(`step-${step}-content`).classList.remove('hidden');
 
         // Update UI
-        const isWelcome = (step === 0);
-        const isFinal = (step === 4);
+        const isIntro = (step === 0);
+        const isRole = (step === 1);
+        const isApp = (step > 1);
+        const isFinal = (step === 5);
         
-        $('progress-bar-container').style.display = isWelcome ? 'none' : 'flex';
+        // Progress Bar: Only show for steps 2-5
+        $('progress-bar-container').style.display = isApp ? 'flex' : 'none';
         
-        // Update Progress Tabs
-        if(!isWelcome) {
+        if(isApp) {
             ['baseline','gap','solution','review'].forEach((id, idx) => {
-                $(`progress-${id}`).className = (idx + 1 === step) ? 'progress-tab progress-tab-active' : 'progress-tab';
+                // steps 2,3,4,5 correspond to indices 0,1,2,3
+                $(`progress-${id}`).className = (idx === step - 2) ? 'progress-tab progress-tab-active' : 'progress-tab';
             });
         }
 
         // Buttons
-        $('prevButton').style.display = (step > 0 && step < 4) ? 'inline-block' : (step === 4 ? 'inline-block' : 'none');
-        $('nextButton').style.display = (step < 4) ? 'inline-block' : 'none';
-        $('nextButton').textContent = isWelcome ? 'Get Started' : 'Next';
+        // Hide Previous on Intro (0) and Role (1)
+        $('prevButton').style.display = (step > 1 && step < 5) ? 'inline-block' : (step === 5 ? 'inline-block' : 'none');
+        
+        // Next Button
+        $('nextButton').style.display = (step < 5) ? 'inline-block' : 'none';
+        if (step === 0) $('nextButton').textContent = 'Start';
+        else if (step === 1) $('nextButton').textContent = 'Next';
+        else $('nextButton').textContent = 'Next';
         
         const finalBtns = ['resetButton','printButton','copyCommitmentButton','exportJSONButton'];
         finalBtns.forEach(b => $(b).style.display = isFinal ? 'inline-block' : 'none');
         
+        // Alignments
         if(step === 0) {
-             $('navigation-buttons').classList.remove('justify-center'); // Right align Get Started
+             $('navigation-buttons').classList.remove('justify-center'); 
              $('nav-spacer').style.display = 'block';
         }
     }
@@ -626,7 +672,8 @@
         });
         
         $('nextButton').addEventListener('click', () => {
-             if(currentStep === 0 || validateStep(currentStep)) {
+             // No validation on Intro (0), Role (1) is mostly select
+             if(currentStep < 2 || validateStep(currentStep)) {
                  currentStep++;
                  showStep(currentStep);
              }
