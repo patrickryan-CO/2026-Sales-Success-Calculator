@@ -80,7 +80,7 @@
             font-size: 1rem; font-weight: 700; color: #1f2937; margin-bottom: 0.25rem;
         }
         .input-prompt {
-            display: block; font-size: 0.9rem; color: #4b5563; margin-bottom: 0.5rem; line-height: 1.5;
+            display: block; font-size: 0.85rem; color: #4b5563; margin-bottom: 0.5rem; line-height: 1.4; font-style: italic;
         }
         .input-field {
             display: block; width: 100%;
@@ -93,20 +93,6 @@
             box-shadow: 0 0 0 3px rgba(0, 99, 163, 0.1);
         }
         
-        /* ACTION BLOCKS */
-        .action-block {
-            @apply border-l-4 border-gray-300 pl-5 py-2 mb-8 transition-colors;
-        }
-        .action-block:focus-within {
-            @apply border-primary;
-        }
-        .action-block h4 {
-            @apply text-lg font-bold text-gray-800 mb-1;
-        }
-        .action-context {
-            @apply text-sm text-gray-600 mb-3 bg-gray-50 p-3 rounded-md border border-gray-100;
-        }
-
         /* SLIDERS */
         .slider-group { @apply mb-6; }
         input[type=range] {
@@ -121,6 +107,11 @@
             margin-top: -8px; transition: transform 0.1s;
         }
         input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.1); }
+        
+        /* SLIDER CONTEXT TEXT */
+        .slider-context {
+            @apply text-xs text-gray-500 mt-1 italic;
+        }
 
         /* VALIDATION STATES */
         .input-error { border-color: #e11d48 !important; background-color: #fff1f2; }
@@ -710,6 +701,10 @@ ${$('act-forecast').value}
     $('btn-next').onclick = () => navigate(1);
     $('btn-prev').onclick = () => navigate(-1);
     $('userRole').onchange = () => { updateLabels(); doMath(); };
+    // Explicitly attach doMath to range sliders
+    ['slide-efficiency', 'slide-value', 'slide-volume'].forEach(id => {
+        $(id).addEventListener('input', doMath);
+    });
     document.querySelectorAll('input').forEach(i => { i.oninput = doMath; });
     
     $('btn-restart').onclick = () => { if(confirm("Start over?")) location.reload(); };
@@ -720,7 +715,7 @@ ${$('act-forecast').value}
         const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'plan.json'; a.click();
     };
 
-    // Init
+    // Init: Labels updated on load
     updateLabels(); 
 </script>
 
