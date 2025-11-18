@@ -27,7 +27,8 @@
     body {
         font-family: 'Open Sans', sans-serif;
         color: #252a2e; /* primary-text */
-        background-color: #F3F4F6; /* bg-gray-100 */
+        /* NEW: Blue background for the whole page */
+        background-color: #0063a3; /* bg-primary */
     }
     
     /* Instruction Box Style */
@@ -290,9 +291,6 @@
             font-family: 'Open Sans', sans-serif !important;
             color: #252a2e !important;
         }
-        .app-header-bar {
-            display: none !important;
-        }
         .max-w-4xl {
             box-shadow: none !important; margin: 0 !important; padding: 0 !important; width: 100% !important; max-width: 100% !important;
         }
@@ -300,7 +298,7 @@
             display: block !important; visibility: visible !important;
         }
         /* Make sure all content in the combined Step 3 prints */
-        #step-3-content > * { display: block !important; }
+        #step-3-content > * { display: block !importan' }
         
         input, select, textarea {
             border: 1px solid #ccc !important;
@@ -335,9 +333,7 @@
     }
 </style>
 
-<div class="app-header-bar bg-primary h-40 w-full"></div>
-
-<div class="relative z-10 max-w-4xl mx-auto p-6 md:p-10 bg-white rounded-lg shadow-2xl -mt-20 mb-12">
+<div class="relative z-10 max-w-4xl mx-auto p-6 md:p-10 bg-white rounded-lg shadow-2xl my-12">
     <header class="mb-10 text-center space-y-4">
         <h1 id="main-heading" tabindex="-1" class="text-4xl font-bold text-primary">The Trimble 2026 Success Plan</h1>
         <p class="text-xl font-bold text-primary">Personal Commitment Plan</p>
@@ -356,8 +352,7 @@
             <div id="step-0-content" class="step-panel">
                 <section class="text-center">
                     <svg class="mx-auto h-16 w-16 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.356-.464.557-.328l5.603 3.113z" clip-rule="evenodd" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M10.125 2.25h-4.5c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 019 9v.375M10.125 2.25A3.375 3.375 0 0113.5 5.625v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 013.375 3.375M9 15l2.25 2.25L15 12" />
                     </svg>
 
                     <h2 class="text-2xl font-bold text-primary mt-4 mb-4">Welcome to Your 2026 Success Plan!</h2>
@@ -388,10 +383,10 @@
 
             <div id="step-1-content" class="step-panel hidden">
                 <section>
-                    <h2 class="step-heading" tabindex="-1">Step 1: BASELINE (My 2025 Look Back)</h2>
+                    <h2 class="step-heading" tabindex="-1">Step 1: BASELINE - My 2025 Look Back</h2>
                     
                     <div class="instruction-box">
-                        <strong>INSTRUCTION:</strong> Let's establish your starting point. Use your Sales Scorecard to enter your 2025 baseline data. This helps you understand your historical efficiency.
+                        <strong>INSTRUCTIONS:</strong> Let's establish your starting point. Use your Sales Scorecard to enter your 2025 baseline data. This helps you understand your historical efficiency.
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
@@ -445,14 +440,14 @@
                             <span class="error-message" id="error-avgDealSize2025">Please enter your 2025 avg. deal size.</span>
                         </div>
                         <div>
-                            <label for="avgMeetings2025" class="input-label">My 2025 Avg. In-Person Meetings (Quarterly): <span class="tooltip-trigger" data-tooltip="On average, how many *in-person* customer meetings did you conduct each quarter?">i</span></label>
+                            <label for="avgMeetings2025" class="input-label">My 2025 Avg. In-Person Meetings, Quarterly: <span class="tooltip-trigger" data-tooltip="On average, how many *in-person* customer meetings did you conduct each quarter?">i</span></label>
                             <input type="number" id="avgMeetings2025" class="input-field required-field" placeholder="e.g., 15">
                             <span class="error-message" id="error-avgMeetings2025">Please enter your avg. meetings.</span>
                         </div>
                         <div class="calc-box md:col-span-1 flex flex-col justify-center">
                             <span class="text-sm font-medium text-gray-700">2025 Attainment:</span>
                             <span id="attainment2025" class="calc-output">0%</span>
-                            <span class="text-xs text-gray-500">(Bookings / Quota)</span>
+                            <span class="text-xs text-gray-500">Bookings / Quota</span>
                         </div>
                     </div>
                 </section>
@@ -460,10 +455,10 @@
 
             <div id="step-2-content" class="step-panel hidden">
                 <section>
-                    <h2 class="step-heading" tabindex="-1">Step 2: THE GAP (The 2026 Formula)</h2>
+                    <h2 class="step-heading" tabindex="-1">Step 2: THE GAP - The 2026 Formula</h2>
                     
                     <div class="instruction-box">
-                        <strong>INSTRUCTION:</strong> Enter your 2026 quota. The tool will use your 2025 numbers to calculate the 'Gap'—the pipeline and deals required *if you change nothing*. This step helps you see the challenge before building the solution.
+                        <strong>INSTRUCTIONS:</strong> Enter your 2026 quota. The tool will use your 2025 numbers to calculate the 'Gap'—the pipeline and deals required *if you change nothing*. This step helps you see the challenge before building the solution.
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
@@ -480,16 +475,16 @@
                         <div class="calc-box">
                             <span class="text-sm font-medium text-gray-700">Total Pipeline I Must Close: <span class="font-bold">(B)</span></span>
                             <span id="pipelineToClose2026" class="calc-output">0</span>
-                            <span class="text-xs text-gray-500">(A) / (My 2025 Win Rate)</span>
+                            <span class="text-xs text-gray-500">A / My 2025 Win Rate</span>
                         </div>
                         <div class="calc-box">
                             <span class="text-sm font-medium text-gray-700">Total Deals I Must Close: <span class="font-bold">(C)</span></span>
                             <span id="dealsToClose2026" class="calc-output">0</span>
-                            <span class="text-xs text-gray-500">(B) / (My 2025 Avg. Deal Size)</span>
+                            <span class="text-xs text-gray-500">B / My 2025 Avg. Deal Size</span>
                         </div>
                     </div>
                     <div class="mt-6">
-                        <label class="input-label">My Reflection (Based on the numbers above, does your goal feel achievable?):</label>
+                        <label class="input-label">My Reflection: Based on the numbers above, does your goal feel achievable?</label>
                         <div class="flex flex-wrap gap-x-6 gap-y-2 mt-2" id="reflection-group">
                             <div class="flex items-center">
                                 <input id="reflect-1" name="reflection" type="radio" value="Achievable" class="focus:ring-primary h-4 w-4 text-primary border-gray-300">
@@ -511,21 +506,21 @@
 
             <div id="step-3-content" class="step-panel hidden">
                 <section>
-                    <h2 class="step-heading" tabindex="-1">Step 3: SOLUTION (My Plan to Close the Gap)</h2>
+                    <h2 class="step-heading" tabindex="-1">Step 3: SOLUTION - My Plan to Close the Gap</h2>
                     
                     <div class="instruction-box">
-                        <strong>INSTRUCTION:</strong> This is your plan. First, use the sliders to model *how* you will close the Gap (Scenarios). Then, commit to your plan by defining the *measurable actions* you will take (Action Plan).
+                        <strong>INSTRUCTIONS:</strong> This is your plan. First, use the sliders to model *how* you will close the Gap (Scenarios). Then, commit to your plan by defining the *measurable actions* you will take (Action Plan).
                     </div>
 
                     <h3 class="text-xl font-bold text-primary-text mb-4 pb-2 border-b">Part A: Model Your Scenarios</h3>
                     
                     <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-8">
                         <div class="space-y-4 p-6 rounded-lg bg-primary/10 border border-primary/20">
-                            <h3 class="text-xl font-semibold text-primary">Lever 1: Improve Win Rate (Quality)</h3>
+                            <h3 class="text-xl font-semibold text-primary">Lever 1: Improve Win Rate</h3>
                             <label for="winRateImprovement" class="block text-sm font-medium text-primary-text">
                                 Improve Win Rate by: <span id="winRateImprovementLabel" class="font-bold text-primary">5.0%</span>
                                 <span class="tooltip-trigger" data-tooltip="Improving Win Rate reduces the total pipeline required. This is done through better qualification and coaching.">i</span>
-                                <br>(New Win Rate: <span id="newWinRateLabel" class="font-bold">0%</span>)
+                                <br>New Win Rate: <span id="newWinRateLabel" class="font-bold">0%</span>
                             </label>
                             <input type="range" id="winRateImprovement" min="0" max="25" value="5" step="0.5" class="w-full">
                             
@@ -540,11 +535,11 @@
                         </div>
 
                         <div class="space-y-4 p-6 rounded-lg bg-gray-100 border border-gray-300">
-                            <h3 class="text-xl font-semibold text-primary-text">Lever 2: Improve Avg. Deal Size (Value)</h3>
+                            <h3 class="text-xl font-semibold text-primary-text">Lever 2: Improve Avg. Deal Size</h3>
                             <label for="dealSizeImprovement" class="block text-sm font-medium text-primary-text">
                                 Improve Avg. Deal Size by: <span id="dealSizeImprovementLabel" class="font-bold text-primary-text">15%</span>
                                 <span class="tooltip-trigger" data-tooltip="Increasing deal value reduces the total number of deals you must close. This is achieved through cross-sell/up-sell.">i</span>
-                                <br>(New Avg. Deal Size: <span id="newAvgDealSizeLabel" class="font-bold">0</span>)
+                                <br>New Avg. Deal Size: <span id="newAvgDealSizeLabel" class="font-bold">0</span>
                             </label>
                             <input type="range" id="dealSizeImprovement" min="0" max="50" value="15" step="1" class="w-full" style="--thumb-color: #252a2e;">
                             
@@ -559,13 +554,13 @@
                         </div>
 
                         <div class="space-y-4 p-6 rounded-lg bg-gray-100 border border-gray-300">
-                            <h3 class="text-xl font-semibold text-primary-text">Lever 3: Increase Meetings (Activity)</h3>
+                            <h3 class="text-xl font-semibold text-primary-text">Lever 3: Increase Meetings</h3>
                             <p class="text-sm text-primary-text/80">Context: Deals with in-person meetings are 40% more likely to close.</p>
                             
                             <label for="meetingImprovement" class="block text-sm font-medium text-primary-text">
                                 Increase Avg. Quarterly Meetings by: <span id="meetingImprovementLabel" class="font-bold text-primary-text">5</span>
                                 <span class="tooltip-trigger" data-tooltip="Increasing face-to-face time directly impacts win rate and deal flow predictability.">i</span>
-                                <br>(New Quarterly Avg: <span id="newMeetingAvgLabel" class="font-bold">0</span>)
+                                <br>New Quarterly Avg: <span id="newMeetingAvgLabel" class="font-bold">0</span>
                             </label>
                             <input type="range" id="meetingImprovement" min="0" max="20" value="5" step="1" class="w-full" style="--thumb-color: #252a2e;">
                             
@@ -595,23 +590,23 @@
                     
                     <div class="space-y-6">
                         <div>
-                            <label class="input-label !font-semibold !text-base !text-primary-text">My Primary Goal (The Lever I will focus on):</label>
+                            <label class="input-label !font-semibold !text-base !text-primary-text">My Primary Goal: The Lever I will focus on</label>
                             <div class="flex flex-wrap gap-x-6 gap-y-2 mt-2" id="primaryGoal-group">
                                 <div class="flex items-center">
                                     <input id="goal-win-rate" name="primaryGoal" type="radio" value="Win Rate" class="focus:ring-primary h-4 w-4 text-primary border-gray-300">
-                                    <label for="goal-win-rate" class="ml-2 block text-sm text-primary-text">"I will focus on improving my <strong>Win Rate</strong> (Lever 1)."</label>
+                                    <label for="goal-win-rate" class="ml-2 block text-sm text-primary-text">"I will focus on improving my <strong>Win Rate</strong> - Lever 1."</label>
                                 </div>
                                 <div class="flex items-center">
                                     <input id="goal-deal-size" name="primaryGoal" type="radio" value="Avg. Deal Size" class="focus:ring-primary h-4 w-4 text-primary border-gray-300">
-                                    <label for="goal-deal-size" class="ml-2 block text-sm text-primary-text">"I will focus on improving my <strong>Avg. Deal Size</strong> (Lever 2)."</label>
+                                    <label for="goal-deal-size" class="ml-2 block text-sm text-primary-text">"I will focus on improving my <strong>Avg. Deal Size</strong> - Lever 2."</label>
                                 </div>
                                 <div class="flex items-center">
                                     <input id="goal-meetings" name="primaryGoal" type="radio" value="In-Person Meetings" class="focus:ring-primary h-4 w-4 text-primary border-gray-300">
-                                    <label for="goal-meetings" class="ml-2 block text-sm text-primary-text">"I will focus on increasing my <strong>In-Person Meetings</strong> (Lever 3)."</label>
+                                    <label for="goal-meetings" class="ml-2 block text-sm text-primary-text">"I will focus on increasing my <strong>In-Person Meetings</strong> - Lever 3."</label>
                                 </div>
                                 <div class="flex items-center">
                                     <input id="goal-both" name="primaryGoal" type="radio" value="Both (L1 & L2)" class="focus:ring-primary h-4 w-4 text-primary border-gray-300">
-                                    <label for="goal-both" class="ml-2 block text-sm text-primary-text">"I will focus on <strong>Both (Levers 1 & 2)</strong>."</label>
+                                    <label for="goal-both" class="ml-2 block text-sm text-primary-text">"I will focus on <strong>Both Levers 1 & 2</strong>."</label>
                                 </div>
                                 <div class="flex items-center">
                                     <input id="goal-all-three" name="primaryGoal" type="radio" value="All Three Levers" class="focus:ring-primary h-4 w-4 text-primary border-gray-300">
@@ -638,14 +633,15 @@
                         </div>
                         
                         <div class="pt-4 border-t border-gray-200">
-                            <label class="input-label !font-semibold !text-base !text-primary-text">My Forecasting Commitment (Predictability): "My Rep Commit will be 95-105% accurate every quarter."</label>
+                            <label class="input-label !font-semibold !text-base !text-primary-text">My Forecasting Commitment: Predictability</label>
+                            <p class="text-sm mb-2 text-gray-600">"My Rep Commit will be 95-105% accurate every quarter."</p>
                             <label class="input-label mt-2">Key Action: <span class="tooltip-trigger" data-tooltip="What specific action will you take to improve your forecast accuracy?">i</span></label>
                             <input type="text" id="action-forecast" class="input-field required-field" placeholder="e.g., I will 'murder-board' my own commit list...">
                             <span class="error-message" id="error-action-forecast">Please define your forecasting action.</span>
                         </div>
 
                         <div class="pt-4 border-t border-gray-200">
-                            <label class="input-label !font-semibold !text-base !text-primary-text">My Personal Improvement Plan (Long-term growth):</label>
+                            <label class="input-label !font-semibold !text-base !text-primary-text">My Personal Improvement Plan: Long-term growth</label>
                             <div class="mt-2 space-y-4">
                                 <div>
                                     <label class="input-label">1. Account Planning: <span class="tooltip-trigger" data-tooltip="What is your plan for strategic account management?">i</span></label>
@@ -665,10 +661,10 @@
             
             <div id="step-4-content" class="step-panel hidden">
                 <section>
-                    <h2 class="step-heading" tabindex="-1">Step 4: REVIEW (My Commitment Summary)</h2>
+                    <h2 class="step-heading" tabindex="-1">Step 4: REVIEW - My Commitment Summary</h2>
                     
                     <div class="instruction-box">
-                        <strong>INSTRUCTION:</strong> Review your complete 2026 plan. For team compilation, click **"Export JSON Data"** and send the file to your manager. Then, **"Save as PDF"** for your own records.
+                        <strong>INSTRUCTIONS:</strong> Review your complete 2026 plan. For team compilation, click <strong>"Export JSON Data"</strong> and send the file to your manager. Then, <strong>"Save as PDF"</strong> for your own records.
                     </div>
 
                     <p class="text-primary-text/80 mb-6">Final Plan Review:</p>
@@ -685,7 +681,7 @@
                     Previous
                 </button>
                 
-                <div id="nav-spacer" class="flex-grow"></div>
+                <div id="nav-spacer" class="flex-grow" style="display: none;"></div>
 
                 <div id="nav-button-group" class="flex gap-4">
                      <button type="button" id="resetButton" class="nav-button nav-button-secondary" style="display: none;">
@@ -882,7 +878,7 @@
     // --- Compilation Function for Managers ---
     function generateJSONData() {
         const metadata = {
-            plan_version: "2026.3-4Step-Validation", // NEW: Updated version
+            plan_version: "2026.4-BlueBG-Validation", // NEW: Updated version
             date_exported: new Date().toISOString(),
             rep_name: getStringValue('personName'),
             manager_name: getStringValue('managerName'),
@@ -1055,9 +1051,9 @@
         finalButtons.forEach(id => { $(id).style.display = 'none'; });
 
         if (step === 0) {
-            // WELCOME SCREEN
-            navContainer.classList.add('justify-center');
-            navSpacer.style.display = 'none';
+            // WELCOME SCREEN - FIXED: "Get Started" is now on the right
+            navContainer.classList.remove('justify-center');
+            navSpacer.style.display = 'block';
             prevBtn.style.display = 'none';
             nextBtn.style.display = 'inline-block';
             nextBtn.textContent = 'Get Started';
