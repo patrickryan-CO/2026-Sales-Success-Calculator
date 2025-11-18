@@ -48,11 +48,6 @@
         .guide-box p {
             @apply text-gray-700 mb-3 text-base;
         }
-        
-        /* SLIDER CONTEXT TEXT */
-        .slider-context {
-            @apply text-xs text-gray-500 mt-1 italic;
-        }
 
         /* TOOLTIPS */
         .tooltip-container {
@@ -85,7 +80,7 @@
             font-size: 1rem; font-weight: 700; color: #1f2937; margin-bottom: 0.25rem;
         }
         .input-prompt {
-            display: block; font-size: 0.85rem; color: #4b5563; margin-bottom: 0.5rem; line-height: 1.4; font-style: italic;
+            display: block; font-size: 0.85rem; color: #4b5563; margin-bottom: 0.5rem; line-height: 1.4; font-weight: 500;
         }
         .input-field {
             display: block; width: 100%;
@@ -191,39 +186,11 @@
 
                     <div id="step-0" class="step-content">
                         <div class="text-center max-w-3xl mx-auto space-y-8">
+                            <h2 class="text-2xl font-bold text-gray-800">Your Plan. Your Year.</h2>
+                            <p class="text-lg text-gray-600 leading-relaxed">
+                                This tool connects your corporate target to your personal actions. By the end, you will have a specific roadmap for <strong>People, Pipeline, and Productivity</strong>.
+                            </p>
                             
-                            <div class="flex justify-center">
-                                <svg class="h-16 w-16 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
-                                </svg>
-                            </div>
-
-                            <div class="prose max-w-none text-gray-600">
-                                <h2 class="text-2xl font-bold text-gray-800 mb-4">Your Plan. Your Year.</h2>
-                                <p class="text-lg leading-relaxed">
-                                    Success isn't just about hitting a target; it's about having a clear path to get there. 
-                                    We built this tool to help you translate your 2026 goals into a personal roadmap you can own.
-                                </p>
-                            </div>
-
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 text-left">
-                                <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
-                                    <div class="text-primary text-2xl mb-2">👥</div>
-                                    <h3 class="font-bold text-gray-800 mb-1">People</h3>
-                                    <p class="text-sm text-gray-600">Identify the skills and coaching you need to level up.</p>
-                                </div>
-                                <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
-                                    <div class="text-primary text-2xl mb-2">📈</div>
-                                    <h3 class="font-bold text-gray-800 mb-1">Pipeline</h3>
-                                    <p class="text-sm text-gray-600">Calculate the coverage you need to hit your number.</p>
-                                </div>
-                                <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
-                                    <div class="text-primary text-2xl mb-2">⚡</div>
-                                    <h3 class="font-bold text-gray-800 mb-1">Productivity</h3>
-                                    <p class="text-sm text-gray-600">Commit to working smarter with the right tools.</p>
-                                </div>
-                            </div>
-
                             <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
                                 <h3 class="font-bold text-primary mb-2">Before you start:</h3>
                                 <p class="text-sm text-gray-600">
@@ -236,10 +203,8 @@
                     <div id="step-1" class="step-content hidden">
                         <div class="max-w-xl mx-auto text-center py-10">
                             <h2 class="text-2xl font-bold text-gray-800 mb-4">Select Your Role</h2>
-                            <p class="text-gray-600 mb-8">Select your primary role below so we can adjust the metrics to match your business.</p>
-                            
-                            <div class="text-left bg-white p-8 rounded-lg border border-gray-200 shadow-sm">
-                                <label class="input-label text-lg mb-2">I am a:</label>
+                            <p class="text-gray-600 mb-6">We will customize the metrics and language for you.</p>
+                            <div class="text-left bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
                                 <select id="userRole" class="input-field text-lg py-3 cursor-pointer bg-gray-50">
                                     <option value="AE">Account Executive (AE)</option>
                                     <option value="SDR">Sales Development (SDR)</option>
@@ -259,13 +224,13 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label class="input-label">My Name</label>
-                                <input type="text" id="personName" class="input-field required" placeholder="First and Last Name">
-                                <p class="error-text" id="err-personName">Required.</p>
+                                <input type="text" id="personName" class="input-field required" placeholder="Full Name">
+                                <p class="error-text" id="err-personName">Please enter your name.</p>
                             </div>
                             <div>
                                 <label class="input-label">My Manager</label>
                                 <input type="text" id="managerName" class="input-field required" placeholder="Manager Name">
-                                <p class="error-text" id="err-managerName">Required.</p>
+                                <p class="error-text" id="err-managerName">Required for the report.</p>
                             </div>
                             <div class="md:col-span-2">
                                 <label class="input-label">My Region</label>
@@ -331,6 +296,7 @@
                                     <span id="calc-resultA" class="block text-3xl font-extrabold text-primary">0</span>
                                     <span class="text-xs text-gray-500 mt-1 block">Based on current efficiency</span>
                                 </div>
+                                
                                 <div>
                                     <span id="lbl-resultB" class="block text-sm text-gray-600 mb-1 font-bold">Deals Needed</span>
                                     <span id="calc-resultB" class="block text-3xl font-extrabold text-primary">0</span>
@@ -352,8 +318,8 @@
                     <div id="step-4" class="step-content hidden">
                         <div class="guide-box">
                             <h3>YOUR GUIDE: The Action Plan</h3>
-                            <p><strong>Part 1: The Math.</strong> Use the sliders below to see how improvements in Efficiency (Win Rate) or Strategy (Deal Size) reduce the sheer Volume you need.</p>
-                            <p><strong>Part 2: The Method.</strong> Then, define exactly <em>how</em> you will achieve those improvements using the frameworks from the Best Practice Sessions.</p>
+                            <p><strong>Part 1: The Math.</strong> Use the sliders to model "What If" scenarios. See how small efficiency gains reduce the pipeline/volume you need.</p>
+                            <p><strong>Part 2: The Commitment.</strong> Use the fields below to build your <strong>Year-Long Plan</strong>. These are the specific actions you will track with your manager in every 1:1 and QBR.</p>
                         </div>
 
                         <div class="mb-10 bg-gray-50 p-6 rounded-lg border border-gray-200">
@@ -401,32 +367,36 @@
                             </div>
                         </div>
 
-                        <div class="space-y-10">
+                        <div class="space-y-8">
+                            <div class="bg-yellow-50 border-l-4 border-accent p-4 text-sm text-gray-700 mb-6">
+                                <strong>Make it SMART:</strong> Ensure your goals below are Specific, Measurable, Achievable, Relevant, and Time-bound.
+                            </div>
+
                             <div>
                                 <label class="input-label text-lg">1. People & Skills Commitment</label>
-                                <p class="input-prompt mb-2">Think back to the <strong>Team Selling</strong> session. To hit the win rate modeled above, what specific competency must you master in Q1?</p>
-                                <input type="text" id="act-people" class="input-field required" placeholder="SMART Example: I will complete the Negotiation Certification by Feb 28th...">
+                                <p class="input-prompt mb-2">To hit your new targets, you must upgrade your skills. Identify one specific competency gap (e.g. Negotiation, Technical Demo) to master this quarter.</p>
+                                <input type="text" id="act-people" class="input-field required" placeholder="I will complete the [Certification Name] by [Date] to improve my [Metric]...">
                                 <p class="error-text" id="err-act-people">Required.</p>
                             </div>
 
                             <div>
                                 <label class="input-label text-lg">2. Process & Pipeline Commitment</label>
-                                <p class="input-prompt mb-2">Reflecting on <strong>Account Planning</strong>: Pipeline isn't just volume; it's quality. What specific routine will you start to ensure your deals are real?</p>
-                                <input type="text" id="act-process" class="input-field required" placeholder="SMART Example: I will conduct a 'Murder Board' review of my Top 10 deals every Friday...">
+                                <p class="input-prompt mb-2">Pipeline quality determines forecast accuracy. Define a specific weekly routine you will start to clean your data and remove bad deals early.</p>
+                                <input type="text" id="act-process" class="input-field required" placeholder="I will conduct a 'Murder Board' review of my Top 10 deals every Friday at 9am...">
                                 <p class="error-text" id="err-act-process">Required.</p>
                             </div>
 
                             <div>
                                 <label class="input-label text-lg">3. Productivity Commitment</label>
-                                <p class="input-prompt mb-2">From <strong>Territory Management</strong>: Time is your scarcest resource. How will you structure your calendar to protect your "Golden Hours" for selling?</p>
-                                <input type="text" id="act-prod" class="input-field required" placeholder="SMART Example: I will block 8am-10am every Tue/Thu for net-new prospecting...">
+                                <p class="input-prompt mb-2">Time is your scarcest resource. Define a specific "Golden Hour" block you will protect on your calendar every week for net-new prospecting.</p>
+                                <input type="text" id="act-prod" class="input-field required" placeholder="I will block 8am-10am every Tue/Thu for prospecting and decline all internal meetings...">
                                 <p class="error-text" id="err-act-prod">Required.</p>
                             </div>
 
                             <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
                                 <label class="input-label text-lg text-primary">Final Pledge: Forecast Accuracy</label>
                                 <p class="input-prompt mb-2">Predictability builds trust. The standard is <strong>95-105% accuracy</strong> on your Rep Commit. What is your personal routine to ensure this?</p>
-                                <input type="text" id="act-forecast" class="input-field required bg-white" placeholder="e.g. I will update my commit dates every Friday before 2pm...">
+                                <input type="text" id="act-forecast" class="input-field required bg-white" placeholder="I will update my commit dates and next steps every Friday before 2pm...">
                                 <p class="error-text" id="err-act-forecast">Required.</p>
                             </div>
                         </div>
