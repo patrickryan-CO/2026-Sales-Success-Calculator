@@ -42,15 +42,13 @@
         .guide-box {
             @apply bg-blue-50 border-l-4 border-primary text-primary-text p-4 mb-8 rounded-r-md text-sm leading-relaxed;
         }
-        .guide-box strong {
-            color: #0063a3;
-        }
 
-        /* ANIMATED TOOLTIPS */
+        /* ANIMATED TOOLTIPS (FIXED) */
         .tooltip-wrapper {
             position: relative;
             display: inline-block;
-            margin-left: 6px;
+            margin-left: 8px;
+            vertical-align: middle;
         }
         .tooltip-icon {
             display: inline-flex; align-items: center; justify-content: center;
@@ -64,19 +62,20 @@
         
         .tooltip-content {
             visibility: hidden; opacity: 0;
-            position: absolute; bottom: 140%; left: 50%;
+            position: absolute; bottom: 150%; left: 50%;
             transform: translateX(-50%) translateY(10px);
             background-color: #252a2e; color: white;
-            text-align: center; padding: 8px 12px;
+            text-align: center; padding: 10px 14px;
             border-radius: 6px; font-size: 13px; font-weight: 500;
-            white-space: normal; width: 220px; z-index: 50;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            white-space: normal; width: 240px; z-index: 100;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
             transition: all 0.2s ease-out;
             pointer-events: none;
+            line-height: 1.4;
         }
         .tooltip-content::after {
             content: ""; position: absolute; top: 100%; left: 50%;
-            margin-left: -5px; border-width: 5px;
+            margin-left: -6px; border-width: 6px;
             border-style: solid;
             border-color: #252a2e transparent transparent transparent;
         }
@@ -86,19 +85,18 @@
         }
 
         /* INPUT FIELDS */
-        .input-group { margin-bottom: 0; }
         .input-label {
             display: flex; align-items: center;
-            font-size: 0.9rem; font-weight: 600; color: #374151; margin-bottom: 0.35rem;
+            font-size: 0.9rem; font-weight: 700; color: #374151; margin-bottom: 0.5rem;
         }
         .input-field {
             display: block; width: 100%;
             border-radius: 0.5rem; border: 1px solid #d1d5db;
-            padding: 0.6rem 1rem; font-size: 1rem;
+            padding: 0.75rem 1rem; font-size: 1rem;
             transition: all 0.2s;
         }
         .input-field:focus {
-            outline: none; border-color: #0063a3; ring: 2px; ring-color: #e0f2fe;
+            outline: none; border-color: #0063a3; ring: 3px; ring-color: #e0f2fe;
             box-shadow: 0 0 0 3px rgba(0, 99, 163, 0.1);
         }
         
@@ -108,7 +106,7 @@
             background-color: #fff1f2;
         }
         .error-text {
-            display: none; color: #e11d48; font-size: 0.8rem; margin-top: 0.25rem; font-weight: 500;
+            display: none; color: #e11d48; font-size: 0.8rem; margin-top: 0.4rem; font-weight: 600;
         }
         .error-text.show { display: block; animation: fadeIn 0.3s; }
 
@@ -117,7 +115,7 @@
         /* SWOOP HEADER */
         .header-swoop {
             background-color: #0063a3;
-            width: 100%; height: 180px;
+            width: 100%; height: 220px;
             position: absolute; top: 0; left: 0; z-index: 0;
             overflow: hidden;
         }
@@ -132,8 +130,8 @@
         }
         .progress-step {
             flex: 1; text-align: center; padding: 1rem;
-            font-size: 0.85rem; font-weight: 600; color: #9ca3af;
-            border-bottom: 3px solid transparent; transition: all 0.3s;
+            font-size: 0.8rem; font-weight: 700; color: #9ca3af; letter-spacing: 0.05em;
+            border-bottom: 4px solid transparent; transition: all 0.3s;
         }
         .progress-step.active {
             color: #0063a3; border-bottom-color: #0063a3;
@@ -147,8 +145,8 @@
             padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600;
             transition: all 0.2s; cursor: pointer; text-align: center;
         }
-        .btn-primary { background-color: #0063a3; color: white; }
-        .btn-primary:hover { background-color: #004a7c; transform: translateY(-1px); }
+        .btn-primary { background-color: #0063a3; color: white; box-shadow: 0 4px 6px -1px rgba(0, 99, 163, 0.2); }
+        .btn-primary:hover { background-color: #004a7c; transform: translateY(-1px); box-shadow: 0 6px 8px -1px rgba(0, 99, 163, 0.3); }
         .btn-accent { background-color: #fbad26; color: #252a2e; }
         .btn-accent:hover { background-color: #e59b1a; }
         .btn-ghost { background-color: transparent; color: #6b7280; }
@@ -167,62 +165,76 @@
 
     <div class="header-swoop">
         <svg viewbox="0 0 100 100" preserveAspectRatio="none">
-            <path d="M0,100 C30,60 70,40 100,100 L100,0 L0,0 Z" fill="#0063a3" />
-            <path d="M0,100 C50,80 80,80 100,100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2" />
+            <path d="M0,100 C30,40 70,40 100,100 L100,0 L0,0 Z" fill="#0063a3" />
+            <path d="M0,100 C50,70 80,70 100,100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2" />
         </svg>
     </div>
 
-    <div class="relative z-10 max-w-4xl mx-auto mt-12 mb-12 px-4">
+    <div class="relative z-10 max-w-5xl mx-auto mt-16 mb-12 px-4">
         
-        <div class="bg-white rounded-xl shadow-2xl overflow-hidden min-h-[600px] flex flex-col">
+        <div class="bg-white rounded-xl shadow-2xl min-h-[650px] flex flex-col">
             
-            <div class="p-8 pb-0 text-center">
+            <div class="p-8 pb-0 text-center rounded-t-xl bg-white">
                 <h1 class="text-3xl font-extrabold text-primary mb-2">Trimble 2026 Success Plan</h1>
-                <p class="text-gray-500 font-medium">Your Personal Commitment to Success</p>
+                <p class="text-gray-500 font-medium">Own Your Number. Build Your Path.</p>
             </div>
 
             <div id="progress-bar" class="progress-container mt-8 px-8 hidden">
-                <div id="tab-baseline" class="progress-step">BASELINE</div>
-                <div id="tab-gap" class="progress-step">OPPORTUNITY</div>
-                <div id="tab-solution" class="progress-step">SOLUTION</div>
-                <div id="tab-review" class="progress-step">COMMITMENT</div>
+                <div id="tab-baseline" class="progress-step">1. BASELINE</div>
+                <div id="tab-gap" class="progress-step">2. OPPORTUNITY</div>
+                <div id="tab-solution" class="progress-step">3. SOLUTION</div>
+                <div id="tab-review" class="progress-step">4. REVIEW</div>
             </div>
 
             <div class="p-8 flex-grow">
                 <form id="appForm" onsubmit="return false;">
 
                     <div id="step-0" class="step-content">
-                        <div class="text-center max-w-2xl mx-auto">
-                            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-50 text-primary mb-6">
-                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                            </div>
+                        <div class="text-center max-w-3xl mx-auto space-y-8">
                             
-                            <h2 class="text-2xl font-bold text-gray-800 mb-4">Let's Build Your Path to 2026</h2>
-                            <p class="text-gray-600 mb-8 text-lg">
-                                Welcome! This tool is here to help you translate your quota into a personal, actionable plan. 
-                                By the end, you'll have a clear roadmap for <strong>People, Pipeline, and Productivity</strong> that you can own.
-                            </p>
+                            <div class="prose max-w-none text-gray-600">
+                                <p class="text-xl leading-relaxed">
+                                    Welcome to SKO 2026. This tool is designed to bridge the gap between the corporate target you've been given and the personal plan you need to hit it.
+                                </p>
+                            </div>
 
-                            <div class="bg-gray-50 rounded-lg p-6 text-left border border-gray-200">
-                                <h3 class="font-bold text-primary mb-3">What You'll Need to Start:</h3>
-                                <p class="text-sm text-gray-600 mb-3">Please have your <strong>Sales Scorecard</strong> handy. We'll use your 2025 data to help build your 2026 plan.</p>
-                                <ul class="space-y-2 text-sm text-gray-700">
-                                    <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Your 2025 Quota & Bookings</li>
-                                    <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Your Win Rate %</li>
-                                    <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Your Average Deal Size</li>
-                                </ul>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 text-left">
+                                <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
+                                    <div class="text-primary text-2xl mb-2">👥</div>
+                                    <h3 class="font-bold text-gray-800 mb-2">People</h3>
+                                    <p class="text-sm text-gray-600">What skills or coaching do you need to level up?</p>
+                                </div>
+                                <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
+                                    <div class="text-primary text-2xl mb-2">📈</div>
+                                    <h3 class="font-bold text-gray-800 mb-2">Pipeline</h3>
+                                    <p class="text-sm text-gray-600">How will you generate the coverage and quality you need?</p>
+                                </div>
+                                <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
+                                    <div class="text-primary text-2xl mb-2">⚡</div>
+                                    <h3 class="font-bold text-gray-800 mb-2">Productivity</h3>
+                                    <p class="text-sm text-gray-600">How will you use tools and time to work smarter?</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-gray-50 rounded-lg p-6 text-left border border-gray-200 mt-8">
+                                <h3 class="font-bold text-primary mb-2">🎯 The Outcome</h3>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    By the end of this process (approx. 5 mins), you will have a calculated "Gap Analysis" and a set of specific commitments to review with your manager.
+                                </p>
+                                <div class="text-xs text-gray-500 font-semibold uppercase tracking-wide">What You Need Now:</div>
+                                <p class="text-sm text-gray-700">Your Sales Scorecard (2025 Quota, Actuals, Win Rate, Deal Size).</p>
                             </div>
                         </div>
                     </div>
 
                     <div id="step-1" class="step-content hidden">
-                        <div class="max-w-xl mx-auto text-center">
-                            <h2 class="text-2xl font-bold text-gray-800 mb-6">First, tell us about your role.</h2>
-                            <p class="text-gray-600 mb-8">This helps us customize the metrics and calculations just for you.</p>
+                        <div class="max-w-xl mx-auto text-center py-10">
+                            <h2 class="text-2xl font-bold text-gray-800 mb-4">Let's customize your plan.</h2>
+                            <p class="text-gray-600 mb-8">Select your primary role below so we can adjust the metrics and calculations to match your business.</p>
                             
-                            <div class="text-left">
-                                <label class="input-label">I am a:</label>
-                                <select id="userRole" class="input-field text-lg py-3 cursor-pointer">
+                            <div class="text-left bg-white p-8 rounded-lg border border-gray-200 shadow-sm">
+                                <label class="input-label text-lg mb-2">I am a:</label>
+                                <select id="userRole" class="input-field text-lg py-3 cursor-pointer bg-gray-50">
                                     <option value="AE">Account Executive (AE)</option>
                                     <option value="SDR">Sales Development (SDR)</option>
                                     <option value="SE">Sales Engineer (SE)</option>
@@ -235,20 +247,20 @@
 
                     <div id="step-2" class="step-content hidden">
                         <div class="guide-box">
-                            <h3 class="font-bold mb-1">YOUR GUIDE: Looking Back</h3>
-                            <p>Let's start by entering your <strong>2025 actuals</strong> from your scorecard. This establishes your personal baseline efficiency so we can build a realistic plan for next year.</p>
+                            <h3 class="font-bold mb-1">YOUR GUIDE: Establishing the Baseline</h3>
+                            <p>We can't build a path forward without knowing where we stand. Please enter your <strong>2025 actuals</strong>. This calculates your personal efficiency baseline.</p>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label class="input-label">My Name</label>
-                                <input type="text" id="personName" class="input-field required" placeholder="e.g. Jane Doe">
-                                <p class="error-text">Please enter your name.</p>
+                                <input type="text" id="personName" class="input-field required" placeholder="First and Last Name">
+                                <p class="error-text">Please help us identify you.</p>
                             </div>
                             <div>
                                 <label class="input-label">My Manager</label>
-                                <input type="text" id="managerName" class="input-field required" placeholder="e.g. John Smith">
-                                <p class="error-text">Please enter your manager's name.</p>
+                                <input type="text" id="managerName" class="input-field required" placeholder="Manager Name">
+                                <p class="error-text">Required for the report.</p>
                             </div>
                             <div class="md:col-span-2">
                                 <label class="input-label">My Region</label>
@@ -266,7 +278,7 @@
                                     <span id="lbl-quota25">2025 Quota</span>
                                     <div class="tooltip-wrapper">
                                         <span class="tooltip-icon">?</span>
-                                        <div id="tip-quota25" class="tooltip-content">Your total assigned target for 2025.</div>
+                                        <div id="tip-quota25" class="tooltip-content">...</div>
                                     </div>
                                 </label>
                                 <input type="text" id="val-quota25" class="input-field required" placeholder="0">
@@ -278,7 +290,7 @@
                                     <span id="lbl-actual25">2025 Actuals</span>
                                     <div class="tooltip-wrapper">
                                         <span class="tooltip-icon">?</span>
-                                        <div id="tip-actual25" class="tooltip-content">Your total closed/booked amount for 2025.</div>
+                                        <div id="tip-actual25" class="tooltip-content">...</div>
                                     </div>
                                 </label>
                                 <input type="text" id="val-actual25" class="input-field required" placeholder="0">
@@ -290,7 +302,7 @@
                                     <span id="lbl-efficiency25">Win Rate %</span>
                                     <div class="tooltip-wrapper">
                                         <span class="tooltip-icon">?</span>
-                                        <div id="tip-efficiency25" class="tooltip-content">Percentage of opportunities that you won.</div>
+                                        <div id="tip-efficiency25" class="tooltip-content">...</div>
                                     </div>
                                 </label>
                                 <div class="relative">
@@ -305,7 +317,7 @@
                                     <span id="lbl-dealSize25">Avg Deal Size</span>
                                     <div class="tooltip-wrapper">
                                         <span class="tooltip-icon">?</span>
-                                        <div id="tip-dealSize25" class="tooltip-content">The average dollar value of your closed deals.</div>
+                                        <div id="tip-dealSize25" class="tooltip-content">...</div>
                                     </div>
                                 </label>
                                 <input type="text" id="val-dealSize25" class="input-field required" placeholder="0">
@@ -314,7 +326,7 @@
 
                             <div class="md:col-span-2 mt-2">
                                 <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 flex items-center justify-between">
-                                    <span class="text-sm font-bold text-gray-600">2025 Attainment:</span>
+                                    <span class="text-sm font-bold text-gray-600 uppercase tracking-wide">2025 Attainment</span>
                                     <span id="calc-attainment" class="text-2xl font-extrabold text-primary">0%</span>
                                 </div>
                             </div>
@@ -324,7 +336,7 @@
                     <div id="step-3" class="step-content hidden">
                         <div class="guide-box">
                             <h3 class="font-bold mb-1">YOUR GUIDE: The 2026 Opportunity</h3>
-                            <p>Now, enter your <strong>2026 Target</strong>. Based on your baseline efficiency, we'll calculate what it will take to hit this new number.</p>
+                            <p>Now, enter your <strong>2026 Target</strong>. We will use your baseline data to calculate exactly what activity or pipeline volume you need to hit this number.</p>
                         </div>
 
                         <div id="calc-section">
@@ -345,12 +357,12 @@
                                     <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-4">Required to Hit Goal</h4>
                                     
                                     <div class="mb-6">
-                                        <span id="lbl-resultA" class="block text-sm text-gray-600 mb-1">Pipeline Needed</span>
+                                        <span id="lbl-resultA" class="block text-sm text-gray-600 mb-1 font-bold">Pipeline Needed</span>
                                         <span id="calc-resultA" class="block text-3xl font-extrabold text-primary">0</span>
                                     </div>
                                     
                                     <div>
-                                        <span id="lbl-resultB" class="block text-sm text-gray-600 mb-1">Deals Needed</span>
+                                        <span id="lbl-resultB" class="block text-sm text-gray-600 mb-1 font-bold">Deals Needed</span>
                                         <span id="calc-resultB" class="block text-3xl font-extrabold text-primary">0</span>
                                     </div>
                                 </div>
@@ -358,7 +370,7 @@
                         </div>
 
                         <div class="mt-8">
-                            <label class="input-label mb-3">Reflection: Looking at these numbers, how does this goal feel?</label>
+                            <label class="input-label mb-3">Reflection: Looking at these requirements, how does this goal feel?</label>
                             <div class="grid grid-cols-3 gap-4">
                                 <label class="cursor-pointer">
                                     <input type="radio" name="reflection" value="Achievable" class="peer sr-only">
@@ -386,7 +398,7 @@
                     <div id="step-4" class="step-content hidden">
                         <div class="guide-box">
                             <h3 class="font-bold mb-1">YOUR GUIDE: The Action Plan</h3>
-                            <p>Data is just the start. Now, let's commit to the specific actions (People, Process, Productivity) that will help you close that gap.</p>
+                            <p>The math showed us the "What." Now we decide the "How." Please commit to one specific action for each pillar to close your gap.</p>
                         </div>
 
                         <div class="space-y-6">
@@ -431,29 +443,29 @@
 
                     <div id="step-5" class="step-content hidden">
                         <div class="guide-box">
-                            <h3 class="font-bold mb-1">YOUR GUIDE: Final Review</h3>
-                            <p>Review your plan below. When you are ready, use the buttons below to save a copy for yourself and export the data for your manager.</p>
+                            <h3 class="font-bold mb-1">YOUR GUIDE: Final Commitment</h3>
+                            <p>Review your plan below. This is your roadmap for 2026. Please export the data for your manager and save a PDF copy for yourself.</p>
                         </div>
 
-                        <div id="summary-display" class="bg-gray-50 p-6 rounded-lg text-sm text-gray-700 font-mono whitespace-pre-wrap border border-gray-200 h-96 overflow-y-auto">
+                        <div id="summary-display" class="bg-gray-50 p-6 rounded-lg text-sm text-gray-700 font-mono whitespace-pre-wrap border border-gray-200 h-96 overflow-y-auto shadow-inner">
                             </div>
                     </div>
 
                 </form>
             </div>
 
-            <div id="nav-area" class="p-6 border-t bg-gray-50 flex justify-between items-center">
+            <div id="nav-area" class="p-6 border-t bg-gray-50 flex justify-between items-center rounded-b-xl">
                 <button id="btn-prev" class="btn btn-ghost hidden">← Back</button>
                 <div class="flex-grow"></div>
                 
                 <div id="final-buttons" class="hidden flex gap-3">
-                    <button id="btn-restart" class="btn btn-ghost text-red-600">Start Over</button>
+                    <button id="btn-restart" class="btn btn-ghost text-red-600 hover:bg-red-50">Start Over</button>
                     <button id="btn-pdf" class="btn btn-ghost border border-gray-300 bg-white">Save PDF</button>
                     <button id="btn-copy" class="btn btn-primary">Copy Text</button>
                     <button id="btn-json" class="btn btn-accent">Export Data</button>
                 </div>
 
-                <button id="btn-next" class="btn btn-primary min-w-[120px]">Start</button>
+                <button id="btn-next" class="btn btn-primary min-w-[120px] shadow-lg">Start</button>
             </div>
 
         </div>
@@ -464,10 +476,10 @@
     const ROLE_DATA = {
         'AE': {
             lbl: {
-                q25: '2025 Quota ($)', q25tip: 'Your total assigned quota for 2025.',
-                a25: '2025 Bookings ($)', a25tip: 'Your total closed/booked revenue.',
-                e25: 'Win Rate %', e25tip: 'Percentage of opportunities won.',
-                d25: 'Avg Deal Size ($)', d25tip: 'Your average deal value.',
+                q25: '2025 Quota ($)', q25tip: 'Your total assigned revenue quota for 2025.',
+                a25: '2025 Bookings ($)', a25tip: 'Your total closed/booked revenue for the year.',
+                e25: 'Win Rate %', e25tip: 'The percentage of opportunities you won.',
+                d25: 'Avg Deal Size ($)', d25tip: 'Your average dollar value per closed deal.',
                 q26: '2026 Quota ($)',
                 resA: 'Pipeline Needed',
                 resB: 'Deals Needed'
@@ -476,10 +488,10 @@
         },
         'SDR': {
             lbl: {
-                q25: '2025 Target (#)', q25tip: 'Target number of meetings or SQLs.',
-                a25: '2025 Actuals (#)', a25tip: 'Actual meetings/SQLs achieved.',
-                e25: 'Conversion %', e25tip: 'Lead to Meeting conversion rate.',
-                d25: 'Avg Opp Size ($)', d25tip: 'Average size of opps generated (optional).',
+                q25: '2025 Target (#)', q25tip: 'Your target number of Meetings or SQLs.',
+                a25: '2025 Actuals (#)', a25tip: 'The actual number of Meetings/SQLs you achieved.',
+                e25: 'Conversion %', e25tip: 'Your conversion rate from Lead to Meeting.',
+                d25: 'Avg Opp Size ($)', d25tip: 'Optional: The average size of opps you generate.',
                 q26: '2026 Target (#)',
                 resA: 'Activity Volume Needed',
                 resB: 'Est. Pipeline Generated'
@@ -488,10 +500,10 @@
         },
         'SE': {
              lbl: {
-                q25: '2025 Rev Target ($)', q25tip: 'Revenue target you supported.',
-                a25: '2025 Actuals ($)', a25tip: 'Actual revenue supported.',
-                e25: 'Tech Win Rate %', e25tip: 'Percentage of technical wins.',
-                d25: 'Avg Deal Size ($)', d25tip: 'Average size of deals supported.',
+                q25: '2025 Rev Target ($)', q25tip: 'The total revenue target you supported.',
+                a25: '2025 Actuals ($)', a25tip: 'The actual revenue closed that you supported.',
+                e25: 'Tech Win Rate %', e25tip: 'Percentage of deals where you secured the Technical Win.',
+                d25: 'Avg Deal Size ($)', d25tip: 'The average size of deals you support.',
                 q26: '2026 Rev Target ($)',
                 resA: 'Coverage Needed',
                 resB: 'Deals to Support'
@@ -500,10 +512,10 @@
         },
         'ECOMM': {
              lbl: {
-                q25: '2025 Revenue ($)', q25tip: 'Total eComm revenue target.',
-                a25: '2025 Actuals ($)', a25tip: 'Total revenue achieved.',
-                e25: 'Conversion Rate %', e25tip: 'Visitor to purchaser rate.',
-                d25: 'Avg Order Value ($)', d25tip: 'Average value per transaction.',
+                q25: '2025 Revenue ($)', q25tip: 'Total eCommerce revenue target.',
+                a25: '2025 Actuals ($)', a25tip: 'Total revenue actually achieved.',
+                e25: 'Conversion Rate %', e25tip: 'Website visitor to purchaser conversion rate.',
+                d25: 'Avg Order Value ($)', d25tip: 'Average dollar value per transaction.',
                 q26: '2026 Revenue ($)',
                 resA: 'Traffic/Leads Needed',
                 resB: 'Transactions Needed'
@@ -512,10 +524,10 @@
         },
         'COMPLIANCE': {
             lbl: {
-                q25: '2025 Objectives', q25tip: 'Number of key objectives.',
-                a25: 'Completed', a25tip: 'Number completed.',
-                e25: 'Completion %', e25tip: 'Percentage completed.',
-                d25: 'N/A', d25tip: 'Enter 0.',
+                q25: '2025 Objectives', q25tip: 'Total count of key objectives.',
+                a25: 'Completed', a25tip: 'Number of objectives completed.',
+                e25: 'Completion %', e25tip: 'Percentage of objectives completed.',
+                d25: 'N/A', d25tip: 'Not applicable. Enter 0.',
                 q26: '2026 Objectives',
                 resA: 'Gap',
                 resB: 'Notes'
@@ -539,7 +551,7 @@
         const r = $('userRole').value;
         const d = ROLE_DATA[r].lbl;
         
-        // Update Labels
+        // Update Labels & Tooltips
         setTxt('lbl-quota25', d.q25); setTxt('tip-quota25', d.q25tip);
         setTxt('lbl-actual25', d.a25); setTxt('tip-actual25', d.a25tip);
         setTxt('lbl-efficiency25', d.e25); setTxt('tip-efficiency25', d.e25tip);
