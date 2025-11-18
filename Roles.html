@@ -80,7 +80,7 @@
             font-size: 1rem; font-weight: 700; color: #1f2937; margin-bottom: 0.25rem;
         }
         .input-prompt {
-            display: block; font-size: 0.9rem; color: #4b5563; margin-bottom: 0.5rem; line-height: 1.5;
+            display: block; font-size: 0.85rem; color: #4b5563; margin-bottom: 0.5rem; line-height: 1.4; font-style: italic;
         }
         .input-field {
             display: block; width: 100%;
@@ -95,16 +95,16 @@
         
         /* ACTION BLOCKS */
         .action-block {
-            @apply border-l-4 border-gray-300 pl-5 py-4 mb-8 transition-colors;
+            @apply border-l-4 border-gray-300 pl-5 py-2 mb-8 transition-colors;
         }
         .action-block:focus-within {
             @apply border-primary;
         }
         .action-block h4 {
-            @apply text-lg font-bold text-gray-800 mb-2;
+            @apply text-lg font-bold text-gray-800 mb-1;
         }
         .action-context {
-            @apply text-sm text-gray-600 mb-4 bg-gray-50 p-4 rounded-md border border-gray-100;
+            @apply text-sm text-gray-600 mb-3 bg-gray-50 p-3 rounded-md border border-gray-100;
         }
         .action-context strong {
             @apply text-primary block mb-1;
@@ -374,7 +374,7 @@
                     <div id="step-4" class="step-content hidden">
                         <div class="guide-box">
                             <h3>YOUR GUIDE: The Action Plan</h3>
-                            <p><strong>Part 1: The Math.</strong> Use the sliders to model "What If" scenarios. See how small improvements (like 1-2%) drastically reduce the volume you need to chase.</p>
+                            <p><strong>Part 1: The Math.</strong> Use the sliders below to model "What If" scenarios. See how small improvements (like 1-2%) drastically reduce the volume you need to chase.</p>
                             <p><strong>Part 2: The Commitment.</strong> Then, define exactly <em>how</em> you will achieve those improvements. These commitments will form the basis of your management 1:1s for the year.</p>
                         </div>
 
@@ -427,8 +427,8 @@
                             <div class="action-block">
                                 <h4>1. People & Skills Commitment</h4>
                                 <div class="action-context">
-                                    <strong>Why this matters:</strong> To hit the efficiency gains you modeled above, you need to upskill. <br>
-                                    <strong>The Ask:</strong> Identify one specific competency gap (e.g. Negotiation, Technical Demo) and the exact date you will complete coaching/certification for it.
+                                    <strong>Why this matters:</strong> Growth requires new capabilities. <br>
+                                    <strong>The Ask:</strong> To hit the efficiency gains modeled above, what is the one specific competency you will master in Q1?
                                 </div>
                                 <input type="text" id="act-people" class="input-field required" placeholder="e.g., 'I will complete the Negotiation Certification by Feb 28th to improve my close rate...'">
                                 <p class="error-text" id="err-act-people">Please define your People commitment.</p>
@@ -438,7 +438,7 @@
                                 <h4>2. Process & Pipeline Commitment</h4>
                                 <div class="action-context">
                                     <strong>Why this matters:</strong> Pipeline quality determines forecast accuracy. <br>
-                                    <strong>The Ask:</strong> Define a specific, weekly routine you will start (e.g. 'Murder Board' reviews) to ensure your deals are real and advancing.
+                                    <strong>The Ask:</strong> What specific, recurring weekly routine will you start to ensure your deals are real and advancing?
                                 </div>
                                 <input type="text" id="act-process" class="input-field required" placeholder="e.g., 'I will conduct a formal 'Murder Board' review of my Top 10 deals every Friday at 9am...'">
                                 <p class="error-text" id="err-act-process">Please define your Process commitment.</p>
@@ -448,7 +448,7 @@
                                 <h4>3. Productivity Commitment</h4>
                                 <div class="action-context">
                                     <strong>Why this matters:</strong> Time is your scarcest resource. <br>
-                                    <strong>The Ask:</strong> How exactly will you structure your calendar to protect your "Golden Hours" for selling? Be specific about days and times.
+                                    <strong>The Ask:</strong> Exactly how will you structure your calendar to protect your "Golden Hours" for high-value selling?
                                 </div>
                                 <input type="text" id="act-prod" class="input-field required" placeholder="e.g., 'I will block 8:00am-10:00am every Tuesday/Thursday for net-new prospecting...'">
                                 <p class="error-text" id="err-act-prod">Please define your Productivity commitment.</p>
@@ -739,7 +739,7 @@ ${$('act-forecast').value}
         const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'plan.json'; a.click();
     };
 
-    // Init
+    // Init: Labels updated on load
     updateLabels(); 
 </script>
 
