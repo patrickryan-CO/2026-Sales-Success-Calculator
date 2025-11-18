@@ -14,7 +14,7 @@
                         'accent': '#fbad26',       // Trimble accent orange/amber
                         'success': '#02542e',      // Trimble Green
                         'primary-text': '#252a2e', // Trimble primary dark text
-                        'system-bg': '#f3f6f9',    // Light background for conversation box
+                        'system-bg': '#f3f6f9',    // Light background
                     },
                     fontFamily: {
                         'sans': ['Open Sans', 'sans-serif'] // Set default font
@@ -33,6 +33,7 @@
         body {
             font-family: 'Open Sans', sans-serif;
             color: #252a2e;
+            background-color: #f3f6f9; /* NEW: Set main BG color */
         }
         
         /* Wizard Container */
@@ -46,6 +47,8 @@
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); 
             margin-top: 1rem;
             margin-bottom: 1rem;
+            position: relative; /* Needed for z-index */
+            z-index: 10;
         }
         @media (min-width: 768px) {
             .wizard-container {
@@ -59,22 +62,22 @@
             }
         }
         
-        /* NEW: Progress Bar (6 Segments) */
+        /* Progress Bar (6 Segments) */
         .progress-bar {
             display: flex;
             width: 100%;
-            background-color: #e5e7eb; /* gray-200 */
+            background-color: #e5e7eb;
             border-radius: 0.5rem;
             overflow: hidden;
-            margin-bottom: 2rem; /* MOVED TO TOP */
+            margin-bottom: 2rem;
         }
         .progress-segment {
             flex: 1;
-            padding: 0.5rem 0.25rem; /* Tighter padding for 6 segments */
+            padding: 0.5rem 0.25rem;
             text-align: center;
-            font-size: 0.65rem; /* Smaller text for 6 segments */
+            font-size: 0.65rem;
             font-weight: 700;
-            color: #4b5563; /* gray-600 */
+            color: #4b5563;
             border-right: 2px solid #ffffff;
             transition: all 0.3s ease;
         }
@@ -93,18 +96,17 @@
         .progress-segment.complete {
             color: #ffffff;
             opacity: 0.7;
-            cursor: pointer; /* NEW: Clickable */
+            cursor: pointer;
         }
         .progress-segment.complete:hover {
-             opacity: 1.0; /* NEW: Hover effect */
+             opacity: 1.0;
         }
-        /* Phase-specific colors */
-        #progress-1.active, #progress-1.complete { background-color: #0063a3; /* primary */ }
-        #progress-2.active, #progress-2.complete { background-color: #fbad26; /* accent */ }
-        #progress-3.active, #progress-3.complete { background-color: #0063a3; /* primary */ }
-        #progress-4.active, #progress-4.complete { background-color: #fbad26; /* accent */ }
-        #progress-5.active, #progress-5.complete { background-color: #02542e; /* success */ }
-        #progress-6.active, #progress-6.complete { background-color: #252a2e; /* primary-text */ }
+        #progress-1.active, #progress-1.complete { background-color: #0063a3; }
+        #progress-2.active, #progress-2.complete { background-color: #fbad26; }
+        #progress-3.active, #progress-3.complete { background-color: #0063a3; }
+        #progress-4.active, #progress-4.complete { background-color: #fbad26; }
+        #progress-5.active, #progress-5.complete { background-color: #02542e; }
+        #progress-6.active, #progress-6.complete { background-color: #252a2e; }
 
 
         /* Conversation Bubble */
@@ -139,6 +141,22 @@
             color: #0063a3;
             font-weight: 700;
         }
+        
+        /* NEW: Styles for Phase Icons */
+        .conversation-bubble h3 {
+            display: flex;
+            align-items: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #252a2e;
+        }
+        .conversation-bubble h3 svg {
+            width: 1.25rem; /* 20px */
+            height: 1.25rem; /* 20px */
+            margin-right: 0.5rem; /* 8px */
+            flex-shrink: 0;
+        }
+        
         .prompt-why {
             margin-top: 0.75rem;
             font-size: 1rem;
@@ -191,7 +209,7 @@
         
         /* Calculation & Results Boxes */
         .calc-box {
-            background-color: #F9FAFB;
+            background-color: #ffffff; /* UPDATED: Was F9FAFB */
             border: 1px solid #E5E7EB;
             border-radius: 0.5rem;
             padding: 0.75rem;
@@ -298,7 +316,7 @@
         @media print {
             body { background-color: white !important; color: #252a2e !important; }
             .wizard-container { box-shadow: none !important; margin: 0 !important; padding: 0 !important; width: 100% !important; max-width: 100% !important; }
-            #navigation-buttons, .progress-bar, .conversation-bubble, .error-message, .tooltip-trigger { display: none !important; }
+            #navigation-buttons, .progress-bar, .conversation-bubble, .error-message, .tooltip-trigger, #header-svg-wrapper { display: none !important; }
             .step-heading { margin-top: 2rem; page-break-before: auto; page-break-inside: avoid; }
             .form-group, .hidden-step-content { display: block !important; visibility: visible !important; }
             input, select, textarea { border: 1px solid #ccc !important; }
@@ -308,7 +326,12 @@
     </style>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-system-bg"> <div id="header-svg-wrapper" style="background-color: #0063a3; position: absolute; top: 0; left: 0; width: 100%; height: 200px; z-index: 1; overflow: hidden;">
+        <svg viewbox="0 0 100 100" preserveAspectRatio="none" style="width: 100%; height: 100%; position: absolute; bottom: -1px; left: 0;">
+            <path d="M0,100 C40,50 60,50 100,100 L100,100 L0,100 Z" fill="#f3f6f9" />
+        </svg>
+    </div>
+
     <div class="wizard-container">
         <header class="mb-6 text-center space-y-2">
             <h1 id="main-heading" class="text-2xl md:text-3xl font-bold text-primary">The Trimble 2026 Success Plan</h1>
@@ -684,6 +707,15 @@
             if (isNaN(val) || !isFinite(val)) return '0';
             return val.toLocaleString('en-US', { maximumFractionDigits: 1 });
         };
+
+        // --- NEW: SVG Icons ---
+        const iconBaseline = `<svg class="text-primary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" /><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" /></svg>`;
+        const iconGap = `<svg class="text-accent" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" /></svg>`;
+        const iconPipe = `<svg class="text-primary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M3 3a1 1 0 000 2v11a1 1 0 100 2h14a1 1 0 100-2V5a1 1 0 000-2H3zM16 5v1H4V5h12zM4 9v2h12V9H4zm12 4H4v2h12v-2z" /></svg>`;
+        const iconScenarios = `<svg class="text-accent" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M5 4a1 1 0 00-2 0v2.28a1 1 0 00.9 1.42A6.956 6.956 0 018 7.4V3a1 1 0 012 0v4.4a6.956 6.956 0 011.1.28a1 1 0 00.9-1.42V4a1 1 0 00-2 0v2.28a1 1 0 00.9 1.42A6.956 6.956 0 0112 7.4V3a1 1 0 012 0v4.4a6.956 6.956 0 011.1.28a1 1 0 00.9-1.42V4a1 1 0 00-2 0v2.28a1 1 0 00.9 1.42A6.956 6.956 0 0116 7.4V3a1 1 0 012 0v4.4a6.956 6.956 0 011.1.28a1 1 0 00.9-1.42V4a1 1 0 10-2 0v2.28A1 1 0 0017.9 7.7a6.956 6.956 0 011.1-.28V3a1 1 0 10-2 0v4.4a6.956 6.956 0 01-1.1.28a1 1 0 00-.9 1.42V16a1 1 0 002 0v-2.28a1 1 0 00-.9-1.42A6.956 6.956 0 0112 12.6V17a1 1 0 01-2 0v-4.4a6.956 6.956 0 01-1.1-.28a1 1 0 00-.9 1.42V16a1 1 0 002 0v-2.28a1 1 0 00-.9-1.42A6.956 6.956 0 018 12.6V17a1 1 0 01-2 0v-4.4a6.956 6.956 0 01-1.1-.28a1 1 0 00-.9 1.42V16a1 1 0 102 0v-2.28a1 1 0 00-.9-1.42A6.956 6.956 0 014 12.6V17a1 1 0 102 0v-4.4a6.956 6.956 0 01-1.1-.28a1 1 0 00-.9 1.42V16a1 1 0 102 0v-2.28a1 1 0 00-.9-1.42A6.956 6.956 0 010 12.6V17a1 1 0 102 0v-4.4a6.956 6.956 0 011.1-.28a1 1 0 00.9-1.42V4z" /></svg>`;
+        const iconActions = `<svg class="text-success" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>`;
+        const iconReview = `<svg class="text-primary-text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M10.75 2.75a.75.75 0 00-1.5 0v8.586l-2.293-2.293a.75.75 0 00-1.06 1.06l3.5 3.5a.75.75 0 001.06 0l3.5-3.5a.75.75 0 10-1.06-1.06L10.75 11.336V2.75z" /><path d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" /></svg>`;
+
         
         // --- Step Definitions (The Core Conversation) ---
         // NEW: 6 Phases, new intro text, friendlier tone, better examples
@@ -704,7 +736,7 @@
             
             // --- Phase 1: BASELINE (Steps 1-9) ---
             { id: 'phase1-welcome', fieldId: null, phase: 1, 
-              prompt: `<h3>PHASE 1: Your 2025 Baseline</h3>
+              prompt: `<h3>${iconBaseline} PHASE 1: Your 2025 Baseline</h3>
                        <p class='prompt-why'>First, let's get an honest look at your starting point. You can't set a new course until you know where you are on the map.</p>
                        <p class='prompt-example'>For this section, you'll use your <strong>Sales Scorecard</strong> (your 'cheat sheet') to enter your 2025 performance data. Let's start with the basics.</p>` 
             }, // 1
@@ -719,7 +751,7 @@
 
             // --- Phase 2: THE GAP (Steps 10-12) ---
             { id: 'phase2-welcome', fieldId: null, phase: 2, 
-              prompt: `<h3>PHASE 2: THE GAP (Your 2026 Challenge)</h3>
+              prompt: `<h3>${iconGap} PHASE 2: THE GAP (Your 2026 Challenge)</h3>
                        <p class='prompt-why'>Great, your 2025 baseline is set. You can't set a new course until you know where you're starting from.</p>
                        <p class='prompt-why'>Now for Phase 2: let's figure out the <strong>size</strong> of your 2026 challenge. In this section, you'll enter your new quota and see the gap it creates. This is the "scary number" we're going to build a plan to conquer.</p>` 
             }, // 10
@@ -728,7 +760,7 @@
             
             // --- Phase 3: PIPE PLAN (Steps 13-15) ---
             { id: 'recommendedCoverage', fieldId: 'recommendedCoverage', phase: 3, 
-              prompt: `<h3>PHASE 3: Your Pipeline Plan</h3>
+              prompt: `<h3>${iconPipe} PHASE 3: Your Pipeline Plan</h3>
                        <p class='prompt-why'>On your <strong>Sales Scorecard</strong>, you'll see a <strong>Recommended Pipeline Coverage</strong> (like 1.9x or 2.5x). What is that number?</p>
                        <p class='prompt-example'><strong>Why?</strong> This number is your *personal* success formula. It's the total pipeline you *actually* need to hit your number. The tool will now calculate your **Total Pipeline Gap** in real dollars.</p>` 
             }, // 13
@@ -737,7 +769,7 @@
 
             // --- Phase 4: SCENARIOS (Steps 16-19) ---
             { id: 'phase3-welcome', fieldId: null, phase: 4, 
-              prompt: `<h3>PHASE 4: Your Improvement Scenarios</h3>
+              prompt: `<h3>${iconScenarios} PHASE 4: Your Improvement Scenarios</h3>
                        <p class='prompt-why'>You've defined the gap. Now let's find ways to close it by working smarter, not just harder. </p>
                        <p class='prompt-example'>In this section, you'll play with three scenarios. See how small improvements to your sales habits (like better qualification or selling bigger deals) can dramatically reduce the 'Required Pipeline' number.</p>` 
             }, // 16
@@ -752,7 +784,7 @@
                 if (region === 'NA' || region === 'EMEA') {
                     workshopText = "the <strong>3 Best Practice Workshops</strong> (on Account Planning, Cross-Sell Strategies, and Team Selling).";
                 }
-                return `<h3>PHASE 5: Your Action Plan</h3><p class='prompt-why'>You've seen your data and your gap. You've played with scenarios. Now, it's time to commit. You just attended ${workshopText}</p><p class='prompt-why'>This is where you connect those ideas to your numbers. Based on what you learned, <strong>which improvement will be your primary focus in 2026?</strong></p>`;
+                return `<h3>${iconActions} PHASE 5: Your Action Plan</h3><p class='prompt-why'>You've seen your data and your gap. You've played with scenarios. Now, it's time to commit. You just attended ${workshopText}</p><p class='prompt-why'>This is where you connect those ideas to your numbers. Based on what you learned, <strong>which improvement will be your primary focus in 2026?</strong></p>`;
             }}, // 20
             { id: 'action-people', fieldId: 'action-people', phase: 5, prompt: () => { // DYNAMIC
                 let region = $('region').value;
@@ -771,7 +803,7 @@
             }}, // 24
             
             // --- Phase 6: Review (Step 25) ---
-            { id: 'review', fieldId: 'review', phase: 6, prompt: "<h3>✅ PHASE 6: Final Review & Submission</h3><p class='prompt-why'>This is it! Your 2026 Commitment Plan is complete. Please review the summary below one last time.</p><hr class='my-4'><p class='prompt-why'><strong>1. For your Manager (Required):</strong><br>Click <strong>Export JSON Data</strong>. This saves a small data file. Please email this file to your manager for team compilation.</p><p class='prompt-why mt-4'><strong>2. For You (Final Step):</strong><br>Click <strong>Save as PDF</strong> to keep a personal, printable copy of your full commitment.</p>", group: $('group-review') } // 25
+            { id: 'review', fieldId: 'review', phase: 6, prompt: `<h3>${iconReview} PHASE 6: Final Review & Submission</h3><p class='prompt-why'>This is it! Your 2026 Commitment Plan is complete. Please review the summary below one last time.</p><hr class='my-4'><p class='prompt-why'><strong>1. For your Manager (Required):</strong><br>Click <strong>Export JSON Data</strong>. This saves a small data file. Please email this file to your manager for team compilation.</p><p class='prompt-why mt-4'><strong>2. For You (Final Step):</strong><br>Click <strong>Save as PDF</strong> to keep a personal, printable copy of your full commitment.</p>`, group: $('group-review') } // 25
         ];
         
         // --- Maps Phase numbers to the *first step index* of that phase ---
@@ -780,7 +812,7 @@
             1: 1, // Phase 1 (Baseline) starts at step 1 (Phase 1 Welcome)
             2: 10, // Phase 2 (The Gap) starts at step 10 (Phase 2 Welcome)
             3: 13, // Phase 3 (Pipe Plan) starts at step 13
-            4: 16, // Phase 4 (Scenarios) starts at step 16 (Phase 3 Welcome... wait, I'll rename that)
+            4: 16, // Phase 4 (Scenarios) starts at step 16 (Phase 4 Welcome)
             5: 20, // Phase 5 (Action Plan) starts at step 20
             6: 25  // Phase 6 (Review) starts at step 25
         };
@@ -1014,7 +1046,7 @@ Generated by the Trimble 2026 Success Planner.
             calculatePlan(); 
             
             const metadata = {
-                plan_version: "2026.18-Clickable-Bar", // New version tag
+                plan_version: "2026.19-Splash-Page", // New version tag
                 date_exported: new Date().toISOString(),
                 rep_name: getStringValue('personName'),
                 manager_name: getStringValue('managerName'),
@@ -1077,7 +1109,7 @@ Generated by the Trimble 2026 Success Planner.
             });
             
             currentStepIndex = stepIndex;
-            const step = steps[stepIndex];
+            const step = steps[currentStepIndex];
             const currentPhase = step.phase;
 
             // Update Progress Bar
@@ -1168,8 +1200,8 @@ Generated by the Trimble 2026 Success Planner.
                 if (currentStepIndex > 20) { // If on any action step
                      currentStepIndex = 20; // Go back to Primary Goal
                 } else if (currentStepIndex >= 17 && currentStepIndex <= 19) { // If on Scenarios
-                    currentStepIndex = 16; // Go back to Phase 3 Welcome
-                } else if (currentStepIndex == 16) { // If on Phase 3 Welcome
+                    currentStepIndex = 16; // Go back to Phase 4 Welcome
+                } else if (currentStepIndex == 16) { // If on Phase 4 Welcome
                     currentStepIndex = 15; // Go back to Sourcing
                 } else if (currentStepIndex == 13) { // If on Phase 3 start
                     currentStepIndex = 12; // Go back to reflection
@@ -1277,11 +1309,14 @@ Generated by the Trimble 2026 Success Planner.
                     // Only allow clicking on *completed* phases (cannot click current or future)
                     if (clickedPhase < currentPhase) {
                         // Find the "front page" step for that phase
-                        const targetStepIndex = steps.findIndex(step => step.phase === clickedPhase && step.id.includes('welcome'));
-                        // If no "front page" (like for phase 3, 4, 5, 6), find the first step of that phase
-                        const fallbackStepIndex = steps.findIndex(step => step.phase === clickedPhase);
+                        let targetStepIndex = steps.findIndex(step => step.phase === clickedPhase && (step.id.includes('welcome') || step.id.includes('intro')));
                         
-                        showStep(targetStepIndex !== -1 ? targetStepIndex : fallbackStepIndex);
+                        // If no "front page" (like for phase 3, 4, 5, 6), find the first step of that phase
+                        if (targetStepIndex === -1) {
+                             targetStepIndex = steps.findIndex(step => step.phase === clickedPhase);
+                        }
+                        
+                        showStep(targetStepIndex);
                     }
                 });
             });
