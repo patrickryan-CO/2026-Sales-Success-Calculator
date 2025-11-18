@@ -130,7 +130,7 @@
         box-shadow: 0 0 0 2px rgba(0, 99, 163, 0.3); /* focus:ring-primary/30 */
     }
     
-    /* --- NEW VALIDATION STYLES --- */
+    /* --- VALIDATION STYLES --- */
     .input-field-error {
         border-color: #B91C1C; /* error-red */
     }
@@ -177,7 +177,7 @@
         outline: none;
     }
     
-    /* --- NEW 4-STEP PROGRESS BAR --- */
+    /* --- 4-STEP PROGRESS BAR --- */
     .progress-tab {
         flex: 1;
         padding: 0.625rem 1.25rem; /* py-2.5 px-5 */
@@ -894,6 +894,8 @@
             win_rate_target_pct: getNumberValue('winRate2025') + getNumberValue('winRateImprovement'),
             deal_size_target_pct: 1 + (getNumberValue('dealSizeImprovement') / 100),
             meetings_quarterly_target: getNumberValue('avgMeetings2025') + getNumberValue('meetingImprovement'),
+            // FIXED: Added missing implied win rate to export
+            meetings_implied_win_rate: getNumberValue('meetingsImpliedWinRate'),
         };
 
         const actions = {
@@ -1169,7 +1171,7 @@
             jsonBtn.addEventListener('click', () => {
                 const data = generateJSONData();
                 const repName = getStringValue('personName') || 'SalesRep';
-                const fileName = `Trimble_2026_Plan_${repName.replace(/\s/g '_')}.json`;
+                const fileName = `Trimble_2026_Plan_${repName.replace(/\s/g, '_')}.json`;
                 downloadJSON(data, fileName);
             });
         }
