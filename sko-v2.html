@@ -185,9 +185,48 @@
             font-weight: 600;
             margin-top: 1.5rem;
         }
-        /* NEW: Override for strong tag inside callout */
         .splash-callout strong {
-            color: #252a2e;
+            color: #252a2e !important; /* FIX: Override blue strong tag */
+        }
+        
+        /* NEW: Phase Welcome Card */
+        .phase-welcome-card {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        .phase-icon-bg {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+        .phase-text-content {
+            padding: 1rem;
+        }
+        @media (min-width: 768px) {
+            .phase-welcome-card {
+                flex-direction: row;
+            }
+            .phase-icon-bg {
+                padding: 2rem;
+                width: 33.33%;
+            }
+            .phase-text-content {
+                padding: 2rem;
+                width: 66.67%;
+            }
+        }
+        .phase-welcome-card h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+        .phase-welcome-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-top: 0.75rem;
         }
 
         /* Input Styling */
@@ -597,7 +636,7 @@
                     ← Previous
                 </button>
                 
-                <div class="flex-grow" id="nav-flex-grow"></div>
+                <div class="flex-grow" id="nav-flex-grow" style="display: none;"></div>
 
                 <div class="nav-button-group" id="nav-button-group-main">
                      <button type="button" id="resetButton" class="nav-button nav-button-default" style="display: none;">
@@ -670,14 +709,13 @@
 
         // --- SVG Icons ---
         const iconSplash = `<svg class="text-primary mx-auto h-16 w-16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
-        const iconBaseline = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-primary"><path fill-rule="evenodd" d="M3 6a3 3 0 013-3h12a3 3 0 013 3v12a3 3 0 01-3 3H6a3 3 0 01-3-3V6zm4.5 9.75a.75.75 0 01.75-.75h6a.75.75 0 010 1.5h-6a.75.75 0 01-.75-.75zm.75-2.25a.75.75 0 000 1.5h6a.75.75 0 000-1.5h-6zM6.75 9a.75.75 0 01.75-.75h6a.75.75 0 010 1.5h-6A.75.75 0 016.75 9z" clip-rule="evenodd" /></svg>`;
-        const iconGap = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-accent"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h6a.75.75 0 000-1.5h-5.25V6z" clip-rule="evenodd" /></svg>`;
-        const iconSolution = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-success"><path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3A5.25 5.25 0 0012 1.5zm-3.75 5.25v3a3 3 0 003 3h1.5a3 3 0 003-3v-3A3.75 3.75 0 0012 3a3.75 3.75 0 00-3.75 3.75z" clip-rule="evenodd" /></svg>`;
-        const iconReview = `<svg class="text-primary-text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clip-rule="evenodd" /></svg>`;
+        const iconBaseline = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-16 w-16 md:h-24 md:w-24"><path fill="#0063a3" fill-opacity="0.2" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25z" /><path stroke="#0063a3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 18a.75.75 0 00.75-.75V8.668l3.374 1.948a.75.75 0 10.75-1.3l-4.5-2.6a.75.75 0 00-.75 0l-4.5 2.6a.75.75 0 10.75 1.3L11.25 8.67v8.58a.75.75 0 00.75.75z" /></svg>`;
+        const iconGap = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-16 w-16 md:h-24 md:w-24"><path fill="#fbad26" fill-opacity="0.2" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25z" /><path stroke="#fbad26" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M15.364 15.364l-1.06-1.06a.75.75 0 01-1.06 1.06l-4.243 4.242a.75.75 0 01-1.06-1.06l4.242-4.243a.75.75 0 011.06-1.06l1.06 1.06zM9.75 12a2.25 2.25 0 114.5 0 2.25 2.25 0 01-4.5 0z" /><path stroke="#fbad26" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>`;
+        const iconSolution = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-16 w-16 md:h-24 md:w-24"><path fill="#02542e" fill-opacity="0.2" d="M12.75 3.1a.75.75 0 00-1.5 0v5.844l-2.47-2.47a.75.75 0 00-1.06 1.06L12 11.78l4.28-4.28a.75.75 0 00-1.06-1.06L12.75 8.934V3.1z" /><path fill="#02542e" fill-opacity="0.2" d="M12 21.75a9.75 9.75 0 01-9.75-9.75c0-3.268 1.593-6.19 4.07-7.974a.75.75 0 011.06 1.06A8.25 8.25 0 003.75 12c0 4.54 3.71 8.25 8.25 8.25s8.25-3.71 8.25-8.25a8.25 8.25 0 00-3.63-6.814.75.75 0 111.06-1.06C19.907 5.81 21.5 8.732 21.5 12a9.75 9.75 0 01-9.75 9.75H12z" /><path stroke="#02542e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 11.78l-4.28-4.28a.75.75 0 00-1.06 1.06L10.94 13.06l-4.22 4.22a.75.75 0 101.06 1.06L12 14.12l4.22 4.22a.75.75 0 101.06-1.06l-4.22-4.22 4.28-4.28a.75.75 0 00-1.06-1.06L12 11.78z" /></svg>`;
+        const iconReview = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-primary-text"><path fill-rule="evenodd" d="M10.5 3A1.501 1.501 0 009 4.5V5.378a4.5 4.5 0 00-3.328 1.4c-.697.697-.999 1.631-.999 2.599V15a3 3 0 003 3h9a3 3 0 003-3V9.377a4.5 4.5 0 00-1-2.599 4.5 4.5 0 00-3.328-1.4V4.5A1.5 1.5 0 0013.5 3h-3zm.22 4.22a.75.75 0 011.06 0l1.25 1.25a.75.75 0 01-1.06 1.06L10.5 8.06l-1.47 1.47a.75.75 0 01-1.06-1.06l2.75-2.75z" clip-rule="evenodd" /><path d="M6 19.5a3 3 0 013-3h6a3 3 0 013 3v.75a.75.75 0 01-1.5 0V19.5a1.5 1.5 0 00-1.5-1.5h-6A1.5 1.5 0 007.5 19.5v.75a.75.75 0 01-1.5 0v-.75z" /></svg>`;
 
         
         // --- Step Definitions (The Core Conversation) ---
-        // NEW: 4-Phase flow, simplified, no "Pipe Plan"
         const steps = [
             // --- Intro (Step 0) ---
             { id: 'intro', fieldId: null, phase: 1, 
@@ -693,9 +731,14 @@
             
             // --- Phase 1: BASELINE (Steps 1-9) ---
             { id: 'phase1-welcome', fieldId: null, phase: 1, 
-              prompt: `<h3>${iconBaseline} PHASE 1: Your 2025 Baseline</h3>
-                       <p class='prompt-why'>First, let's get an honest look at your starting point. You can't set a new course until you know where you are on the map.</p>
-                       <p class='prompt-example'>For this section, you'll use your <strong>Sales Scorecard</strong> to enter your 2025 performance data. Let's start with the basics.</p>` 
+              prompt: `<div class="phase-welcome-card">
+                         <div class="phase-icon-bg bg-primary/10">${iconBaseline}</div>
+                         <div class="phase-text-content">
+                           <h3 class="!text-primary">PHASE 1: Your 2025 Baseline</h3>
+                           <p>First, let's get an honest look at your starting point. You can't set a new course until you know where you are on the map.</p>
+                           <p class="mt-2">For this section, you'll use your <strong>Sales Scorecard</strong> to enter your 2025 performance data. Let's start with the basics.</p>
+                         </div>
+                       </div>` 
             }, // 1
             { id: 'personName', fieldId: 'personName', phase: 1, prompt: "First things first, <strong>what's your full name?</strong>" }, // 2
             { id: 'managerName', fieldId: 'managerName', phase: 1, prompt: "Great. Now, <strong>who is your manager?</strong> This plan is a commitment you'll both work on, so their name is important." }, // 3
@@ -703,23 +746,33 @@
             { id: 'quota2025', fieldId: 'quota2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>Alright, let's open your <strong>Sales Scorecard</strong>. For the next few steps, you'll be pulling your 2025 numbers from that scorecard. First, what was your <strong>2025 Quota?</strong></p>" }, // 5
             { id: 'bookings2025', fieldId: 'bookings2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>On that same scorecard, find your <strong>2025 Bookings</strong> (your total closed-won revenue).</p><p class='prompt-example'><strong>Why?</strong> This calculates your 2025 Attainment. This plan is about honesty. Be accurate so we can build a realistic path forward.</p>" }, // 6
             { id: 'winRate2025', fieldId: 'winRate2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>This is a key one. <strong>Look at your scorecard</strong> for your <strong>2025 Baseline Win Rate %</strong>.</p><p class='prompt-example'><strong>Why?</strong> This is your <em>quality & qualification</em> metric. A low rate might mean you're wasting time on unqualified deals.</p>" }, // 7
-            { id: 'avgDealSize2025', fieldId: 'avgDealSize2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>Next, find your <strong>2025 Avg. Deal Size</strong> on your scorecard.</p><p class='prompt-example'><strong>Why?</strong> This is your <em>value</em> metric. Are you selling single products, or are you selling the full 'Connect & Scale' solution? For example, are you selling <strong>Viewpoint</strong> to a customer who already uses <strong>Tekla</strong>?</p>" }, // 8
+            { id: 'avgDealSize2025', fieldId: 'avgDealSize2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>Next, find your <strong>2025 Avg. Deal Size</strong> on your scorecard.</p><p class='prompt-example'><strong>Why?</strong> This is your <em>value</em> metric. Are you selling single products, or are you selling the full 'Connect & Scale' solution? (e.g., selling Viewpoint to a customer who already uses Tekla).</p>" }, // 8
             { id: 'avgMeetings2025', fieldId: 'avgMeetings2025', phase: 1, prompt: "<h3>Step 1: The Look-Back</h3><p class='prompt-why'>Last baseline number: Find your <strong>2025 Avg. Quarterly In-Person Meetings</strong> on your scorecard's activity tab.</p><p class='prompt-example'><strong>Why?</strong> This is your <em>activity</em> metric. In our complex industries, face-time with customers is directly linked to success.</p>" }, // 9
 
             // --- Phase 2: THE GAP (Steps 10-12) ---
             { id: 'phase2-welcome', fieldId: null, phase: 2, 
-              prompt: `<h3>${iconGap} PHASE 2: THE GAP (Your 2026 Challenge)</h3>
-                       <p class='prompt-why'>Great, your 2025 baseline is set. You can't set a new course until you know where you're starting from.</p>
-                       <p class='prompt-why'>Now for Phase 2: let's figure out the <strong>size</strong> of your 2026 challenge. In this section, you'll enter your new quota and see the gap it creates. This is the total pipeline you'll need to build, and we're going to make a plan to conquer it.</p>` 
+              prompt: `<div class="phase-welcome-card">
+                         <div class="phase-icon-bg bg-accent/10">${iconGap}</div>
+                         <div class="phase-text-content">
+                           <h3 style="color: #fbad26;">PHASE 2: THE GAP (Your 2026 Challenge)</h3>
+                           <p>Great, your 2025 baseline is set. You can't set a new course until you know where you're starting from.</p>
+                           <p class="mt-2">Now for Phase 2: let's figure out the <strong>size</strong> of your 2026 challenge. In this section, you'll enter your new quota and see the gap it creates. This is the challenge we're going to build a plan to conquer.</p>
+                         </div>
+                       </div>` 
             }, // 10
             { id: 'quota2026', fieldId: 'quota2026', phase: 2, prompt: "<h3>Step 2: The 2026 Formula</h3><p class='prompt-why'>This is the big one: what is your <strong>2026 Quota Commitment?</strong></p><p class='prompt-example'><strong>Why?</strong> Enter your new number. The tool will *immediately* calculate what's required to hit this goal *if you change nothing*. This isn't your plan; it's the *challenge* we're about to solve together.</p>" }, // 11
             { id: 'reflection', fieldId: 'reflection', phase: 2, prompt: "<h3>Step 2: The 2026 Formula</h3><p class='prompt-why'>Okay, take a look at those 'Required' numbers. Based on that hard math, <strong>how does your 2026 goal feel right now?</strong></p><p class='prompt-example'><strong>Why?</strong> Be honest. If it feels 'Impossible,' it just means your 2025 efficiency isn't good enough for 2026. That's fine! The next steps are <em>how</em> we fix that.</p>" }, // 12
             
             // --- Phase 3: SOLUTION (Steps 13-22) ---
             { id: 'phase3-welcome', fieldId: null, phase: 3, 
-              prompt: `<h3>${iconSolution} PHASE 3: Your Solution</h3>
-                       <p class='prompt-why'>You've seen the data. You've defined the gap. Now for the most important part: <strong>creating your solution.</strong></p>
-                       <p class='prompt-example'>In this section, you'll first play with scenarios to see how small improvements can close your gap. Then, you'll use what you learned in the SKO workshops to write your *specific* action plan.</p>` 
+              prompt: `<div class="phase-welcome-card">
+                         <div class="phase-icon-bg bg-success/10">${iconSolution}</div>
+                         <div class="phase-text-content">
+                           <h3 style="color: #02542e;">PHASE 3: Your Solution</h3>
+                           <p>You've seen the data. You've defined the gap. Now for the most important part: <strong>creating your solution.</strong></p>
+                           <p class="mt-2">In this section, you'll first play with scenarios to see how small improvements can close your gap. Then, you'll use what you learned in the SKO workshops to write your *specific* action plan.</p>
+                         </div>
+                       </div>` 
             }, // 13
             { id: 'winRateImprovement', fieldId: 'winRateImprovement', phase: 3, prompt: "<h3>Scenario 1: Improve Win Rate (Quality)</h3><p class='prompt-why'>Improving your Win Rate means you need <em>less total pipeline</em> to hit your goal. This is about better qualification (like you learned in the **Pipeline Hygiene** workshop for APAC) and wasting less time on bad-fit deals. </p><p class='prompt-example'>Use the slider to see how it affects your 'Pipeline Needed' number.</p>" }, // 14
             { id: 'dealSizeImprovement', fieldId: 'dealSizeImprovement', phase: 3, prompt: "<h3>Scenario 2: Improve Avg. Deal Size (Value)</h3><p class='prompt-why'>Increasing your Avg. Deal Size means you need to close <em>fewer total deals</em>. This is about selling the full 'Connect & Scale' solution.</p><p class='prompt-example'>Use the skills from the **Cross-Sell Strategies** workshop (for NA/EMEA) to sell more software. Use the slider to see its impact.</p>" }, // 15
@@ -737,7 +790,7 @@
                 let region = $('region').value;
                 let workshopExample = "If your data shows a low <strong>Win Rate</strong>, your 'People' action (from the <strong>Pipeline Hygiene</strong> workshop) might be: 'I will learn to disqualify deals earlier to protect my win rate.'";
                 if (region === 'NA' || region === 'EMEA') {
-                     workshopExample = "If you need to sell bigger deals, your 'People' action (from the <strong>Cross-Sell Strategies</strong> workshop) might be: 'I will master how to position Viewpoint to my Tekla customers.'";
+                     workshopExample = "If you want to sell bigger deals, your 'People' action (from the <strong>Cross-Sell Strategies</strong> workshop) might be: 'I will master how to position Viewpoint to my Tekla customers.'";
                 }
                 return `<h3>Step 4: Your Action Plan (People)</h3><p class='prompt-why'>This is your <strong>'Get Smarter'</strong> plan. What new skill will you learn to close the gap? Think about the SKO sessions you just attended.</p><p class='prompt-example'><strong>Example:</strong> ${workshopExample}</p>`;
             }}, // 18
@@ -780,10 +833,11 @@
             if (input && input.classList.contains('required-field') && !value) {
                 isValid = false;
             } 
-            else if (isNumeric && (numValue <= 0 || !isFinite(numValue))) {
-                // Allow 0 for bookings and avg meetings
+            else if (isNumeric && (numValue < 0 || !isFinite(numValue))) { 
+                // Allow 0 for bookings and avg meetings, but not others
                 if (fieldId !== 'bookings2025' && fieldId !== 'meetingsImpliedWinRate_visible' && fieldId !== 'avgMeetings2025') {
-                    isValid = false;
+                    // Check if it's 0, which is invalid for quota/deal size/win rate
+                    if (numValue === 0) isValid = false;
                 }
             }
             else if (fieldId === 'winRate2025' && (numValue < 0 || numValue > 100)) {
@@ -909,7 +963,7 @@
             
             const actions = {
                 people: getStringValue('action-people'),
-                pipeline: getStringValue('action-pipeline'), // Re-added
+                pipeline: getStringValue('action-pipeline'), 
                 productivity: getStringValue('action-productivity'),
                 forecast: getStringValue('action-forecast'),
                 accountPlan: getStringValue('action-account-plan'),
@@ -954,7 +1008,7 @@ Generated by the Trimble 2026 Success Planner.
             calculatePlan(); 
             
             const metadata = {
-                plan_version: "2026.24-Final-Clean", // New version tag
+                plan_version: "2026.25-Final-UX-Fixes", // New version tag
                 date_exported: new Date().toISOString(),
                 rep_name: getStringValue('personName'),
                 manager_name: getStringValue('managerName'),
@@ -1050,7 +1104,6 @@ Generated by the Trimble 2026 Success Planner.
     
             // --- NEW Button Logic for Splash Page ---
             const navContainer = $('navigation-buttons');
-            const navButtonGroup = $('nav-button-group-main');
             const navFlexGrow = $('nav-flex-grow'); // The spacer
             const nextButton = $('nextButton');
             const resetButton = $('resetButton');
