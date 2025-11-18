@@ -93,6 +93,20 @@
             box-shadow: 0 0 0 3px rgba(0, 99, 163, 0.1);
         }
         
+        /* ACTION BLOCKS */
+        .action-block {
+            @apply border-l-4 border-gray-300 pl-5 py-2 mb-8 transition-colors;
+        }
+        .action-block:focus-within {
+            @apply border-primary;
+        }
+        .action-block h4 {
+            @apply text-lg font-bold text-gray-800 mb-1;
+        }
+        .action-context {
+            @apply text-sm text-gray-600 mb-3 bg-gray-50 p-3 rounded-md border border-gray-100;
+        }
+
         /* SLIDERS */
         .slider-group { @apply mb-6; }
         input[type=range] {
@@ -107,20 +121,6 @@
             margin-top: -8px; transition: transform 0.1s;
         }
         input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.1); }
-
-        /* ACTION BLOCKS */
-        .action-block {
-            @apply border-l-4 border-gray-300 pl-5 py-2 mb-8 transition-colors;
-        }
-        .action-block:focus-within {
-            @apply border-primary;
-        }
-        .action-block h4 {
-            @apply text-lg font-bold text-gray-800 mb-1;
-        }
-        .action-context {
-            @apply text-sm text-gray-600 mb-3 bg-gray-50 p-3 rounded-md border border-gray-100;
-        }
 
         /* VALIDATION STATES */
         .input-error { border-color: #e11d48 !important; background-color: #fff1f2; }
@@ -266,7 +266,7 @@
                             <div>
                                 <label class="input-label">My Name</label>
                                 <input type="text" id="personName" class="input-field required" placeholder="First and Last Name">
-                                <p class="error-text" id="err-personName">Required.</p>
+                                <p class="error-text" id="err-personName">Please enter your name.</p>
                             </div>
                             <div>
                                 <label class="input-label">My Manager</label>
@@ -409,8 +409,6 @@
                         </div>
 
                         <div class="space-y-10">
-                            <h4 class="text-primary font-bold uppercase text-xs tracking-wide">Part 2: Your Commitments</h4>
-
                             <div class="action-block">
                                 <h4>1. People & Skills Commitment</h4>
                                 <div class="action-context">
@@ -541,11 +539,11 @@
         const r = $('userRole').value;
         const d = ROLE_DATA[r].lbl;
         
-        setTxt('lbl-quota25', d.q25); $('tip-quota25').setAttribute('data-tip', d.q25tip);
-        setTxt('lbl-actual25', d.a25); $('tip-actual25').setAttribute('data-tip', d.a25tip);
-        setTxt('lbl-efficiency25', d.e25); $('tip-efficiency25').setAttribute('data-tip', d.e25tip);
-        setTxt('lbl-dealSize25', d.d25); $('tip-dealSize25').setAttribute('data-tip', d.d25tip);
-        setTxt('lbl-quota26', d.q26); $('tip-quota26').setAttribute('data-tip', 'Your new target.');
+        setTxt('lbl-quota25', d.q25); $('tip-quota25').textContent = d.q25tip;
+        setTxt('lbl-actual25', d.a25); $('tip-actual25').textContent = d.a25tip;
+        setTxt('lbl-efficiency25', d.e25); $('tip-efficiency25').textContent = d.e25tip;
+        setTxt('lbl-dealSize25', d.d25); $('tip-dealSize25').textContent = d.d25tip;
+        setTxt('lbl-quota26', d.q26); $('tip-quota26').textContent = 'Your new target for 2026.';
         setTxt('lbl-resultA', d.resA); setTxt('lbl-resultB', d.resB);
         setTxt('lbl-slider1', d.sl1); setTxt('lbl-slider2', d.sl2); setTxt('lbl-slider3', d.sl3);
         setTxt('lbl-new-vol', d.newVol); setTxt('lbl-new-count', d.newCount);
@@ -576,7 +574,7 @@
         // Calc A: Volume Needed
         let valA = newEff > 0 ? q26 / newEff : 0;
         
-        // Apply Volume Slider Logic: Reduces the "Gap" visually
+        // Apply Volume Slider Logic
         let reducedReq = valA * (1 - (impVol/200));
 
         // Calc B: Count Needed
@@ -721,6 +719,21 @@ ${$('act-forecast').value}
         const blob = new Blob([JSON.stringify({ plan: $('summary-display').textContent }, null, 2)], {type:'application/json'});
         const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'plan.json'; a.click();
     };
+
+    // FIX: Use textContent instead of attribute for tooltips
+    function updateLabels() {
+        const r = $('userRole').value;
+        const d = ROLE_DATA[r].lbl;
+        
+        setTxt('lbl-quota25', d.q25); $('tip-quota25').textContent = d.q25tip;
+        setTxt('lbl-actual25', d.a25); $('tip-actual25').textContent = d.a25tip;
+        setTxt('lbl-efficiency25', d.e25); $('tip-efficiency25').textContent = d.e25tip;
+        setTxt('lbl-dealSize25', d.d25); $('tip-dealSize25').textContent = d.d25tip;
+        setTxt('lbl-quota26', d.q26); $('tip-quota26').textContent = 'Your new target for 2026.';
+        setTxt('lbl-resultA', d.resA); setTxt('lbl-resultB', d.resB);
+        setTxt('lbl-slider1', d.sl1); setTxt('lbl-slider2', d.sl2); setTxt('lbl-slider3', d.sl3);
+        setTxt('lbl-new-vol', d.newVol); setTxt('lbl-new-count', d.newCount);
+    }
 
     updateLabels();
 </script>
