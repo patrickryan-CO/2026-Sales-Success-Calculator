@@ -43,7 +43,7 @@
             @apply bg-blue-50 border-l-4 border-primary text-primary-text p-4 mb-8 rounded-r-md text-sm leading-relaxed;
         }
 
-        /* ANIMATED TOOLTIPS (FIXED) */
+        /* ANIMATED TOOLTIPS */
         .tooltip-container {
             position: relative;
             display: inline-flex;
@@ -57,6 +57,7 @@
             width: 20px; height: 20px;
             background-color: #d1d5db; color: white; border-radius: 50%;
             cursor: help; transition: background-color 0.2s;
+            font-size: 12px; font-weight: bold;
         }
         
         .tooltip-trigger:hover {
@@ -68,9 +69,9 @@
             position: absolute; bottom: 130%; left: 50%;
             transform: translateX(-50%) translateY(5px);
             background-color: #1f2937; color: white;
-            text-align: center; padding: 8px 12px;
-            border-radius: 6px; font-size: 0.75rem; font-weight: 500;
-            line-height: 1.4; white-space: normal; width: 200px;
+            text-align: center; padding: 10px 14px;
+            border-radius: 6px; font-size: 0.8rem; font-weight: 500;
+            line-height: 1.4; white-space: normal; width: 220px;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             transition: all 0.2s ease-out;
             pointer-events: none;
@@ -116,10 +117,10 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* SWOOP HEADER */
+        /* SMOOTHER SWOOP HEADER */
         .header-swoop {
             background-color: #0063a3;
-            width: 100%; height: 220px;
+            width: 100%; height: 240px;
             position: absolute; top: 0; left: 0; z-index: 0;
             overflow: hidden;
         }
@@ -163,7 +164,6 @@
             .shadow-2xl { box-shadow: none; }
             .step-panel { display: block !important; }
             .hidden { display: block !important; }
-            /* Hide Intro/Role steps in print */
             #step-0, #step-1 { display: none !important; }
         }
     </style>
@@ -171,9 +171,9 @@
 <body>
 
     <div class="header-swoop">
-        <svg viewbox="0 0 100 100" preserveAspectRatio="none">
-            <path d="M0,100 C30,40 70,40 100,100 L100,0 L0,0 Z" fill="#0063a3" />
-            <path d="M0,100 C50,70 80,70 100,100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2" />
+        <svg viewbox="0 0 1440 320" preserveAspectRatio="none">
+            <path fill="#0063a3" fill-opacity="1" d="M0,0L1440,0L1440,220L0,220Z"></path>
+            <path fill="#f3f6f9" fill-opacity="1" d="M0,220L60,213.3C120,207,240,193,360,197.3C480,202,600,224,720,229.3C840,235,960,224,1080,208C1200,192,1320,171,1380,160L1440,149L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
         </svg>
     </div>
 
@@ -182,7 +182,7 @@
         <div class="bg-white rounded-xl shadow-2xl min-h-[650px] flex flex-col relative">
             
             <div class="p-8 pb-0 text-center rounded-t-xl bg-white">
-                <h1 class="text-3xl font-extrabold text-primary mb-2">Trimble 2026 Success Plan</h1>
+                <h1 class="text-3xl font-extrabold text-gray-800 mb-2">Trimble 2026 Success Plan</h1>
                 <p class="text-gray-500 font-medium">Own Your Number. Build Your Path.</p>
             </div>
 
@@ -232,7 +232,7 @@
                                         <strong>If you have a Sales Scorecard:</strong> Please verify you have access to your 2025 Quota, Bookings, and Win Rate.
                                     </p>
                                     <p>
-                                        <strong>If your role doesn't have a scorecard:</strong> Don't worry. You can still use this tool to set objectives and build your action plan.
+                                        <strong>If your role doesn't use a scorecard:</strong> Don't worry. You can still use this tool to set objectives and build your action plan.
                                     </p>
                                 </div>
                             </div>
@@ -253,6 +253,12 @@
                                     <option value="ECOMM">eCommerce</option>
                                     <option value="COMPLIANCE">Compliance / Ops</option>
                                 </select>
+                            </div>
+
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mt-8 text-left">
+                                <h3 class="text-md font-bold text-primary mb-2">Data You Will Need:</h3>
+                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1" id="dynamic-req-list">
+                                    </ul>
                             </div>
                         </div>
                     </div>
@@ -290,11 +296,11 @@
                                     <span id="lbl-quota25">2025 Quota</span>
                                     <div class="tooltip-container">
                                         <span class="tooltip-trigger">?</span>
-                                        <div id="tip-quota25" class="tooltip-popup">Your total assigned target for 2025.</div>
+                                        <div id="tip-quota25" class="tooltip-popup">...</div>
                                     </div>
                                 </label>
                                 <input type="text" id="val-quota25" class="input-field required" placeholder="0">
-                                <p class="error-text">Please enter your target.</p>
+                                <p class="error-text">Please add this value.</p>
                             </div>
 
                             <div>
@@ -302,11 +308,11 @@
                                     <span id="lbl-actual25">2025 Actuals</span>
                                     <div class="tooltip-container">
                                         <span class="tooltip-trigger">?</span>
-                                        <div id="tip-actual25" class="tooltip-popup">Your total closed/booked amount for 2025.</div>
+                                        <div id="tip-actual25" class="tooltip-popup">...</div>
                                     </div>
                                 </label>
                                 <input type="text" id="val-actual25" class="input-field required" placeholder="0">
-                                <p class="error-text">Please enter your actuals.</p>
+                                <p class="error-text">Please add this value.</p>
                             </div>
 
                             <div>
@@ -314,14 +320,14 @@
                                     <span id="lbl-efficiency25">Win Rate %</span>
                                     <div class="tooltip-container">
                                         <span class="tooltip-trigger">?</span>
-                                        <div id="tip-efficiency25" class="tooltip-popup">Percentage of opportunities that you won.</div>
+                                        <div id="tip-efficiency25" class="tooltip-popup">...</div>
                                     </div>
                                 </label>
                                 <div class="relative">
                                     <input type="number" id="val-efficiency25" class="input-field pr-8 required" placeholder="0">
                                     <span class="absolute right-3 top-3 text-gray-400 font-bold">%</span>
                                 </div>
-                                <p class="error-text">Please enter this rate.</p>
+                                <p class="error-text">Please add this value.</p>
                             </div>
 
                             <div>
@@ -329,11 +335,11 @@
                                     <span id="lbl-dealSize25">Avg Deal Size</span>
                                     <div class="tooltip-container">
                                         <span class="tooltip-trigger">?</span>
-                                        <div id="tip-dealSize25" class="tooltip-popup">The average dollar value of your closed deals.</div>
+                                        <div id="tip-dealSize25" class="tooltip-popup">...</div>
                                     </div>
                                 </label>
                                 <input type="text" id="val-dealSize25" class="input-field required" placeholder="0">
-                                <p class="error-text">Please enter your avg size (or 0).</p>
+                                <p class="error-text">Please add this value.</p>
                             </div>
 
                             <div class="md:col-span-2 mt-2">
@@ -496,7 +502,8 @@
                 resA: 'Pipeline Needed',
                 resB: 'Deals Needed'
             },
-            isMoney: true
+            isMoney: true,
+            docs: ["2025 Quota & Bookings", "Win Rate %", "Average Deal Size"]
         },
         'SDR': {
             lbl: {
@@ -508,7 +515,8 @@
                 resA: 'Activity Volume Needed',
                 resB: 'Est. Pipeline Generated'
             },
-            isMoney: false
+            isMoney: false,
+            docs: ["2025 Activity/Meeting Targets", "Conversion Rates", "2026 Target"]
         },
         'SE': {
              lbl: {
@@ -520,7 +528,8 @@
                 resA: 'Coverage Needed',
                 resB: 'Deals to Support'
             },
-            isMoney: true
+            isMoney: true,
+            docs: ["2025 Supported Revenue", "Technical Win Rate", "2026 Revenue Target"]
         },
         'ECOMM': {
              lbl: {
@@ -532,7 +541,8 @@
                 resA: 'Traffic/Leads Needed',
                 resB: 'Transactions Needed'
             },
-            isMoney: true
+            isMoney: true,
+            docs: ["2025 Revenue & Actuals", "Site Conversion Rate", "Average Order Value"]
         },
         'COMPLIANCE': {
             lbl: {
@@ -545,7 +555,8 @@
                 resB: 'Notes'
             },
             isMoney: false,
-            skipMath: true
+            skipMath: true,
+            docs: ["2025 Key Objectives List", "2026 Goals/Projects"]
         }
     };
 
@@ -561,16 +572,25 @@
 
     function updateLabels() {
         const r = $('userRole').value;
-        const d = ROLE_DATA[r].lbl;
+        const data = ROLE_DATA[r];
         
         // Update Labels & Tooltips
-        setTxt('lbl-quota25', d.q25); setTxt('tip-quota25', d.q25tip);
-        setTxt('lbl-actual25', d.a25); setTxt('tip-actual25', d.a25tip);
-        setTxt('lbl-efficiency25', d.e25); setTxt('tip-efficiency25', d.e25tip);
-        setTxt('lbl-dealSize25', d.d25); setTxt('tip-dealSize25', d.d25tip);
-        setTxt('lbl-quota26', d.q26);
-        setTxt('lbl-resultA', d.resA);
-        setTxt('lbl-resultB', d.resB);
+        setTxt('lbl-quota25', data.lbl.q25); setTxt('tip-quota25', data.lbl.q25tip);
+        setTxt('lbl-actual25', data.lbl.a25); setTxt('tip-actual25', data.lbl.a25tip);
+        setTxt('lbl-efficiency25', data.lbl.e25); setTxt('tip-efficiency25', data.lbl.e25tip);
+        setTxt('lbl-dealSize25', data.lbl.d25); setTxt('tip-dealSize25', data.lbl.d25tip);
+        setTxt('lbl-quota26', data.lbl.q26);
+        setTxt('lbl-resultA', data.lbl.resA);
+        setTxt('lbl-resultB', data.lbl.resB);
+
+        // Update "What You Need" list dynamically on Step 1
+        const docList = $('dynamic-req-list');
+        docList.innerHTML = '';
+        data.docs.forEach(doc => {
+            const li = document.createElement('li');
+            li.textContent = doc;
+            docList.appendChild(li);
+        });
 
         // Handle Compliance special case
         const isComp = (r === 'COMPLIANCE');
@@ -614,7 +634,9 @@
         let valid = true;
         // Check all visible required inputs
         const currentPanel = $(`step-${step}`);
-        const inputs = currentPanel.querySelectorAll('.required');
+        
+        // Filter inputs that are actually visible on screen (ignores Compliance hidden fields)
+        const inputs = Array.from(currentPanel.querySelectorAll('.required')).filter(el => el.offsetParent !== null);
         
         inputs.forEach(inp => {
             const err = inp.nextElementSibling;
