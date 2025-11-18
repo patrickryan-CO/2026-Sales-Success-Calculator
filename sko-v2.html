@@ -185,6 +185,10 @@
             font-weight: 600;
             margin-top: 1.5rem;
         }
+        /* NEW: Override for strong tag inside callout */
+        .splash-callout strong {
+            color: #252a2e;
+        }
 
         /* Input Styling */
         .input-label {
@@ -281,10 +285,6 @@
             gap: 0.5rem;
             flex-wrap: wrap;
             justify-content: flex-end;
-        }
-        /* Special container for centered button on Step 0 */
-        .nav-center {
-            justify-content: center;
         }
         
         .nav-button {
@@ -597,7 +597,7 @@
                     ← Previous
                 </button>
                 
-                <div class="flex-grow"></div>
+                <div class="flex-grow" id="nav-flex-grow"></div>
 
                 <div class="nav-button-group" id="nav-button-group-main">
                      <button type="button" id="resetButton" class="nav-button nav-button-default" style="display: none;">
@@ -670,13 +670,14 @@
 
         // --- SVG Icons ---
         const iconSplash = `<svg class="text-primary mx-auto h-16 w-16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
-        const iconBaseline = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-primary"><path d="M11.25 4.5a.75.75 0 00-1.5 0v8.25em(13.5, 4.5)"></path><path d="M12.75 4.5a.75.75 0 011.5 0v8.25em(13.5, 4.5)"></path><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM3.5 12a8.5 8.5 0 1117 0 8.5 8.5 0 01-17 0z" clip-rule="evenodd" /></svg>`;
-        const iconGap = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-accent"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-1.47a.75.75 0 00-1.06-1.06L10.5 11.56l-1.068-1.068a.75.75 0 00-1.06 1.06l1.5 1.5a.75.75 0 001.06 0l2.5-2.5z" clip-rule="evenodd" /><path fill-rule="evenodd" d="M10.5 6a.75.75 0 01.75.75v4.59l1.97 1.97a.75.75 0 01-1.06 1.06L10.5 13.06l-2.47 2.47a.75.75 0 01-1.06-1.06L8.53 13.5H4.5a.75.75 0 010-1.5h3.03l-1.06-1.06a.75.75 0 011.06-1.06L10.5 11.56l1.068-1.068a.75.75 0 011.06 1.06l-1.5 1.5a.75.75 0 01-1.06 0L8 11.97v-3.72a.75.75 0 01.75-.75h1.75z" clip-rule="evenodd" /></svg>`;
-        const iconSolution = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-success"><path fill-rule="evenodd" d="M10.5 1.5a.75.75 0 01.75.75V3h1.5a.75.75 0 010 1.5H12v1.5a.75.75 0 01-1.5 0V4.5H9a.75.75 0 010-1.5h1.5V2.25a.75.75 0 01.75-.75zM8.25 4.5A.75.75 0 019 3.75h6a.75.75 0 010 1.5H9a.75.75 0 01-.75-.75zM12 7.5a.75.75 0 01.75.75V9h1.5a.75.75 0 010 1.5H12v1.5a.75.75 0 01-1.5 0V10.5H9a.75.75 0 010-1.5h1.5V8.25A.75.75 0 0112 7.5zM10.5 12A.75.75 0 0111.25 11.25h1.5a.75.75 0 010 1.5h-1.5A.75.75 0 0110.5 12zM10.5 15a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75zM12 16.5a.75.75 0 01.75.75V18h1.5a.75.75 0 010 1.5H12v1.5a.75.75 0 01-1.5 0V19.5H9a.75.75 0 010-1.5h1.5v-1.5A.75.75 0 0112 16.5zM15 15a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5h-1.5A.75.75 0 0115 15zM15 12a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5h-1.5A.75.75 0 0115 12zM18 8.25a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5h-1.5A.75.75 0 0118 8.25zM18 11.25a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75zM6 15a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5H6.75A.75.75 0 016 15zM6 12a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5H6.75A.75.75 0 016 12zM3.75 8.25a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5H4.5a.75.75 0 01-.75-.75zM3.75 11.25a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5H4.5a.75.75 0 01-.75-.75z" /></svg>`;
-        const iconReview = `<svg class="text-primary-text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M10.75 2.75a.75.75 0 00-1.5 0v8.586l-2.293-2.293a.75.75 0 00-1.06 1.06l3.5 3.5a.75.75 0 001.06 0l3.5-3.5a.75.75 0 10-1.06-1.06L10.75 11.336V2.75z" /><path d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" /></svg>`;
+        const iconBaseline = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-primary"><path fill-rule="evenodd" d="M3 6a3 3 0 013-3h12a3 3 0 013 3v12a3 3 0 01-3 3H6a3 3 0 01-3-3V6zm4.5 9.75a.75.75 0 01.75-.75h6a.75.75 0 010 1.5h-6a.75.75 0 01-.75-.75zm.75-2.25a.75.75 0 000 1.5h6a.75.75 0 000-1.5h-6zM6.75 9a.75.75 0 01.75-.75h6a.75.75 0 010 1.5h-6A.75.75 0 016.75 9z" clip-rule="evenodd" /></svg>`;
+        const iconGap = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-accent"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h6a.75.75 0 000-1.5h-5.25V6z" clip-rule="evenodd" /></svg>`;
+        const iconSolution = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-success"><path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3A5.25 5.25 0 0012 1.5zm-3.75 5.25v3a3 3 0 003 3h1.5a3 3 0 003-3v-3A3.75 3.75 0 0012 3a3.75 3.75 0 00-3.75 3.75z" clip-rule="evenodd" /></svg>`;
+        const iconReview = `<svg class="text-primary-text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clip-rule="evenodd" /></svg>`;
 
         
         // --- Step Definitions (The Core Conversation) ---
+        // NEW: 4-Phase flow, simplified, no "Pipe Plan"
         const steps = [
             // --- Intro (Step 0) ---
             { id: 'intro', fieldId: null, phase: 1, 
@@ -716,7 +717,7 @@
             
             // --- Phase 3: SOLUTION (Steps 13-22) ---
             { id: 'phase3-welcome', fieldId: null, phase: 3, 
-              prompt: `<h3>${iconSolution} PHASE 3: Your Solution (Scenarios & Actions)</h3>
+              prompt: `<h3>${iconSolution} PHASE 3: Your Solution</h3>
                        <p class='prompt-why'>You've seen the data. You've defined the gap. Now for the most important part: <strong>creating your solution.</strong></p>
                        <p class='prompt-example'>In this section, you'll first play with scenarios to see how small improvements can close your gap. Then, you'll use what you learned in the SKO workshops to write your *specific* action plan.</p>` 
             }, // 13
@@ -754,7 +755,6 @@
         ];
         
         // --- Maps Phase numbers to the *first step index* of that phase ---
-        // Used for clickable progress bar (4-Phase model)
         const phaseStartSteps = {
             1: 1, // Phase 1 (Baseline) starts at step 1
             2: 10, // Phase 2 (The Gap) starts at step 10
@@ -954,7 +954,7 @@ Generated by the Trimble 2026 Success Planner.
             calculatePlan(); 
             
             const metadata = {
-                plan_version: "2026.23-Splash-Page-Fix", // New version tag
+                plan_version: "2026.24-Final-Clean", // New version tag
                 date_exported: new Date().toISOString(),
                 rep_name: getStringValue('personName'),
                 manager_name: getStringValue('managerName'),
@@ -1049,24 +1049,27 @@ Generated by the Trimble 2026 Success Planner.
             if (isReviewStep) generateCommitmentSummary();
     
             // --- NEW Button Logic for Splash Page ---
-            const navButtonContainer = $('navigation-buttons');
+            const navContainer = $('navigation-buttons');
             const navButtonGroup = $('nav-button-group-main');
+            const navFlexGrow = $('nav-flex-grow'); // The spacer
             const nextButton = $('nextButton');
             const resetButton = $('resetButton');
 
             if (stepIndex === 0) { // Splash page
-                navButtonContainer.classList.add('justify-center'); // Center the whole bar
+                navContainer.classList.add('justify-center'); // Center the whole bar
                 $('prevButton').style.display = 'none';
                 resetButton.style.display = 'none';
+                navFlexGrow.style.display = 'none'; // HIDE the spacer
                 nextButton.textContent = 'Get Started';
                 // Hide all other buttons as 'none'
                 $('printButton').style.display = 'none';
                 $('copyCommitmentButton').style.display = 'none';
                 $('exportJSONButton').style.display = 'none';
             } else {
-                navButtonContainer.classList.remove('justify-center'); // Revert to default
+                navContainer.classList.remove('justify-center'); // Revert to default
                 $('prevButton').style.display = 'inline-block';
                 resetButton.style.display = 'inline-block';
+                navFlexGrow.style.display = 'block'; // SHOW the spacer
 
                 // Set button text based on if it's a "welcome" step
                 if (step.id.includes('welcome')) {
@@ -1204,7 +1207,7 @@ Generated by the Trimble 2026 Success Planner.
                 if (el) {
                     const changeHandler = () => {
                         calculatePlan();
-                        updateNextButtonState();
+                        updateNextButtonState(); // VALIDATION BUG FIX: Check state on every input
                     };
                     el.addEventListener('input', changeHandler);
                     el.addEventListener('change', changeHandler);
@@ -1216,7 +1219,7 @@ Generated by the Trimble 2026 Success Planner.
                 document.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
                     const radioChangeHandler = () => {
                         calculatePlan();
-                        updateNextButtonState();
+                        updateNextButtonState(); // VALIDATION BUG FIX: Check state on change
                     };
                     radio.addEventListener('change', radioChangeHandler);
                 });
