@@ -14,7 +14,7 @@
                         'primary': '#0063a3',      // Trimble Blue
                         'primary-hover': '#004a7c',
                         'accent': '#fbad26',       // Trimble Yellow
-                        'primary-text': '#252a2e', // Dark Gray
+                        'primary-text': '#252a2e', // Dark Gray (FIXED: Used for Headings)
                         'soft-bg': '#f3f6f9',      // Light Gray
                         'error-red': '#e11d48',    // Softer Red
                     },
@@ -43,12 +43,12 @@
             @apply bg-blue-50 border-l-4 border-primary text-primary-text p-4 mb-8 rounded-r-md text-sm leading-relaxed;
         }
 
-        /* ANIMATED TOOLTIPS */
+        /* ANIMATED TOOLTIPS (FIXED) */
         .tooltip-container {
             position: relative;
-            display: inline-flex;
-            vertical-align: middle;
+            display: inline-block;
             margin-left: 8px;
+            vertical-align: middle;
             z-index: 50;
         }
         
@@ -117,10 +117,10 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* SMOOTHER SWOOP HEADER */
+        /* SWOOP HEADER */
         .header-swoop {
             background-color: #0063a3;
-            width: 100%; height: 240px;
+            width: 100%; height: 220px;
             position: absolute; top: 0; left: 0; z-index: 0;
             overflow: hidden;
         }
@@ -182,7 +182,7 @@
         <div class="bg-white rounded-xl shadow-2xl min-h-[650px] flex flex-col relative">
             
             <div class="p-8 pb-0 text-center rounded-t-xl bg-white">
-                <h1 class="text-3xl font-extrabold text-gray-800 mb-2">Trimble 2026 Success Plan</h1>
+                <h1 class="text-3xl font-extrabold text-primary-text mb-2">Trimble 2026 Success Plan</h1>
                 <p class="text-gray-500 font-medium">Own Your Number. Build Your Path.</p>
             </div>
 
@@ -200,7 +200,7 @@
                         <div class="text-center max-w-3xl mx-auto space-y-8">
                             
                             <div class="prose max-w-none text-gray-600">
-                                <h2 class="text-2xl font-bold text-gray-800 mb-4">Your Plan. Your Year.</h2>
+                                <h2 class="text-2xl font-bold text-primary-text mb-4">Your Plan. Your Year.</h2>
                                 <p class="text-lg leading-relaxed">
                                     Success isn't just about hitting a target; it's about having a clear path to get there. 
                                     We built this tool to help you translate your 2026 goals into a personal roadmap you can own.
@@ -575,10 +575,10 @@
         const data = ROLE_DATA[r];
         
         // Update Labels & Tooltips
-        setTxt('lbl-quota25', data.lbl.q25); setTxt('tip-quota25', data.lbl.q25tip);
-        setTxt('lbl-actual25', data.lbl.a25); setTxt('tip-actual25', data.lbl.a25tip);
-        setTxt('lbl-efficiency25', data.lbl.e25); setTxt('tip-efficiency25', data.lbl.e25tip);
-        setTxt('lbl-dealSize25', data.lbl.d25); setTxt('tip-dealSize25', data.lbl.d25tip);
+        setTxt('lbl-quota25', data.lbl.q25); $('tip-quota25').textContent = data.lbl.q25tip;
+        setTxt('lbl-actual25', data.lbl.a25); $('tip-actual25').textContent = data.lbl.a25tip;
+        setTxt('lbl-efficiency25', data.lbl.e25); $('tip-efficiency25').textContent = data.lbl.e25tip;
+        setTxt('lbl-dealSize25', data.lbl.d25); $('tip-dealSize25').textContent = data.lbl.d25tip;
         setTxt('lbl-quota26', data.lbl.q26);
         setTxt('lbl-resultA', data.lbl.resA);
         setTxt('lbl-resultB', data.lbl.resB);
@@ -608,7 +608,11 @@
         const att = q25 > 0 ? (a25 / q25) * 100 : 0;
         setTxt('calc-attainment', att.toFixed(1) + '%');
 
-        if(conf.skipMath) return;
+        if(conf.skipMath) {
+            setTxt('calc-resultA', "N/A");
+            setTxt('calc-resultB', "N/A");
+            return;
+        }
 
         const eff = getVal('val-efficiency25') / 100;
         const size = getVal('val-dealSize25');
@@ -622,7 +626,6 @@
         if(size > 0) {
             valB = valA / size; 
         } else {
-            // Fallback for SDRs if no deal size
             valB = valA; 
         }
 
@@ -632,11 +635,12 @@
 
     function validate() {
         let valid = true;
-        // Check all visible required inputs
         const currentPanel = $(`step-${step}`);
         
-        // Filter inputs that are actually visible on screen (ignores Compliance hidden fields)
-        const inputs = Array.from(currentPanel.querySelectorAll('.required')).filter(el => el.offsetParent !== null);
+        const inputs = Array.from(currentPanel.querySelectorAll('.required')).filter(el => {
+             // CRITICAL FIX: Only validate visible elements (to skip hidden compliance math fields)
+            return el.offsetParent !== null;
+        });
         
         inputs.forEach(inp => {
             const err = inp.nextElementSibling;
