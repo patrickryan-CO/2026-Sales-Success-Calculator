@@ -44,42 +44,46 @@
         }
 
         /* ANIMATED TOOLTIPS (FIXED) */
-        .tooltip-wrapper {
+        .tooltip-container {
             position: relative;
-            display: inline-block;
-            margin-left: 8px;
+            display: inline-flex;
             vertical-align: middle;
+            margin-left: 8px;
+            z-index: 50;
         }
-        .tooltip-icon {
-            display: inline-flex; align-items: center; justify-content: center;
-            width: 18px; height: 18px;
-            background-color: #9ca3af; /* Neutral Gray */
-            color: white; border-radius: 50%;
-            font-size: 12px; font-weight: bold; cursor: help;
-            transition: background-color 0.2s;
-        }
-        .tooltip-icon:hover { background-color: #0063a3; }
         
-        .tooltip-content {
+        .tooltip-trigger {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 20px; height: 20px;
+            background-color: #d1d5db; color: white; border-radius: 50%;
+            cursor: help; transition: background-color 0.2s;
+        }
+        
+        .tooltip-trigger:hover {
+            background-color: #0063a3;
+        }
+        
+        .tooltip-popup {
             visibility: hidden; opacity: 0;
-            position: absolute; bottom: 150%; left: 50%;
-            transform: translateX(-50%) translateY(10px);
-            background-color: #252a2e; color: white;
-            text-align: center; padding: 10px 14px;
-            border-radius: 6px; font-size: 13px; font-weight: 500;
-            white-space: normal; width: 240px; z-index: 100;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+            position: absolute; bottom: 130%; left: 50%;
+            transform: translateX(-50%) translateY(5px);
+            background-color: #1f2937; color: white;
+            text-align: center; padding: 8px 12px;
+            border-radius: 6px; font-size: 0.75rem; font-weight: 500;
+            line-height: 1.4; white-space: normal; width: 200px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             transition: all 0.2s ease-out;
             pointer-events: none;
-            line-height: 1.4;
         }
-        .tooltip-content::after {
+        
+        .tooltip-popup::after {
             content: ""; position: absolute; top: 100%; left: 50%;
-            margin-left: -6px; border-width: 6px;
+            margin-left: -5px; border-width: 5px;
             border-style: solid;
-            border-color: #252a2e transparent transparent transparent;
+            border-color: #1f2937 transparent transparent transparent;
         }
-        .tooltip-wrapper:hover .tooltip-content {
+        
+        .tooltip-container:hover .tooltip-popup {
             visibility: visible; opacity: 1;
             transform: translateX(-50%) translateY(0);
         }
@@ -154,10 +158,13 @@
 
         /* Print adjustments */
         @media print {
-            .header-swoop, .tooltip-icon, #nav-area { display: none !important; }
+            .header-swoop, .tooltip-container, #nav-area { display: none !important; }
             body { background: white; }
             .shadow-2xl { box-shadow: none; }
             .step-panel { display: block !important; }
+            .hidden { display: block !important; }
+            /* Hide Intro/Role steps in print */
+            #step-0, #step-1 { display: none !important; }
         }
     </style>
 </head>
@@ -172,7 +179,7 @@
 
     <div class="relative z-10 max-w-5xl mx-auto mt-16 mb-12 px-4">
         
-        <div class="bg-white rounded-xl shadow-2xl min-h-[650px] flex flex-col">
+        <div class="bg-white rounded-xl shadow-2xl min-h-[650px] flex flex-col relative">
             
             <div class="p-8 pb-0 text-center rounded-t-xl bg-white">
                 <h1 class="text-3xl font-extrabold text-primary mb-2">Trimble 2026 Success Plan</h1>
@@ -193,8 +200,10 @@
                         <div class="text-center max-w-3xl mx-auto space-y-8">
                             
                             <div class="prose max-w-none text-gray-600">
-                                <p class="text-xl leading-relaxed">
-                                    Welcome to SKO 2026. This tool is designed to bridge the gap between the corporate target you've been given and the personal plan you need to hit it.
+                                <h2 class="text-2xl font-bold text-gray-800 mb-4">Your Plan. Your Year.</h2>
+                                <p class="text-lg leading-relaxed">
+                                    Success isn't just about hitting a target; it's about having a clear path to get there. 
+                                    We built this tool to help you translate your 2026 goals into a personal roadmap you can own.
                                 </p>
                             </div>
 
@@ -202,27 +211,30 @@
                                 <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
                                     <div class="text-primary text-2xl mb-2">👥</div>
                                     <h3 class="font-bold text-gray-800 mb-2">People</h3>
-                                    <p class="text-sm text-gray-600">What skills or coaching do you need to level up?</p>
+                                    <p class="text-sm text-gray-600">Identify the skills and coaching you need to level up.</p>
                                 </div>
                                 <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
                                     <div class="text-primary text-2xl mb-2">📈</div>
                                     <h3 class="font-bold text-gray-800 mb-2">Pipeline</h3>
-                                    <p class="text-sm text-gray-600">How will you generate the coverage and quality you need?</p>
+                                    <p class="text-sm text-gray-600">Calculate the exact coverage required to hit your number.</p>
                                 </div>
                                 <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
                                     <div class="text-primary text-2xl mb-2">⚡</div>
                                     <h3 class="font-bold text-gray-800 mb-2">Productivity</h3>
-                                    <p class="text-sm text-gray-600">How will you use tools and time to work smarter?</p>
+                                    <p class="text-sm text-gray-600">Commit to working smarter with the right tools.</p>
                                 </div>
                             </div>
 
                             <div class="bg-gray-50 rounded-lg p-6 text-left border border-gray-200 mt-8">
-                                <h3 class="font-bold text-primary mb-2">🎯 The Outcome</h3>
-                                <p class="text-sm text-gray-600 mb-4">
-                                    By the end of this process (approx. 5 mins), you will have a calculated "Gap Analysis" and a set of specific commitments to review with your manager.
-                                </p>
-                                <div class="text-xs text-gray-500 font-semibold uppercase tracking-wide">What You Need Now:</div>
-                                <p class="text-sm text-gray-700">Your Sales Scorecard (2025 Quota, Actuals, Win Rate, Deal Size).</p>
+                                <h3 class="font-bold text-primary mb-2">What You'll Need:</h3>
+                                <div class="text-sm text-gray-600 mb-0 space-y-2">
+                                    <p>
+                                        <strong>If you have a Sales Scorecard:</strong> Please verify you have access to your 2025 Quota, Bookings, and Win Rate.
+                                    </p>
+                                    <p>
+                                        <strong>If your role doesn't have a scorecard:</strong> Don't worry. You can still use this tool to set objectives and build your action plan.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -230,7 +242,7 @@
                     <div id="step-1" class="step-content hidden">
                         <div class="max-w-xl mx-auto text-center py-10">
                             <h2 class="text-2xl font-bold text-gray-800 mb-4">Let's customize your plan.</h2>
-                            <p class="text-gray-600 mb-8">Select your primary role below so we can adjust the metrics and calculations to match your business.</p>
+                            <p class="text-gray-600 mb-8">Select your primary role below so we can adjust the metrics to match your business.</p>
                             
                             <div class="text-left bg-white p-8 rounded-lg border border-gray-200 shadow-sm">
                                 <label class="input-label text-lg mb-2">I am a:</label>
@@ -276,9 +288,9 @@
                             <div>
                                 <label class="input-label">
                                     <span id="lbl-quota25">2025 Quota</span>
-                                    <div class="tooltip-wrapper">
-                                        <span class="tooltip-icon">?</span>
-                                        <div id="tip-quota25" class="tooltip-content">...</div>
+                                    <div class="tooltip-container">
+                                        <span class="tooltip-trigger">?</span>
+                                        <div id="tip-quota25" class="tooltip-popup">Your total assigned target for 2025.</div>
                                     </div>
                                 </label>
                                 <input type="text" id="val-quota25" class="input-field required" placeholder="0">
@@ -288,9 +300,9 @@
                             <div>
                                 <label class="input-label">
                                     <span id="lbl-actual25">2025 Actuals</span>
-                                    <div class="tooltip-wrapper">
-                                        <span class="tooltip-icon">?</span>
-                                        <div id="tip-actual25" class="tooltip-content">...</div>
+                                    <div class="tooltip-container">
+                                        <span class="tooltip-trigger">?</span>
+                                        <div id="tip-actual25" class="tooltip-popup">Your total closed/booked amount for 2025.</div>
                                     </div>
                                 </label>
                                 <input type="text" id="val-actual25" class="input-field required" placeholder="0">
@@ -300,9 +312,9 @@
                             <div>
                                 <label class="input-label">
                                     <span id="lbl-efficiency25">Win Rate %</span>
-                                    <div class="tooltip-wrapper">
-                                        <span class="tooltip-icon">?</span>
-                                        <div id="tip-efficiency25" class="tooltip-content">...</div>
+                                    <div class="tooltip-container">
+                                        <span class="tooltip-trigger">?</span>
+                                        <div id="tip-efficiency25" class="tooltip-popup">Percentage of opportunities that you won.</div>
                                     </div>
                                 </label>
                                 <div class="relative">
@@ -315,9 +327,9 @@
                             <div>
                                 <label class="input-label">
                                     <span id="lbl-dealSize25">Avg Deal Size</span>
-                                    <div class="tooltip-wrapper">
-                                        <span class="tooltip-icon">?</span>
-                                        <div id="tip-dealSize25" class="tooltip-content">...</div>
+                                    <div class="tooltip-container">
+                                        <span class="tooltip-trigger">?</span>
+                                        <div id="tip-dealSize25" class="tooltip-popup">The average dollar value of your closed deals.</div>
                                     </div>
                                 </label>
                                 <input type="text" id="val-dealSize25" class="input-field required" placeholder="0">
@@ -336,7 +348,7 @@
                     <div id="step-3" class="step-content hidden">
                         <div class="guide-box">
                             <h3 class="font-bold mb-1">YOUR GUIDE: The 2026 Opportunity</h3>
-                            <p>Now, enter your <strong>2026 Target</strong>. We will use your baseline data to calculate exactly what activity or pipeline volume you need to hit this number.</p>
+                            <p>Now, enter your <strong>2026 Target</strong>. based on your baseline efficiency, we'll calculate what it will take to hit this new number.</p>
                         </div>
 
                         <div id="calc-section">
@@ -344,9 +356,9 @@
                                 <div>
                                     <label class="input-label">
                                         <span id="lbl-quota26">2026 Quota</span>
-                                        <div class="tooltip-wrapper">
-                                            <span class="tooltip-icon">?</span>
-                                            <div class="tooltip-content">Your new target for the coming year.</div>
+                                        <div class="tooltip-container">
+                                            <span class="tooltip-trigger">?</span>
+                                            <div class="tooltip-popup">Your new target for the coming year.</div>
                                         </div>
                                     </label>
                                     <input type="text" id="val-quota26" class="input-field required text-lg font-semibold text-primary" placeholder="0">
@@ -405,7 +417,7 @@
                             <div>
                                 <label class="input-label">
                                     Action 1: People (Training & Coaching)
-                                    <div class="tooltip-wrapper"><span class="tooltip-icon">?</span><div class="tooltip-content">What skill will you improve? e.g., "Complete Negotiation Certification."</div></div>
+                                    <div class="tooltip-container"><span class="tooltip-trigger">?</span><div class="tooltip-popup">What skill will you improve? e.g., "Complete Negotiation Certification."</div></div>
                                 </label>
                                 <input type="text" id="act-people" class="input-field required" placeholder="I will...">
                                 <p class="error-text">Please add a People action.</p>
@@ -414,7 +426,7 @@
                             <div>
                                 <label class="input-label">
                                     Action 2: Process (Pipeline & Quality)
-                                    <div class="tooltip-wrapper"><span class="tooltip-icon">?</span><div class="tooltip-content">How will you improve deal quality? e.g., "Disqualify bad deals earlier."</div></div>
+                                    <div class="tooltip-container"><span class="tooltip-trigger">?</span><div class="tooltip-popup">How will you improve deal quality? e.g., "Disqualify bad deals earlier."</div></div>
                                 </label>
                                 <input type="text" id="act-process" class="input-field required" placeholder="I will...">
                                 <p class="error-text">Please add a Process action.</p>
@@ -423,7 +435,7 @@
                             <div>
                                 <label class="input-label">
                                     Action 3: Productivity (Time & Tools)
-                                    <div class="tooltip-wrapper"><span class="tooltip-icon">?</span><div class="tooltip-content">How will you work smarter? e.g., "Block 2 hours daily for prospecting."</div></div>
+                                    <div class="tooltip-container"><span class="tooltip-trigger">?</span><div class="tooltip-popup">How will you work smarter? e.g., "Block 2 hours daily for prospecting."</div></div>
                                 </label>
                                 <input type="text" id="act-prod" class="input-field required" placeholder="I will...">
                                 <p class="error-text">Please add a Productivity action.</p>
@@ -432,7 +444,7 @@
                             <div class="pt-6 border-t">
                                 <label class="input-label">
                                     My Accuracy Commitment
-                                    <div class="tooltip-wrapper"><span class="tooltip-icon">?</span><div class="tooltip-content">How will you ensure your forecast is accurate?</div></div>
+                                    <div class="tooltip-container"><span class="tooltip-trigger">?</span><div class="tooltip-popup">How will you ensure your forecast is accurate?</div></div>
                                 </label>
                                 <p class="text-xs text-gray-500 mb-2">"My Rep Commit will be 95-105% accurate every quarter."</p>
                                 <input type="text" id="act-forecast" class="input-field required" placeholder="Key action to ensure accuracy...">
