@@ -51,13 +51,13 @@
             overflow-x: hidden;
         }
 
-        /* --- Updated Flowing Wave (z-index 0) --- */
+        /* --- Blue Wave Background (z-index 0) --- */
         .wave-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 350px; /* Slightly taller for flow */
+            height: 320px;
             background-color: #0063a3;
             z-index: 0; 
         }
@@ -78,8 +78,8 @@
             border-radius: 0.75rem;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
             width: 95%;
-            max-width: 64rem; /* max-w-5xl */
-            margin: 5rem auto; /* Push down */
+            max-width: 64rem; /* Slightly wider for merged steps */
+            margin: 4rem auto;
             padding: 0;
             overflow: hidden;
         }
@@ -88,7 +88,7 @@
             padding: 2.5rem;
         }
 
-        /* Typography Enforcement (Dark Gray Headers) */
+        /* Typography */
         h1, h2, h3, h4, h5, h6 { color: #252a2e !important; }
 
         /* Tooltips */
@@ -492,7 +492,7 @@
             <p class="text-gray-600 mb-8 text-base leading-relaxed">
                 We are about to open a <strong>Google Form</strong> in a new tab with your data pre-filled.
                 <br><br>
-                Please <strong>REVIEW</strong> the numbers in that form and click the <strong>SUBMIT</strong> button there to finalize.
+                Please <strong>REVIEW</strong> the numbers in that form and click the <strong>SUBMIT</strong> button there to finalize your commitment.
             </p>
             <div class="flex justify-end gap-4 pt-4 border-t border-gray-100">
                 <button id="cancelModalBtn" class="btn btn-default">Go Back</button>
