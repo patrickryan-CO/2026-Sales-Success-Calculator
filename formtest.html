@@ -136,8 +136,21 @@
         .btn-default { background-color: #E5E7EB; color: #252a2e; }
         .btn-default:hover { background-color: #D1D5DB; }
 
-        /* Progress Steps - 4 Column Grid */
-        .progress-step { padding: 0.75rem; text-align: center; font-size: 0.875rem; font-weight: 600; color: #9CA3AF; border-bottom: 4px solid transparent; }
+        /* Progress Steps - STRICT 4 Column Grid */
+        .progress-bar-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            width: 100%;
+            border-bottom: 2px solid #E5E7EB;
+        }
+        .progress-step { 
+            padding: 0.75rem; 
+            text-align: center; 
+            font-size: 0.875rem; 
+            font-weight: 600; 
+            color: #9CA3AF; 
+            border-bottom: 4px solid transparent; 
+        }
         .progress-step-active { color: #0063a3; border-bottom-color: #0063a3; }
 
         /* Sliders */
@@ -244,8 +257,8 @@
                     <p class="text-lg font-bold text-gray-600">Personal Success Plan for 2026 (My Commitment)</p>
                 </div>
 
-                <div id="progress-bar-container" class="mb-8 border-b-2 border-gray-200">
-                    <div class="grid grid-cols-4 w-full">
+                <div class="mb-8">
+                    <div class="progress-bar-grid">
                         <div id="progress-1" class="progress-step progress-step-active">Phase 1: Baseline</div>
                         <div id="progress-2" class="progress-step">Phase 2: The Gap</div>
                         <div id="progress-3" class="progress-step">Phase 3: The Solution</div>
@@ -618,7 +631,7 @@
 
     // --- 4. Init & Events ---
     let currStep = 1;
-    const steps = 4; // Updated to 4 Phases
+    const steps = 4; // Hard-coded to 4 Phases
 
     function goStep(s) {
         if(s === 4) summary();
@@ -664,7 +677,6 @@
         $('cancelModalBtn').onclick = () => { $('submissionModal').classList.add('hidden'); $('submissionModal').classList.remove('flex'); };
 
         calc();
-        // Note: goStep is handled by start button / init
     });
 </script>
 </body>
