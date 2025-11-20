@@ -57,7 +57,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 320px;
+            height: 350px;
             background-color: #0063a3;
             z-index: 0; 
         }
@@ -78,8 +78,8 @@
             border-radius: 0.75rem;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
             width: 95%;
-            max-width: 64rem; 
-            margin: 4rem auto;
+            max-width: 64rem;
+            margin: 5rem auto; 
             padding: 0;
             overflow: hidden;
         }
@@ -88,15 +88,25 @@
             padding: 2.5rem;
         }
 
-        /* Typography */
+        /* Typography Enforcement */
         h1, h2, h3, h4, h5, h6 { color: #252a2e !important; }
 
-        /* Tooltips */
+        /* Tooltips - UPDATED FOR VISIBILITY */
         .tooltip-trigger {
-            display: inline-block; width: 1.1rem; height: 1.1rem; line-height: 1.1rem;
-            margin-left: 0.3rem; background-color: #D1D5DB; color: #252a2e;
-            font-family: serif; font-weight: bold; font-style: italic; text-align: center;
-            border-radius: 50%; cursor: help; font-size: 0.8rem; position: relative;
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center;
+            width: 1.25rem; height: 1.25rem; 
+            margin-left: 0.5rem; 
+            background-color: #0063a3; /* High Contrast Blue */
+            color: white;
+            font-family: sans-serif; 
+            font-weight: bold; 
+            font-style: normal;
+            border-radius: 50%; 
+            cursor: help; 
+            font-size: 0.75rem; 
+            position: relative;
         }
         .tooltip-trigger::after {
             content: attr(data-tooltip); position: absolute; bottom: 140%; left: 50%;
@@ -105,6 +115,7 @@
             padding: 0.5rem 0.75rem; border-radius: 0.25rem; width: 220px;
             opacity: 0; visibility: hidden; transition: all 0.2s; pointer-events: none; z-index: 50;
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            line-height: 1.4;
         }
         .tooltip-trigger:hover::after { opacity: 1; visibility: visible; }
 
@@ -136,7 +147,7 @@
         .btn-default { background-color: #E5E7EB; color: #252a2e; }
         .btn-default:hover { background-color: #D1D5DB; }
 
-        /* Progress Steps */
+        /* Progress Steps - Strict Grid */
         .progress-bar-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -277,11 +288,11 @@
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                                 <div>
-                                    <label class="input-label">My Name <span class="tooltip-trigger" data-tooltip="Your Full Name">?</span></label>
+                                    <label class="input-label">My Name <span class="tooltip-trigger" data-tooltip="Your full name">?</span></label>
                                     <input type="text" id="personName" class="input-field" placeholder="e.g., Jane Doe">
                                 </div>
                                 <div>
-                                    <label class="input-label">My Manager <span class="tooltip-trigger" data-tooltip="Your Direct Manager">?</span></label>
+                                    <label class="input-label">My Manager <span class="tooltip-trigger" data-tooltip="Your direct manager">?</span></label>
                                     <input type="text" id="managerName" class="input-field" placeholder="e.g., John Smith">
                                 </div>
                                 <div class="md:col-span-2">
@@ -294,11 +305,11 @@
                                     </select>
                                 </div>
                                 <div>
-                                    <label class="input-label">2025 Quota <span class="tooltip-trigger" data-tooltip="Your total assigned quota for 2025">?</span></label>
+                                    <label class="input-label">2025 Quota <span class="tooltip-trigger" data-tooltip="Your assigned quota for 2025">?</span></label>
                                     <input type="text" id="quota2025" class="input-field" placeholder="e.g., 1,000,000">
                                 </div>
                                 <div>
-                                    <label class="input-label">2025 Bookings <span class="tooltip-trigger" data-tooltip="Total closed-won business in 2025">?</span></label>
+                                    <label class="input-label">2025 Bookings <span class="tooltip-trigger" data-tooltip="Total closed-won deals in 2025">?</span></label>
                                     <input type="text" id="bookings2025" class="input-field" placeholder="e.g., 1,100,000">
                                 </div>
                                 <div>
@@ -306,7 +317,7 @@
                                     <input type="number" id="winRate2025" class="input-field" placeholder="e.g., 25">
                                 </div>
                                 <div>
-                                    <label class="input-label">2025 Avg. Deal Size <span class="tooltip-trigger" data-tooltip="Total Bookings / Number of Deals">?</span></label>
+                                    <label class="input-label">2025 Avg. Deal Size <span class="tooltip-trigger" data-tooltip="Bookings / Number of Deals">?</span></label>
                                     <input type="text" id="avgDealSize2025" class="input-field" placeholder="e.g., 50,000">
                                 </div>
                                 <div class="bg-gray-50 border border-gray-200 rounded p-4 flex flex-col justify-center">
@@ -326,7 +337,7 @@
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                                 <div>
-                                    <label class="input-label text-lg text-primary">My 2026 Quota (A) <span class="tooltip-trigger" data-tooltip="Your official quota target for 2026">?</span></label>
+                                    <label class="input-label text-lg text-primary">My 2026 Quota (A) <span class="tooltip-trigger" data-tooltip="Your new quota for 2026">?</span></label>
                                     <input type="text" id="quota2026" class="input-field text-lg font-bold" placeholder="e.g., 1,200,000">
                                 </div>
                                 <div class="md:col-span-1 pt-8 text-gray-500 italic">
@@ -368,7 +379,7 @@
                         <section>
                             <h2 class="step-heading">Phase 3: The Solution</h2>
                             
-                            <div class="mb-8">
+                            <div class="mb-12">
                                 <h3 class="text-xl font-bold text-primary mb-4">Part A: Model Efficiency Gains</h3>
                                 <div class="bg-accent/10 border-l-4 border-accent p-4 mb-6 rounded text-sm text-primary-text">
                                     <strong>INSTRUCTION:</strong> Move the sliders to see how improving Win Rate, Deal Size, or Activity reduces your pipeline burden.
@@ -380,12 +391,15 @@
                                         <label class="text-sm font-semibold text-primary-text">Improve by: <span id="winRateImprovementLabel" class="text-primary font-bold">5.0%</span></label>
                                         <input type="range" id="winRateImprovement" min="0" max="25" value="5" step="0.5" class="w-full mt-2 mb-4 accent-primary">
                                         
-                                        <div class="bg-white p-4 rounded border border-gray-200">
-                                            <span class="text-xs font-bold text-gray-500 uppercase">New Pipeline Needed</span>
-                                            <span id="newPipelineNeeded" class="block text-2xl font-bold text-primary mt-1">$0</span>
-                                        </div>
-                                        <div class="mt-2 text-xs text-gray-600">
-                                            New Coverage: <span id="newPipelineCoverage" class="font-bold">0.0x</span>
+                                        <div class="bg-white p-4 rounded border border-gray-200 flex justify-between items-center">
+                                            <div>
+                                                <span class="text-xs font-bold text-gray-500 uppercase">New Pipeline Needed</span>
+                                                <span id="newPipelineNeeded" class="block text-2xl font-bold text-primary mt-1">$0</span>
+                                            </div>
+                                            <div class="text-right">
+                                                <span class="text-xs font-bold text-gray-500 uppercase">New Coverage</span>
+                                                <span id="newPipelineCoverage" class="block text-xl font-bold text-gray-700 mt-1">0.0x</span>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -407,8 +421,8 @@
                                         
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div>
-                                                <label class="block text-xs font-bold text-gray-500 mb-1">Implied New Win Rate</label>
-                                                <input type="number" id="meetingsImpliedWinRate" class="input-field" placeholder="%">
+                                                <label class="block text-xs font-bold text-gray-500 mb-1">Implied New Win Rate (%)</label>
+                                                <input type="number" id="meetingsImpliedWinRate" class="input-field" placeholder="e.g., 28">
                                             </div>
                                             <div class="bg-white p-3 rounded border border-gray-200">
                                                 <span class="text-xs font-bold text-gray-500 uppercase">New Pipeline Needed</span>
@@ -668,6 +682,10 @@
         $('copyCommitmentButton').classList.toggle('hidden', !isLast);
         $('printButton').classList.toggle('hidden', !isLast);
         $('resetButton').classList.toggle('hidden', !isLast);
+        
+        // Auto-focus header for accessibility
+        const h = $(`step-${s}-content`).querySelector('h2');
+        if(h) h.focus();
     }
 
     document.addEventListener('DOMContentLoaded', () => {
