@@ -21,15 +21,6 @@
                     },
                     fontFamily: {
                         'sans': ['Open Sans', 'sans-serif']
-                    },
-                    animation: {
-                        fadeIn: 'fadeIn 0.4s ease-out forwards',
-                    },
-                    keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0', transform: 'translateY(10px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        }
                     }
                 }
             }
@@ -98,7 +89,7 @@
             justify-content: center;
             width: 1.25rem; height: 1.25rem; 
             margin-left: 0.5rem; 
-            background-color: #0063a3; /* High Contrast Blue */
+            background-color: #0063a3; 
             color: white;
             font-family: sans-serif; 
             font-weight: bold; 
@@ -147,10 +138,10 @@
         .btn-default { background-color: #E5E7EB; color: #252a2e; }
         .btn-default:hover { background-color: #D1D5DB; }
 
-        /* Progress Steps - Strict Grid */
+        /* Progress Steps */
         .progress-bar-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr); /* 5 Steps */
+            grid-template-columns: repeat(5, 1fr); 
             width: 100%;
             border-bottom: 2px solid #E5E7EB;
         }
@@ -197,7 +188,7 @@
     <div class="main-card">
         <div class="card-content">
             
-            <div id="welcome-screen" class="animate-fadeIn">
+            <div id="welcome-screen">
                 <div class="text-center space-y-8">
                     
                     <div class="space-y-2">
@@ -262,7 +253,7 @@
                 </div>
             </div>
 
-            <div id="wizard-container" class="hidden animate-fadeIn">
+            <div id="wizard-container" class="hidden">
                 
                 <div class="mb-10 text-center space-y-2">
                     <h1 class="text-3xl font-extrabold text-primary-text">Trimble 2026 Success Plan</h1>
