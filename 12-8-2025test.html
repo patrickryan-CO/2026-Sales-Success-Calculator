@@ -15,6 +15,9 @@
                         'primary-hover': '#004a7c', 
                         'accent': '#fbad26',        // Trimble Amber
                         'primary-text': '#252a2e',  // Dark Gray
+                        'icon-people': '#6f42c1',    
+                        'icon-pipeline': '#007bff',
+                        'icon-prod': '#fd7e14',      
                     },
                     fontFamily: {
                         'sans': ['Open Sans', 'sans-serif']
@@ -87,6 +90,7 @@
             padding: 1rem;
             margin-bottom: 1.5rem;
             border-radius: 0 0.5rem 0.5rem 0;
+            line-height: 1.5;
         }
         .coach-note strong { color: #0063a3; }
 
@@ -182,16 +186,61 @@
             
             <div id="welcome-screen">
                 <div class="text-center space-y-8">
+                    
                     <div class="space-y-2">
                         <h1 class="text-3xl md:text-4xl font-extrabold text-primary-text">Trimble 2026 Success Plan</h1>
                         <p class="text-lg md:text-xl font-medium text-gray-500">Own Your Number. Build Your Path.</p>
                     </div>
-                    <div class="bg-blue-50 border border-blue-100 rounded-lg p-6 md:p-8 text-left">
-                        <h3 class="text-primary-text font-bold text-lg md:text-xl mb-2">Why This Matters:</h3>
-                        <p class="text-gray-700 leading-relaxed">
-                            This plan creates the <strong>"Contract for Success"</strong> that you and your manager will use to track progress, identify gaps, and celebrate wins throughout 2026. It connects your activity directly to our "Connect & Scale" strategy.
+
+                    <div class="max-w-3xl mx-auto space-y-4">
+                        <h2 class="text-2xl font-bold text-primary-text">Your Plan. Your Year.</h2>
+                        <p class="text-gray-600 text-lg leading-relaxed">
+                            This tool is your personal coach. It helps you translate your quota into a set of clear, measurable actions you can take every day.
                         </p>
                     </div>
+
+                    <div class="bg-blue-50 border border-blue-100 rounded-lg p-8 text-left">
+                        <h3 class="text-primary-text font-bold text-xl mb-3">Why This Matters:</h3>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            This is not a one-time exercise. This plan creates the <strong>"Contract for Success"</strong> that you and your manager will use to track progress, identify gaps, and celebrate wins throughout 2026.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+                        <div class="p-6 border border-gray-200 rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow">
+                            <div class="text-icon-people mb-4">
+                                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-primary-text mb-2">People</h3>
+                            <ul class="text-sm text-gray-600 list-disc list-inside space-y-2">
+                                <li>Identify specific skill gaps</li>
+                                <li>Commit to a coaching plan</li>
+                            </ul>
+                        </div>
+
+                        <div class="p-6 border border-gray-200 rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow">
+                            <div class="text-icon-pipeline mb-4">
+                                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-primary-text mb-2">Pipeline</h3>
+                            <ul class="text-sm text-gray-600 list-disc list-inside space-y-2">
+                                <li>Calculate coverage gaps</li>
+                                <li>Define generation strategy</li>
+                            </ul>
+                        </div>
+
+                        <div class="p-6 border border-gray-200 rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow">
+                            <div class="text-icon-prod mb-4">
+                                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-primary-text mb-2">Productivity</h3>
+                            <ul class="text-sm text-gray-600 list-disc list-inside space-y-2">
+                                <li>Audit your calendar</li>
+                                <li>Protect time for selling</li>
+                            </ul>
+                        </div>
+                    </div>
+
                     <div class="pt-6 border-t border-gray-100">
                         <button type="button" id="startBtn" class="btn btn-primary text-lg px-10 py-4 shadow-lg w-full md:w-auto">
                             Start My Plan
@@ -220,7 +269,7 @@
                         <section>
                             <h2 class="step-heading">Step 1 : My Look Back 2025</h2>
                             <div class="coach-note">
-                                <strong>Why?</strong> This establishes your personal efficiency baseline. Be honest with these numbers so we can build a realistic path to your 2026 goal.
+                                <strong>Why?</strong> This establishes your personal efficiency baseline. Be honest with these numbers (especially <strong>Win Rate</strong> and <strong>Avg Deal Size</strong>) so we can build a realistic path to your 2026 goal.
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -269,7 +318,7 @@
                         <section>
                             <h2 class="step-heading">Step 2 : Pipeline Target</h2>
                             <div class="coach-note">
-                                <strong>The Math:</strong> The tool calculates the pipeline you need based on your 2025 efficiency. If the number looks high, don't panic! Step 3 is about how we lower that number through efficiency.
+                                <strong>The Gap:</strong> The tool calculates the pipeline you need based on your 2025 efficiency. If the number looks high, don't panic! Step 3 is about how we lower that number through better <strong>Qualification</strong> and <strong>Cross-Selling</strong>.
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -313,7 +362,7 @@
                         <section>
                             <h2 class="step-heading">Step 3 : Scenario Modeling</h2>
                             <div class="coach-note">
-                                <strong>Instructions:</strong> Use the sliders to model efficiency gains. See how improving Win Rate (Quality) or Deal Size (Value) drastically reduces the "Required Pipeline" you need to generate.
+                                <strong>Instructions:</strong> Use the sliders to model efficiency gains. Improving <strong>Win Rate</strong> (better qualification) or <strong>Deal Size</strong> (bundling Viewpoint/Tekla) drastically reduces the pipeline you need to generate.
                             </div>
 
                             <div class="space-y-8">
@@ -329,7 +378,7 @@
 
                                 <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                                     <h3 class="text-lg font-bold text-primary mb-2">Lever 2: Avg. Deal Size (Value)</h3>
-                                    <p class="text-sm text-gray-600 mb-4">Bundling software (e.g., Tekla, Viewpoint) increases deal size. <strong>Target:</strong> Improve by <span id="dealSizeImprovementLabel" class="font-bold text-primary">15%</span></p>
+                                    <p class="text-sm text-gray-600 mb-4">Bundling software & hardware increases deal size. <strong>Target:</strong> Improve by <span id="dealSizeImprovementLabel" class="font-bold text-primary">15%</span></p>
                                     <input type="range" id="dealSizeImprovement" min="0" max="50" value="15" step="1" class="w-full">
                                     <div class="mt-4 p-4 bg-blue-50 rounded text-center">
                                         <span class="text-sm text-gray-600">New Deals Needed:</span>
@@ -354,24 +403,28 @@
                         <section>
                             <h2 class="step-heading">Step 4 : My Action Plan</h2>
                             <div class="coach-note">
-                                <strong>Commitment:</strong> Define the *measurable actions* you will take. Align these with the pillars of People, Pipeline, and Productivity.
+                                <strong>Commitment:</strong> Define the <strong>measurable actions</strong> you will take. Example: <em>"I will block 2 hours every Friday for prospecting"</em> or <em>"I will complete my 'Connect & Scale' certification by Q2."</em>
                             </div>
 
                             <div class="space-y-6">
                                 <div>
-                                    <label class="input-label text-lg">My Primary Focus (Select all that apply):</label>
-                                    <div class="flex flex-wrap gap-4 mt-2">
-                                        <label class="flex items-center space-x-2 p-3 border rounded bg-white w-full sm:w-auto">
+                                    <label class="input-label text-lg">My Primary Focus Goal (Select all that apply):</label>
+                                    <div class="flex flex-col gap-3 mt-3">
+                                        <label class="flex items-center space-x-3 p-3 border rounded bg-white hover:bg-gray-50 cursor-pointer">
                                             <input type="checkbox" name="entry.1090213679" value="Win Rate" class="h-5 w-5 text-primary">
-                                            <span>Win Rate</span>
+                                            <span class="text-primary-text font-medium">Win Rate</span>
                                         </label>
-                                        <label class="flex items-center space-x-2 p-3 border rounded bg-white w-full sm:w-auto">
-                                            <input type="checkbox" name="entry.1090213679" value="Avg Deal Size" class="h-5 w-5 text-primary">
-                                            <span>Avg Deal Size</span>
+                                        <label class="flex items-center space-x-3 p-3 border rounded bg-white hover:bg-gray-50 cursor-pointer">
+                                            <input type="checkbox" name="entry.1090213679" value="Average Deal Size" class="h-5 w-5 text-primary">
+                                            <span class="text-primary-text font-medium">Average Deal Size</span>
                                         </label>
-                                        <label class="flex items-center space-x-2 p-3 border rounded bg-white w-full sm:w-auto">
+                                        <label class="flex items-center space-x-3 p-3 border rounded bg-white hover:bg-gray-50 cursor-pointer">
                                             <input type="checkbox" name="entry.1090213679" value="Pipeline" class="h-5 w-5 text-primary">
-                                            <span>Pipeline Generation</span>
+                                            <span class="text-primary-text font-medium">Pipeline</span>
+                                        </label>
+                                        <label class="flex items-center space-x-3 p-3 border rounded bg-white hover:bg-gray-50 cursor-pointer">
+                                            <input type="checkbox" name="entry.1090213679" value="In-Person Meetings" class="h-5 w-5 text-primary">
+                                            <span class="text-primary-text font-medium">In-Person Meetings</span>
                                         </label>
                                     </div>
                                 </div>
@@ -418,7 +471,6 @@
                         <div class="nav-button-group">
                              <button type="button" id="resetButton" class="btn btn-secondary hidden">Start Over</button>
                              <button type="button" id="printButton" class="btn btn-default hidden">Save as PDF</button>
-                             <button type="button" id="exportJSONButton" class="btn btn-default hidden">Export JSON</button>
                              
                              <button type="button" id="submitToFormButton" class="btn btn-accent hidden font-bold">
                                  Review Your Plan
@@ -551,33 +603,6 @@ Action (Forecast): ${getStringValue('action-forecast')}
         window.open(url, '_blank');
     }
 
-    // --- JSON Export ---
-    function downloadJSON() {
-        const data = {
-            metadata: {
-                repName: getStringValue('personName'),
-                date: new Date().toISOString()
-            },
-            inputs: {
-                quota2026: getNumberValue('quota2026'),
-                actions: {
-                    people: getStringValue('action-people'),
-                    productivity: getStringValue('action-productivity'),
-                    forecast: getStringValue('action-forecast')
-                }
-            }
-        };
-        const fileName = `Trimble_Plan_${getStringValue('personName').replace(/\s/g,'_')}.json`;
-        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileName;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-    }
-
     // --- Navigation Logic ---
     let currentStep = 1;
     const totalSteps = 5; 
@@ -619,7 +644,6 @@ Action (Forecast): ${getStringValue('action-forecast')}
         const submitBtn = $('submitToFormButton');
         const printBtn = $('printButton');
         const resetBtn = $('resetButton');
-        const exportBtn = $('exportJSONButton');
 
         prevBtn.classList.toggle('hidden', step === 1);
         
@@ -628,7 +652,6 @@ Action (Forecast): ${getStringValue('action-forecast')}
             submitBtn.classList.remove('hidden');
             printBtn.classList.remove('hidden');
             resetBtn.classList.remove('hidden');
-            exportBtn.classList.remove('hidden');
         } else {
             nextBtn.classList.remove('hidden');
             nextBtn.textContent = 'Next';
@@ -637,7 +660,6 @@ Action (Forecast): ${getStringValue('action-forecast')}
             submitBtn.classList.add('hidden');
             printBtn.classList.add('hidden');
             resetBtn.classList.add('hidden');
-            exportBtn.classList.add('hidden');
         }
         
         // Scroll to heading of new step
@@ -675,7 +697,6 @@ Action (Forecast): ${getStringValue('action-forecast')}
             if(confirm("Is this your final, correct plan?")) window.print();
         });
         
-        $('exportJSONButton').addEventListener('click', downloadJSON);
         $('submitToFormButton').addEventListener('click', submitToGoogleForm);
 
         calculatePlan();
