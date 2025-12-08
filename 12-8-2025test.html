@@ -75,7 +75,7 @@
             overflow: hidden;
         }
         
-        .card-content { padding: 1.5rem; }
+        .card-content { padding: 1.5rem; position: relative; }
         @media (min-width: 768px) {
             .card-content { padding: 2.5rem; }
             .main-card { margin-top: 5rem; }
@@ -213,6 +213,8 @@
     <div class="main-card">
         <div class="card-content">
             
+            <div class="absolute top-2 right-4 text-xs text-gray-300 font-mono select-none">v2026.22</div>
+
             <div id="welcome-screen">
                 <div class="text-center space-y-6">
                     
@@ -310,13 +312,13 @@
                         <section>
                             <h2 class="step-heading">Phase 1 : Baseline</h2>
                             
-                            <div style="background-color: #fffbeb; border-left: 5px solid #fbad26; color: #1f2937; padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 2rem;">
-                                <div style="display: flex; align-items: center; font-weight: 800; font-size: 1.1rem; margin-bottom: 0.5rem; color: #0063a3;">
+                            <div style="background-color: #eff6ff; border-left: 4px solid #3b82f6; color: #1f2937; padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 2rem;">
+                                <div style="display: flex; align-items: center; font-weight: 800; font-size: 1.1rem; margin-bottom: 0.5rem; color: #1e40af;">
                                     <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     PLEASE READ:
                                 </div>
-                                <p style="font-weight: 600; margin-bottom: 0.75rem; color: #1f2937;">Do you have a Scorecard with your 2025 data?</p>
-                                <ul style="list-style-type: disc; padding-left: 1.5rem; line-height: 1.5; color: #374151;">
+                                <p style="font-weight: 600; margin-bottom: 0.75rem;">Do you have a Scorecard with your 2025 data?</p>
+                                <ul style="list-style-type: disc; padding-left: 1.5rem; line-height: 1.5;">
                                     <li><strong>YES:</strong> Enter your actual numbers below to calculate your efficiency gap.</li>
                                     <li><strong>NO (No Scorecard/Quota/Data):</strong> If you do not have a scorecard, quota, or historical data (e.g. you are new or in a non-quota role), enter <strong>"0"</strong> in the numeric fields below. This allows you to skip the math and proceed directly to your Action Plan in Phase 4.</li>
                                 </ul>
@@ -415,8 +417,8 @@
                         <section>
                             <h2 class="step-heading">Phase 3 : The Solution</h2>
                             <div class="coach-note">
-                                <strong>The Aha Moment:</strong><br>
-                                Use the sliders to model efficiency gains. See how improving Win Rate or Deal Size makes your required pipeline <strong>manageable</strong>. Small improvements here compound to massively reduce the pressure to generate new pipeline.<br><br>
+                                <strong>How to use this:</strong><br>
+                                You have 3 Levers to reduce the massive pipeline burden from Phase 2. Use the sliders to model efficiency gains. Even small improvements in Win Rate and Deal Size can significantly reduce the pressure to generate new pipeline.<br><br>
                                 <strong>NOTE:</strong> If you entered "0" in Phase 1, you can skip this section. Click Next.
                             </div>
 
@@ -434,7 +436,7 @@
 
                                 <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                                     <h3 class="text-lg font-bold text-primary mb-2">Lever 2: Deal Size</h3>
-                                    <p class="text-sm text-gray-600 mb-4"><strong>The Logic:</strong> Bundling software increases average deal size. If you sell bigger deals, you need to close FEWER of them.</p>
+                                    <p class="text-sm text-gray-600 mb-4"><strong>The Logic:</strong> Bundling software and hardware increases average deal size. If you sell bigger deals, you need to close FEWER of them.</p>
                                     <label class="block text-sm font-bold text-gray-700 mb-2">Improve Deal Size by: <span id="dealSizeImprovementLabel" class="text-primary">15%</span></label>
                                     <input type="range" id="dealSizeImprovement" min="0" max="50" value="15" step="1" class="w-full">
                                     <div class="mt-4 p-4 bg-blue-50 rounded text-center">
