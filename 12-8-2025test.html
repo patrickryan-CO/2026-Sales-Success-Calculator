@@ -94,6 +94,26 @@
         }
         .coach-note strong { color: #0063a3; display: block; margin-bottom: 0.25rem; font-size: 1rem; }
 
+        /* ALERT BOX STYLE */
+        .alert-box {
+            background-color: #FEF2F2; /* red-50 */
+            border: 2px solid #DC2626; /* red-600 */
+            color: #991B1B; /* red-800 */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            text-align: left;
+        }
+        .alert-title {
+            font-weight: 800;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            color: #DC2626;
+        }
+
         /* Typography */
         h1, h2, h3, h4, h5, h6 { color: #252a2e !important; }
         .step-heading { font-size: 1.5rem; font-weight: 800; color: #0063a3; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e5e7eb; }
@@ -166,7 +186,7 @@
         /* Print */
         @media print {
             body { background: white; }
-            .wave-container, #welcome-screen, #navigation-buttons, .progress-bar-grid, .coach-note { display: none !important; }
+            .wave-container, #welcome-screen, #navigation-buttons, .progress-bar-grid, .coach-note, .alert-box { display: none !important; }
             .main-card { box-shadow: none; margin: 0; width: 100%; max-width: 100%; padding: 0; }
             #wizard-container, .step-panel, .hidden { display: block !important; visibility: visible !important; }
             .step-panel { page-break-after: always; margin-bottom: 3rem; }
@@ -202,7 +222,7 @@
                     <div class="bg-blue-50 border border-blue-100 rounded-lg p-8 text-left">
                         <h3 class="text-primary-text font-bold text-xl mb-3">Why This Matters:</h3>
                         <p class="text-gray-700 mb-4 leading-relaxed">
-                            This is not a one-time exercise. This plan creates the <strong>"Contract for Success"</strong> that you and your manager will use to track progress, identify gaps, and celebrate wins throughout 2026.
+                            We focus on <strong>People, Pipeline, and Productivity</strong> because they are the daily levers that drive our <strong>broader company goals</strong>. Whether you are an AE, SDR, or Specialist, this framework aligns your personal success with Trimble's mission.
                         </p>
                     </div>
 
@@ -268,6 +288,19 @@
                     <div id="step-1-content" class="step-panel">
                         <section>
                             <h2 class="step-heading">Phase 1 : Baseline (Look Back 2025)</h2>
+                            
+                            <div class="alert-box">
+                                <div class="alert-title">
+                                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                    STOP & READ:
+                                </div>
+                                <p class="mb-2">Do you have a Scorecard with your 2025 data?</p>
+                                <ul class="list-disc list-inside ml-4 space-y-1">
+                                    <li><strong>YES:</strong> Enter your actual numbers below to calculate your efficiency gap.</li>
+                                    <li><strong>NO (No Scorecard/Quota/Data):</strong> If you do not have a scorecard, quota, or historical data (e.g. you are new or in a non-quota role), enter <strong>"0"</strong> in the numeric fields. This allows you to skip the math and proceed to Phase 4 to build your Action Plan.</li>
+                                </ul>
+                            </div>
+
                             <div class="coach-note">
                                 <strong>Why are we asking this?</strong><br>
                                 You cannot improve what you do not measure. This section establishes your <strong>Baseline Efficiency</strong>. Be brutally honest here—this is the foundation of your plan.
@@ -321,7 +354,8 @@
                             <div class="coach-note">
                                 <strong>What does this mean?</strong><br>
                                 This tool calculates the pipeline you would need if your 2026 efficiency remains <strong>exactly the same</strong> as 2025. <br><br>
-                                <em>If the numbers below look scary, that's the point.</em> It shows that doing the "same old thing" won't work. In the next phase, we will calculate how to fix this.
+                                <em>If the numbers below look scary, that's the point.</em> It shows that doing the "same old thing" won't work. In the next phase, we will calculate how to fix this.<br><br>
+                                <strong>NOTE:</strong> If you entered "0" in Phase 1, these numbers will be 0. Click Next to continue.
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -366,7 +400,8 @@
                             <h2 class="step-heading">Phase 3 : The Solution (Levers)</h2>
                             <div class="coach-note">
                                 <strong>How to use this:</strong><br>
-                                You have 3 Levers to reduce the massive pipeline burden from Phase 2. Use the sliders to model efficiency gains.
+                                You have 3 Levers to reduce the massive pipeline burden from Phase 2. Use the sliders to model efficiency gains.<br><br>
+                                <strong>NOTE:</strong> If you entered "0" in Phase 1, you can skip this section. Click Next.
                             </div>
 
                             <div class="space-y-8">
@@ -418,7 +453,7 @@
                         <section>
                             <h2 class="step-heading">Phase 4 : Action Plan</h2>
                             <div class="coach-note">
-                                <strong>Make it Real:</strong> You've looked at the numbers. Now, what are you actually going to <em>do</em> differently? Define your commitments below.
+                                <strong>Make it Real:</strong> You've looked at the numbers (or skipped them if you are new). Now, what are you actually going to <em>do</em> differently? Define your commitments below.
                             </div>
 
                             <div class="space-y-6">
