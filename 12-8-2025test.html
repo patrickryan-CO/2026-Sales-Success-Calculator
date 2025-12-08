@@ -256,18 +256,18 @@
                 </div>
 
                 <div class="progress-bar-grid">
-                    <div id="progress-1" class="progress-step progress-step-active">1. Baseline</div>
-                    <div id="progress-2" class="progress-step">2. Target</div>
-                    <div id="progress-3" class="progress-step">3. Levers</div>
-                    <div id="progress-4" class="progress-step">4. Actions</div>
-                    <div id="progress-5" class="progress-step">5. Submit</div>
+                    <div id="progress-1" class="progress-step progress-step-active">Phase 1: Baseline</div>
+                    <div id="progress-2" class="progress-step">Phase 2: The Gap</div>
+                    <div id="progress-3" class="progress-step">Phase 3: The Solution (A)</div>
+                    <div id="progress-4" class="progress-step">Phase 3: The Solution (B)</div>
+                    <div id="progress-5" class="progress-step">Phase 4: Review</div>
                 </div>
 
                 <form id="skoForm" onsubmit="return false;">
 
                     <div id="step-1-content" class="step-panel">
                         <section>
-                            <h2 class="step-heading">Step 1 : My Look Back 2025</h2>
+                            <h2 class="step-heading">Phase 1 : Baseline (Look Back 2025)</h2>
                             <div class="coach-note">
                                 <strong>Why?</strong> This establishes your personal efficiency baseline. Be honest with these numbers (especially <strong>Win Rate</strong> and <strong>Avg Deal Size</strong>) so we can build a realistic path to your 2026 goal.
                             </div>
@@ -316,30 +316,30 @@
 
                     <div id="step-2-content" class="step-panel hidden">
                         <section>
-                            <h2 class="step-heading">Step 2 : Pipeline Target</h2>
+                            <h2 class="step-heading">Phase 2 : The Gap</h2>
                             <div class="coach-note">
-                                <strong>The Gap:</strong> The tool calculates the pipeline you need based on your 2025 efficiency. If the number looks high, don't panic! Step 3 is about how we lower that number through better <strong>Qualification</strong> and <strong>Cross-Selling</strong>.
+                                <strong>The Math:</strong> The tool calculates the pipeline you need based on your 2025 efficiency. If the number looks high, don't panic! Phase 3 is about how we lower that number through better <strong>Qualification</strong> and <strong>Cross-Selling</strong>.
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label class="input-label text-lg">My 2026 Quota (Goal):</label>
+                                    <label class="input-label text-lg">My 2026 Quota (A):</label>
                                     <input type="text" id="quota2026" name="entry.1187258724" class="input-field" placeholder="e.g., 1,200,000">
                                 </div>
                                 <div></div> <div class="calc-box">
-                                    <span class="text-sm font-medium text-gray-700">Required Pipeline (at current efficiency)</span>
+                                    <span class="text-sm font-medium text-gray-700">Required Pipeline (B)</span>
                                     <span id="pipelineToClose2026" class="calc-output">$0</span>
                                     <span class="text-xs text-gray-500 block mt-1">(Quota / Win Rate)</span>
                                 </div>
                                 <div class="calc-box">
-                                    <span class="text-sm font-medium text-gray-700">Deals to Close</span>
+                                    <span class="text-sm font-medium text-gray-700">Required Deals (C)</span>
                                     <span id="dealsToClose2026" class="calc-output">0</span>
                                     <span class="text-xs text-gray-500 block mt-1">(Pipeline / Deal Size)</span>
                                 </div>
                             </div>
                             
                             <div class="mt-8">
-                                <label class="input-label">Reflection: Based on these numbers, does your goal feel achievable?</label>
+                                <label class="input-label">How does this gap feel?</label>
                                 <div class="flex flex-wrap gap-4 mt-3">
                                     <label class="flex items-center space-x-2">
                                         <input type="radio" name="reflection" value="Achievable" class="h-5 w-5 text-primary">
@@ -360,9 +360,9 @@
 
                     <div id="step-3-content" class="step-panel hidden">
                         <section>
-                            <h2 class="step-heading">Step 3 : Scenario Modeling</h2>
+                            <h2 class="step-heading">Phase 3 : The Solution (Part A)</h2>
                             <div class="coach-note">
-                                <strong>Instructions:</strong> Use the sliders to model efficiency gains. Improving <strong>Win Rate</strong> (better qualification) or <strong>Deal Size</strong> (bundling Viewpoint/Tekla) drastically reduces the pipeline you need to generate.
+                                <strong>Part A: Model Efficiency Gains.</strong> Use the sliders to see how improving Win Rate, Deal Size, or Activity reduces your pipeline burden.
                             </div>
 
                             <div class="space-y-8">
@@ -371,28 +371,37 @@
                                     <p class="text-sm text-gray-600 mb-4">Better qualification means less wasted time. <strong>Target:</strong> Improve by <span id="winRateImprovementLabel" class="font-bold text-primary">5.0%</span></p>
                                     <input type="range" id="winRateImprovement" min="0" max="25" value="5" step="0.5" class="w-full">
                                     <div class="mt-4 p-4 bg-blue-50 rounded text-center">
-                                        <span class="text-sm text-gray-600">New Pipeline Needed:</span>
+                                        <span class="text-sm text-gray-600">New Pipeline Needed</span>
                                         <div id="newPipelineNeeded" class="text-2xl font-bold text-primary">$0</div>
                                     </div>
                                 </div>
 
                                 <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-                                    <h3 class="text-lg font-bold text-primary mb-2">Lever 2: Avg. Deal Size (Value)</h3>
+                                    <h3 class="text-lg font-bold text-primary mb-2">Lever 2: Deal Size (Value)</h3>
                                     <p class="text-sm text-gray-600 mb-4">Bundling software & hardware increases deal size. <strong>Target:</strong> Improve by <span id="dealSizeImprovementLabel" class="font-bold text-primary">15%</span></p>
                                     <input type="range" id="dealSizeImprovement" min="0" max="50" value="15" step="1" class="w-full">
                                     <div class="mt-4 p-4 bg-blue-50 rounded text-center">
-                                        <span class="text-sm text-gray-600">New Deals Needed:</span>
+                                        <span class="text-sm text-gray-600">New Deals Needed</span>
                                         <div id="newDealsNeeded" class="text-2xl font-bold text-primary">0</div>
                                     </div>
                                 </div>
 
                                 <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                                     <h3 class="text-lg font-bold text-primary mb-2">Lever 3: Meetings (Activity)</h3>
-                                    <p class="text-sm text-gray-600 mb-4">Face-time drives predictability. <strong>Target:</strong> <span id="meetingImprovementLabel" class="font-bold text-primary">5</span> more meetings/quarter.</p>
+                                    <p class="text-sm text-gray-600 mb-4"><strong>Activity drives results.</strong> If you commit to more face-to-face meetings, you should expect a higher win rate on those deals.</p>
+                                    
+                                    <label class="block text-sm font-bold text-gray-700 mb-2">Increase Quarterly Meetings by: <span id="meetingImprovementLabel" class="text-primary">5</span></label>
                                     <input type="range" id="meetingImprovement" min="0" max="20" value="5" step="1" class="w-full">
-                                    <div class="mt-4">
-                                        <label class="input-label text-sm">Implied New Win Rate (%):</label>
+                                    
+                                    <div class="mt-6 pt-4 border-t border-gray-100">
+                                        <label class="input-label text-sm text-primary mb-2">Target Win Rate with these Meetings (%):</label>
+                                        <p class="text-xs text-gray-500 mb-2">Enter the Win Rate you expect to achieve by adding these face-to-face meetings. (e.g. if you are at 25%, committing to +5 meetings might get you to 28%).</p>
                                         <input type="number" id="meetingsImpliedWinRate" class="input-field" placeholder="e.g., 28">
+                                    </div>
+                                    
+                                    <div class="mt-4 p-4 bg-blue-50 rounded text-center">
+                                        <span class="text-sm text-gray-600">New Pipeline Needed (at this Target Win Rate)</span>
+                                        <div id="meetingsPipelineNeeded" class="text-2xl font-bold text-primary">$0</div>
                                     </div>
                                 </div>
                             </div>
@@ -401,9 +410,9 @@
 
                     <div id="step-4-content" class="step-panel hidden">
                         <section>
-                            <h2 class="step-heading">Step 4 : My Action Plan</h2>
+                            <h2 class="step-heading">Phase 3 : The Solution (Part B)</h2>
                             <div class="coach-note">
-                                <strong>Commitment:</strong> Define the <strong>measurable actions</strong> you will take. Example: <em>"I will block 2 hours every Friday for prospecting"</em> or <em>"I will complete my 'Connect & Scale' certification by Q2."</em>
+                                <strong>Part B: Build Your Plan.</strong> Define the <strong>measurable actions</strong> you will take. Align these with the pillars of People, Pipeline, and Productivity.
                             </div>
 
                             <div class="space-y-6">
@@ -430,13 +439,13 @@
                                 </div>
 
                                 <div>
-                                    <label class="input-label">Action: People (Skills & Knowledge):</label>
+                                    <label class="input-label">Action: People (Skills/Coaching):</label>
                                     <p class="text-xs text-gray-500 mb-1">e.g., "I will complete my Viewpoint certification by Q2."</p>
                                     <input type="text" id="action-people" name="entry.1667466065" class="input-field">
                                 </div>
 
                                 <div>
-                                    <label class="input-label">Action: Productivity (Process & Time):</label>
+                                    <label class="input-label">Action: Productivity (Time):</label>
                                     <p class="text-xs text-gray-500 mb-1">e.g., "I will block 2 hours every Friday for prospecting."</p>
                                     <input type="text" id="action-productivity" name="entry.1571167359" class="input-field">
                                 </div>
@@ -452,7 +461,7 @@
                     
                     <div id="step-5-content" class="step-panel hidden">
                         <section>
-                            <h2 class="step-heading">Step 5 : Final Review</h2>
+                            <h2 class="step-heading">Phase 4 : Review & Submit</h2>
                             <div class="coach-note">
                                 <strong>Instructions:</strong> Review your plan below. <br>
                                 1. Click <strong>"Save as PDF"</strong> for your records.<br>
@@ -555,6 +564,9 @@
         
         if($('meetingImprovementLabel')) $('meetingImprovementLabel').textContent = meetingImprovement;
         
+        const pipeMtg = (meetingsImpliedWinRate/100) > 0 ? quota2026 / (meetingsImpliedWinRate/100) : 0;
+        if($('meetingsPipelineNeeded')) $('meetingsPipelineNeeded').textContent = formatCurrency(pipeMtg);
+
         if (currentStep === 5) generateCommitmentSummary();
     }
     
@@ -563,14 +575,23 @@
         const primaryFocus = getMultiSelectValue(GOOGLE_FORM_CONFIG.fields.primaryGoal);
 
         const summaryText = `
-**TRIMBLE 2026 SALES PLAN**
+TRIMBLE 2026 SALES PLAN (COMMITMENT)
+
+Phase 1: Baseline
 Rep: ${getStringValue('personName')}
 Quota: ${formatCurrency(getNumberValue('quota2026'))}
+
+Phase 2: The Gap
+Pipeline Goal: ${formatCurrency(getNumberValue('pipelineToClose2026'))}
+
+Phase 3: The Solution
 Win Rate Goal: ${formatPercent(getNumberValue('winRate2025') + getNumberValue('winRateImprovement'))}
 Primary Focus: ${primaryFocus}
-Action (People): ${getStringValue('action-people')}
-Action (Productivity): ${getStringValue('action-productivity')}
-Action (Forecast): ${getStringValue('action-forecast')}
+
+Actions:
+People: ${getStringValue('action-people')}
+Productivity: ${getStringValue('action-productivity')}
+Forecast: ${getStringValue('action-forecast')}
         `.trim();
         
         $('commitmentSummaryOutput').textContent = summaryText;
@@ -647,19 +668,21 @@ Action (Forecast): ${getStringValue('action-forecast')}
 
         prevBtn.classList.toggle('hidden', step === 1);
         
+        // Reset button visibility states
+        nextBtn.classList.add('hidden');
+        submitBtn.classList.add('hidden');
+        printBtn.classList.add('hidden');
+        resetBtn.classList.add('hidden');
+
         if (isFinalStep) {
-            nextBtn.classList.add('hidden');
-            submitBtn.classList.remove('hidden');
-            printBtn.classList.remove('hidden');
-            resetBtn.classList.remove('hidden');
+            submitBtn.classList.remove('hidden'); // "Review Your Plan"
+            printBtn.classList.remove('hidden');  // PDF
+            resetBtn.classList.remove('hidden');  // Start Over
         } else {
-            nextBtn.classList.remove('hidden');
+            nextBtn.classList.remove('hidden');   // Blue Next Button
             nextBtn.textContent = 'Next';
             nextBtn.classList.remove('btn-accent');
             nextBtn.classList.add('btn-primary');
-            submitBtn.classList.add('hidden');
-            printBtn.classList.add('hidden');
-            resetBtn.classList.add('hidden');
         }
         
         // Scroll to heading of new step
