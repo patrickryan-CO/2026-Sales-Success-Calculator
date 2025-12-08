@@ -87,12 +87,12 @@
             color: #374151; /* gray-700 */
             background-color: #FFFBEB; /* amber-50 */
             border-left: 4px solid #fbad26;
-            padding: 1.25rem;
+            padding: 1.5rem;
             margin-bottom: 2rem;
             border-radius: 0 0.5rem 0.5rem 0;
             line-height: 1.6;
         }
-        .coach-note strong { color: #0063a3; display: block; margin-bottom: 0.25rem; font-size: 1rem; }
+        .coach-note strong { color: #0063a3; display: block; margin-bottom: 0.5rem; font-size: 1.05rem; }
 
         /* Typography */
         h1, h2, h3, h4, h5, h6 { color: #252a2e !important; }
@@ -488,19 +488,19 @@
                                 </div>
 
                                 <div>
-                                    <label class="input-label text-lg mb-2">People</label>
+                                    <label class="input-label text-lg mb-2">Action: People</label>
                                     <p class="text-sm text-gray-600 mb-2">What specific skill or knowledge gap will you close this year to hit your goal?</p>
                                     <textarea id="action-people" name="entry.1667466065" class="input-field" rows="4"></textarea>
                                 </div>
 
                                 <div>
-                                    <label class="input-label text-lg mb-2">Pipeline</label>
+                                    <label class="input-label text-lg mb-2">Action: Pipeline</label>
                                     <p class="text-sm text-gray-600 mb-2">What specific routine or strategy will you execute to generate high-quality opportunities?</p>
                                     <textarea id="action-pipeline" name="entry.1553800751" class="input-field" rows="4"></textarea>
                                 </div>
 
                                 <div>
-                                    <label class="input-label text-lg mb-2">Productivity</label>
+                                    <label class="input-label text-lg mb-2">Action: Productivity</label>
                                     <p class="text-sm text-gray-600 mb-2">How will you better manage your time or tools to maximize selling hours?</p>
                                     <textarea id="action-productivity" name="entry.1571167359" class="input-field" rows="4"></textarea>
                                 </div>
@@ -580,7 +580,7 @@
 
     // --- Core Logic ---
     function calculatePlan() {
-        // Inputs
+        // Inputs (Math Logic Decoupled from Text Areas to prevent bugs)
         const quota2025 = getNumberValue('quota2025');
         const bookings2025 = getNumberValue('bookings2025');
         const winRate2025 = getNumberValue('winRate2025');
@@ -621,7 +621,6 @@
     }
     
     function generateCommitmentSummary() {
-        // Use multi-select helper
         const primaryFocus = getMultiSelectValue(GOOGLE_FORM_CONFIG.fields.primaryGoal);
 
         const summaryText = `
@@ -654,7 +653,6 @@ Productivity: ${getStringValue('action-productivity')}
         const wr = getNumberValue('winRate2025') + getNumberValue('winRateImprovement');
         const cov = wr > 0 ? (1 / (wr / 100)).toFixed(1) : "0.0";
         
-        // 1. Gather Basic Fields
         let url = `${c.baseUrl}?${c.fields.repName}=${encodeURIComponent(getStringValue('personName'))}` +
             `&${c.fields.managerName}=${encodeURIComponent(getStringValue('managerName'))}` +
             `&${c.fields.region}=${encodeURIComponent($('region').value)}` +
@@ -665,7 +663,6 @@ Productivity: ${getStringValue('action-productivity')}
             `&${c.fields.pipelinePlan}=${encodeURIComponent(getStringValue('action-pipeline'))}` +
             `&${c.fields.productivityPlan}=${encodeURIComponent(getStringValue('action-productivity'))}`;
 
-        // 2. Gather Checkboxes (Loop through all checked inputs for Primary Goal)
         const checkedBoxes = document.querySelectorAll(`input[name="${c.fields.primaryGoal}"]:checked`);
         checkedBoxes.forEach(cb => {
             url += `&${c.fields.primaryGoal}=${encodeURIComponent(cb.value)}`;
@@ -709,7 +706,6 @@ Productivity: ${getStringValue('action-productivity')}
         
         const isFinalStep = (step === totalSteps);
         
-        // Button Logic
         const prevBtn = $('prevButton');
         const nextBtn = $('nextButton');
         const submitBtn = $('submitToFormButton');
@@ -718,24 +714,21 @@ Productivity: ${getStringValue('action-productivity')}
 
         prevBtn.classList.toggle('hidden', step === 1);
         
-        // Reset button visibility states
-        nextBtn.classList.add('hidden');
-        submitBtn.classList.add('hidden');
-        printBtn.classList.add('hidden');
-        resetBtn.classList.add('hidden');
-
         if (isFinalStep) {
-            submitBtn.classList.remove('hidden'); // "Review Your Plan"
-            printBtn.classList.remove('hidden');  // PDF
-            resetBtn.classList.remove('hidden');  // Start Over
+            submitBtn.classList.remove('hidden'); 
+            printBtn.classList.remove('hidden');  
+            resetBtn.classList.remove('hidden');  
+            nextBtn.classList.add('hidden'); // Hide Next on final step
         } else {
-            nextBtn.classList.remove('hidden');   // Blue Next Button
+            nextBtn.classList.remove('hidden');   
             nextBtn.textContent = 'Next';
             nextBtn.classList.remove('btn-accent');
             nextBtn.classList.add('btn-primary');
+            submitBtn.classList.add('hidden');
+            printBtn.classList.add('hidden');
+            resetBtn.classList.add('hidden');
         }
         
-        // Scroll to heading of new step
         const heading = $(`step-${step}-content`).querySelector('.step-heading');
         if (heading) heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -743,10 +736,15 @@ Productivity: ${getStringValue('action-productivity')}
     document.addEventListener('DOMContentLoaded', () => {
         initViews();
 
-        const inputs = document.querySelectorAll('input, select, textarea');
-        inputs.forEach(el => {
+        // Calculate Plan is only for numerical inputs, to avoid crashes on text
+        const calcInputs = document.querySelectorAll('input[type="text"], input[type="number"], input[type="range"], select, input[type="radio"]');
+        calcInputs.forEach(el => {
             el.addEventListener('input', calculatePlan);
-            // Enter key navigation (skip textareas)
+        });
+
+        // Navigation listeners
+        const allInputs = document.querySelectorAll('input, select, textarea');
+        allInputs.forEach(el => {
             if (el.tagName !== 'TEXTAREA') {
                 el.addEventListener('keydown', function(e) {
                     if (e.key === 'Enter') {
