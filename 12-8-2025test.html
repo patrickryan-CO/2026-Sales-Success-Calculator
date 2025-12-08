@@ -195,7 +195,7 @@
         @media print {
             body { background: white; }
             .wave-container, #welcome-screen, #navigation-buttons, .progress-bar-grid, .coach-note { display: none !important; }
-            /* Keep the Blue Info Box visible in print so they remember data context */
+            /* Keep the Blue Info Box visible in print */
             .main-card { box-shadow: none; margin: 0; width: 100%; max-width: 100%; padding: 0; }
             #wizard-container, .step-panel, .hidden { display: block !important; visibility: visible !important; }
             .step-panel { page-break-after: always; margin-bottom: 3rem; }
@@ -460,7 +460,8 @@
                             <h2 class="step-heading">Phase 4 : Action Plan</h2>
                             <div class="coach-note">
                                 <strong>Your Personal Roadmap:</strong><br>
-                                This plan is for you. Invest time now to define clear, high-impact goals that you can proudly review with your manager throughout the year. Your future success depends on the clarity of your commitment today.
+                                This plan is for you. Invest time now to define clear, high-impact goals that you can proudly review with your manager throughout the year. Your future success depends on the clarity of your commitment today.<br><br>
+                                <strong>Instructions:</strong> Think back on the week you just had. Write goals with thought and purpose.
                             </div>
 
                             <div class="space-y-6">
@@ -487,19 +488,19 @@
                                 </div>
 
                                 <div>
-                                    <label class="input-label text-lg mb-2">Action: People</label>
+                                    <label class="input-label text-lg mb-2">People</label>
                                     <p class="text-sm text-gray-600 mb-2">What specific skill or knowledge gap will you close this year to hit your goal?</p>
                                     <textarea id="action-people" name="entry.1667466065" class="input-field" rows="4"></textarea>
                                 </div>
 
                                 <div>
-                                    <label class="input-label text-lg mb-2">Action: Pipeline</label>
+                                    <label class="input-label text-lg mb-2">Pipeline</label>
                                     <p class="text-sm text-gray-600 mb-2">What specific routine or strategy will you execute to generate high-quality opportunities?</p>
                                     <textarea id="action-pipeline" name="entry.1553800751" class="input-field" rows="4"></textarea>
                                 </div>
 
                                 <div>
-                                    <label class="input-label text-lg mb-2">Action: Productivity</label>
+                                    <label class="input-label text-lg mb-2">Productivity</label>
                                     <p class="text-sm text-gray-600 mb-2">How will you better manage your time or tools to maximize selling hours?</p>
                                     <textarea id="action-productivity" name="entry.1571167359" class="input-field" rows="4"></textarea>
                                 </div>
