@@ -87,22 +87,22 @@
             color: #374151; /* gray-700 */
             background-color: #FFFBEB; /* amber-50 */
             border-left: 4px solid #fbad26;
-            padding: 1.25rem;
+            padding: 1.5rem;
             margin-bottom: 2rem;
             border-radius: 0 0.5rem 0.5rem 0;
             line-height: 1.6;
         }
-        .coach-note strong { color: #0063a3; display: block; margin-bottom: 0.25rem; font-size: 1rem; }
+        .coach-note strong { color: #0063a3; display: block; margin-bottom: 0.5rem; font-size: 1.05rem; }
 
-        /* ALERT BOX STYLE */
+        /* ALERT BOX STYLE (Blue/Informational) */
         .alert-box {
-            background-color: #FEF2F2; /* red-50 */
-            border: 2px solid #DC2626; /* red-600 */
-            color: #991B1B; /* red-800 */
+            background-color: #EFF6FF; /* blue-50 */
+            border: 2px solid #3B82F6; /* blue-500 */
+            color: #1E40AF; /* blue-800 */
             padding: 1.5rem;
             border-radius: 0.5rem;
             margin-bottom: 2rem;
-            font-weight: 600;
+            font-weight: 500;
             text-align: left;
         }
         .alert-title {
@@ -111,7 +111,7 @@
             display: flex;
             align-items: center;
             margin-bottom: 0.5rem;
-            color: #DC2626;
+            color: #1E40AF;
         }
 
         /* Typography */
@@ -212,17 +212,19 @@
                         <p class="text-lg md:text-xl font-medium text-gray-500">Own Your Number. Build Your Path.</p>
                     </div>
 
-                    <div class="max-w-3xl mx-auto space-y-4">
-                        <h2 class="text-2xl font-bold text-primary-text">Your Plan. Your Year.</h2>
-                        <p class="text-gray-600 text-lg leading-relaxed">
-                            This tool is your personal coach. It helps you translate your quota into a set of clear, measurable actions you can take every day.
-                        </p>
+                    <div class="bg-blue-50 border border-blue-100 rounded-lg p-8 text-left">
+                        <h3 class="text-primary-text font-bold text-xl mb-4">How to Use This Tool:</h3>
+                        <ol class="list-decimal list-inside space-y-3 text-gray-700 leading-relaxed text-lg">
+                            <li><strong>If you have a Scorecard, pull it up now.</strong> You will need your 2025 actuals to complete Phase 1.</li>
+                            <li><strong>Enter your baseline data.</strong> This calculates your efficiency gap.</li>
+                            <li><strong>Model your path to success.</strong> Use the levers to see how small changes impact your pipeline needs.</li>
+                            <li><strong>Commit to action.</strong> Define the specific goals you will execute to hit your number.</li>
+                        </ol>
                     </div>
 
-                    <div class="bg-blue-50 border border-blue-100 rounded-lg p-8 text-left">
-                        <h3 class="text-primary-text font-bold text-xl mb-3">Why This Matters:</h3>
-                        <p class="text-gray-700 mb-4 leading-relaxed">
-                            We focus on <strong>People, Pipeline, and Productivity</strong> because they are the daily levers that drive our <strong>broader company goals</strong>. Whether you are an AE, SDR, or Specialist, this framework aligns your personal success with Trimble's mission.
+                    <div class="max-w-3xl mx-auto space-y-4">
+                        <p class="text-gray-600 text-lg leading-relaxed">
+                            We focus on <strong>People, Pipeline, and Productivity</strong> because they are the daily levers that drive our broader company goals. Whether you are an AE, SDR, or Specialist, this framework aligns your personal success with Trimble's mission.
                         </p>
                     </div>
 
@@ -291,19 +293,19 @@
                             
                             <div class="alert-box">
                                 <div class="alert-title">
-                                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                                    STOP & READ:
+                                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    PLEASE READ:
                                 </div>
                                 <p class="mb-2">Do you have a Scorecard with your 2025 data?</p>
                                 <ul class="list-disc list-inside ml-4 space-y-1">
                                     <li><strong>YES:</strong> Enter your actual numbers below to calculate your efficiency gap.</li>
-                                    <li><strong>NO (No Scorecard/Quota/Data):</strong> If you do not have a scorecard, quota, or historical data (e.g. you are new or in a non-quota role), enter <strong>"0"</strong> in the numeric fields. This allows you to skip the math and proceed to Phase 4 to build your Action Plan.</li>
+                                    <li><strong>NO (No Scorecard/Quota/Data):</strong> If you do not have a scorecard, quota, or historical data (e.g. you are new or in a non-quota role), enter <strong>"0"</strong> in the numeric fields below. This allows you to skip the math and proceed directly to your Action Plan in Phase 4.</li>
                                 </ul>
                             </div>
 
                             <div class="coach-note">
                                 <strong>Why are we asking this?</strong><br>
-                                You cannot improve what you do not measure. This section establishes your <strong>Baseline Efficiency</strong>. Be brutally honest here—this is the foundation of your plan.
+                                You cannot improve what you do not measure. This section establishes your baseline. Be brutally honest here. This is the foundation of your plan.
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -350,11 +352,10 @@
 
                     <div id="step-2-content" class="step-panel hidden">
                         <section>
-                            <h2 class="step-heading">Phase 2 : The Gap (The "Status Quo" Scenario)</h2>
+                            <h2 class="step-heading">Phase 2 : The Gap</h2>
                             <div class="coach-note">
                                 <strong>What does this mean?</strong><br>
-                                This tool calculates the pipeline you would need if your 2026 efficiency remains <strong>exactly the same</strong> as 2025. <br><br>
-                                <em>If the numbers below look scary, that's the point.</em> It shows that doing the "same old thing" won't work. In the next phase, we will calculate how to fix this.<br><br>
+                                This tool calculates the pipeline you would need if your 2026 efficiency remains exactly the same as 2025. It shows what happens if you try to hit your 2026 number using your 2025 performance. It highlights the gap you need to fill.<br><br>
                                 <strong>NOTE:</strong> If you entered "0" in Phase 1, these numbers will be 0. Click Next to continue.
                             </div>
 
@@ -400,14 +401,14 @@
                             <h2 class="step-heading">Phase 3 : The Solution (Levers)</h2>
                             <div class="coach-note">
                                 <strong>How to use this:</strong><br>
-                                You have 3 Levers to reduce the massive pipeline burden from Phase 2. Use the sliders to model efficiency gains.<br><br>
+                                You have 3 Levers to reduce the massive pipeline burden from Phase 2. Use the sliders to model efficiency gains. Even small improvements in Win Rate and Deal Size can significantly reduce the pressure to generate new pipeline.<br><br>
                                 <strong>NOTE:</strong> If you entered "0" in Phase 1, you can skip this section. Click Next.
                             </div>
 
                             <div class="space-y-8">
                                 <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                                     <h3 class="text-lg font-bold text-primary mb-2">Lever 1: Win Rate (Quality)</h3>
-                                    <p class="text-sm text-gray-600 mb-4"><strong>The Logic:</strong> Better qualification = less junk in your funnel. If you improve your Win Rate, you need LESS total pipeline.</p>
+                                    <p class="text-sm text-gray-600 mb-4"><strong>The Logic:</strong> Better qualification equals less junk in your funnel. If you improve your Win Rate, you need LESS total pipeline.</p>
                                     <label class="block text-sm font-bold text-gray-700 mb-2">Improve Win Rate by: <span id="winRateImprovementLabel" class="text-primary">5.0%</span></label>
                                     <input type="range" id="winRateImprovement" min="0" max="25" value="5" step="0.5" class="w-full">
                                     <div class="mt-4 p-4 bg-blue-50 rounded text-center">
@@ -418,7 +419,7 @@
 
                                 <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                                     <h3 class="text-lg font-bold text-primary mb-2">Lever 2: Deal Size (Value)</h3>
-                                    <p class="text-sm text-gray-600 mb-4"><strong>The Logic:</strong> Bundling software & hardware (e.g., Tekla/Viewpoint) increases average deal size. If you sell bigger deals, you need to close FEWER of them.</p>
+                                    <p class="text-sm text-gray-600 mb-4"><strong>The Logic:</strong> Bundling software and hardware (e.g., Tekla/Viewpoint) increases average deal size. If you sell bigger deals, you need to close FEWER of them.</p>
                                     <label class="block text-sm font-bold text-gray-700 mb-2">Improve Deal Size by: <span id="dealSizeImprovementLabel" class="text-primary">15%</span></label>
                                     <input type="range" id="dealSizeImprovement" min="0" max="50" value="15" step="1" class="w-full">
                                     <div class="mt-4 p-4 bg-blue-50 rounded text-center">
@@ -453,7 +454,7 @@
                         <section>
                             <h2 class="step-heading">Phase 4 : Action Plan</h2>
                             <div class="coach-note">
-                                <strong>Make it Real:</strong> You've looked at the numbers (or skipped them if you are new). Now, what are you actually going to <em>do</em> differently? Define your commitments below.
+                                <strong>Instructions:</strong> Take a moment to reflect. Think back on the week you just had. Write goals with thought and purpose. This is the start of your yearly plan that you will work on with your manager to hold yourself accountable throughout the year. This is for you, so the better you write them now, the better you will execute them later.
                             </div>
 
                             <div class="space-y-6">
@@ -480,15 +481,21 @@
                                 </div>
 
                                 <div>
-                                    <label class="input-label">Action: People (Skills/Coaching):</label>
-                                    <p class="text-xs text-gray-500 mb-1">e.g., "I will complete my Viewpoint certification by Q2."</p>
-                                    <input type="text" id="action-people" name="entry.1667466065" class="input-field">
+                                    <label class="input-label text-lg mb-2">Action: People (Skills/Coaching):</label>
+                                    <p class="text-sm text-gray-600 mb-2">What skill will you learn? (e.g., "I will complete my Viewpoint certification by Q2.")</p>
+                                    <textarea id="action-people" name="entry.1667466065" class="input-field" rows="4"></textarea>
                                 </div>
 
                                 <div>
-                                    <label class="input-label">Action: Productivity (Time):</label>
-                                    <p class="text-xs text-gray-500 mb-1">e.g., "I will block 2 hours every Friday for prospecting."</p>
-                                    <input type="text" id="action-productivity" name="entry.1571167359" class="input-field">
+                                    <label class="input-label text-lg mb-2">Action: Pipeline (Generation Strategy):</label>
+                                    <p class="text-sm text-gray-600 mb-2">How will you generate high-quality pipeline? (e.g., "I will run a targeted campaign for non-SaaS accounts.")</p>
+                                    <textarea id="action-pipeline" name="entry.1553800751" class="input-field" rows="4"></textarea>
+                                </div>
+
+                                <div>
+                                    <label class="input-label text-lg mb-2">Action: Productivity (Time):</label>
+                                    <p class="text-sm text-gray-600 mb-2">How will you protect your selling time? (e.g., "I will block 2 hours every Friday for prospecting.")</p>
+                                    <textarea id="action-productivity" name="entry.1571167359" class="input-field" rows="4"></textarea>
                                 </div>
                             </div>
                         </section>
@@ -543,6 +550,7 @@
             targetCoverage: "entry.10775378",
             primaryGoal: "entry.1090213679", // Checkbox Field ID
             peoplePlan: "entry.1667466065", 
+            pipelinePlan: "entry.1553800751",
             productivityPlan: "entry.1571167359"
         }
     };
@@ -625,6 +633,7 @@ Primary Focus: ${primaryFocus}
 
 Actions:
 People: ${getStringValue('action-people')}
+Pipeline: ${getStringValue('action-pipeline')}
 Productivity: ${getStringValue('action-productivity')}
         `.trim();
         
@@ -646,6 +655,7 @@ Productivity: ${getStringValue('action-productivity')}
             `&${c.fields.targetWinRate}=${encodeURIComponent(wr)}` +
             `&${c.fields.targetCoverage}=${encodeURIComponent(cov)}` +
             `&${c.fields.peoplePlan}=${encodeURIComponent(getStringValue('action-people'))}` +
+            `&${c.fields.pipelinePlan}=${encodeURIComponent(getStringValue('action-pipeline'))}` +
             `&${c.fields.productivityPlan}=${encodeURIComponent(getStringValue('action-productivity'))}`;
 
         // 2. Gather Checkboxes (Loop through all checked inputs for Primary Goal)
@@ -726,19 +736,21 @@ Productivity: ${getStringValue('action-productivity')}
     document.addEventListener('DOMContentLoaded', () => {
         initViews();
 
-        const inputs = document.querySelectorAll('input, select');
+        const inputs = document.querySelectorAll('input, select, textarea');
         inputs.forEach(el => {
             el.addEventListener('input', calculatePlan);
-            // Enter key navigation
-            el.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    if(currentStep < totalSteps) {
-                        currentStep++;
-                        showStep(currentStep);
+            // Enter key navigation (skip textareas)
+            if (el.tagName !== 'TEXTAREA') {
+                el.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if(currentStep < totalSteps) {
+                            currentStep++;
+                            showStep(currentStep);
+                        }
                     }
-                }
-            });
+                });
+            }
         });
 
         $('nextButton').addEventListener('click', () => { if(currentStep < totalSteps) { currentStep++; showStep(currentStep); }});
