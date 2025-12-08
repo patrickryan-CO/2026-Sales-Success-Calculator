@@ -87,32 +87,12 @@
             color: #374151; /* gray-700 */
             background-color: #FFFBEB; /* amber-50 */
             border-left: 4px solid #fbad26;
-            padding: 1.25rem;
+            padding: 1.5rem;
             margin-bottom: 2rem;
             border-radius: 0 0.5rem 0.5rem 0;
             line-height: 1.6;
         }
-        .coach-note strong { color: #0063a3; display: block; margin-bottom: 0.25rem; font-size: 1rem; }
-
-        /* ALERT BOX STYLE (Blue/Informational) */
-        .alert-box {
-            background-color: #EFF6FF; /* blue-50 */
-            border: 2px solid #3B82F6; /* blue-500 */
-            color: #1E40AF; /* blue-800 */
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            margin-bottom: 2rem;
-            font-weight: 500;
-            text-align: left;
-        }
-        .alert-title {
-            font-weight: 800;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.5rem;
-            color: #1E40AF;
-        }
+        .coach-note strong { color: #0063a3; display: block; margin-bottom: 0.5rem; font-size: 1.05rem; }
 
         /* Typography */
         h1, h2, h3, h4, h5, h6 { color: #252a2e !important; }
@@ -215,6 +195,7 @@
         @media print {
             body { background: white; }
             .wave-container, #welcome-screen, #navigation-buttons, .progress-bar-grid, .coach-note { display: none !important; }
+            /* Keep the Blue Info Box visible in print */
             .main-card { box-shadow: none; margin: 0; width: 100%; max-width: 100%; padding: 0; }
             #wizard-container, .step-panel, .hidden { display: block !important; visibility: visible !important; }
             .step-panel { page-break-after: always; margin-bottom: 3rem; }
@@ -583,7 +564,16 @@
 
     // --- Helper Functions ---
     const $ = (selector) => document.getElementById(selector);
-    const getNumberValue = (id) => { const el = $(id); return el ? (parseFloat(el.value.replace(/[$,]/g, '')) || 0) : 0; };
+    
+    // Updated: Safe Number Parser for Input OR TextContent (Fixes Crash)
+    const getNumberValue = (id) => {
+        const el = $(id);
+        if (!el) return 0;
+        // Handle input vs span
+        const rawVal = (el.value !== undefined) ? el.value : el.textContent;
+        return parseFloat(rawVal.replace(/[$,]/g, '')) || 0;
+    };
+    
     const getStringValue = (id) => { const el = $(id); return el ? el.value.trim() : ''; };
     
     // Updated Helper: Collects ALL checked values from checkboxes
@@ -599,7 +589,7 @@
 
     // --- Core Logic ---
     function calculatePlan() {
-        // Calculate only for numeric inputs to avoid conflict with text areas
+        // Inputs
         const quota2025 = getNumberValue('quota2025');
         const bookings2025 = getNumberValue('bookings2025');
         const winRate2025 = getNumberValue('winRate2025');
