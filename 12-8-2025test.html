@@ -87,32 +87,12 @@
             color: #374151; /* gray-700 */
             background-color: #FFFBEB; /* amber-50 */
             border-left: 4px solid #fbad26;
-            padding: 1.25rem;
+            padding: 1.5rem;
             margin-bottom: 2rem;
             border-radius: 0 0.5rem 0.5rem 0;
             line-height: 1.6;
         }
-        .coach-note strong { color: #0063a3; display: block; margin-bottom: 0.25rem; font-size: 1rem; }
-
-        /* ALERT BOX STYLE (Blue/Informational) */
-        .alert-box {
-            background-color: #EFF6FF; /* blue-50 */
-            border: 2px solid #3B82F6; /* blue-500 */
-            color: #1E40AF; /* blue-800 */
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            margin-bottom: 2rem;
-            font-weight: 500;
-            text-align: left;
-        }
-        .alert-title {
-            font-weight: 800;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.5rem;
-            color: #1E40AF;
-        }
+        .coach-note strong { color: #0063a3; display: block; margin-bottom: 0.5rem; font-size: 1.05rem; }
 
         /* Typography */
         h1, h2, h3, h4, h5, h6 { color: #252a2e !important; }
@@ -186,7 +166,8 @@
         /* Print */
         @media print {
             body { background: white; }
-            .wave-container, #welcome-screen, #navigation-buttons, .progress-bar-grid, .coach-note, .alert-box { display: none !important; }
+            .wave-container, #welcome-screen, #navigation-buttons, .progress-bar-grid, .coach-note { display: none !important; }
+            /* Note: We KEEP the info box in print so they remember why it is 0 */
             .main-card { box-shadow: none; margin: 0; width: 100%; max-width: 100%; padding: 0; }
             #wizard-container, .step-panel, .hidden { display: block !important; visibility: visible !important; }
             .step-panel { page-break-after: always; margin-bottom: 3rem; }
@@ -291,13 +272,13 @@
                         <section>
                             <h2 class="step-heading">Phase 1 : Baseline (Look Back 2025)</h2>
                             
-                            <div class="alert-box">
-                                <div class="alert-title">
+                            <div class="bg-blue-50 border-l-4 border-blue-500 text-blue-900 p-6 rounded-r-lg mb-8 shadow-sm">
+                                <div class="flex items-center font-bold text-lg mb-2">
                                     <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     PLEASE READ:
                                 </div>
-                                <p class="mb-2">Do you have a Scorecard with your 2025 data?</p>
-                                <ul class="list-disc list-inside ml-4 space-y-1">
+                                <p class="mb-3 font-medium">Do you have a Scorecard with your 2025 data?</p>
+                                <ul class="list-disc list-inside ml-2 space-y-2">
                                     <li><strong>YES:</strong> Enter your actual numbers below to calculate your efficiency gap.</li>
                                     <li><strong>NO (No Scorecard/Quota/Data):</strong> If you do not have a scorecard, quota, or historical data (e.g. you are new or in a non-quota role), enter <strong>"0"</strong> in the numeric fields below. This allows you to skip the math and proceed directly to your Action Plan in Phase 4.</li>
                                 </ul>
