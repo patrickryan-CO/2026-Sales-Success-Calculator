@@ -87,53 +87,45 @@
             color: #374151; /* gray-700 */
             background-color: #FFFBEB; /* amber-50 */
             border-left: 4px solid #fbad26;
-            padding: 1.5rem;
+            padding: 1.25rem;
             margin-bottom: 2rem;
             border-radius: 0 0.5rem 0.5rem 0;
             line-height: 1.6;
         }
-        .coach-note strong { color: #0063a3; display: block; margin-bottom: 0.5rem; font-size: 1.05rem; }
+        .coach-note strong { color: #0063a3; display: block; margin-bottom: 0.25rem; font-size: 1rem; }
+
+        /* ALERT BOX STYLE (Blue/Informational) */
+        .alert-box {
+            background-color: #EFF6FF; /* blue-50 */
+            border: 2px solid #3B82F6; /* blue-500 */
+            color: #1E40AF; /* blue-800 */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            text-align: left;
+        }
+        .alert-title {
+            font-weight: 800;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            color: #1E40AF;
+        }
 
         /* Typography */
         h1, h2, h3, h4, h5, h6 { color: #252a2e !important; }
         .step-heading { font-size: 1.5rem; font-weight: 800; color: #0063a3; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e5e7eb; }
 
         /* Inputs */
-        .input-label { display: flex; align-items: center; font-size: 0.9rem; font-weight: 700; color: #252a2e; margin-bottom: 0.375rem; }
+        .input-label { display: block; font-size: 0.9rem; font-weight: 700; color: #252a2e; margin-bottom: 0.375rem; }
         .input-field {
             display: block; width: 100%; border-radius: 0.375rem; border: 1px solid #D1D5DB;
             padding: 0.75rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); color: #252a2e;
             transition: all 0.2s; font-size: 1rem;
         }
         .input-field:focus { outline: none; border-color: #0063a3; ring: 2px; ring-color: rgba(0,99,163,0.2); }
-
-        /* Tooltips */
-        .tooltip-trigger {
-            display: inline-flex; 
-            align-items: center; 
-            justify-content: center;
-            width: 1.1rem; height: 1.1rem; 
-            margin-left: 0.5rem; 
-            background-color: #9CA3AF; /* gray-400 */
-            color: white;
-            font-family: sans-serif; 
-            font-weight: bold; 
-            font-style: normal;
-            border-radius: 50%; 
-            cursor: help; 
-            font-size: 0.7rem; 
-            position: relative;
-        }
-        .tooltip-trigger::after {
-            content: attr(data-tooltip); position: absolute; bottom: 140%; left: 50%;
-            transform: translateX(-50%); background-color: #252a2e; color: white;
-            font-family: sans-serif; font-size: 0.75rem; font-weight: 500; font-style: normal;
-            padding: 0.5rem 0.75rem; border-radius: 0.25rem; width: 220px;
-            opacity: 0; visibility: hidden; transition: all 0.2s; pointer-events: none; z-index: 50;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-            line-height: 1.4;
-        }
-        .tooltip-trigger:hover::after { opacity: 1; visibility: visible; }
 
         /* Buttons */
         .btn {
@@ -191,11 +183,38 @@
             margin-top: 0.25rem;
         }
 
+        /* Tooltips */
+        .tooltip-trigger {
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center;
+            width: 1.1rem; height: 1.1rem; 
+            margin-left: 0.5rem; 
+            background-color: #9CA3AF; 
+            color: white;
+            font-family: sans-serif; 
+            font-weight: bold; 
+            font-style: normal;
+            border-radius: 50%; 
+            cursor: help; 
+            font-size: 0.7rem; 
+            position: relative;
+        }
+        .tooltip-trigger::after {
+            content: attr(data-tooltip); position: absolute; bottom: 140%; left: 50%;
+            transform: translateX(-50%); background-color: #252a2e; color: white;
+            font-family: sans-serif; font-size: 0.75rem; font-weight: 500; font-style: normal;
+            padding: 0.5rem 0.75rem; border-radius: 0.25rem; width: 220px;
+            opacity: 0; visibility: hidden; transition: all 0.2s; pointer-events: none; z-index: 50;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            line-height: 1.4;
+        }
+        .tooltip-trigger:hover::after { opacity: 1; visibility: visible; }
+
         /* Print */
         @media print {
             body { background: white; }
             .wave-container, #welcome-screen, #navigation-buttons, .progress-bar-grid, .coach-note { display: none !important; }
-            /* Keep the Blue Info Box visible in print */
             .main-card { box-shadow: none; margin: 0; width: 100%; max-width: 100%; padding: 0; }
             #wizard-container, .step-panel, .hidden { display: block !important; visibility: visible !important; }
             .step-panel { page-break-after: always; margin-bottom: 3rem; }
@@ -580,7 +599,7 @@
 
     // --- Core Logic ---
     function calculatePlan() {
-        // Inputs (Math Logic Decoupled from Text Areas to prevent bugs)
+        // Calculate only for numeric inputs to avoid conflict with text areas
         const quota2025 = getNumberValue('quota2025');
         const bookings2025 = getNumberValue('bookings2025');
         const winRate2025 = getNumberValue('winRate2025');
@@ -706,6 +725,7 @@ Productivity: ${getStringValue('action-productivity')}
         
         const isFinalStep = (step === totalSteps);
         
+        // Button Logic
         const prevBtn = $('prevButton');
         const nextBtn = $('nextButton');
         const submitBtn = $('submitToFormButton');
@@ -714,21 +734,24 @@ Productivity: ${getStringValue('action-productivity')}
 
         prevBtn.classList.toggle('hidden', step === 1);
         
+        // Reset button visibility states
+        nextBtn.classList.add('hidden');
+        submitBtn.classList.add('hidden');
+        printBtn.classList.add('hidden');
+        resetBtn.classList.add('hidden');
+
         if (isFinalStep) {
-            submitBtn.classList.remove('hidden'); 
-            printBtn.classList.remove('hidden');  
-            resetBtn.classList.remove('hidden');  
-            nextBtn.classList.add('hidden'); // Hide Next on final step
+            submitBtn.classList.remove('hidden'); // "Review Your Plan"
+            printBtn.classList.remove('hidden');  // PDF
+            resetBtn.classList.remove('hidden');  // Start Over
         } else {
-            nextBtn.classList.remove('hidden');   
+            nextBtn.classList.remove('hidden');   // Blue Next Button
             nextBtn.textContent = 'Next';
             nextBtn.classList.remove('btn-accent');
             nextBtn.classList.add('btn-primary');
-            submitBtn.classList.add('hidden');
-            printBtn.classList.add('hidden');
-            resetBtn.classList.add('hidden');
         }
         
+        // Scroll to heading of new step
         const heading = $(`step-${step}-content`).querySelector('.step-heading');
         if (heading) heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -736,15 +759,14 @@ Productivity: ${getStringValue('action-productivity')}
     document.addEventListener('DOMContentLoaded', () => {
         initViews();
 
-        // Calculate Plan is only for numerical inputs, to avoid crashes on text
-        const calcInputs = document.querySelectorAll('input[type="text"], input[type="number"], input[type="range"], select, input[type="radio"]');
-        calcInputs.forEach(el => {
-            el.addEventListener('input', calculatePlan);
-        });
-
-        // Navigation listeners
-        const allInputs = document.querySelectorAll('input, select, textarea');
-        allInputs.forEach(el => {
+        const inputs = document.querySelectorAll('input, select, textarea');
+        inputs.forEach(el => {
+            // Only trigger calculation on numeric inputs
+            if(el.tagName === 'INPUT' && (el.type === 'text' || el.type === 'number' || el.type === 'range' || el.type === 'radio')) {
+                el.addEventListener('input', calculatePlan);
+            }
+            
+            // Enter key navigation (skip textareas)
             if (el.tagName !== 'TEXTAREA') {
                 el.addEventListener('keydown', function(e) {
                     if (e.key === 'Enter') {
