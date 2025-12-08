@@ -81,18 +81,18 @@
             .main-card { margin-top: 5rem; }
         }
 
-        /* Coaching/Context Styles */
+        /* Coaching/Context Styles (Yellow/Amber Theme) */
         .coach-note {
             font-size: 0.95rem;
-            color: #374151; /* gray-700 */
-            background-color: #FFFBEB; /* amber-50 */
-            border-left: 4px solid #fbad26;
-            padding: 1.25rem;
+            color: #1f2937; /* gray-800 */
+            background-color: #fffbeb; /* amber-50 */
+            border-left: 4px solid #fbad26; /* Trimble Accent */
+            padding: 1.5rem;
             margin-bottom: 2rem;
             border-radius: 0 0.5rem 0.5rem 0;
             line-height: 1.6;
         }
-        .coach-note strong { color: #0063a3; display: block; margin-bottom: 0.25rem; font-size: 1rem; }
+        .coach-note strong { color: #0063a3; display: block; margin-bottom: 0.5rem; font-size: 1.05rem; }
 
         /* Typography */
         h1, h2, h3, h4, h5, h6 { color: #252a2e !important; }
@@ -195,7 +195,7 @@
         @media print {
             body { background: white; }
             .wave-container, #welcome-screen, #navigation-buttons, .progress-bar-grid, .coach-note { display: none !important; }
-            /* Keep the Blue Info Box visible in print */
+            /* Keep the Note Box visible in print */
             .main-card { box-shadow: none; margin: 0; width: 100%; max-width: 100%; padding: 0; }
             #wizard-container, .step-panel, .hidden { display: block !important; visibility: visible !important; }
             .step-panel { page-break-after: always; margin-bottom: 3rem; }
@@ -228,7 +228,7 @@
                         <div class="p-6 space-y-4">
                             <div class="flex items-start">
                                 <div class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-primary text-white font-bold text-sm">1</div>
-                                <p class="ml-4 text-gray-700"><strong>Pull up your Scorecard.</strong> You will need your 2025 actuals to establish your baseline accurately.</p>
+                                <p class="ml-4 text-gray-700"><strong>Pull up your Scorecard.</strong> If you have one, you will need your 2025 actuals to establish your baseline accurately.</p>
                             </div>
                             <div class="flex items-start">
                                 <div class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-primary text-white font-bold text-sm">2</div>
@@ -310,13 +310,13 @@
                         <section>
                             <h2 class="step-heading">Phase 1 : Baseline</h2>
                             
-                            <div style="background-color: #f0f9ff; border-left: 5px solid #0063a3; color: #1e3a8a; padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 2rem;">
+                            <div style="background-color: #fffbeb; border-left: 5px solid #fbad26; color: #1f2937; padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 2rem;">
                                 <div style="display: flex; align-items: center; font-weight: 800; font-size: 1.1rem; margin-bottom: 0.5rem; color: #0063a3;">
                                     <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     PLEASE READ:
                                 </div>
-                                <p style="font-weight: 600; margin-bottom: 0.75rem; color: #1e293b;">Do you have a Scorecard with your 2025 data?</p>
-                                <ul style="list-style-type: disc; padding-left: 1.5rem; line-height: 1.5; color: #334155;">
+                                <p style="font-weight: 600; margin-bottom: 0.75rem; color: #1f2937;">Do you have a Scorecard with your 2025 data?</p>
+                                <ul style="list-style-type: disc; padding-left: 1.5rem; line-height: 1.5; color: #374151;">
                                     <li><strong>YES:</strong> Enter your actual numbers below to calculate your efficiency gap.</li>
                                     <li><strong>NO (No Scorecard/Quota/Data):</strong> If you do not have a scorecard, quota, or historical data (e.g. you are new or in a non-quota role), enter <strong>"0"</strong> in the numeric fields below. This allows you to skip the math and proceed directly to your Action Plan in Phase 4.</li>
                                 </ul>
@@ -470,7 +470,7 @@
                             <h2 class="step-heading">Phase 4 : Action Plan</h2>
                             <div class="coach-note">
                                 <strong>Your Personal Roadmap:</strong><br>
-                                This plan is for you. It's the start of your yearly plan that you will work on with your manager to hold yourself accountable throughout the year. The better you write these goals now, the better you will execute them later.<br><br>
+                                This plan is for you. Invest time now to define clear, high-impact goals that you can proudly review with your manager throughout the year. Your future success depends on the clarity of your commitment today.<br><br>
                                 <strong>Instructions:</strong> Think back on the week you just had. Write goals with thought and purpose.
                             </div>
 
@@ -498,19 +498,19 @@
                                 </div>
 
                                 <div>
-                                    <label class="input-label text-lg mb-2">My People Goal</label>
-                                    <p class="text-sm text-gray-600 mb-2">What specific skill or knowledge gap will you close this year to hit your goal? Make it measurable.</p>
+                                    <label class="input-label text-lg mb-2">Strategic Goal: People</label>
+                                    <p class="text-sm text-gray-600 mb-2">What specific skill or knowledge gap will you close this year to hit your goal?</p>
                                     <textarea id="action-people" name="entry.1667466065" class="input-field" rows="4"></textarea>
                                 </div>
 
                                 <div>
-                                    <label class="input-label text-lg mb-2">My Pipeline Goal</label>
+                                    <label class="input-label text-lg mb-2">Strategic Goal: Pipeline</label>
                                     <p class="text-sm text-gray-600 mb-2">What specific routine or strategy will you execute to generate high-quality opportunities?</p>
                                     <textarea id="action-pipeline" name="entry.1553800751" class="input-field" rows="4"></textarea>
                                 </div>
 
                                 <div>
-                                    <label class="input-label text-lg mb-2">My Productivity Goal</label>
+                                    <label class="input-label text-lg mb-2">Strategic Goal: Productivity</label>
                                     <p class="text-sm text-gray-600 mb-2">How will you better manage your time or tools to maximize selling hours?</p>
                                     <textarea id="action-productivity" name="entry.1571167359" class="input-field" rows="4"></textarea>
                                 </div>
@@ -525,7 +525,7 @@
                                 <strong>Final Steps:</strong><br>
                                 1. Review your plan summary below.<br>
                                 2. Click <strong>"Save as PDF"</strong> to keep a copy for yourself.<br>
-                                3. Click <strong>"Review Your Plan"</strong> to generate the final summary. You will have one last chance to review everything before officially submitting.
+                                3. Click <strong>"Review Your Plan"</strong> to submit your commitment to your manager.
                             </div>
                             
                             <div id="commitmentSummaryOutput" class="bg-gray-100 p-6 rounded-lg text-sm text-primary-text whitespace-pre-wrap border border-gray-300 font-mono mb-6">
@@ -637,9 +637,10 @@
         if($('meetingsPipelineNeeded')) $('meetingsPipelineNeeded').textContent = formatCurrency(pipeMtg);
 
         // IMPORTANT: We moved the summary generation logic to the showStep function
+        // to prevent it from running during input events on text areas.
     }
     
-    // Separate function to generate summary safely
+    // Separate function to generate summary safely without crashing calc logic
     function generateCommitmentSummary() {
         try {
             const primaryFocus = getMultiSelectValue(GOOGLE_FORM_CONFIG.fields.primaryGoal);
@@ -742,6 +743,12 @@ Productivity: ${getStringValue('action-productivity')}
 
         prevBtn.classList.toggle('hidden', step === 1);
         
+        // Reset button visibility states
+        nextBtn.classList.add('hidden');
+        submitBtn.classList.add('hidden');
+        printBtn.classList.add('hidden');
+        resetBtn.classList.add('hidden');
+
         if (isFinalStep) {
             submitBtn.classList.remove('hidden'); // "Review Your Plan"
             printBtn.classList.remove('hidden');  // PDF
