@@ -87,12 +87,12 @@
             color: #374151; /* gray-700 */
             background-color: #FFFBEB; /* amber-50 */
             border-left: 4px solid #fbad26;
-            padding: 1.5rem;
+            padding: 1.25rem;
             margin-bottom: 2rem;
             border-radius: 0 0.5rem 0.5rem 0;
             line-height: 1.6;
         }
-        .coach-note strong { color: #0063a3; display: block; margin-bottom: 0.5rem; font-size: 1.05rem; }
+        .coach-note strong { color: #0063a3; display: block; margin-bottom: 0.25rem; font-size: 1rem; }
 
         /* Typography */
         h1, h2, h3, h4, h5, h6 { color: #252a2e !important; }
@@ -170,7 +170,7 @@
             justify-content: center;
             width: 1.1rem; height: 1.1rem; 
             margin-left: 0.5rem; 
-            background-color: #9CA3AF; 
+            background-color: #9CA3AF; /* gray-400 */
             color: white;
             font-family: sans-serif; 
             font-weight: bold; 
@@ -304,7 +304,7 @@
                             <div style="background-color: #eff6ff; border-left: 4px solid #3b82f6; color: #1f2937; padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 2rem;">
                                 <div style="display: flex; align-items: center; font-weight: 800; font-size: 1.1rem; margin-bottom: 0.5rem; color: #1e40af;">
                                     <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    PLEASE READ:
+                                    Data Instructions:
                                 </div>
                                 <p style="font-weight: 600; margin-bottom: 0.75rem;">Do you have a Scorecard with your 2025 data?</p>
                                 <ul style="list-style-type: disc; padding-left: 1.5rem; line-height: 1.5;">
@@ -625,14 +625,14 @@
         
         const pipeMtg = (meetingsImpliedWinRate/100) > 0 ? quota2026 / (meetingsImpliedWinRate/100) : 0;
         if($('meetingsPipelineNeeded')) $('meetingsPipelineNeeded').textContent = formatCurrency(pipeMtg);
-
-        if (currentStep === 5) generateCommitmentSummary();
     }
     
+    // Separate function to generate summary safely without crashing calc logic
     function generateCommitmentSummary() {
-        const primaryFocus = getMultiSelectValue(GOOGLE_FORM_CONFIG.fields.primaryGoal);
+        try {
+            const primaryFocus = getMultiSelectValue(GOOGLE_FORM_CONFIG.fields.primaryGoal);
 
-        const summaryText = `
+            const summaryText = `
 TRIMBLE 2026 SALES PLAN (COMMITMENT)
 
 Phase 1: Baseline
@@ -650,10 +650,13 @@ Actions:
 People: ${getStringValue('action-people')}
 Pipeline: ${getStringValue('action-pipeline')}
 Productivity: ${getStringValue('action-productivity')}
-        `.trim();
-        
-        $('commitmentSummaryOutput').textContent = summaryText;
-        return summaryText;
+            `.trim();
+            
+            $('commitmentSummaryOutput').textContent = summaryText;
+        } catch (e) {
+            console.error("Summary Generation Error:", e);
+            $('commitmentSummaryOutput').textContent = "Error generating summary. Please check your inputs.";
+        }
     }
 
     // --- FORM SUBMISSION LOGIC ---
@@ -704,7 +707,10 @@ Productivity: ${getStringValue('action-productivity')}
     });
 
     function showStep(step) {
-        if (step === 5) generateCommitmentSummary();
+        // Run summary generation ONLY if entering step 5
+        if (step === 5) {
+            generateCommitmentSummary();
+        }
         
         for (let i = 1; i <= totalSteps; i++) {
             $(`step-${i}-content`).classList.add('hidden');
@@ -724,21 +730,19 @@ Productivity: ${getStringValue('action-productivity')}
 
         prevBtn.classList.toggle('hidden', step === 1);
         
-        // Reset button visibility states
-        nextBtn.classList.add('hidden');
-        submitBtn.classList.add('hidden');
-        printBtn.classList.add('hidden');
-        resetBtn.classList.add('hidden');
-
         if (isFinalStep) {
             submitBtn.classList.remove('hidden'); // "Review Your Plan"
             printBtn.classList.remove('hidden');  // PDF
             resetBtn.classList.remove('hidden');  // Start Over
+            nextBtn.classList.add('hidden');      // Hide Next
         } else {
             nextBtn.classList.remove('hidden');   // Blue Next Button
             nextBtn.textContent = 'Next';
             nextBtn.classList.remove('btn-accent');
             nextBtn.classList.add('btn-primary');
+            submitBtn.classList.add('hidden');
+            printBtn.classList.add('hidden');
+            resetBtn.classList.add('hidden');
         }
         
         // Scroll to heading of new step
