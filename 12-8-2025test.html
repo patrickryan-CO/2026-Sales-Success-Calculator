@@ -94,12 +94,32 @@
         }
         .coach-note strong { color: #0063a3; display: block; margin-bottom: 0.25rem; font-size: 1rem; }
 
+        /* ALERT BOX STYLE (Blue/Informational) - Forced Styles */
+        .alert-box {
+            background-color: #EFF6FF !important; /* blue-50 */
+            border: 2px solid #3B82F6 !important; /* blue-500 */
+            color: #1F2937 !important; /* gray-800 */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            text-align: left;
+        }
+        .alert-title {
+            font-weight: 800;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            color: #1E40AF !important; /* blue-800 */
+        }
+
         /* Typography */
         h1, h2, h3, h4, h5, h6 { color: #252a2e !important; }
         .step-heading { font-size: 1.5rem; font-weight: 800; color: #0063a3; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e5e7eb; }
 
         /* Inputs */
-        .input-label { display: block; font-size: 0.9rem; font-weight: 700; color: #252a2e; margin-bottom: 0.375rem; }
+        .input-label { display: flex; align-items: center; font-size: 0.9rem; font-weight: 700; color: #252a2e; margin-bottom: 0.375rem; }
         .input-field {
             display: block; width: 100%; border-radius: 0.375rem; border: 1px solid #D1D5DB;
             padding: 0.75rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); color: #252a2e;
@@ -170,7 +190,7 @@
             justify-content: center;
             width: 1.1rem; height: 1.1rem; 
             margin-left: 0.5rem; 
-            background-color: #9CA3AF; /* gray-400 */
+            background-color: #9CA3AF; 
             color: white;
             font-family: sans-serif; 
             font-weight: bold; 
@@ -301,10 +321,10 @@
                         <section>
                             <h2 class="step-heading">Phase 1 : Baseline</h2>
                             
-                            <div style="background-color: #eff6ff; border-left: 4px solid #3b82f6; color: #1f2937; padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 2rem;">
-                                <div style="display: flex; align-items: center; font-weight: 800; font-size: 1.1rem; margin-bottom: 0.5rem; color: #1e40af;">
+                            <div class="alert-box">
+                                <div class="alert-title">
                                     <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    Data Instructions:
+                                    PLEASE READ:
                                 </div>
                                 <p style="font-weight: 600; margin-bottom: 0.75rem;">Do you have a Scorecard with your 2025 data?</p>
                                 <ul style="list-style-type: disc; padding-left: 1.5rem; line-height: 1.5;">
@@ -625,9 +645,12 @@
         
         const pipeMtg = (meetingsImpliedWinRate/100) > 0 ? quota2026 / (meetingsImpliedWinRate/100) : 0;
         if($('meetingsPipelineNeeded')) $('meetingsPipelineNeeded').textContent = formatCurrency(pipeMtg);
+
+        // IMPORTANT: We moved the summary generation logic to the showStep function
+        // to prevent it from running during input events on text areas.
     }
     
-    // Separate function to generate summary safely without crashing calc logic
+    // Separate function to generate summary safely
     function generateCommitmentSummary() {
         try {
             const primaryFocus = getMultiSelectValue(GOOGLE_FORM_CONFIG.fields.primaryGoal);
