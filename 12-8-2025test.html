@@ -213,7 +213,7 @@
     <div class="main-card">
         <div class="card-content">
             
-            <div class="absolute top-2 right-4 text-xs text-gray-300 font-mono select-none">v2026.22</div>
+            <div class="absolute top-2 right-4 text-xs text-gray-300 font-mono select-none">v2026.23</div>
 
             <div id="welcome-screen">
                 <div class="text-center space-y-6">
@@ -312,13 +312,13 @@
                         <section>
                             <h2 class="step-heading">Phase 1 : Baseline</h2>
                             
-                            <div style="background-color: #eff6ff; border-left: 4px solid #3b82f6; color: #1f2937; padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 2rem;">
-                                <div style="display: flex; align-items: center; font-weight: 800; font-size: 1.1rem; margin-bottom: 0.5rem; color: #1e40af;">
+                            <div style="background-color: #f0f9ff; border-left: 5px solid #0063a3; color: #1e3a8a; padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 2rem;">
+                                <div style="display: flex; align-items: center; font-weight: 800; font-size: 1.1rem; margin-bottom: 0.5rem; color: #0063a3;">
                                     <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     PLEASE READ:
                                 </div>
-                                <p style="font-weight: 600; margin-bottom: 0.75rem;">Do you have a Scorecard with your 2025 data?</p>
-                                <ul style="list-style-type: disc; padding-left: 1.5rem; line-height: 1.5;">
+                                <p style="font-weight: 600; margin-bottom: 0.75rem; color: #1e293b;">Do you have a Scorecard with your 2025 data?</p>
+                                <ul style="list-style-type: disc; padding-left: 1.5rem; line-height: 1.5; color: #334155;">
                                     <li><strong>YES:</strong> Enter your actual numbers below to calculate your efficiency gap.</li>
                                     <li><strong>NO (No Scorecard/Quota/Data):</strong> If you do not have a scorecard, quota, or historical data (e.g. you are new or in a non-quota role), enter <strong>"0"</strong> in the numeric fields below. This allows you to skip the math and proceed directly to your Action Plan in Phase 4.</li>
                                 </ul>
@@ -388,7 +388,7 @@
                                 <div class="calc-box">
                                     <span class="text-sm font-medium text-gray-700">Required Deals (C)</span>
                                     <span id="dealsToClose2026" class="calc-output">0</span>
-                                    <span class="text-xs text-gray-500 block mt-1">(Pipeline / 2025 Deal Size)</span>
+                                    <span class="text-xs text-gray-500 block mt-1">(Quota / 2025 Deal Size)</span>
                                 </div>
                             </div>
                             
@@ -417,8 +417,8 @@
                         <section>
                             <h2 class="step-heading">Phase 3 : The Solution</h2>
                             <div class="coach-note">
-                                <strong>How to use this:</strong><br>
-                                You have 3 Levers to reduce the massive pipeline burden from Phase 2. Use the sliders to model efficiency gains. Even small improvements in Win Rate and Deal Size can significantly reduce the pressure to generate new pipeline.<br><br>
+                                <strong>The Aha Moment:</strong><br>
+                                Use the sliders to model efficiency gains. See how improving Win Rate or Deal Size makes your required pipeline <strong>manageable</strong>. Small improvements here compound to massively reduce the pressure to generate new pipeline.<br><br>
                                 <strong>NOTE:</strong> If you entered "0" in Phase 1, you can skip this section. Click Next.
                             </div>
 
@@ -436,7 +436,7 @@
 
                                 <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                                     <h3 class="text-lg font-bold text-primary mb-2">Lever 2: Deal Size</h3>
-                                    <p class="text-sm text-gray-600 mb-4"><strong>The Logic:</strong> Bundling software and hardware increases average deal size. If you sell bigger deals, you need to close FEWER of them.</p>
+                                    <p class="text-sm text-gray-600 mb-4"><strong>The Logic:</strong> Bundling software increases average deal size. If you sell bigger deals, you need to close FEWER of them.</p>
                                     <label class="block text-sm font-bold text-gray-700 mb-2">Improve Deal Size by: <span id="dealSizeImprovementLabel" class="text-primary">15%</span></label>
                                     <input type="range" id="dealSizeImprovement" min="0" max="50" value="15" step="1" class="w-full">
                                     <div class="mt-4 p-4 bg-blue-50 rounded text-center">
@@ -563,254 +563,4 @@
         fields: {
             repName: "entry.1533888544", 
             managerName: "entry.2004467893", 
-            region: "entry.909220528",
-            quota2026: "entry.1187258724", 
-            targetWinRate: "entry.516044971", 
-            targetCoverage: "entry.10775378",
-            primaryGoal: "entry.1090213679", // Checkbox Field ID
-            peoplePlan: "entry.1667466065", 
-            pipelinePlan: "entry.1553800751",
-            productivityPlan: "entry.1571167359"
-        }
-    };
-
-    // --- Helper Functions ---
-    const $ = (selector) => document.getElementById(selector);
-    
-    // Updated: Safe Number Parser for Input OR TextContent (Fixes Crash)
-    const getNumberValue = (id) => {
-        const el = $(id);
-        if (!el) return 0;
-        // Handle input vs span
-        const rawVal = (el.value !== undefined) ? el.value : el.textContent;
-        return parseFloat(rawVal.replace(/[$,]/g, '')) || 0;
-    };
-    
-    const getStringValue = (id) => { const el = $(id); return el ? el.value.trim() : ''; };
-    
-    // Updated Helper: Collects ALL checked values from checkboxes
-    const getMultiSelectValue = (name) => {
-        const checked = document.querySelectorAll(`input[name="${name}"]:checked`);
-        return Array.from(checked).map(cb => cb.value).join(', ') || '[Not Selected]';
-    };
-    
-    const formatCurrency = (val) => '$' + (val || 0).toLocaleString('en-US', { maximumFractionDigits: 0 });
-    const formatPercent = (val) => (val || 0).toFixed(1) + '%';
-    const formatNumber = (val) => (val || 0).toLocaleString('en-US', { maximumFractionDigits: 1 });
-    const formatCoverage = (val) => (val || 0).toFixed(1) + 'x';
-
-    // --- Core Logic ---
-    function calculatePlan() {
-        // Inputs (Math Logic Decoupled from Text Areas to prevent bugs)
-        const quota2025 = getNumberValue('quota2025');
-        const bookings2025 = getNumberValue('bookings2025');
-        const winRate2025 = getNumberValue('winRate2025');
-        const avgDealSize2025 = getNumberValue('avgDealSize2025');
-        const quota2026 = getNumberValue('quota2026');
-        const winRateImprovement = getNumberValue('winRateImprovement');
-        const dealSizeImprovement = getNumberValue('dealSizeImprovement');
-        const meetingImprovement = getNumberValue('meetingImprovement');
-        const meetingsImpliedWinRate = getNumberValue('meetingsImpliedWinRate');
-
-        // Phase 1
-        const attainment2025 = quota2025 > 0 ? (bookings2025 / quota2025) * 100 : 0;
-        if($('attainment2025')) $('attainment2025').textContent = formatPercent(attainment2025);
-
-        // Phase 2
-        const winRateDecimal = winRate2025 / 100;
-        const pipelineToClose2026 = winRateDecimal > 0 ? quota2026 / winRateDecimal : 0;
-        if($('pipelineToClose2026')) $('pipelineToClose2026').textContent = formatCurrency(pipelineToClose2026);
-        if($('dealsToClose2026')) $('dealsToClose2026').textContent = formatNumber(avgDealSize2025 > 0 ? pipelineToClose2026 / avgDealSize2025 : 0);
-
-        // Phase 3
-        const newWinRate = winRate2025 + winRateImprovement;
-        const newPipelineNeeded = (newWinRate/100) > 0 ? quota2026 / (newWinRate/100) : 0;
-        if($('winRateImprovementLabel')) $('winRateImprovementLabel').textContent = `${winRateImprovement.toFixed(1)}%`;
-        if($('newPipelineNeeded')) $('newPipelineNeeded').textContent = formatCurrency(newPipelineNeeded);
-
-        const newAvgDealSize = avgDealSize2025 * (1 + (dealSizeImprovement / 100));
-        const newDealsNeeded = newAvgDealSize > 0 ? quota2026 / newAvgDealSize : 0;
-        if($('dealSizeImprovementLabel')) $('dealSizeImprovementLabel').textContent = `${dealSizeImprovement.toFixed(0)}%`;
-        if($('newDealsNeeded')) $('newDealsNeeded').textContent = formatNumber(newDealsNeeded);
-        
-        if($('meetingImprovementLabel')) $('meetingImprovementLabel').textContent = meetingImprovement;
-        
-        const pipeMtg = (meetingsImpliedWinRate/100) > 0 ? quota2026 / (meetingsImpliedWinRate/100) : 0;
-        if($('meetingsPipelineNeeded')) $('meetingsPipelineNeeded').textContent = formatCurrency(pipeMtg);
-
-        // IMPORTANT: We moved the summary generation logic to the showStep function
-        // to prevent it from running during input events on text areas.
-    }
-    
-    // Separate function to generate summary safely without crashing calc logic
-    function generateCommitmentSummary() {
-        try {
-            const primaryFocus = getMultiSelectValue(GOOGLE_FORM_CONFIG.fields.primaryGoal);
-
-            const summaryText = `
-TRIMBLE 2026 SALES PLAN (COMMITMENT)
-
-Phase 1: Baseline
-Rep: ${getStringValue('personName')}
-Quota: ${formatCurrency(getNumberValue('quota2026'))}
-
-Phase 2: The Gap
-Pipeline Goal: ${formatCurrency(getNumberValue('pipelineToClose2026'))}
-
-Phase 3: The Solution
-Win Rate Goal: ${formatPercent(getNumberValue('winRate2025') + getNumberValue('winRateImprovement'))}
-Primary Focus: ${primaryFocus}
-
-Actions:
-People: ${getStringValue('action-people')}
-Pipeline: ${getStringValue('action-pipeline')}
-Productivity: ${getStringValue('action-productivity')}
-            `.trim();
-            
-            $('commitmentSummaryOutput').textContent = summaryText;
-        } catch (e) {
-            console.error("Summary Generation Error:", e);
-            $('commitmentSummaryOutput').textContent = "Error generating summary. Please check your inputs.";
-        }
-    }
-
-    // --- FORM SUBMISSION LOGIC ---
-    function submitToGoogleForm() {
-        const c = GOOGLE_FORM_CONFIG;
-        const wr = getNumberValue('winRate2025') + getNumberValue('winRateImprovement');
-        const cov = wr > 0 ? (1 / (wr / 100)).toFixed(1) : "0.0";
-        
-        let url = `${c.baseUrl}?${c.fields.repName}=${encodeURIComponent(getStringValue('personName'))}` +
-            `&${c.fields.managerName}=${encodeURIComponent(getStringValue('managerName'))}` +
-            `&${c.fields.region}=${encodeURIComponent($('region').value)}` +
-            `&${c.fields.quota2026}=${encodeURIComponent(getNumberValue('quota2026'))}` +
-            `&${c.fields.targetWinRate}=${encodeURIComponent(wr)}` +
-            `&${c.fields.targetCoverage}=${encodeURIComponent(cov)}` +
-            `&${c.fields.peoplePlan}=${encodeURIComponent(getStringValue('action-people'))}` +
-            `&${c.fields.pipelinePlan}=${encodeURIComponent(getStringValue('action-pipeline'))}` +
-            `&${c.fields.productivityPlan}=${encodeURIComponent(getStringValue('action-productivity'))}`;
-
-        const checkedBoxes = document.querySelectorAll(`input[name="${c.fields.primaryGoal}"]:checked`);
-        checkedBoxes.forEach(cb => {
-            url += `&${c.fields.primaryGoal}=${encodeURIComponent(cb.value)}`;
-        });
-            
-        window.open(url, '_blank');
-    }
-
-    // --- Navigation Logic ---
-    let currentStep = 1;
-    const totalSteps = 5; 
-
-    // View Controller
-    const views = {
-        welcome: $('welcome-screen'),
-        wizard: $('wizard-container')
-    };
-
-    function initViews() {
-        views.welcome.style.display = 'block';
-        views.wizard.classList.add('hidden');
-        window.scrollTo(0,0);
-    }
-
-    $('startBtn').addEventListener('click', () => {
-        views.welcome.style.display = 'none';
-        views.wizard.classList.remove('hidden');
-        calculatePlan();
-        window.scrollTo(0,0);
-    });
-
-    function showStep(step) {
-        // Run summary generation ONLY if entering step 5
-        if (step === 5) {
-            generateCommitmentSummary();
-        }
-        
-        for (let i = 1; i <= totalSteps; i++) {
-            $(`step-${i}-content`).classList.add('hidden');
-            $(`progress-${i}`).classList.remove('progress-step-active');
-        }
-        $(`step-${step}-content`).classList.remove('hidden');
-        for (let i = 1; i <= step; i++) $(`progress-${i}`).classList.add('progress-step-active');
-        
-        const isFinalStep = (step === totalSteps);
-        
-        // Button Logic
-        const prevBtn = $('prevButton');
-        const nextBtn = $('nextButton');
-        const submitBtn = $('submitToFormButton');
-        const printBtn = $('printButton');
-        const resetBtn = $('resetButton');
-
-        prevBtn.classList.toggle('hidden', step === 1);
-        
-        // Reset button visibility states
-        nextBtn.classList.add('hidden');
-        submitBtn.classList.add('hidden');
-        printBtn.classList.add('hidden');
-        resetBtn.classList.add('hidden');
-
-        if (isFinalStep) {
-            submitBtn.classList.remove('hidden'); // "Review Your Plan"
-            printBtn.classList.remove('hidden');  // PDF
-            resetBtn.classList.remove('hidden');  // Start Over
-            nextBtn.classList.add('hidden');      // Hide Next
-        } else {
-            nextBtn.classList.remove('hidden');   // Blue Next Button
-            nextBtn.textContent = 'Next';
-            nextBtn.classList.remove('btn-accent');
-            nextBtn.classList.add('btn-primary');
-            submitBtn.classList.add('hidden');
-            printBtn.classList.add('hidden');
-            resetBtn.classList.add('hidden');
-        }
-        
-        // Scroll to heading of new step
-        const heading = $(`step-${step}-content`).querySelector('.step-heading');
-        if (heading) heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        initViews();
-
-        const inputs = document.querySelectorAll('input, select, textarea');
-        inputs.forEach(el => {
-            // Only trigger calculation on numeric inputs
-            if(el.tagName === 'INPUT' && (el.type === 'text' || el.type === 'number' || el.type === 'range' || el.type === 'radio')) {
-                el.addEventListener('input', calculatePlan);
-            }
-            
-            // Enter key navigation (skip textareas)
-            if (el.tagName !== 'TEXTAREA') {
-                el.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter') {
-                        e.preventDefault();
-                        if(currentStep < totalSteps) {
-                            currentStep++;
-                            showStep(currentStep);
-                        }
-                    }
-                });
-            }
-        });
-
-        $('nextButton').addEventListener('click', () => { if(currentStep < totalSteps) { currentStep++; showStep(currentStep); }});
-        $('prevButton').addEventListener('click', () => { if(currentStep > 1) { currentStep--; showStep(currentStep); }});
-        $('resetButton').addEventListener('click', () => { 
-            if(confirm("Start over? All data will be lost.")) {
-                $('skoForm').reset(); calculatePlan(); currentStep = 1; showStep(1); 
-            }
-        });
-        
-        $('printButton').addEventListener('click', () => {
-            if(confirm("Is this your final, correct plan?")) window.print();
-        });
-        
-        $('submitToFormButton').addEventListener('click', submitToGoogleForm);
-
-        calculatePlan();
-    });
-</script>
-</body>
-</html>
+            region: "entry.90922052
