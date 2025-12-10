@@ -48,7 +48,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 650px; /* Deep enough to cover the top third */
+            height: 800px; /* TALLER height to accommodate the card moving down */
             background-color: transparent;
             z-index: 0; 
             overflow: hidden;
@@ -71,9 +71,8 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
             width: 95%;
             max-width: 64rem;
-            
-            /* MASSIVELY INCREASED TOP MARGINS */
-            margin: 8rem auto 5rem auto; 
+            /* Margins handled by spacer div now to prevent collapse */
+            margin: 0 auto 5rem auto; 
             padding: 0;
             overflow: hidden;
         }
@@ -82,7 +81,6 @@
         
         @media (min-width: 768px) {
             .card-content { padding: 2.5rem; }
-            .main-card { margin-top: 12rem; } /* Desktop: Approx 190px from top */
         }
 
         /* Coaching/Context Styles (Yellow/Amber Theme) */
@@ -96,8 +94,22 @@
             border-radius: 0 0.5rem 0.5rem 0;
             line-height: 1.6;
         }
-        /* NOTE: We removed the aggressive "display:block" rule here to fix the list formatting */
         
+        /* Headers inside coach note */
+        .coach-note strong { 
+            color: #0063a3; 
+            display: block; 
+            margin-bottom: 0.5rem; 
+            font-size: 1.05rem; 
+        }
+        
+        /* List items inside coach note (INLINE FIX) */
+        .coach-note li strong { 
+            display: inline !important; 
+            margin-bottom: 0; 
+            color: #0063a3;
+        }
+
         /* Typography */
         h1, h2, h3, h4, h5, h6 { color: #252a2e !important; }
         .step-heading { font-size: 1.5rem; font-weight: 800; color: #0063a3; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e5e7eb; }
@@ -199,7 +211,6 @@
         @media print {
             body { background: white; }
             .wave-container, #welcome-screen, #navigation-buttons, .progress-bar-grid, .coach-note { display: none !important; }
-            /* Keep the Note Box visible in print */
             .main-card { box-shadow: none; margin: 0; width: 100%; max-width: 100%; padding: 0; }
             #wizard-container, .step-panel, .hidden { display: block !important; visibility: visible !important; }
             .step-panel { page-break-after: always; margin-bottom: 3rem; }
@@ -210,14 +221,16 @@
 
     <div class="wave-container">
         <svg class="wave-svg" viewBox="0 0 1440 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path fill="#0063a3" fill-opacity="1" d="M0,0 L1440,0 L1440,320 Q720,620 0,320 Z"></path>
+            <path fill="#0063a3" fill-opacity="1" d="M0,0 L1440,0 L1440,350 Q720,600 0,350 Z"></path>
         </svg>
     </div>
+
+    <div class="h-24 md:h-48 w-full bg-transparent relative z-0"></div>
 
     <div class="main-card">
         <div class="card-content">
             
-            <div class="absolute top-2 right-4 text-xs text-gray-300 font-mono select-none">v12.10.32</div>
+            <div class="absolute top-2 right-4 text-xs text-gray-300 font-mono select-none">v12.10.33</div>
 
             <div id="welcome-screen">
                 <div class="text-center space-y-6">
@@ -482,11 +495,10 @@
                         <section>
                             <h2 class="step-heading">Phase 4 : Action Plan</h2>
                             <div class="coach-note">
-                                <div class="font-bold text-primary text-lg mb-2">Your Personal Roadmap:</div>
-                                <p class="mb-4">This plan is for you. Invest time now to define clear, high-impact goals that you can proudly review with your manager throughout the year. Your future success depends on the clarity of your commitment today.</p>
-                                
-                                <div class="font-bold text-primary text-lg mb-2">How to write a winning goal (SMART):</div>
-                                <ul class="list-disc list-inside space-y-1 text-sm">
+                                <strong>Your Personal Roadmap:</strong><br>
+                                This plan is for you. Invest time now to define clear, high-impact goals that you can proudly review with your manager throughout the year. Your future success depends on the clarity of your commitment today.<br><br>
+                                <strong>How to write a winning goal (SMART):</strong>
+                                <ul class="list-disc list-inside mt-2 space-y-1 text-sm">
                                     <li><strong>S</strong>pecific: Be clear about exactly what you will do.</li>
                                     <li><strong>M</strong>easurable: How will you track progress? (Include a number or metric).</li>
                                     <li><strong>A</strong>chievable: Is this realistic given your time and resources?</li>
@@ -772,6 +784,12 @@ Productivity: ${getStringValue('action-productivity')}
 
         prevBtn.classList.toggle('hidden', step === 1);
         
+        // Reset button visibility states
+        nextBtn.classList.add('hidden');
+        submitBtn.classList.add('hidden');
+        printBtn.classList.add('hidden');
+        resetBtn.classList.add('hidden');
+
         if (isFinalStep) {
             submitBtn.classList.remove('hidden'); // "Review Your Plan"
             printBtn.classList.remove('hidden');  // PDF
