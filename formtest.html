@@ -42,13 +42,13 @@
             overflow-x: hidden;
         }
 
-        /* --- New Curve Background (The "Globe" Arc) --- */
+        /* --- Blue Curve Background --- */
         .wave-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 800px; /* TALLER height to accommodate the card moving down */
+            height: 600px;
             background-color: transparent;
             z-index: 0; 
             overflow: hidden;
@@ -72,8 +72,8 @@
             width: 95%;
             max-width: 64rem;
             
-            /* MARGINS to create the "Floating" Effect */
-            margin: 8rem auto 5rem auto; 
+            /* ADJUSTED MARGINS: Higher up the page to avoid scrolling */
+            margin: 2rem auto 5rem auto; 
             padding: 0;
             overflow: hidden;
         }
@@ -82,7 +82,8 @@
         
         @media (min-width: 768px) {
             .card-content { padding: 2.5rem; }
-            .main-card { margin-top: 12rem; } /* Desktop: Push down 12rem (approx 192px) */
+            /* Desktop Margin: Enough to show the blue curve, but high enough to see content */
+            .main-card { margin-top: 5rem; } 
         }
 
         /* Coaching/Context Styles (Yellow/Amber Theme) */
@@ -228,12 +229,10 @@
         </svg>
     </div>
 
-    <div class="h-24 md:h-48 w-full bg-transparent relative z-0"></div>
-
     <div class="main-card">
         <div class="card-content">
             
-            <div class="absolute top-2 right-4 text-xs text-gray-300 font-mono select-none">v12.10.33</div>
+            <div class="absolute top-2 right-4 text-xs text-gray-300 font-mono select-none">v12.10.34</div>
 
             <div id="welcome-screen">
                 <div class="text-center space-y-6">
@@ -787,6 +786,12 @@ Productivity: ${getStringValue('action-productivity')}
 
         prevBtn.classList.toggle('hidden', step === 1);
         
+        // Reset button visibility states
+        nextBtn.classList.add('hidden');
+        submitBtn.classList.add('hidden');
+        printBtn.classList.add('hidden');
+        resetBtn.classList.add('hidden');
+
         if (isFinalStep) {
             submitBtn.classList.remove('hidden'); // "Review Your Plan"
             printBtn.classList.remove('hidden');  // PDF
