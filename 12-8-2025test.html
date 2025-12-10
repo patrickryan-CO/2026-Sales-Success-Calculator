@@ -42,13 +42,14 @@
             overflow-x: hidden;
         }
 
-        /* --- New Curve Background (The "Globe" Arc) --- */
+        /* --- Blue Wave Background --- */
         .wave-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 450px; /* Increased height to accommodate the curve */
+            height: 600px; /* Increased height so the curve goes deeper behind the card */
+            background-color: transparent;
             z-index: 0; 
             overflow: hidden;
         }
@@ -70,15 +71,18 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
             width: 95%;
             max-width: 64rem;
-            margin: 2rem auto 5rem auto;
+            
+            /* INCREASED MARGINS FOR "BREATHING ROOM" */
+            margin: 6rem auto 5rem auto; /* Mobile: Push down 6rem */
             padding: 0;
             overflow: hidden;
         }
         
         .card-content { padding: 1.5rem; position: relative; }
+        
         @media (min-width: 768px) {
             .card-content { padding: 2.5rem; }
-            .main-card { margin-top: 5rem; }
+            .main-card { margin-top: 10rem; } /* Desktop: Push down 10rem */
         }
 
         /* Coaching/Context Styles (Yellow/Amber Theme) */
@@ -94,9 +98,7 @@
         }
         /* Headers inside coach note are block */
         .coach-note strong { color: #0063a3; display: block; margin-bottom: 0.5rem; font-size: 1.05rem; }
-        
         /* FIX: List items inside coach note should stay inline */
-        /* This specifically targets the "S", "M", "A" bold letters to keep them on the same line */
         .coach-note li strong { display: inline; margin-bottom: 0; color: #252a2e; }
 
         /* Typography */
@@ -210,15 +212,15 @@
 <body>
 
     <div class="wave-container">
-        <svg class="wave-svg" viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path fill="#0063a3" fill-opacity="1" d="M0,0 L1440,0 L1440,220 Q720,420 0,220 Z"></path>
+        <svg class="wave-svg" viewBox="0 0 1440 450" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <path fill="#0063a3" fill-opacity="1" d="M0,0 L1440,0 L1440,300 Q720,550 0,300 Z"></path>
         </svg>
     </div>
 
     <div class="main-card">
         <div class="card-content">
             
-            <div class="absolute top-2 right-4 text-xs text-gray-300 font-mono select-none">v12.10.29</div>
+            <div class="absolute top-2 right-4 text-xs text-gray-300 font-mono select-none">v12.10.30</div>
 
             <div id="welcome-screen">
                 <div class="text-center space-y-6">
@@ -400,7 +402,7 @@
                                 <div class="calc-box">
                                     <span class="text-sm font-medium text-gray-700">Required Deals (C)</span>
                                     <span id="dealsToClose2026" class="calc-output">0</span>
-                                    <span class="text-xs text-gray-500 block mt-1">(Quota / 2025 Deal Size)</span>
+                                    <span class="text-xs text-gray-500 block mt-1">(Pipeline / 2025 Deal Size)</span>
                                 </div>
                             </div>
                             
