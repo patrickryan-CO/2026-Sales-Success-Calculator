@@ -42,22 +42,22 @@
             overflow-x: hidden;
         }
 
-        /* --- Blue Wave Background --- */
+        /* --- New Curve Background (The "Globe" Arc) --- */
         .wave-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 350px;
-            background-color: #0063a3; /* Trimble Blue 10 */
+            height: 450px; /* Increased height to accommodate the curve */
             z-index: 0; 
+            overflow: hidden;
         }
         .wave-svg {
             position: absolute;
-            bottom: -1px;
+            top: 0;
             left: 0;
             width: 100%;
-            height: auto;
+            height: 100%;
             display: block;
         }
 
@@ -94,7 +94,9 @@
         }
         /* Headers inside coach note are block */
         .coach-note strong { color: #0063a3; display: block; margin-bottom: 0.5rem; font-size: 1.05rem; }
+        
         /* FIX: List items inside coach note should stay inline */
+        /* This specifically targets the "S", "M", "A" bold letters to keep them on the same line */
         .coach-note li strong { display: inline; margin-bottom: 0; color: #252a2e; }
 
         /* Typography */
@@ -209,14 +211,14 @@
 
     <div class="wave-container">
         <svg class="wave-svg" viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path fill="#f3f4f6" fill-opacity="1" d="M0,160L48,176C96,192,192,224,288,218.7C384,213,480,171,576,149.3C672,128,768,128,864,149.3C960,171,1056,213,1152,218.7C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            <path fill="#0063a3" fill-opacity="1" d="M0,0 L1440,0 L1440,220 Q720,420 0,220 Z"></path>
         </svg>
     </div>
 
     <div class="main-card">
         <div class="card-content">
             
-            <div class="absolute top-2 right-4 text-xs text-gray-300 font-mono select-none">v12.10.28</div>
+            <div class="absolute top-2 right-4 text-xs text-gray-300 font-mono select-none">v12.10.29</div>
 
             <div id="welcome-screen">
                 <div class="text-center space-y-6">
