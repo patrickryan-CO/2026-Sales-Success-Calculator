@@ -48,7 +48,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 550px; /* Reduced height to fit better */
+            height: 600px;
             background-color: transparent;
             z-index: 0; 
             overflow: hidden;
@@ -72,7 +72,7 @@
             width: 95%;
             max-width: 64rem;
             
-            /* OPTIMIZED MARGINS: Higher up the page */
+            /* TIGHTER MARGINS: Moves card UP to show Start button */
             margin: 2rem auto 5rem auto; 
             padding: 0;
             overflow: hidden;
@@ -82,8 +82,8 @@
         
         @media (min-width: 768px) {
             .card-content { padding: 2.5rem; }
-            /* Desktop: Overlaps the blue curve nicely without pushing content off screen */
-            .main-card { margin-top: 6rem; } 
+            /* Desktop: Just enough top margin to show the blue header, but keeps content high */
+            .main-card { margin-top: 5rem; } 
         }
 
         /* Coaching/Context Styles (Yellow/Amber Theme) */
@@ -214,7 +214,6 @@
         @media print {
             body { background: white; }
             .wave-container, #welcome-screen, #navigation-buttons, .progress-bar-grid, .coach-note { display: none !important; }
-            /* Keep the Note Box visible in print */
             .main-card { box-shadow: none; margin: 0; width: 100%; max-width: 100%; padding: 0; }
             #wizard-container, .step-panel, .hidden { display: block !important; visibility: visible !important; }
             .step-panel { page-break-after: always; margin-bottom: 3rem; }
@@ -225,14 +224,14 @@
 
     <div class="wave-container">
         <svg class="wave-svg" viewBox="0 0 1440 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path fill="#0063a3" fill-opacity="1" d="M0,0 L1440,0 L1440,320 Q720,550 0,320 Z"></path>
+            <path fill="#0063a3" fill-opacity="1" d="M0,0 L1440,0 L1440,350 Q720,600 0,350 Z"></path>
         </svg>
     </div>
 
     <div class="main-card">
         <div class="card-content">
             
-            <div class="absolute top-2 right-4 text-xs text-gray-300 font-mono select-none">v12.10.35</div>
+            <div class="absolute top-2 right-4 text-xs text-gray-300 font-mono select-none">v12.10.36</div>
 
             <div id="welcome-screen">
                 <div class="text-center space-y-6">
@@ -557,10 +556,12 @@
                         <section>
                             <h2 class="step-heading">Phase 5 : Review & Submit</h2>
                             <div class="coach-note">
-                                <strong>Final Steps:</strong><br>
-                                1. Review your plan summary below.<br>
-                                2. Click <strong>"Save as PDF"</strong> to keep a copy for yourself.<br>
-                                3. Click <strong>"Review Your Plan"</strong> to submit your commitment to your manager.
+                                <strong>Final Steps:</strong>
+                                <ol class="list-decimal list-inside mt-3 space-y-2 text-sm">
+                                    <li>Review your plan summary below.</li>
+                                    <li>Click <strong>"Save as PDF"</strong> to keep a copy for yourself.</li>
+                                    <li>Click <strong>"Review Your Plan"</strong> to submit your commitment to your manager.</li>
+                                </ol>
                             </div>
                             
                             <div id="commitmentSummaryOutput" class="bg-gray-100 p-6 rounded-lg text-sm text-primary-text whitespace-pre-wrap border border-gray-300 font-mono mb-6">
@@ -807,7 +808,7 @@ Productivity: ${getStringValue('action-productivity')}
             resetBtn.classList.add('hidden');
         }
         
-        // Scroll to TOP of the PAGE to ensure the user sees the blue header and progress bar
+        // FORCE SCROLL TO TOP ON STEP CHANGE
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
