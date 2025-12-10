@@ -11,16 +11,16 @@
             theme: {
                 extend: {
                     colors: {
-                        'primary': '#0063a3',       // Trimble Blue
+                        'primary': '#0063a3',       // Trimble Blue 10
                         'primary-hover': '#004a7c', 
-                        'accent': '#fbad26',        // Trimble Amber
-                        'primary-text': '#252a2e',  // Dark Gray
+                        'accent': '#fbad26',        // Trimble Gold 10
+                        'primary-text': '#252a2e',  // Trimble Dark Gray 10
                         'icon-people': '#6f42c1',    
                         'icon-pipeline': '#007bff',
                         'icon-prod': '#fd7e14',      
                     },
                     fontFamily: {
-                        'sans': ['Open Sans', 'sans-serif']
+                        'sans': ['Open Sans', 'sans-serif'] // Brand Font
                     }
                 }
             }
@@ -35,8 +35,8 @@
         /* Global Styles */
         body {
             font-family: 'Open Sans', sans-serif;
-            color: #252a2e;
-            background-color: #f3f4f6;
+            color: #252a2e; /* Trimble Dark Gray 10 */
+            background-color: #F1F1F6; /* Trimble Gray -1 (Canvas) */
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
@@ -49,7 +49,7 @@
             left: 0;
             width: 100%;
             height: 350px;
-            background-color: #0063a3;
+            background-color: #0063a3; /* Trimble Blue 10 */
             z-index: 0; 
         }
         .wave-svg {
@@ -84,15 +84,18 @@
         /* Coaching/Context Styles (Yellow/Amber Theme) */
         .coach-note {
             font-size: 0.95rem;
-            color: #1f2937; /* gray-800 */
+            color: #252a2e; /* Trimble Dark Gray 10 */
             background-color: #fffbeb; /* amber-50 */
-            border-left: 4px solid #fbad26; /* Trimble Accent */
+            border-left: 4px solid #fbad26; /* Trimble Gold 10 */
             padding: 1.5rem;
             margin-bottom: 2rem;
             border-radius: 0 0.5rem 0.5rem 0;
             line-height: 1.6;
         }
+        /* Headers inside coach note are block */
         .coach-note strong { color: #0063a3; display: block; margin-bottom: 0.5rem; font-size: 1.05rem; }
+        /* FIX: List items inside coach note should stay inline */
+        .coach-note li strong { display: inline; margin-bottom: 0; color: #252a2e; }
 
         /* Typography */
         h1, h2, h3, h4, h5, h6 { color: #252a2e !important; }
@@ -213,14 +216,14 @@
     <div class="main-card">
         <div class="card-content">
             
-            <div class="absolute top-2 right-4 text-xs text-gray-300 font-mono select-none">v12.10.25</div>
+            <div class="absolute top-2 right-4 text-xs text-gray-300 font-mono select-none">v12.10.28</div>
 
             <div id="welcome-screen">
                 <div class="text-center space-y-6">
                     
                     <div class="space-y-2">
                         <h1 class="text-3xl md:text-4xl font-extrabold text-primary-text">Trimble 2026 Success Plan</h1>
-                        <p class="text-lg md:text-xl font-medium text-gray-500">Own Your Number. Build Your Path.</p>
+                        <p class="text-lg md:text-xl font-medium text-gray-500">Build Your Path.</p>
                     </div>
 
                     <div class="bg-white border border-gray-200 rounded-lg shadow-sm text-left overflow-hidden">
@@ -395,7 +398,7 @@
                                 <div class="calc-box">
                                     <span class="text-sm font-medium text-gray-700">Required Deals (C)</span>
                                     <span id="dealsToClose2026" class="calc-output">0</span>
-                                    <span class="text-xs text-gray-500 block mt-1">(Pipeline / 2025 Deal Size)</span>
+                                    <span class="text-xs text-gray-500 block mt-1">(Quota / 2025 Deal Size)</span>
                                 </div>
                             </div>
                             
@@ -640,23 +643,21 @@
         if($('dealsToClose2026')) $('dealsToClose2026').textContent = formatNumber(dealsToWin2026);
 
         // Phase 3
-        const newWinRate = winRate2025 + winRateImprovement;
+        const newWinRate = winRate2025 + parseFloat(winRateImprovement); // Ensure float addition
         const newPipelineNeeded = (newWinRate/100) > 0 ? quota2026 / (newWinRate/100) : 0;
-        if($('winRateImprovementLabel')) $('winRateImprovementLabel').textContent = `${winRateImprovement.toFixed(1)}%`;
+        
+        if($('winRateImprovementLabel')) $('winRateImprovementLabel').textContent = `${parseFloat(winRateImprovement).toFixed(1)}%`;
         if($('newPipelineNeeded')) $('newPipelineNeeded').textContent = formatCurrency(newPipelineNeeded);
 
         const newAvgDealSize = avgDealSize2025 * (1 + (dealSizeImprovement / 100));
         const newDealsNeeded = newAvgDealSize > 0 ? quota2026 / newAvgDealSize : 0;
-        if($('dealSizeImprovementLabel')) $('dealSizeImprovementLabel').textContent = `${dealSizeImprovement.toFixed(0)}%`;
+        if($('dealSizeImprovementLabel')) $('dealSizeImprovementLabel').textContent = `${parseFloat(dealSizeImprovement).toFixed(0)}%`;
         if($('newDealsNeeded')) $('newDealsNeeded').textContent = formatNumber(newDealsNeeded);
         
         if($('meetingImprovementLabel')) $('meetingImprovementLabel').textContent = meetingImprovement;
         
         const pipeMtg = (meetingsImpliedWinRate/100) > 0 ? quota2026 / (meetingsImpliedWinRate/100) : 0;
         if($('meetingsPipelineNeeded')) $('meetingsPipelineNeeded').textContent = formatCurrency(pipeMtg);
-
-        // IMPORTANT: We moved the summary generation logic to the showStep function
-        // to prevent it from running during input events on text areas.
     }
     
     // Separate function to generate summary safely without crashing calc logic
