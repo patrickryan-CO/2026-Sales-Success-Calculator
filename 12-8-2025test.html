@@ -42,13 +42,13 @@
             overflow-x: hidden;
         }
 
-        /* --- Blue Wave Background --- */
+        /* --- New Curve Background (The "Globe" Arc) --- */
         .wave-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 600px; /* Increased height so the curve goes deeper behind the card */
+            height: 600px; /* Tall height to allow deep curve */
             background-color: transparent;
             z-index: 0; 
             overflow: hidden;
@@ -72,8 +72,8 @@
             width: 95%;
             max-width: 64rem;
             
-            /* INCREASED MARGINS FOR "BREATHING ROOM" */
-            margin: 6rem auto 5rem auto; /* Mobile: Push down 6rem */
+            /* Spacing to let the blue curve show */
+            margin: 6rem auto 5rem auto; 
             padding: 0;
             overflow: hidden;
         }
@@ -82,7 +82,7 @@
         
         @media (min-width: 768px) {
             .card-content { padding: 2.5rem; }
-            .main-card { margin-top: 10rem; } /* Desktop: Push down 10rem */
+            .main-card { margin-top: 8rem; } 
         }
 
         /* Coaching/Context Styles (Yellow/Amber Theme) */
@@ -96,10 +96,21 @@
             border-radius: 0 0.5rem 0.5rem 0;
             line-height: 1.6;
         }
+        
         /* Headers inside coach note are block */
-        .coach-note strong { color: #0063a3; display: block; margin-bottom: 0.5rem; font-size: 1.05rem; }
-        /* FIX: List items inside coach note should stay inline */
-        .coach-note li strong { display: inline; margin-bottom: 0; color: #252a2e; }
+        .coach-note strong { 
+            color: #0063a3; 
+            display: block; 
+            margin-bottom: 0.5rem; 
+            font-size: 1.05rem; 
+        }
+        
+        /* --- FIX: List items inside coach note must be INLINE to prevent breaking --- */
+        .coach-note li strong { 
+            display: inline !important; 
+            margin-bottom: 0; 
+            color: #0063a3;
+        }
 
         /* Typography */
         h1, h2, h3, h4, h5, h6 { color: #252a2e !important; }
@@ -212,15 +223,15 @@
 <body>
 
     <div class="wave-container">
-        <svg class="wave-svg" viewBox="0 0 1440 450" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path fill="#0063a3" fill-opacity="1" d="M0,0 L1440,0 L1440,300 Q720,550 0,300 Z"></path>
+        <svg class="wave-svg" viewBox="0 0 1440 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <path fill="#0063a3" fill-opacity="1" d="M0,0 L1440,0 L1440,350 Q720,600 0,350 Z"></path>
         </svg>
     </div>
 
     <div class="main-card">
         <div class="card-content">
             
-            <div class="absolute top-2 right-4 text-xs text-gray-300 font-mono select-none">v12.10.30</div>
+            <div class="absolute top-2 right-4 text-xs text-gray-300 font-mono select-none">v12.10.31</div>
 
             <div id="welcome-screen">
                 <div class="text-center space-y-6">
@@ -402,7 +413,7 @@
                                 <div class="calc-box">
                                     <span class="text-sm font-medium text-gray-700">Required Deals (C)</span>
                                     <span id="dealsToClose2026" class="calc-output">0</span>
-                                    <span class="text-xs text-gray-500 block mt-1">(Pipeline / 2025 Deal Size)</span>
+                                    <span class="text-xs text-gray-500 block mt-1">(Quota / 2025 Deal Size)</span>
                                 </div>
                             </div>
                             
