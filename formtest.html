@@ -48,7 +48,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 600px;
+            height: 550px; /* Reduced height to fit better */
             background-color: transparent;
             z-index: 0; 
             overflow: hidden;
@@ -72,7 +72,7 @@
             width: 95%;
             max-width: 64rem;
             
-            /* ADJUSTED MARGINS: Higher up the page to avoid scrolling */
+            /* OPTIMIZED MARGINS: Higher up the page */
             margin: 2rem auto 5rem auto; 
             padding: 0;
             overflow: hidden;
@@ -82,8 +82,8 @@
         
         @media (min-width: 768px) {
             .card-content { padding: 2.5rem; }
-            /* Desktop Margin: Enough to show the blue curve, but high enough to see content */
-            .main-card { margin-top: 5rem; } 
+            /* Desktop: Overlaps the blue curve nicely without pushing content off screen */
+            .main-card { margin-top: 6rem; } 
         }
 
         /* Coaching/Context Styles (Yellow/Amber Theme) */
@@ -225,14 +225,14 @@
 
     <div class="wave-container">
         <svg class="wave-svg" viewBox="0 0 1440 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path fill="#0063a3" fill-opacity="1" d="M0,0 L1440,0 L1440,350 Q720,600 0,350 Z"></path>
+            <path fill="#0063a3" fill-opacity="1" d="M0,0 L1440,0 L1440,320 Q720,550 0,320 Z"></path>
         </svg>
     </div>
 
     <div class="main-card">
         <div class="card-content">
             
-            <div class="absolute top-2 right-4 text-xs text-gray-300 font-mono select-none">v12.10.34</div>
+            <div class="absolute top-2 right-4 text-xs text-gray-300 font-mono select-none">v12.10.35</div>
 
             <div id="welcome-screen">
                 <div class="text-center space-y-6">
@@ -444,7 +444,7 @@
                             <h2 class="step-heading">Phase 3 : The Solution</h2>
                             <div class="coach-note">
                                 <strong>The Aha Moment:</strong><br>
-                                Use the sliders to model efficiency gains. See how improving Win Rate or Deal Size makes your required pipeline <strong>manageable</strong>. Small improvements here compound to massively reduce the pressure to generate new pipeline.<br><br>
+                                Use the sliders to model efficiency gains. See how improving Win Rate or Deal Size makes your required pipeline manageable. Small improvements here compound to massively reduce the pressure to generate new pipeline.<br><br>
                                 <strong>NOTE:</strong> If you entered "0" in Phase 1, you can skip this section. Click Next.
                             </div>
 
@@ -807,9 +807,8 @@ Productivity: ${getStringValue('action-productivity')}
             resetBtn.classList.add('hidden');
         }
         
-        // Scroll to heading of new step
-        const heading = $(`step-${step}-content`).querySelector('.step-heading');
-        if (heading) heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Scroll to TOP of the PAGE to ensure the user sees the blue header and progress bar
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     document.addEventListener('DOMContentLoaded', () => {
