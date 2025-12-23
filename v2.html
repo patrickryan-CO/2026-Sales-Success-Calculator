@@ -11,9 +11,9 @@
             theme: {
                 extend: {
                     colors: {
-                        'primary': '#0063a3',
-                        'accent': '#fbad26',
-                        'primary-text': '#252a2e'
+                        'primary': '#0063a3',       // Trimble Blue 10
+                        'accent': '#fbad26',        // Trimble Gold 10
+                        'primary-text': '#252a2e'   // Trimble Dark Gray 10
                     }
                 }
             }
@@ -22,7 +22,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.gstatic.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         body { font-family: 'Open Sans', sans-serif; color: #252a2e; background-color: #F1F1F6; min-height: 100vh; position: relative; overflow-x: hidden; }
@@ -36,7 +36,22 @@
         h1, h2, h3, h4, h5, h6 { color: #252a2e !important; font-weight: 800 !important; }
         .step-heading { font-size: 1.5rem; font-weight: 800; color: #252a2e !important; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e5e7eb; }
 
-        /* Navigation Visibility Control - Verified Fix */
+        /* TOOLTIPS */
+        .tooltip-trigger {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 1.1rem; height: 1.1rem; margin-left: 0.5rem;
+            background-color: #9CA3AF; color: white; border-radius: 50%;
+            cursor: help; font-size: 0.7rem; position: relative; font-weight: bold;
+        }
+        .tooltip-trigger::after {
+            content: attr(data-tooltip); position: absolute; bottom: 140%; left: 50%;
+            transform: translateX(-50%); background-color: #252a2e; color: white;
+            padding: 0.5rem 0.75rem; border-radius: 0.25rem; width: 220px;
+            opacity: 0; visibility: hidden; transition: all 0.2s; z-index: 50; font-size: 0.75rem; font-weight: normal;
+        }
+        .tooltip-trigger:hover::after { opacity: 1; visibility: visible; }
+
+        /* Visibility Control Overrides */
         .section-hidden { display: none !important; }
         .section-visible { display: block !important; }
 
@@ -87,11 +102,11 @@
                             </div>
                             <div class="flex items-start">
                                 <div class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-primary text-white font-bold text-sm">2</div>
-                                <p class="ml-4 text-gray-700"><strong>Don't have a Scorecard?</strong> If you are new or in a non-quota role, simply enter '0' for the baseline numbers to jump to your Action Plan.</p>
+                                <p class="ml-4 text-gray-700"><strong>Don't have a Scorecard?</strong> If you are new or in a non-quota role, enter '0' for baseline numbers to jump straight to Action Plan.</p>
                             </div>
                             <div class="flex items-start">
                                 <div class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-primary text-white font-bold text-sm">3</div>
-                                <p class="ml-4 text-gray-700"><strong>Build your plan.</strong> You will use this tool to calculate your gap, model efficiency gains, and define your personal goals for the year.</p>
+                                <p class="ml-4 text-gray-700"><strong>Build your plan.</strong> Calculate your gap and define your goals for the year.</p>
                             </div>
                         </div>
                     </div>
@@ -127,11 +142,19 @@
                 <form onsubmit="return false;">
                     <div id="step-1-content" class="step-panel section-visible">
                         <h2 class="step-heading">Phase 1 : Baseline</h2>
-                        <div class="coach-note"><strong>PLEASE READ:</strong><p>Enter your 2025 actuals. If you are new or support a non-quota mission, enter '0' to proceed directly to Phase 4.</p></div>
+                        <div class="coach-note"><strong>PLEASE READ:</strong><p>Enter your 2025 actuals. If you are new or support a non-quota mission, enter '0' to proceed to Phase 4.</p></div>
+                        
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div><label class="input-label">My Name:</label><input type="text" id="personName" class="input-field" placeholder="Jane Doe"></div>
+                            <div>
+                                <label class="input-label">My Name: <span class="tooltip-trigger" data-tooltip="Please enter your full name.">?</span></label>
+                                <input type="text" id="personName" class="input-field" placeholder="Jane Doe">
+                            </div>
+                            <div>
+                                <label class="input-label">My Manager: <span class="tooltip-trigger" data-tooltip="Enter your direct manager's name.">?</span></label>
+                                <input type="text" id="managerName" class="input-field" placeholder="John Smith">
+                            </div>
                             <div class="md:col-span-2">
-                                <label class="input-label">My Region:</label>
+                                <label class="input-label">My Region: <span class="tooltip-trigger" data-tooltip="Select your assigned region.">?</span></label>
                                 <select id="region" class="input-field">
                                     <option value="" disabled selected>Select your region</option>
                                     <option value="Americas - Customer">Americas - Customer</option>
@@ -141,10 +164,26 @@
                                     <option value="O&PS">O&PS</option>
                                 </select>
                             </div>
-                            <div><label class="input-label">2025 Quota ($):</label><input type="text" id="quota2025" class="input-field" value="0"></div>
-                            <div><label class="input-label">2025 Comped Bookings ($):</label><input type="text" id="bookings2025" class="input-field" value="0"></div>
-                            <div><label class="input-label">2025 ACV Based Win Rate (%):</label><input type="number" id="winRate2025" class="input-field" value="0"></div>
-                            <div class="calc-box"><span class="text-sm font-medium">2025 Attainment</span><span id="attainment2025" class="calc-output">0%</span></div>
+                            <div>
+                                <label class="input-label">2025 Quota ($): <span class="tooltip-trigger" data-tooltip="Your total annual quota for 2025.">?</span></label>
+                                <input type="text" id="q25" class="input-field" value="0">
+                            </div>
+                            <div>
+                                <label class="input-label">2025 Comped Bookings ($): <span class="tooltip-trigger" data-tooltip="Your total closed-won revenue in 2025.">?</span></label>
+                                <input type="text" id="b25" class="input-field" value="0">
+                            </div>
+                            <div>
+                                <label class="input-label">2025 ACV Based Win Rate (%): <span class="tooltip-trigger" data-tooltip="Won Deals / (Won + Lost Deals) based on ACV.">?</span></label>
+                                <input type="number" id="wr25" class="input-field" value="0">
+                            </div>
+                            <div>
+                                <label class="input-label">2025 Avg. Deal Size ($): <span class="tooltip-trigger" data-tooltip="Total Revenue / Total Closed-Won Deals.">?</span></label>
+                                <input type="text" id="ds25" class="input-field" value="0">
+                            </div>
+                            <div class="calc-box">
+                                <span class="text-sm font-medium">2025 Attainment</span>
+                                <span id="attainment2025" class="calc-output">0%</span>
+                            </div>
                         </div>
                     </div>
 
@@ -174,7 +213,7 @@
 
     let currentStep = 1;
 
-    // START ACTION - Force bypass Tailwind !important
+    // START ACTION - Force toggle to reveal wizard
     startBtn.onclick = function() {
         welcome.classList.replace('section-visible', 'section-hidden');
         wizard.classList.replace('section-hidden', 'section-visible');
@@ -182,8 +221,8 @@
     };
 
     function calculate() {
-        const q25 = parseFloat(document.getElementById('quota2025').value.replace(/[$,]/g, '')) || 0;
-        const b25 = parseFloat(document.getElementById('bookings2025').value.replace(/[$,]/g, '')) || 0;
+        const q25 = parseFloat(document.getElementById('q25').value.replace(/[$,]/g, '')) || 0;
+        const b25 = parseFloat(document.getElementById('b25').value.replace(/[$,]/g, '')) || 0;
         document.getElementById('attainment2025').textContent = q25 > 0 ? ((b25/q25)*100).toFixed(1) + '%' : '0%';
     }
 
