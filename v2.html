@@ -15,9 +15,6 @@
                         'primary-hover': '#004a7c', 
                         'accent': '#fbad26',        // Trimble Gold 10
                         'primary-text': '#252a2e',  // Trimble Dark Gray 10
-                        'icon-people': '#6f42c1',    
-                        'icon-pipeline': '#007bff',
-                        'icon-prod': '#fd7e14',      
                     },
                     fontFamily: {
                         'sans': ['Open Sans', 'sans-serif']
@@ -39,36 +36,31 @@
         .card-content { padding: 1.5rem; position: relative; }
         @media (min-width: 768px) { .card-content { padding: 2.5rem; } .main-card { margin-top: 5rem; } }
 
+        /* BRANDING: ALL HEADINGS BLACK */
+        h1, h2, h3, h4, h5, h6 { color: #252a2e !important; font-weight: 800 !important; }
+        .step-heading { font-size: 1.5rem; font-weight: 800; color: #252a2e !important; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e5e7eb; }
+
         .coach-note { font-size: 0.95rem; color: #252a2e; background-color: #fffbeb; border-left: 4px solid #fbad26; padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 0.5rem 0.5rem 0; line-height: 1.6; }
-        .coach-note strong { color: #0063a3; display: block; margin-bottom: 0.5rem; font-size: 1.05rem; }
+        .coach-note strong { color: #252a2e !important; display: block; margin-bottom: 0.5rem; font-size: 1.05rem; }
 
-        .tooltip-trigger { display: inline-flex; align-items: center; justify-content: center; width: 1.1rem; height: 1.1rem; margin-left: 0.5rem; background-color: #9CA3AF; color: white; border-radius: 50%; cursor: help; font-size: 0.7rem; position: relative; font-weight: bold; }
-        .tooltip-trigger::after { content: attr(data-tooltip); position: absolute; bottom: 140%; left: 50%; transform: translateX(-50%); background-color: #252a2e; color: white; padding: 0.5rem 0.75rem; border-radius: 0.25rem; width: 220px; opacity: 0; visibility: hidden; transition: all 0.2s; z-index: 50; font-size: 0.75rem; line-height: 1.4; }
-        .tooltip-trigger:hover::after { opacity: 1; visibility: visible; }
-
-        .step-heading { font-size: 1.5rem; font-weight: 800; color: #0063a3; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e5e7eb; }
         .input-label { display: flex; align-items: center; font-size: 0.9rem; font-weight: 700; color: #252a2e; margin-bottom: 0.375rem; }
-        .input-field { display: block; width: 100%; border-radius: 0.375rem; border: 1px solid #D1D5DB; padding: 0.75rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); color: #252a2e; transition: all 0.2s; font-size: 1rem; }
-        
-        .btn { display: inline-block; font-weight: 700; text-align: center; padding: 0.75rem 1.5rem; border-radius: 0.375rem; transition: all 0.15s ease-in-out; cursor: pointer; }
+        .input-field { display: block; width: 100%; border-radius: 0.375rem; border: 1px solid #D1D5DB; padding: 0.75rem; color: #252a2e; font-size: 1rem; }
+
+        .btn { display: inline-block; font-weight: 700; text-align: center; padding: 0.75rem 1.5rem; border-radius: 0.375rem; transition: all 0.15s ease-in-out; cursor: pointer; border: none; }
         .btn-primary { background-color: #0063a3; color: white; }
         .btn-accent { background-color: #fbad26; color: #252a2e; }
-        .btn-secondary { background-color: white; color: #B91C1C; border-color: #D1D5DB; }
+        .btn-secondary { background-color: white; color: #B91C1C; border: 1px solid #D1D5DB; }
         .btn-default { background-color: #E5E7EB; color: #252a2e; }
 
         .progress-bar-grid { display: grid; grid-template-columns: repeat(5, 1fr); border-bottom: 2px solid #E5E7EB; margin-bottom: 2rem; }
-        .progress-step { padding: 0.75rem 0.25rem; text-align: center; font-size: 0.75rem; font-weight: 600; color: #9CA3AF; border-bottom: 4px solid transparent; }
+        .progress-step { padding: 0.75rem 0.25rem; text-align: center; font-size: 0.7rem; font-weight: 600; color: #9CA3AF; border-bottom: 4px solid transparent; }
         .progress-step-active { color: #0063a3; border-bottom-color: #0063a3; }
 
         .calc-box { background-color: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 0.5rem; padding: 1rem; text-align: center; }
         .calc-output { display: block; font-size: 1.5rem; font-weight: 800; color: #0063a3; margin-top: 0.25rem; }
+        
+        /* The specific fix for Tailwind specificity */
         .hidden { display: none !important; }
-
-        @media print {
-            .wave-container, #welcome-screen, #navigation-buttons, .progress-bar-grid, .coach-note { display: none !important; }
-            .main-card { box-shadow: none; margin: 0; width: 100%; max-width: 100%; padding: 0; }
-            #wizard-container, .step-panel, .hidden { display: block !important; visibility: visible !important; }
-        }
     </style>
 </head>
 <body>
@@ -85,16 +77,14 @@
             <div id="welcome-screen">
                 <div class="text-center space-y-6">
                     <div class="space-y-2">
-                        <h1 class="text-3xl md:text-4xl font-extrabold text-primary-text">Trimble 2026 Success Plan</h1>
+                        <h1 class="text-3xl md:text-4xl">Trimble 2026 Success Plan</h1>
                         <p class="text-lg md:text-xl font-medium text-gray-500">Build Your Path.</p>
                     </div>
 
-                    <div class="bg-white border border-gray-200 rounded-lg shadow-sm text-left overflow-hidden">
-                        <div class="bg-blue-50 px-6 py-4 border-b border-blue-100">
-                            <h3 class="text-primary font-bold text-lg">Your Blueprint for Success</h3>
-                        </div>
+                    <div class="bg-white border border-gray-200 rounded-lg shadow-sm text-left overflow-hidden max-w-4xl mx-auto">
+                        <div class="bg-blue-50 px-6 py-4 border-b border-blue-100"><h3 class="font-bold text-lg">Your Blueprint for Success</h3></div>
                         <div class="px-6 pt-6 pb-2">
-                            <p class="text-gray-700 leading-relaxed">Welcome to your 2026 planning session. This tool is your guide to building a personal roadmap for the year ahead. Whether you carry a quota or support the wider mission, this plan belongs to you.</p>
+                            <p class="text-gray-700 leading-relaxed">Welcome to your 2026 planning session. This tool is your guide to building a personal roadmap for the year ahead. It creates the clarity you need to define your goals and build a predictable path to success.</p>
                         </div>
                         <div class="p-6 space-y-4">
                             <div class="flex items-start">
@@ -107,45 +97,27 @@
                             </div>
                             <div class="flex items-start">
                                 <div class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-primary text-white font-bold text-sm">3</div>
-                                <p class="ml-4 text-gray-700"><strong>Build your plan.</strong> You will use this tool to calculate your gap, model efficiency gains, and define your personal goals.</p>
+                                <p class="ml-4 text-gray-700"><strong>Build your plan.</strong> You will use this tool to calculate your gap, model efficiency gains, and define your personal goals for the year.</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-                        <div class="p-6 border border-gray-200 rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow">
-                            <div class="text-icon-people mb-4">
-                                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                            </div>
-                            <h3 class="text-xl font-bold text-primary-text mb-2">People</h3>
-                            <ul class="text-sm text-gray-600 list-disc list-inside space-y-2">
-                                <li>Identify skill gaps</li>
-                                <li>Commit to coaching</li>
-                            </ul>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left max-w-4xl mx-auto">
+                        <div class="p-6 border border-gray-200 rounded-lg bg-white shadow-sm hover:shadow-md">
+                            <h3 class="text-xl font-bold mb-2">People</h3>
+                            <ul class="text-sm text-gray-600 list-disc list-inside space-y-2"><li>Identify skill gaps</li><li>Commit to coaching</li></ul>
                         </div>
-                        <div class="p-6 border border-gray-200 rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow">
-                            <div class="text-icon-pipeline mb-4">
-                                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                            </div>
-                            <h3 class="text-xl font-bold text-primary-text mb-2">Pipeline</h3>
-                            <ul class="text-sm text-gray-600 list-disc list-inside space-y-2">
-                                <li>Calculate gaps</li>
-                                <li>Define strategy</li>
-                            </ul>
+                        <div class="p-6 border border-gray-200 rounded-lg bg-white shadow-sm hover:shadow-md">
+                            <h3 class="text-xl font-bold mb-2">Pipeline</h3>
+                            <ul class="text-sm text-gray-600 list-disc list-inside space-y-2"><li>Calculate gaps</li><li>Define strategy</li></ul>
                         </div>
-                        <div class="p-6 border border-gray-200 rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow">
-                            <div class="text-icon-prod mb-4">
-                                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                            </div>
-                            <h3 class="text-xl font-bold text-primary-text mb-2">Productivity</h3>
-                            <ul class="text-sm text-gray-600 list-disc list-inside space-y-2">
-                                <li>Audit calendar</li>
-                                <li>Protect selling time</li>
-                            </ul>
+                        <div class="p-6 border border-gray-200 rounded-lg bg-white shadow-sm hover:shadow-md">
+                            <h3 class="text-xl font-bold mb-2">Productivity</h3>
+                            <ul class="text-sm text-gray-600 list-disc list-inside space-y-2"><li>Audit calendar</li><li>Protect selling time</li></ul>
                         </div>
                     </div>
 
-                    <button type="button" id="startBtn" class="btn btn-primary text-lg px-10 py-4 shadow-lg">Start My Plan</button>
+                    <button type="button" id="startBtn" class="btn btn-primary text-lg px-10 py-4 shadow-lg w-full md:w-auto">Start My Plan</button>
                 </div>
             </div>
 
@@ -162,10 +134,8 @@
                     
                     <div id="step-1-content" class="step-panel">
                         <h2 class="step-heading">Phase 1 : Baseline</h2>
-                        <div class="coach-note"><strong>PLEASE READ:</strong><p>Enter your 2025 actuals. If you are new or in a non-quota role, enter "0" to proceed directly to Phase 4.</p></div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div><label class="input-label">My Name: <span class="tooltip-trigger" data-tooltip="Please enter your full name.">?</span></label><input type="text" id="personName" class="input-field"></div>
-                            <div><label class="input-label">My Manager: <span class="tooltip-trigger" data-tooltip="Enter manager name.">?</span></label><input type="text" id="managerName" class="input-field"></div>
+                            <div><label class="input-label">My Name:</label><input type="text" id="personName" class="input-field"></div>
                             <div class="md:col-span-2">
                                 <label class="input-label">My Region:</label>
                                 <select id="region" class="input-field">
@@ -179,81 +149,17 @@
                             </div>
                             <div><label class="input-label">2025 Quota ($):</label><input type="text" id="quota2025" class="input-field" value="0"></div>
                             <div><label class="input-label">2025 Bookings ($):</label><input type="text" id="bookings2025" class="input-field" value="0"></div>
-                            <div><label class="input-label">2025 Win Rate (%):</label><input type="number" id="winRate2025" class="input-field" value="0"></div>
-                            <div><label class="input-label">2025 Avg. Deal Size ($):</label><input type="text" id="avgDealSize2025" class="input-field" value="0"></div>
-                            <div class="calc-box"><span class="text-sm font-medium">2025 Attainment</span><span id="attainment2025" class="calc-output">0%</span></div>
                         </div>
                     </div>
 
                     <div id="step-2-content" class="step-panel hidden">
                         <h2 class="step-heading">Phase 2 : The Gap</h2>
-                        <div class="coach-note"><strong>What does this mean?</strong><p>Calculates pipeline needed based on your 2025 performance.</p></div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div><label class="input-label text-lg">2026 Quota ($):</label><input type="text" id="quota2026" class="input-field"></div>
-                            <div class="calc-box"><span class="text-sm font-medium">Required Pipeline</span><span id="pipelineToClose2026" class="calc-output">$0</span></div>
-                            <div class="calc-box"><span class="text-sm font-medium">Required Deals</span><span id="dealsToClose2026" class="calc-output">0</span></div>
-                        </div>
-                        <div class="mt-8">
-                            <label class="input-label">How does this gap feel?</label>
-                            <div class="flex gap-4 mt-2">
-                                <label class="flex items-center gap-2"><input type="radio" name="reflection" value="Achievable"> Achievable</label>
-                                <label class="flex items-center gap-2"><input type="radio" name="reflection" value="Challenging"> Challenging</label>
-                                <label class="flex items-center gap-2"><input type="radio" name="reflection" value="Impossible"> Impossible</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="step-3-content" class="step-panel hidden">
-                        <h2 class="step-heading">Phase 3 : The Solution</h2>
-                        <div class="space-y-8">
-                            <div class="bg-white border p-6 rounded-lg shadow-sm">
-                                <h3 class="text-lg font-bold text-primary mb-2">Lever 1: Meetings</h3>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Increase Quarterly Meetings by: <span id="meetingImprovementLabel" class="text-primary">5</span></label>
-                                <input type="range" id="meetingImprovement" min="0" max="20" value="5" step="1" class="w-full">
-                                <div class="mt-6 pt-4 border-t">
-                                    <label class="input-label text-sm text-primary mb-2">Target Win Rate (Driven by Activity) %:</label>
-                                    <input type="number" id="meetingsImpliedWinRate" class="input-field" placeholder="e.g., 28">
-                                </div>
-                                <div class="mt-4 p-4 bg-blue-50 text-center rounded"><span class="text-sm">New Pipeline Needed</span><div id="meetingsPipelineNeeded" class="text-2xl font-bold text-primary">$0</div></div>
-                            </div>
-                            <div class="bg-white border p-6 rounded-lg shadow-sm">
-                                <h3 class="text-lg font-bold text-primary mb-2">Lever 2: Win Rate</h3>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Improve Win Rate by: <span id="winRateImprovementLabel" class="text-primary">5.0%</span></label>
-                                <input type="range" id="winRateImprovement" min="0" max="25" value="5" step="0.5" class="w-full">
-                                <div class="mt-4 p-4 bg-blue-50 text-center rounded"><span class="text-sm">New Pipeline Needed</span><div id="newPipelineNeeded" class="text-2xl font-bold text-primary">$0</div></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="step-4-content" class="step-panel hidden">
-                        <h2 class="step-heading">Phase 4 : Action Plan</h2>
-                        <div class="space-y-6">
-                            <div>
-                                <label class="input-label text-lg">My Primary Focus Goal (Select all that apply):</label>
-                                <div class="flex flex-col gap-3 mt-3">
-                                    <label class="flex items-center space-x-3 p-3 border rounded bg-white hover:bg-gray-50 cursor-pointer"><input type="checkbox" name="primaryGoal" value="In-Person Meetings" class="h-5 w-5 text-primary"><span>In-Person Meetings</span></label>
-                                    <label class="flex items-center space-x-3 p-3 border rounded bg-white hover:bg-gray-50 cursor-pointer"><input type="checkbox" name="primaryGoal" value="Average Deal Size" class="h-5 w-5 text-primary"><span>Average Deal Size</span></label>
-                                    <label class="flex items-center space-x-3 p-3 border rounded bg-white hover:bg-gray-50 cursor-pointer"><input type="checkbox" name="primaryGoal" value="Pipeline" class="h-5 w-5 text-primary"><span>Pipeline</span></label>
-                                    <label class="flex items-center space-x-3 p-3 border rounded bg-white hover:bg-gray-50 cursor-pointer"><input type="checkbox" name="primaryGoal" value="Win Rate" class="h-5 w-5 text-primary"><span>Win Rate</span></label>
-                                </div>
-                            </div>
-                            <div><label class="input-label text-lg">Strategic Goal: People</label><textarea id="action-people" class="input-field" rows="3"></textarea></div>
-                            <div><label class="input-label text-lg">Strategic Goal: Pipeline</label><textarea id="action-pipeline" class="input-field" rows="3"></textarea></div>
-                            <div><label class="input-label text-lg">Strategic Goal: Productivity</label><textarea id="action-productivity" class="input-field" rows="3"></textarea></div>
-                            <div class="pt-4 border-t">
-                                <label class="input-label font-bold">Forecasting Commitment:</label>
-                                <textarea id="action-forecast" class="input-field" rows="2" placeholder="My key action to improve forecast accuracy..."></textarea>
-                            </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t">
-                                <div><label class="input-label font-bold">Account Planning Action:</label><input type="text" id="action-account-plan" class="input-field"></div>
-                                <div><label class="input-label font-bold">Cross Selling Action:</label><input type="text" id="action-cross-sell" class="input-field"></div>
-                            </div>
-                        </div>
+                        <div class="calc-box"><span class="text-sm font-medium">Required Pipeline</span><span id="pipelineToClose2026" class="calc-output">$0</span></div>
                     </div>
 
                     <div id="step-5-content" class="step-panel hidden">
                         <h2 class="step-heading">Phase 5 : Review</h2>
-                        <div id="commitmentSummaryOutput" class="bg-gray-100 p-6 rounded-lg font-mono text-sm whitespace-pre-wrap border">Summary loading...</div>
+                        <div id="summary" class="bg-gray-100 p-6 rounded-lg font-mono text-sm whitespace-pre-wrap border">Summary will appear here...</div>
                     </div>
 
                     <div id="navigation-buttons" class="mt-8 pt-6 border-t flex justify-between">
@@ -262,7 +168,6 @@
                         <div class="flex gap-2">
                             <button type="button" id="resetButton" class="btn btn-secondary hidden">Start Over</button>
                             <button type="button" id="printButton" class="btn btn-default hidden">Save as PDF</button>
-                            <button type="button" id="submitToFormButton" class="btn btn-accent hidden font-bold">Review Your Plan</button>
                             <button type="button" id="nextButton" class="btn btn-primary">Next</button>
                         </div>
                     </div>
@@ -272,84 +177,43 @@
     </div>
 
 <script>
-    const GOOGLE_FORM_CONFIG = {
-        baseUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdVizNI9jeThAxWU2FjxTcqaVfdsnXqaDbbDMzHg8Y4gGX1Hg/viewform",
-        fields: {
-            repName: "entry.1533888544", managerName: "entry.2004467893", region: "entry.909220528",
-            quota2026: "entry.1187258724", targetWinRate: "entry.516044971", targetCoverage: "entry.10775378",
-            primaryGoal: "entry.1090213679", peoplePlan: "entry.1667466065", 
-            pipelinePlan: "entry.1553800751", productivityPlan: "entry.1571167359"
-        }
-    };
-
     const $ = (id) => document.getElementById(id);
     let currentStep = 1;
 
-    const getNum = (id) => {
-        const val = $(id).value || $(id).textContent || "0";
-        return parseFloat(val.replace(/[$,]/g, '')) || 0;
+    // --- VERIFIED CORE NAVIGATION ---
+    window.onload = function() {
+        const startBtn = document.getElementById('startBtn');
+        const welcome = document.getElementById('welcome-screen');
+        const wizard = document.getElementById('wizard-container');
+
+        if (startBtn) {
+            startBtn.addEventListener('click', function() {
+                // Must specifically toggle Tailwind's hidden class
+                welcome.classList.add('hidden');
+                wizard.classList.remove('hidden');
+            });
+        }
+
+        $('nextButton').onclick = () => { if(currentStep < 5) showStep(++currentStep); };
+        $('prevButton').onclick = () => { if(currentStep > 1) showStep(--currentStep); };
+        $('resetButton').onclick = () => location.reload();
     };
 
-    function calculate() {
-        const q25 = getNum('quota2025'), b25 = getNum('bookings2025'), wr25 = getNum('winRate2025'), ds25 = getNum('avgDealSize2025');
-        const q26 = getNum('quota2026'), wrImp = getNum('winRateImprovement'), mtgImp = getNum('meetingImprovement'), mtgWr = getNum('meetingsImpliedWinRate');
-
-        $('attainment2025').textContent = q25 > 0 ? ((b25/q25)*100).toFixed(1) + '%' : '0%';
-        const wrDec = wr25 / 100;
-        $('pipelineToClose2026').textContent = '$' + (wrDec > 0 ? (q26 / wrDec) : 0).toLocaleString();
-        $('dealsToClose2026').textContent = ds25 > 0 ? Math.ceil(q26/ds25) : 0;
-        $('winRateImprovementLabel').textContent = wrImp.toFixed(1) + '%';
-        $('newPipelineNeeded').textContent = (wr25+wrImp)/100 > 0 ? '$' + (q26/((wr25+wrImp)/100)).toLocaleString() : '$0';
-        $('meetingImprovementLabel').textContent = mtgImp;
-        $('meetingsPipelineNeeded').textContent = (mtgWr/100) > 0 ? '$' + (q26 / (mtgWr/100)).toLocaleString() : '$0';
-    }
-
-    function updateSummary() {
-        const primaryFocus = Array.from(document.querySelectorAll('input[name="primaryGoal"]:checked')).map(cb => cb.value).join(', ');
-        $('commitmentSummaryOutput').textContent = `
-TRIMBLE 2026 SALES PLAN
------------------------------------
-Rep: ${$('personName').value} | Region: ${$('region').value}
-2026 Quota: $${getNum('quota2026').toLocaleString()}
-Primary Focus: ${primaryFocus || 'None'}
-
-Actions:
-People: ${$('action-people').value}
-Pipeline: ${$('action-pipeline').value}
-Productivity: ${$('action-productivity').value}
-        `.trim();
-    }
-
-    function submitToForm() {
-        const c = GOOGLE_FORM_CONFIG;
-        let url = `${c.baseUrl}?${c.fields.repName}=${encodeURIComponent($('personName').value)}&${c.fields.managerName}=${encodeURIComponent($('managerName').value)}&${c.fields.region}=${encodeURIComponent($('region').value)}&${c.fields.quota2026}=${encodeURIComponent(getNum('quota2026'))}&${c.fields.peoplePlan}=${encodeURIComponent($('action-people').value)}&${c.fields.pipelinePlan}=${encodeURIComponent($('action-pipeline').value)}&${c.fields.productivityPlan}=${encodeURIComponent($('action-productivity').value)}`;
-        document.querySelectorAll('input[name="primaryGoal"]:checked').forEach(cb => { url += `&${c.fields.primaryGoal}=${encodeURIComponent(cb.value)}`; });
-        window.open(url, '_blank');
-    }
-
     function showStep(step) {
-        if (step === 5) updateSummary();
         document.querySelectorAll('.step-panel').forEach(p => p.classList.add('hidden'));
-        document.querySelectorAll('.progress-step').forEach(s => s.classList.remove('progress-step-active'));
-        $(`step-${step}-content`).classList.remove('hidden');
-        for(let i=1; i<=step; i++) $(`progress-${i}`).classList.add('progress-step-active');
+        const target = $(`step-${step}-content`);
+        if (target) target.classList.remove('hidden');
+
+        document.querySelectorAll('.progress-step').forEach((s, i) => {
+            s.classList.toggle('progress-step-active', i < step);
+        });
+
         $('prevButton').classList.toggle('hidden', step === 1);
         $('nextButton').classList.toggle('hidden', step === 5);
         $('resetButton').classList.toggle('hidden', step !== 5);
         $('printButton').classList.toggle('hidden', step !== 5);
-        $('submitToFormButton').classList.toggle('hidden', step !== 5);
         window.scrollTo(0, 0);
     }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        $('startBtn').onclick = () => { $('welcome-screen').classList.add('hidden'); $('wizard-container').classList.remove('hidden'); calculate(); };
-        $('nextButton').onclick = () => { if(currentStep < 5) showStep(++currentStep); };
-        $('prevButton').onclick = () => { if(currentStep > 1) showStep(--currentStep); };
-        $('resetButton').onclick = () => location.reload();
-        $('printButton').onclick = () => window.print();
-        $('submitToFormButton').onclick = submitToForm;
-        document.querySelectorAll('input, select, textarea, range').forEach(el => el.addEventListener('input', calculate));
-    });
 </script>
 </body>
 </html>
