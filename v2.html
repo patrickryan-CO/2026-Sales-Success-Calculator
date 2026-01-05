@@ -11,9 +11,9 @@
             theme: {
                 extend: {
                     colors: {
-                        'primary': '#0063a3',       // Trimble Blue
-                        'accent': '#fbad26',        // Trimble Gold
-                        'primary-text': '#252a2e'   // Trimble Dark Gray
+                        'primary': '#0063a3',       
+                        'accent': '#fbad26',        
+                        'primary-text': '#252a2e'   
                     }
                 }
             }
@@ -79,11 +79,15 @@
                 <div class="bg-white border border-gray-200 rounded-lg shadow-sm text-left overflow-hidden max-w-4xl mx-auto p-6 space-y-4">
                     <div class="flex items-start">
                         <div class="shrink-0 h-8 w-8 rounded-full bg-primary flex items-center justify-center text-white font-bold">1</div>
-                        <p class="ml-4 text-gray-700"><strong>Establish Baseline.</strong> Use your Scorecard actuals to establish your historical foundation [cite: 13, 221-223].</p>
+                        <p class="ml-4 text-gray-700"><strong>Establish Baseline.</strong> Use your 2025 results to establish your foundation [cite: 13, 221-223].</p>
                     </div>
                     <div class="flex items-start">
                         <div class="shrink-0 h-8 w-8 rounded-full bg-primary flex items-center justify-center text-white font-bold">2</div>
-                        <p class="ml-4 text-gray-700"><strong>Model Gains.</strong> Use the 1.9x benchmark to find your efficiency path[cite: 21, 241].</p>
+                        <p class="ml-4 text-gray-700"><strong>Model Scenarios.</strong> Use the 1.9x benchmark to find your efficiency path.</p>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="shrink-0 h-8 w-8 rounded-full bg-primary flex items-center justify-center text-white font-bold">3</div>
+                        <p class="ml-4 text-gray-700"><strong>Take Action.</strong> Commit to specific goals for People, Pipeline, and Productivity.</p>
                     </div>
                     <button type="button" id="startBtn" class="btn btn-primary text-lg px-10 py-4 shadow-lg w-full">Start My Plan</button>
                 </div>
@@ -102,13 +106,13 @@
                     
                     <div id="step-1-content" class="step-panel state-visible">
                         <h2 class="step-heading">Phase 1: Baseline</h2>
-                        <div class="coach-note"><strong>INSTRUCTION:</strong><p>Enter your 2025 actual data to establish historical efficiency[cite: 13, 15].</p></div>
+                        <div class="coach-note"><strong>INSTRUCTION:</strong><p>Enter your 2025 actual data to establish your historical efficiency ratios.</p></div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div><label class="input-label">Seller Name</label><input type="text" id="personName" class="input-field" placeholder="Jane Doe"></div>
                             <div><label class="input-label">My Manager</label><input type="text" id="mgrName" class="input-field" placeholder="John Smith"></div>
                             <div><label class="input-label">2025 Quota ($)</label><input type="text" id="quota2025" class="input-field" value="1,000,000"></div>
                             <div><label class="input-label">2025 Bookings ($)</label><input type="text" id="bookings2025" class="input-field" value="850,000"></div>
-                            <div><label class="input-label">2025 Win Rate (%)</label><input type="number" id="winRate2025" class="input-field" value="25"></div>
+                            <div><label class="input-label">2025 ACV Win Rate (%)</label><input type="number" id="winRate2025" class="input-field" value="25"></div>
                             <div><label class="input-label">2025 Avg. Deal Size ($)</label><input type="text" id="avgDealSize2025" class="input-field" value="50,000"></div>
                             <div class="calc-box md:col-span-2"><span class="text-sm font-medium">2025 Attainment</span><span id="attainment2025" class="calc-output">0%</span></div>
                         </div>
@@ -116,7 +120,7 @@
 
                     <div id="step-2-content" class="step-panel state-hidden">
                         <h2 class="step-heading">Phase 2: The Gap</h2>
-                        <div class="coach-note"><strong>INSTRUCTION:</strong><p>Enter your 2026 quota. This shows your "Raw Gap" pipeline needs .</p></div>
+                        <div class="coach-note"><strong>INSTRUCTION:</strong><p>Enter your 2026 quota. This calculates your "Raw Gap" pipeline needs .</p></div>
                         <div class="max-w-md mx-auto mb-10 text-center">
                             <label class="input-label justify-center">2026 Quota Target ($)</label>
                             <input type="text" id="quota2026" class="input-field text-center text-xl font-bold border-primary" value="1,200,000">
@@ -130,7 +134,7 @@
 
                     <div id="step-3-content" class="step-panel state-hidden">
                         <h2 class="step-heading">Phase 3: The Solution</h2>
-                        <div class="coach-note"><strong>INSTRUCTION:</strong><p>Model gains using the 1.9x benchmark as your guide[cite: 21, 241].</p></div>
+                        <div class="coach-note"><strong>INSTRUCTION:</strong><p>Model gains using the 1.9x benchmark as your guide .</p></div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                             <div class="space-y-6">
                                 <div><div class="flex justify-between mb-1"><label class="input-label">Win Rate Gain (%)</label><span id="wrLabel" class="text-sm font-bold text-primary">+0%</span></div>
@@ -145,7 +149,7 @@
                             <div class="bg-gray-50 rounded-xl p-8 border flex flex-col items-center justify-center text-center">
                                 <span class="text-xs font-bold text-gray-500 uppercase">Modelled Coverage</span>
                                 <span id="modelCov" class="text-6xl font-black my-4 text-primary">0.0x</span>
-                                <p class="text-[11px] text-gray-500">Benchmark: <strong>1.9x Coverage</strong>[cite: 21].</p>
+                                <p class="text-[11px] text-gray-500 italic">Guideline: <strong>1.9x Coverage</strong> recommended.</p>
                             </div>
                         </div>
                     </div>
@@ -154,10 +158,10 @@
                         <h2 class="step-heading">Phase 4: Action Plan</h2>
                         <div class="coach-note"><strong>INSTRUCTION:</strong><p>Commit to qualitative actions across the 3 Pillars [cite: 7, 101-105].</p></div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="bg-gray-50 p-4 rounded border"><h3 class="text-xs font-bold uppercase mb-2">People (Upskilling)</h3><textarea id="actPeople" class="input-field h-24 text-sm" placeholder="Certification, product knowledge..."></textarea></div>
-                            <div class="bg-gray-50 p-4 rounded border"><h3 class="text-xs font-bold uppercase mb-2">Pipeline (Sourcing)</h3><input type="text" id="pipeSource" class="input-field text-sm" placeholder="Self vs SDR mix..."></div>
-                            <div class="bg-gray-50 p-4 rounded border"><h3 class="text-xs font-bold uppercase mb-2">Productivity (Tools)</h3><textarea id="actProd" class="input-field h-24 text-sm" placeholder="Gong, pricing tool..."></textarea></div>
-                            <div class="bg-gray-50 p-4 rounded border"><h3 class="text-xs font-bold uppercase mb-2">Territory Plan</h3><textarea id="actTerritory" class="input-field h-24 text-sm" placeholder="Top 10 account focus..."></textarea></div>
+                            <div class="bg-gray-50 p-4 rounded border"><h3 class="text-xs font-bold uppercase mb-2">People (Upskilling)</h3><textarea id="actPeople" class="input-field h-24 text-sm" placeholder="e.g. PIC level 2 certification..."></textarea></div>
+                            <div class="bg-gray-50 p-4 rounded border"><h3 class="text-xs font-bold uppercase mb-2">Pipeline (Sourcing)</h3><input type="text" id="pipeSource" class="input-field text-sm" placeholder="e.g. 70% Self-Gen / 30% SDR mix..."></div>
+                            <div class="bg-gray-50 p-4 rounded border"><h3 class="text-xs font-bold uppercase mb-2">Productivity (Tools)</h3><textarea id="actProd" class="input-field h-24 text-sm" placeholder="e.g. Outreach automation via Gong..."></textarea></div>
+                            <div class="bg-gray-50 p-4 rounded border"><h3 class="text-xs font-bold uppercase mb-2">Territory Plan</h3><textarea id="actTerritory" class="input-field h-24 text-sm" placeholder="e.g. Strategic expansion in Top 10 accounts..."></textarea></div>
                         </div>
                     </div>
 
@@ -234,9 +238,11 @@ MANAGER: ${document.getElementById('mgrName').value || '---'}
 TARGET QUOTA: ${currency.format(getVal('quota2026'))}
 COVERAGE RATIO: ${document.getElementById('modelCov').innerText} (Benchmark: 1.9x)
 
+STRATEGY MIX: ${document.getElementById('crossPct').value}% Cross / ${document.getElementById('upPct').value}% Up
+--------------------------------------------------
 ACTION PLAN:
 - People: ${document.getElementById('actPeople').value || '---'}
-- Pipeline Mix: ${document.getElementById('pipeSource').value || '---'}
+- Pipeline: ${document.getElementById('pipeSource').value || '---'}
 - Productivity: ${document.getElementById('actProd').value || '---'}
 - Territory Strategy: ${document.getElementById('actTerritory').value || '---'}
         `.trim();
