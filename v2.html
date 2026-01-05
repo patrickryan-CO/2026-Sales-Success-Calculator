@@ -11,10 +11,10 @@
             theme: {
                 extend: {
                     colors: {
-                        'primary': '#0063a3',       
+                        'primary': '#0063a3',       // Trimble Blue 10
                         'primary-hover': '#004a7c', 
-                        'accent': '#fbad26',        
-                        'primary-text': '#252a2e',  
+                        'accent': '#fbad26',        // Trimble Gold 10
+                        'primary-text': '#252a2e',  // Trimble Dark Gray 10
                         'icon-people': '#6f42c1',    
                         'icon-pipeline': '#007bff',
                         'icon-prod': '#fd7e14',      
@@ -59,16 +59,20 @@
         .step-heading { font-size: 1.5rem; font-weight: 800; color: #0063a3; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e5e7eb; }
         .input-label { display: flex; align-items: center; font-size: 0.9rem; font-weight: 700; color: #252a2e; margin-bottom: 0.375rem; }
         .input-field { display: block; width: 100%; border-radius: 0.375rem; border: 1px solid #D1D5DB; padding: 0.75rem; font-size: 1rem; color: #252a2e; transition: all 0.2s; }
+        
         .progress-bar-grid { display: grid; grid-template-columns: repeat(5, 1fr); border-bottom: 2px solid #E5E7EB; margin-bottom: 2rem; }
         .progress-step { padding: 0.75rem 0.25rem; text-align: center; font-size: 0.7rem; font-weight: 600; color: #9CA3AF; border-bottom: 4px solid transparent; }
         .progress-step-active { color: #0063a3; border-bottom-color: #0063a3; }
+        
         .calc-box { background-color: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 0.5rem; padding: 1rem; text-align: center; }
         .calc-output { display: block; font-size: 1.5rem; font-weight: 800; color: #0063a3; margin-top: 0.25rem; }
+        
         .btn { display: inline-block; font-weight: 700; text-align: center; padding: 0.75rem 1.5rem; border-radius: 0.375rem; transition: all 0.15s ease-in-out; cursor: pointer; border: none; width: 100%; }
         @media (min-width: 640px) { .btn { width: auto; } }
         .btn-primary { background-color: #0063a3; color: white; }
         .btn-accent { background-color: #fbad26; color: #252a2e; }
         .btn-default { background-color: #E5E7EB; color: #252a2e; }
+        
         input[type=range] { width: 100%; height: 8px; border-radius: 5px; background: #e5e7eb; outline: none; -webkit-appearance: none; margin: 10px 0; }
         input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #0063a3; cursor: pointer; border: 2px solid white; box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
     </style>
@@ -104,16 +108,16 @@
                             </div>
                             <div class="flex items-start">
                                 <div class="shrink-0 h-8 w-8 rounded-full bg-primary flex items-center justify-center text-white font-bold text-sm">2</div>
-                                <p class="ml-4 text-gray-700"><strong>Don't have a Scorecard?</strong> If you are new, enter '0' for the baseline numbers to jump to Phase 4.</p>
+                                <p class="ml-4 text-gray-700"><strong>Don't have a Scorecard?</strong> Enter '0' for the baseline numbers to jump to your Action Plan.</p>
                             </div>
                             <div class="flex items-start">
                                 <div class="shrink-0 h-8 w-8 rounded-full bg-primary flex items-center justify-center text-white font-bold text-sm">3</div>
-                                <p class="ml-4 text-gray-700"><strong>Build your plan.</strong> Use this tool to calculate your gap, model efficiency gains, and define your goals.</p>
+                                <p class="ml-4 text-gray-700"><strong>Build your plan.</strong> You will use this tool to calculate your gap, model efficiency gains, and define your personal goals for the year.</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left max-w-5xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left max-w-5xl mx-auto px-4">
                         <div class="p-6 border border-gray-200 rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow">
                             <div class="text-icon-people mb-4">
                                 <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
@@ -151,42 +155,36 @@
             </div>
 
             <div id="wizard-container" class="hidden">
-                <nav class="progress-bar-grid">
+                <div class="progress-bar-grid">
                     <div id="progress-1" class="progress-step progress-step-active">Baseline</div>
                     <div id="progress-2" class="progress-step">The Gap</div>
                     <div id="progress-3" class="progress-step">Solution</div>
-                    <div id="progress-4" class="progress-step">Actions</div>
+                    <div id="progress-4" class="progress-step">Action Plan</div>
                     <div id="progress-5" class="progress-step">Review</div>
-                </nav>
+                </div>
 
                 <form id="skoForm" onsubmit="return false;">
                     
                     <div id="step-1-content" class="step-panel">
                         <h2 class="step-heading">Phase 1 : Baseline</h2>
-                        <div class="coach-note"><strong>PLEASE READ:</strong>Enter your 2025 actual data to establish historical efficiency ratios.</div>
+                        <div class="coach-note"><strong>PLEASE READ:</strong>Enter your 2025 actual data to establish historical efficiency.</div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div><label class="input-label">Seller Name</label><input type="text" id="personName" class="input-field" placeholder="Jane Doe"></div>
-                            <div><label class="input-label">My Manager</label><input type="text" id="managerName" class="input-field" placeholder="John Smith"></div>
-                            <div class="md:col-span-2">
-                                <label class="input-label">My Region</label>
-                                <select id="region" class="input-field">
-                                    <option value="" disabled selected>Select region</option>
-                                    <option value="NA">NA</option><option value="EMEA">EMEA</option><option value="APAC">APAC</option>
-                                </select>
-                            </div>
-                            <div><label class="input-label">2025 Quota ($) <span class="tooltip-trigger" data-tooltip="Total annual quota for 2025.">i</span></label><input type="text" id="quota2025" class="input-field" placeholder="0"></div>
-                            <div><label class="input-label">2025 Bookings ($) <span class="tooltip-trigger" data-tooltip="Total closed bookings for 2025.">i</span></label><input type="text" id="bookings2025" class="input-field" placeholder="0"></div>
-                            <div><label class="input-label">2025 Win Rate (%) <span class="tooltip-trigger" data-tooltip="Historical ACV-based win rate.">i</span></label><input type="number" id="winRate2025" class="input-field" placeholder="0"></div>
-                            <div><label class="input-label">2025 Avg. Deal Size ($) <span class="tooltip-trigger" data-tooltip="Revenue / Total Wins.">i</span></label><input type="text" id="avgDealSize2025" class="input-field" placeholder="0"></div>
+                            <div><label class="input-label">My Name</label><input type="text" id="personName" class="input-field"></div>
+                            <div><label class="input-label">My Manager</label><input type="text" id="managerName" class="input-field"></div>
+                            <div class="md:col-span-2"><label class="input-label">My Region</label><select id="region" class="input-field"><option value="">Select Region</option><option value="NA">NA</option><option value="EMEA">EMEA</option><option value="APAC">APAC</option></select></div>
+                            <div><label class="input-label">2025 Quota ($)</label><input type="text" id="quota2025" class="input-field"></div>
+                            <div><label class="input-label">2025 Bookings ($)</label><input type="text" id="bookings2025" class="input-field"></div>
+                            <div><label class="input-label">2025 Win Rate (%)</label><input type="number" id="winRate2025" class="input-field"></div>
+                            <div><label class="input-label">2025 Avg Deal Size ($)</label><input type="text" id="avgDealSize2025" class="input-field"></div>
                             <div class="calc-box md:col-span-2"><span>2025 Attainment</span><span id="attainment2025" class="calc-output">0%</span></div>
                         </div>
                     </div>
 
                     <div id="step-2-content" class="step-panel hidden">
                         <h2 class="step-heading">Phase 2 : The Gap</h2>
-                        <div class="coach-note"><strong>The Math:</strong> What do you need if 2026 efficiency remains same as 2025?</div>
+                        <div class="coach-note"><strong>The Math:</strong> What pipeline do you need if 2026 efficiency remains same as 2025?</div>
                         <div class="max-w-md mx-auto space-y-6 text-center">
-                            <div><label class="input-label justify-center text-lg">My 2026 Quota Target ($)</label><input type="text" id="quota2026" class="input-field text-center font-bold text-xl" placeholder="e.g. 1,200,000"></div>
+                            <div><label class="input-label justify-center">My 2026 Quota Target ($)</label><input type="text" id="quota2026" class="input-field text-center font-bold text-xl"></div>
                             <div class="calc-box"><span>Required Pipeline</span><span id="pipelineToClose2026" class="calc-output text-primary">$0</span></div>
                             <div class="calc-box"><span>Required Deals</span><span id="dealsToClose2026" class="calc-output text-primary">0</span></div>
                         </div>
@@ -194,23 +192,23 @@
 
                     <div id="step-3-content" class="step-panel hidden">
                         <h2 class="step-heading">Phase 3 : The Solution</h2>
-                        <div class="coach-note"><strong>The Levers:</strong> Small efficiency gains reduce massive pipeline pressure.</div>
-                        <div class="space-y-8">
+                        <div class="coach-note"><strong>The Levers:</strong> Small efficiency gains reduce massive pipeline pressure. Target is 1.9x coverage.</div>
+                        <div class="space-y-6">
                             <div class="bg-white border rounded-lg p-6 shadow-sm">
-                                <label class="input-label">Lever 1: Meetings Gain: <span id="meetingImprovementLabel" class="text-primary ml-1">0</span> <span class="tooltip-trigger" data-tooltip="In-person meetings drive higher win rates.">i</span></label>
+                                <label class="input-label">Lever 1: Quarterly Meetings Gain: <span id="meetingImprovementLabel" class="text-primary ml-1">0</span> <span class="tooltip-trigger" data-tooltip="In-person meetings drive higher win rates.">i</span></label>
                                 <input type="range" id="meetingImprovement" min="0" max="20" value="0" step="1">
-                                <div class="mt-4"><label class="input-label">Target Win Rate % (Driven by Activity)</label><input type="number" id="meetingsImpliedWinRate" class="input-field" placeholder="e.g. 28"></div>
-                                <div class="mt-2 text-primary font-bold text-center">Pipeline Required: <span id="meetingsPipelineNeeded">$0</span></div>
+                                <div class="mt-4"><label class="input-label">Target Win Rate %</label><input type="number" id="meetingsImpliedWinRate" class="input-field" placeholder="e.g. 28"></div>
+                                <div class="mt-2 text-primary font-bold text-center">Needed Pipeline: <span id="meetingsPipelineNeeded">$0</span></div>
                             </div>
                             <div class="bg-white border rounded-lg p-6 shadow-sm">
                                 <label class="input-label">Lever 2: Deal Size Gain: <span id="dealSizeImprovementLabel" class="text-primary ml-1">0%</span> <span class="tooltip-trigger" data-tooltip="Increase deal value via bundling.">i</span></label>
                                 <input type="range" id="dealSizeImprovement" min="0" max="50" value="0" step="1">
-                                <div class="mt-2 text-primary font-bold text-center">Deals Required: <span id="newDealsNeeded">0</span></div>
+                                <div class="mt-2 text-primary font-bold text-center">New Deals Needed: <span id="newDealsNeeded">0</span></div>
                             </div>
                             <div class="bg-white border rounded-lg p-6 shadow-sm">
-                                <label class="input-label">Lever 3: Win Rate Gain: <span id="winRateImprovementLabel" class="text-primary ml-1">0%</span> <span class="tooltip-trigger" data-tooltip="Better qualification filters out junk.">i</span></label>
+                                <label class="input-label">Lever 3: Win Rate Gain: <span id="winRateImprovementLabel" class="text-primary ml-1">0%</span> <span class="tooltip-trigger" data-tooltip="Better qualification filters the funnel.">i</span></label>
                                 <input type="range" id="winRateImprovement" min="0" max="15" value="0" step="0.5">
-                                <div class="mt-2 text-primary font-bold text-center">Pipeline Required: <span id="newPipelineNeeded">$0</span></div>
+                                <div class="mt-2 text-primary font-bold text-center">Needed Pipeline: <span id="newPipelineNeeded">$0</span></div>
                             </div>
                         </div>
                     </div>
@@ -233,18 +231,18 @@
                     </div>
 
                     <div id="step-5-content" class="step-panel hidden text-center">
-                        <h2 class="step-heading text-left">Phase 5 : Review & Submit</h2>
+                        <h2 class="step-heading text-left">Phase 5 : Review</h2>
                         <div id="commitmentSummaryOutput" class="bg-gray-50 p-6 rounded-lg font-mono text-xs border whitespace-pre-wrap leading-relaxed text-left mb-6"></div>
                         <div class="flex justify-center gap-4">
                             <button type="button" id="copyBtn" class="btn btn-default">Copy Plan Text</button>
-                            <button type="button" id="submitBtn" class="btn btn-accent px-10">Submit Success Plan</button>
+                            <button type="button" id="submitBtn" class="btn btn-accent px-10 font-bold">Review Your Plan</button>
                         </div>
                     </div>
 
                     <div id="navigation-buttons" class="mt-8 pt-6 border-t flex justify-between">
-                        <button type="button" id="prevBtn" class="btn btn-default hidden">Previous</button>
+                        <button type="button" id="prevButton" class="btn btn-default hidden">Previous</button>
                         <div class="flex-grow"></div>
-                        <button type="button" id="nextBtn" class="btn btn-primary">Next</button>
+                        <button type="button" id="nextButton" class="btn btn-primary">Next</button>
                         <button type="button" id="printBtn" class="btn btn-default hidden ml-2">Print to PDF</button>
                     </div>
                 </form>
@@ -266,19 +264,16 @@
         const q26 = getVal('quota2026'), wrImp = getVal('winRateImprovement'), dsImp = getVal('dealSizeImprovement'), mtgWR = getVal('meetingsImpliedWinRate');
 
         $('attainment2025').innerText = q25 > 0 ? (b25/q25*100).toFixed(1) + '%' : '0%';
-        
         const winDec = (wr25/100);
         const pGap = winDec > 0 ? q26 / winDec : 0;
         $('pipelineToClose2026').innerText = fmt(pGap);
         $('dealsToClose2026').innerText = ds25 > 0 ? Math.ceil(q26 / ds25) : 0;
 
-        $('winRateImprovementLabel').textContent = wrImp + '%';
+        $('winRateImprovementLabel').innerText = wrImp + '%';
         $('newPipelineNeeded').innerText = fmt((wr25+wrImp)/100 > 0 ? q26 / ((wr25+wrImp)/100) : 0);
-        
-        $('dealSizeImprovementLabel').textContent = dsImp + '%';
+        $('dealSizeImprovementLabel').innerText = dsImp + '%';
         const nds = ds25 * (1 + (dsImp/100));
         $('newDealsNeeded').innerText = nds > 0 ? Math.ceil(q26 / nds) : 0;
-        
         $('meetingImprovementLabel').innerText = $('meetingImprovement').value;
         $('meetingsPipelineNeeded').innerText = fmt((mtgWR/100) > 0 ? q26 / (mtgWR/100) : 0);
     }
@@ -290,14 +285,14 @@
 
     let step = 1;
     $('startBtn').onclick = () => { $('welcome-screen').classList.add('hidden'); $('wizard-container').classList.remove('hidden'); calculate(); };
-    $('nextBtn').onclick = () => { if(step < 5) { step++; showStep(); } };
-    $('prevBtn').onclick = () => { if(step > 1) { step--; showStep(); } };
+    $('nextButton').onclick = () => { if(step < 5) { step++; showStep(); } };
+    $('prevButton').onclick = () => { if(step > 1) { step--; showStep(); } };
 
     function showStep() {
         document.querySelectorAll('.step-panel').forEach((p, i) => p.classList.toggle('hidden', i + 1 !== step));
         document.querySelectorAll('.progress-step').forEach((s, i) => s.classList.toggle('progress-step-active', i < step));
-        $('prevBtn').classList.toggle('hidden', step === 1);
-        $('nextBtn').classList.toggle('hidden', step === 5);
+        $('prevButton').classList.toggle('hidden', step === 1);
+        $('nextButton').classList.toggle('hidden', step === 5);
         $('submitBtn').classList.toggle('hidden', step !== 5);
         $('printBtn').classList.toggle('hidden', step !== 5);
         if(step === 5) renderSummary();
