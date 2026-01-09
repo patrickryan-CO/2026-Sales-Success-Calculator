@@ -38,7 +38,7 @@
 <body>
     <div class="wave-container"></div>
     <div class="main-card">
-        <div class="absolute top-6 right-8 text-xs text-gray-400 font-mono tracking-widest uppercase">v15.20.00</div>
+        <div class="absolute top-6 right-8 text-xs text-gray-400 font-mono tracking-widest uppercase">v16.00.00</div>
 
         <div id="welcome-screen" class="text-center space-y-12">
             <div class="space-y-4">
@@ -66,7 +66,7 @@
                     <div class="text-4xl mb-4">👥</div><h4 class="font-extrabold text-slate-900 mb-3 text-xl">People</h4><p class="text-sm text-slate-500 leading-relaxed">Focus on expertise. Identify the skills, collaboration habits, or coaching you need to build impact.</p>
                 </div>
                 <div class="p-8 bg-white border border-slate-200 rounded-3xl shadow-sm hover:shadow-xl transition">
-                    <div class="text-4xl mb-4">📈</div><h4 class="font-extrabold text-slate-900 mb-3 text-xl">Pipeline</h4><p class="text-sm text-slate-500 leading-relaxed">Manage the funnel. Ensure a predictable flow of results from sales to project milestones.</p>
+                    <div class="text-4xl mb-4">📈</div><h4 class="font-extrabold text-slate-900 mb-3 text-xl">Pipeline</h4><p class="text-sm text-slate-500 leading-relaxed text-left">Manage the funnel. Ensure a predictable flow of results from sales to project milestones.</p>
                 </div>
                 <div class="p-8 bg-white border border-slate-200 rounded-3xl shadow-sm hover:shadow-xl transition">
                     <div class="text-4xl mb-4 text-left">⚡</div><h4 class="font-extrabold text-slate-900 mb-3 text-xl text-left">Productivity</h4><p class="text-sm text-slate-500 font-medium text-left leading-relaxed">Maximize time. Master the tools and routines that allow focus on high-value output.</p>
@@ -97,7 +97,7 @@
             <form id="skoForm" onsubmit="return false;" class="text-left space-y-12">
                 <div id="step-1-panel" class="step-panel space-y-8">
                     <h2 class="text-3xl font-extrabold text-left">Performance Baseline</h2>
-                    <div class="coach-note text-left">Enter 2025 results to establish an efficiency baseline. If you do not have data, enter <strong>"0"</strong>.</div>
+                    <div class="coach-note text-left">Enter 2025 actual results to establish an efficiency baseline. If you do not have historical data, enter <strong>"0"</strong> to proceed.</div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
                         <div><label class="block font-bold text-sm mb-2 text-slate-700 uppercase tracking-wide">Name</label><input type="text" id="personName" class="input-field" placeholder="Full Name"></div>
                         <div><label class="block font-bold text-sm mb-2 text-slate-700 uppercase tracking-wide">Manager</label><input type="text" id="managerName" class="input-field" placeholder="Manager Name"></div>
@@ -113,7 +113,7 @@
                 </div>
 
                 <div id="step-2-panel" class="step-panel hidden space-y-10 text-center">
-                    <h2 class="text-3xl font-extrabold text-left">Efficiency Gap Analysis</h2>
+                    <h2 class="text-3xl font-extrabold text-left text-left">Efficiency Gap Analysis</h2>
                     <div class="max-w-2xl mx-auto space-y-10 text-center">
                         <div><label class="block font-black text-xl mb-4 text-center">My 2026 Quota</label><input type="text" id="quota2026" class="input-field text-center text-4xl font-black border-2 border-primary/10 py-6" placeholder="0"></div>
                         <div class="grid grid-cols-2 gap-8 text-center">
@@ -125,7 +125,7 @@
                         <label class="block font-black text-slate-700 mb-6 text-center">How does this gap feel?</label>
                         <div class="flex flex-col md:flex-row gap-4 text-center">
                             <label class="flex-1 cursor-pointer group text-center"><input type="radio" name="feeling" value="Achievable" class="sr-only peer"><div class="p-5 border-2 rounded-2xl font-bold transition peer-checked:bg-primary peer-checked:text-white bg-white hover:border-primary text-center">Achievable</div></label>
-                            <label class="flex-1 cursor-pointer group text-center text-center"><input type="radio" name="feeling" value="Challenging" class="sr-only peer"><div class="p-5 border-2 rounded-2xl font-bold transition peer-checked:bg-primary peer-checked:text-white bg-white hover:border-primary text-center text-center">Challenging</div></label>
+                            <label class="flex-1 cursor-pointer group text-center text-center"><input type="radio" name="feeling" value="Challenging" class="sr-only peer"><div class="p-5 border-2 rounded-2xl font-bold transition peer-checked:bg-primary peer-checked:text-white bg-white hover:border-primary text-center">Challenging</div></label>
                             <label class="flex-1 cursor-pointer group text-center text-center text-center text-center"><input type="radio" name="feeling" value="Impossible" class="sr-only peer"><div class="p-5 border-2 rounded-2xl font-bold transition peer-checked:bg-primary peer-checked:text-white bg-white hover:border-primary text-center">Impossible</div></label>
                         </div>
                     </div>
@@ -160,9 +160,9 @@
                     <h2 class="text-3xl font-extrabold text-left text-left text-left">Action Plan Roadmap</h2>
                     <div class="coach-note text-left text-left text-left">
                         <h4 class="font-black text-sm uppercase mb-3 text-slate-900 text-left">Strategic Intent</h4>
-                        <p class="mb-5 font-medium text-slate-600 leading-relaxed text-left text-left">This Action Plan is your foundation. These commitments represent the personal roadmap management will use to align resources and provide targeted coaching.</p>
+                        <p class="mb-5 font-medium text-slate-600 leading-relaxed text-left text-left">This Action Plan is the foundation of your year. These commitments represent the personal roadmap management will use to align resources and provide targeted coaching.</p>
                         <div class="border-t border-slate-200 pt-6">
-                            <strong class="block mb-4 text-slate-800 uppercase text-xs tracking-wider">The SMART Framework (Instructions):</strong>
+                            <strong class="block mb-4 text-slate-800 uppercase text-xs tracking-wider">The SMART Goal Framework (How to write them):</strong>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-left text-left text-left">
                                 <div><strong>S: Specific</strong> - Define exactly what you will do. Avoid vague terms like "improve."</div>
                                 <div><strong>M: Measurable</strong> - Add a number or milestone. Include a yardstick.</div>
@@ -183,12 +183,12 @@
                     <h2 class="text-3xl font-extrabold text-left text-left text-left text-left">Review & Commit</h2>
                     <div id="commitmentSummaryOutput" class="bg-slate-50 p-12 rounded-[2rem] font-mono text-xs whitespace-pre-wrap leading-loose border-2 text-left shadow-inner text-left text-left text-left"></div>
                     <div class="space-y-6 text-center text-center text-center">
-                        <button id="submitBtn" class="btn bg-accent text-slate-900 w-full text-3xl py-10 shadow-2xl hover:scale-[1.01] text-center text-center text-center text-center">Review & Commit My Plan</button>
+                        <button id="submitBtn" class="btn bg-accent text-slate-900 w-full text-3xl py-10 shadow-2xl hover:scale-[1.01]">Review & Commit My Plan</button>
                         <div class="flex justify-center gap-12 text-slate-400 text-center text-center text-center text-center"><button id="copyBtn" class="font-bold uppercase text-xs hover:text-primary tracking-widest text-center text-center">Copy Text</button><button onclick="window.print()" class="font-bold uppercase text-xs hover:text-primary tracking-widest text-center text-center text-center">Save PDF</button></div>
                     </div>
                 </div>
 
-                <div id="nav-btn-container" class="mt-20 flex justify-between border-t pt-12 text-center text-center">
+                <div id="nav-btn-container" class="mt-20 flex justify-between border-t pt-12 text-center text-center text-center text-center">
                     <button id="prevBtn" class="btn bg-slate-100 text-slate-500 px-12 py-5 hidden text-center text-center text-center">Previous Phase</button>
                     <div class="flex-grow text-center text-center text-center text-center"></div>
                     <button id="nextBtn" class="btn bg-primary text-white px-16 py-5 shadow-xl text-center text-center text-center text-center">Next Phase</button>
@@ -228,9 +228,9 @@
     }
 
     function renderSummary() {
-        const quota = getVal('quota2026');
-        const winRateFinal = getVal('winRate2025') + getVal('winRateImprovement');
-        const pipeFinal = winRateFinal > 0 ? (quota / (winRateFinal/100)) : 0;
+        const q26 = getVal('quota2026');
+        const wrTarget = getVal('winRate2025') + getVal('winRateImprovement');
+        const pipeTarget = wrTarget > 0 ? (q26 / (wrTarget/100)) : 0;
         const feeling = document.querySelector('input[name="feeling"]:checked')?.value || "None Selected";
 
         $('commitmentSummaryOutput').innerText = 
@@ -242,11 +242,11 @@
             `\n2025 BOOKINGS: ${fmt(getVal('bookings2025'))}` +
             `\n2025 ATTAINMENT: ${$('attainment2025').innerText}` +
             `\n\n--- 2026 QUOTA COMMITMENT ---` +
-            `\nMY 2026 QUOTA: ${fmt(quota)}` +
+            `\nMY 2026 QUOTA: ${fmt(q26)}` +
             `\nFEELING: ${feeling}` +
             `\n\n--- 2026 EFFICIENCY TARGETS ---` +
-            `\nTARGETED WIN RATE: ${winRateFinal}%` +
-            `\nTARGETED PIPELINE COVERAGE: ${fmt(pipeFinal)}` +
+            `\nTARGETED WIN RATE: ${wrTarget}%` +
+            `\nTARGETED PIPELINE COVERAGE: ${fmt(pipeTarget)}` +
             `\n\n--- 2026 STRATEGIC GOALS ---` +
             `\nGOAL 1: ${$('goal1').value}` +
             `\nGOAL 2: ${$('goal2').value}` +
@@ -258,11 +258,11 @@
     $('prevBtn').onclick = () => { if(step > 1) { step--; updateWizard(); } };
     document.querySelectorAll('.step-item').forEach(el => el.onclick = () => { step = parseInt(el.dataset.step); updateWizard(); });
 
-    // --- GOOGLE FORM INTERACTION ENGINE ---
+    // --- WORKING SUBMISSION ENGINE ---
     $('submitBtn').onclick = () => {
         const q26 = Math.round(getVal('quota2026'));
         const wr = (getVal('winRate2025') + getVal('winRateImprovement'));
-        const pipe = wr > 0 ? Math.round(getVal('quota2026') / (wr/100)) : 0;
+        const pipe = wr > 0 ? Math.round(getVal('quota2026') / (wr / 100)) : 0;
 
         const baseUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdVizNI9jeThAxWU2FjxTcqaVfdsnXqaDbbDMzHg8Y4gGX1Hg/viewform?usp=pp_url";
         const finalUrl = baseUrl 
