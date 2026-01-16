@@ -21,15 +21,16 @@
         .wave-container { position: absolute; top: 0; width: 100%; height: 550px; background: linear-gradient(180deg, #0063a3 0%, #004a7c 100%); z-index: 0; }
         .main-card { position: relative; z-index: 10; background: white; border-radius: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); width: 95%; max-width: 72rem; margin: 4rem auto; padding: 2.5rem; }
         
-        /* NEW POLISHED TOP NAV */
+        .journey-step { transition: all 0.3s ease; cursor: pointer; }
+        .journey-step:hover { transform: translateY(-5px); }
+        .journey-step:hover .step-num { background-color: #0063a3; color: white; box-shadow: 0 10px 15px -3px rgba(0, 99, 163, 0.3); }
+
         .step-item { flex: 1; text-align: center; padding: 1rem 0.5rem; border-radius: 1rem; transition: all 0.3s ease; cursor: pointer; position: relative; }
-        .step-item:hover { background-color: #f1f5f9; }
         .step-pill { height: 6px; background: #e2e8f0; border-radius: 10px; transition: 0.3s; margin-bottom: 10px; width: 80%; margin-left: auto; margin-right: auto; }
         .active .step-pill { background: #0063a3; box-shadow: 0 0 10px rgba(0,99,163,0.3); height: 8px; }
         .step-label { font-size: 0.8rem; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.025em; transition: 0.3s; }
         .active .step-label { color: #0063a3; font-weight: 800; }
         
-        .journey-step { cursor: default; }
         .btn { transition: all 0.2s; font-weight: 800; border-radius: 0.75rem; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; border: none; }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
         .coach-note { background: #fffbeb; border-left: 5px solid #fbad26; padding: 1.5rem; border-radius: 0.5rem; }
@@ -37,12 +38,13 @@
         .input-field:focus { border-color: #0063a3; outline: none; box-shadow: 0 0 0 4px rgba(0,99,163,0.1); }
         input[type=range] { -webkit-appearance: none; width: 100%; height: 10px; background: #e2e8f0; border-radius: 10px; outline: none; }
         input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 28px; height: 28px; background: #0063a3; border-radius: 50%; border: 3px solid white; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .example-block { background: #f8fafc; border-radius: 0.75rem; padding: 1rem; margin-top: 1rem; border: 1px dashed #cbd5e1; }
     </style>
 </head>
 <body>
     <div class="wave-container"></div>
     <div class="main-card">
-        <div class="absolute top-6 right-8 text-xs text-gray-400 font-mono tracking-widest uppercase">v16.10.00</div>
+        <div class="absolute top-6 right-8 text-xs text-gray-400 font-mono tracking-widest uppercase">v18.80.00</div>
 
         <div id="welcome-screen" class="text-center space-y-12">
             <div class="space-y-4">
@@ -53,36 +55,53 @@
             <div class="bg-white p-10 rounded-3xl border border-slate-100 shadow-sm max-w-4xl mx-auto">
                 <h2 class="text-3xl font-bold text-slate-800 mb-4">Your Professional Roadmap</h2>
                 <p class="text-slate-600 text-lg leading-relaxed text-center">
-                    This tool is designed to help everyone at Trimble create a clear, actionable path for the year ahead. Whether you manage sales quotas, technical projects, or operational tasks, success is driven by intentional planning. Use this session to reflect on your impact and commit to the strategies that will define your 2026.
+                    This tool helps every Account Executive at Trimble create a clear, actionable path for 2026. Success is driven by intentional planning: use this session to reflect on your impact and commit to the strategies that will define your year.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-5 gap-6 max-w-5xl mx-auto">
-                <div class="journey-step text-center"><div class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center font-black mx-auto mb-4">1</div><h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Baseline</h4></div>
-                <div class="journey-step text-center"><div class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center font-black mx-auto mb-4">2</div><h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500">The Gap</h4></div>
-                <div class="journey-step text-center"><div class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center font-black mx-auto mb-4">3</div><h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 text-center">Solution</h4></div>
-                <div class="journey-step text-center"><div class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center font-black mx-auto mb-4 text-center">4</div><h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 text-center">Actions</h4></div>
-                <div class="journey-step text-center"><div class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center font-black mx-auto mb-4 text-center">5</div><h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 text-center">Review</h4></div>
+                <div class="journey-step text-center">
+                    <div class="step-num w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center font-black mx-auto mb-4 transition">1</div>
+                    <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Baseline</h4>
+                    <p class="text-[9px] text-slate-400 mt-2 leading-tight">Establish starting point.</p>
+                </div>
+                <div class="journey-step text-center">
+                    <div class="step-num w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center font-black mx-auto mb-4 transition">2</div>
+                    <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500">The Gap</h4>
+                    <p class="text-[9px] text-slate-400 mt-2 leading-tight">Identify volume needed.</p>
+                </div>
+                <div class="journey-step text-center">
+                    <div class="step-num w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center font-black mx-auto mb-4 transition">3</div>
+                    <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Solution</h4>
+                    <p class="text-[9px] text-slate-400 mt-2 leading-tight">Optimize with levers.</p>
+                </div>
+                <div class="journey-step text-center">
+                    <div class="step-num w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center font-black mx-auto mb-4 transition">4</div>
+                    <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Actions</h4>
+                    <p class="text-[9px] text-slate-400 mt-2 leading-tight">Commit to execution.</p>
+                </div>
+                <div class="journey-step text-center">
+                    <div class="step-num w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center font-black mx-auto mb-4 transition">5</div>
+                    <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Review</h4>
+                    <p class="text-[9px] text-slate-400 mt-2 leading-tight">Verify and finalize.</p>
+                </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto text-left">
                 <div class="p-8 bg-white border border-slate-200 rounded-3xl shadow-sm hover:shadow-xl transition">
-                    <div class="text-4xl mb-4">👥</div><h4 class="font-extrabold text-slate-900 mb-3 text-xl">People</h4><p class="text-sm text-slate-500 font-medium leading-relaxed">Focus on expertise. Identify the skills, collaboration habits, or coaching you need to build impact.</p>
+                    <div class="text-4xl mb-4">👥</div><h4 class="font-extrabold text-slate-900 text-xl">People</h4>
+                    <p class="text-[10px] font-black uppercase text-primary mb-3 tracking-widest">Skill Mastery</p>
+                    <p class="text-sm text-slate-500 font-medium leading-relaxed">Focus on expertise. Identify the skills, collaboration habits, or coaching you need to build impact.</p>
                 </div>
                 <div class="p-8 bg-white border border-slate-200 rounded-3xl shadow-sm hover:shadow-xl transition">
-                    <div class="text-4xl mb-4">📈</div><h4 class="font-extrabold text-slate-900 mb-3 text-xl">Pipeline</h4><p class="text-sm text-slate-500 leading-relaxed text-left">Manage the funnel. Ensure a predictable flow of results from sales to project milestones.</p>
+                    <div class="text-4xl mb-4">📈</div><h4 class="font-extrabold text-slate-900 text-xl">Pipeline</h4>
+                    <p class="text-[10px] font-black uppercase text-primary mb-3 tracking-widest">Volume & Flow</p>
+                    <p class="text-sm text-slate-500 leading-relaxed">Manage the funnel. Ensure a predictable flow of results from sales to project milestones.</p>
                 </div>
                 <div class="p-8 bg-white border border-slate-200 rounded-3xl shadow-sm hover:shadow-xl transition">
-                    <div class="text-4xl mb-4 text-left">⚡</div><h4 class="font-extrabold text-slate-900 mb-3 text-xl text-left">Productivity</h4><p class="text-sm text-slate-500 font-medium text-left leading-relaxed">Maximize time. Master the tools and routines that allow focus on high-value output.</p>
-                </div>
-            </div>
-
-            <div class="bg-slate-50 p-8 rounded-2xl max-w-4xl mx-auto text-left border border-slate-200 shadow-sm text-left">
-                <h4 class="text-xs font-black uppercase text-slate-400 mb-6 text-center tracking-widest text-center">Expectations</h4>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-slate-600 text-left">
-                    <div><strong>Ownership:</strong> This roadmap belongs to you. Management will support you, but you own the execution.</div>
-                    <div><strong>Detail:</strong> Specificity is critical. Detailed goals allow management to align resources.</div>
-                    <div class="text-left"><strong>Intentionality:</strong> These goals drive your 2026 coaching sessions.</div>
+                    <div class="text-4xl mb-4">⚡</div><h4 class="font-extrabold text-slate-900 text-xl">Productivity</h4>
+                    <p class="text-[10px] font-black uppercase text-primary mb-3 tracking-widest">Time & Focus</p>
+                    <p class="text-sm text-slate-500 font-medium leading-relaxed">Maximize time. Master the tools and routines that allow focus on high-value output.</p>
                 </div>
             </div>
 
@@ -99,103 +118,146 @@
             </nav>
 
             <form id="skoForm" onsubmit="return false;" class="text-left space-y-12">
+                
                 <div id="step-1-panel" class="step-panel space-y-8">
                     <h2 class="text-3xl font-extrabold text-left">Performance Baseline</h2>
-                    <div class="coach-note text-left">Enter your 2025 actual results to establish an efficiency baseline. If you do not have historical data, enter <strong>"0"</strong> to proceed.</div>
+                    <div class="coach-note text-left">
+                        <strong>Why we ask:</strong> Success starts with a reality check. Establishing your 2025 baseline allows us to identify exactly which efficiency levers will have the biggest impact on your 2026 outcomes.<br><br>
+                        <strong>Instruction:</strong> Please reference your <strong>Scorecard</strong> to find this data. If you do not have historical data for your role, enter <strong>0</strong> to proceed.
+                    </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
                         <div><label class="block font-bold text-sm mb-2 text-slate-700 uppercase tracking-wide">Name</label><input type="text" id="personName" class="input-field" placeholder="Full Name"></div>
                         <div><label class="block font-bold text-sm mb-2 text-slate-700 uppercase tracking-wide">Manager</label><input type="text" id="managerName" class="input-field" placeholder="Manager Name"></div>
-                        <div class="md:col-span-2 text-left"><label class="block font-bold text-sm mb-2 text-slate-700 uppercase tracking-wide text-left">Operational Region</label>
+                        <div class="md:col-span-2">
+                            <label class="block font-bold text-sm mb-2 text-slate-700 uppercase">Operational Region</label>
                             <select id="region" class="input-field"><option value="" disabled selected>Select region...</option><option value="Americas - Customer">Americas - Customer</option><option value="Americas - New Logo">Americas - New Logo</option><option value="APAC">APAC</option><option value="EMEA">EMEA</option><option value="O&PS">O&PS</option></select>
                         </div>
-                        <div><label class="block font-bold text-sm mb-2 text-slate-700 uppercase tracking-wide">2025 Target ($)</label><input type="text" id="quota2025" class="input-field" value="0"></div>
-                        <div><label class="block font-bold text-sm mb-2 text-slate-700 uppercase tracking-wide">2025 Comped Bookings ($)</label><input type="text" id="bookings2025" class="input-field" value="0"></div>
-                        <div><label class="block font-bold text-sm mb-2 text-slate-700 uppercase tracking-wide">2025 ACV Based Win Rate (%)</label><input type="number" id="winRate2025" class="input-field" value="0"></div>
-                        <div><label class="block font-bold text-sm mb-2 text-slate-700 uppercase tracking-wide">2025 Overall Avg Deal Size ($)</label><input type="text" id="avgDealSize2025" class="input-field" value="0"></div>
-                        <div class="md:col-span-2 bg-primary-light p-10 rounded-2xl text-center"><span class="block text-primary font-black uppercase text-xs mb-2 tracking-[0.2em]">2025 Performance Attainment</span><span id="attainment2025" class="text-6xl font-black text-primary">0%</span></div>
+                        <div><label class="block font-bold text-sm mb-2 text-slate-700 uppercase">2025 Target ($)</label><input type="text" id="quota2025" class="input-field" value="0"></div>
+                        <div><label class="block font-bold text-sm mb-2 text-slate-700 uppercase">2025 Bookings ($)</label><input type="text" id="bookings2025" class="input-field" value="0"></div>
+                        <div><label class="block font-bold text-sm mb-2 text-slate-700 uppercase">2025 Win Rate (%)</label><input type="number" id="winRate2025" class="input-field" value="0"></div>
+                        <div><label class="block font-bold text-sm mb-2 text-slate-700 uppercase">2025 Avg Deal Size ($)</label><input type="text" id="avgDealSize2025" class="input-field" value="0"></div>
+                        <div class="md:col-span-2 bg-primary-light p-10 rounded-2xl text-center"><span class="block text-primary font-black uppercase text-xs mb-2 tracking-[0.2em]">2025 Performance Attainment</span><span id="attainment2025" class="text-6xl font-black text-primary text-center">0%</span></div>
                     </div>
                 </div>
 
-                <div id="step-2-panel" class="step-panel hidden space-y-10 text-center">
-                    <h2 class="text-3xl font-extrabold text-left text-left">Efficiency Gap Analysis</h2>
+                <div id="step-2-panel" class="step-panel hidden space-y-10">
+                    <h2 class="text-3xl font-extrabold text-left">Efficiency Gap Analysis</h2>
+                    <div class="coach-note text-left text-left">
+                        <strong>Why we ask:</strong> This identifies the "Mountain to Climb." By seeing the raw volume needed at current efficiency, we establish the urgency for the strategic shifts in Phase 3.<br><br>
+                        <strong>Instruction:</strong> Enter your 2026 Quota below to identify your baseline efficiency gap.
+                    </div>
                     <div class="max-w-2xl mx-auto space-y-10 text-center">
                         <div><label class="block font-black text-xl mb-4 text-center">My 2026 Quota</label><input type="text" id="quota2026" class="input-field text-center text-4xl font-black border-2 border-primary/10 py-6" placeholder="0"></div>
-                        <div class="grid grid-cols-2 gap-8 text-center text-center">
-                            <div class="bg-slate-50 p-10 rounded-3xl border shadow-inner text-center"><span class="text-xs font-black text-slate-400 uppercase block mb-2 text-center text-center text-center">Required Pipeline</span><span id="pipelineToClose2026" class="text-3xl font-bold text-slate-900 text-center text-center">$0</span></div>
-                            <div class="bg-slate-50 p-10 rounded-3xl border shadow-inner text-center"><span class="text-xs font-black text-slate-400 uppercase block mb-2 text-center text-center text-center">Required Deals</span><span id="dealsToClose2026" class="text-3xl font-bold text-slate-900 text-center text-center text-center">0</span></div>
+                        <div class="grid grid-cols-2 gap-8">
+                            <div class="bg-slate-50 p-10 rounded-3xl border shadow-inner text-center"><span class="text-xs font-black text-slate-400 uppercase block mb-2 text-center">Required Pipeline</span><span id="pipelineToClose2026" class="text-3xl font-bold text-slate-900 text-center">$0</span></div>
+                            <div class="bg-slate-50 p-10 rounded-3xl border shadow-inner text-center"><span class="text-xs font-black text-slate-400 uppercase block mb-2 text-center text-center">Required Deals</span><span id="dealsToClose2026" class="text-3xl font-bold text-slate-900 text-center text-center">0</span></div>
                         </div>
                     </div>
                     <div class="p-10 bg-slate-50 rounded-3xl border border-slate-200 max-w-2xl mx-auto text-center">
-                        <label class="block font-black text-slate-700 mb-6 text-center text-center">How does this gap feel?</label>
-                        <div class="flex flex-col md:flex-row gap-4 text-center text-center">
-                            <label class="flex-1 cursor-pointer group text-center text-center text-center text-center"><input type="radio" name="feeling" value="Achievable" class="sr-only peer"><div class="p-5 border-2 rounded-2xl font-bold transition peer-checked:bg-primary peer-checked:text-white bg-white hover:border-primary text-center">Achievable</div></label>
-                            <label class="flex-1 cursor-pointer group text-center text-center text-center text-center text-center"><input type="radio" name="feeling" value="Challenging" class="sr-only peer"><div class="p-5 border-2 rounded-2xl font-bold transition peer-checked:bg-primary peer-checked:text-white bg-white hover:border-primary text-center">Challenging</div></label>
-                            <label class="flex-1 cursor-pointer group text-center text-center text-center text-center text-center text-center text-center text-center"><input type="radio" name="feeling" value="Impossible" class="sr-only peer"><div class="p-5 border-2 rounded-2xl font-bold transition peer-checked:bg-primary peer-checked:text-white bg-white hover:border-primary text-center">Impossible</div></label>
+                        <label class="block font-black text-slate-700 mb-6 text-center">How does this gap feel?</label>
+                        <div class="flex flex-col md:flex-row gap-4 text-center">
+                            <label class="flex-1 cursor-pointer group text-center"><input type="radio" name="feeling" value="Achievable" class="sr-only peer"><div class="p-5 border-2 rounded-2xl font-bold transition peer-checked:bg-primary peer-checked:text-white bg-white hover:border-primary text-center">Achievable</div></label>
+                            <label class="flex-1 cursor-pointer group text-center text-center"><input type="radio" name="feeling" value="Challenging" class="sr-only peer"><div class="p-5 border-2 rounded-2xl font-bold transition peer-checked:bg-primary peer-checked:text-white bg-white hover:border-primary text-center">Challenging</div></label>
+                            <label class="flex-1 cursor-pointer group text-center text-center"><input type="radio" name="feeling" value="Impossible" class="sr-only peer"><div class="p-5 border-2 rounded-2xl font-bold transition peer-checked:bg-primary peer-checked:text-white bg-white hover:border-primary text-center">Impossible</div></label>
                         </div>
                     </div>
                 </div>
 
                 <div id="step-3-panel" class="step-panel hidden space-y-10 text-left">
-                    <h2 class="text-3xl font-extrabold text-left text-left text-left">Strategic Efficiency Levers</h2>
-                    <div class="space-y-12 text-left">
+                    <h2 class="text-3xl font-extrabold text-left text-left">Strategic Efficiency Levers</h2>
+                    <div class="coach-note text-left text-left text-left">
+                        <strong>Why we ask:</strong> We want to work smarter, not harder. Pulling these levers allows you to model how improvements in skill directly reduce the volume of work required to hit your quota.<br><br>
+                        <strong>Instruction:</strong> Adjust the sliders below to model your 2026 strategy.
+                    </div>
+                    
+                    <div class="space-y-12">
                         <div class="bg-white border-2 p-10 rounded-[2rem] shadow-sm text-left">
-                            <h4 class="font-bold text-2xl mb-2 text-slate-800">Lever 1: Engagement Growth</h4><p class="text-sm text-slate-500 mb-6 leading-relaxed">Targeted meeting increases for deeper discovery.</p>
-                            <div class="flex justify-between items-center mb-4 text-left"><label class="font-bold text-slate-700">Growth Target</label><span id="meetingImprovementLabel" class="bg-primary-light text-primary px-6 py-2 rounded-full font-black">0</span></div>
+                            <h4 class="font-bold text-2xl mb-2 text-slate-800 text-left">Lever 1: Engagement Growth (The Meeting Lever)</h4>
+                            <div class="example-block text-left"><p class="text-xs font-bold text-slate-400 uppercase mb-1">Practical Example</p><p class="text-sm text-slate-600 italic">"If I increase discovery calls from 5 to 8 per week, I am committing to more proactive outreach to build a larger base for success."</p></div>
+                            <div class="flex justify-between items-center mb-4 mt-6 text-left"><label class="font-bold text-slate-700">Meeting Growth Target</label><span id="meetingImprovementLabel" class="bg-primary-light text-primary px-6 py-2 rounded-full font-black">0</span></div>
                             <input type="range" id="meetingImprovement" min="0" max="20" value="0">
                         </div>
-                        <div class="bg-white border-2 p-10 rounded-[2rem] shadow-sm text-left">
-                            <h4 class="font-bold text-2xl mb-2 text-emerald-700">Lever 2: Deal Value Growth</h4><p class="text-sm text-slate-500 mb-6 leading-relaxed">Increase in average deal size through comprehensive solutions.</p>
-                            <div class="flex justify-between items-center mb-4 text-left text-left"><label class="font-bold text-slate-700">Growth %</label><span id="dealSizeImprovementLabel" class="bg-emerald-50 text-emerald-600 px-6 py-2 rounded-full font-black">0%</span></div>
+                        <div class="bg-white border-2 p-10 rounded-[2rem] shadow-sm text-left text-left">
+                            <h4 class="font-bold text-2xl mb-2 text-emerald-700 text-left">Lever 2: Creating Deal Value (The Deal Size Lever)</h4>
+                            <div class="example-block text-left text-left"><p class="text-xs font-bold text-slate-400 uppercase mb-1 text-left">Practical Example</p><p class="text-sm text-slate-600 italic text-left">"By looking for opportunities to expand scope or add high-value outcomes early in the discovery phase, I can create larger deals out of standard opportunities."</p></div>
+                            <div class="flex justify-between items-center mb-4 mt-6 text-left text-left"><label class="font-bold text-slate-700">Deal Size Growth %</label><span id="dealSizeImprovementLabel" class="bg-emerald-50 text-emerald-600 px-6 py-2 rounded-full font-black text-left">0%</span></div>
                             <input type="range" id="dealSizeImprovement" min="0" max="50" value="0">
                         </div>
                         <div class="bg-white border-2 p-10 rounded-[2rem] shadow-sm text-left text-left">
-                            <h4 class="font-bold text-2xl mb-2 text-blue-700 text-left text-left">Lever 3: Win Rate Mastery</h4>
-                            <div class="flex justify-between items-center mb-4 text-left text-left text-left text-left text-left"><label class="font-bold text-slate-700 text-lg">Growth %</label><span id="winRateImprovementLabel" class="bg-blue-50 text-blue-600 px-6 py-2 rounded-full font-black text-left text-left text-left text-left">0%</span></div>
+                            <h4 class="font-bold text-2xl mb-2 text-blue-700 text-left text-left">Lever 3: Win Rate Mastery (The Precision Lever)</h4>
+                            <div class="example-block text-left text-left text-left"><p class="text-xs font-bold text-slate-400 uppercase mb-1 text-left text-left">Practical Example</p><p class="text-sm text-slate-600 italic text-left text-left">"If I master discovery to win 1 out of 3 deals instead of 1 out of 4, I save dozens of hours while producing the same total revenue."</p></div>
+                            <div class="flex justify-between items-center mb-4 mt-6 text-left text-left text-left"><label class="font-bold text-slate-700 text-lg">Win Rate Improvement %</label><span id="winRateImprovementLabel" class="bg-blue-50 text-blue-600 px-6 py-2 rounded-full font-black text-left text-left">0%</span></div>
                             <input type="range" id="winRateImprovement" min="0" max="15" step="0.5" value="0">
-                            <div class="grid grid-cols-2 gap-8 mt-10 border-t pt-10 text-left text-left text-left">
-                                <div class="text-left text-left text-left text-left text-left text-left text-left text-left text-left"><span class="text-[10px] font-black uppercase text-slate-400 block mb-2 text-left text-left">My Targeted Win Rate %</span><span id="targetedWinRateDisplay" class="text-3xl font-black text-blue-700 text-left text-left">0%</span></div>
-                                <div class="text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left"><span class="text-[10px] font-black uppercase text-slate-400 block mb-2 text-left text-left text-left">My Targeted Pipeline Coverage</span><span id="newPipelineNeeded" class="text-3xl font-black text-slate-900 text-left text-left text-left text-left text-left text-left">$0</span></div>
+                            <div class="grid grid-cols-2 gap-8 mt-10 border-t pt-10 text-left">
+                                <div class="text-left"><span class="text-[10px] font-black uppercase text-slate-400 block mb-2 text-left">Targeted Win Rate %</span><span id="targetedWinRateDisplay" class="text-3xl font-black text-blue-700 text-left">0%</span></div>
+                                <div class="text-left text-left"><span class="text-[10px] font-black uppercase text-slate-400 block mb-2 text-left text-left">Optimized Pipeline Needed</span><span id="newPipelineNeeded" class="text-3xl font-black text-slate-900 text-left text-left">$0</span></div>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-primary-light p-10 rounded-[2rem] border-2 border-primary/20 space-y-6 text-left">
+                        <h3 class="text-xl font-black text-primary uppercase tracking-wide text-left">My Primary Focus Goal</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed font-medium text-left">Select the primary lever that will define your strategy this year. Focusing your energy on one core metric often leads to the most predictable results.</p>
+                        <div class="flex flex-col md:flex-row gap-4 text-center">
+                            <label class="flex-1 cursor-pointer group text-center text-left"><input type="radio" name="focus_goal" value="Win Rate" class="sr-only peer"><div class="p-4 border-2 border-white rounded-2xl font-bold text-center transition peer-checked:bg-primary peer-checked:text-white bg-white/50 hover:bg-white text-center">Win Rate</div></label>
+                            <label class="flex-1 cursor-pointer group text-center text-center"><input type="radio" name="focus_goal" value="Deal Size" class="sr-only peer"><div class="p-4 border-2 border-white rounded-2xl font-bold text-center transition peer-checked:bg-primary peer-checked:text-white bg-white/50 hover:bg-white text-center">Deal Size</div></label>
+                            <label class="flex-1 cursor-pointer group text-center text-center text-center"><input type="radio" name="focus_goal" value="Deal Count" class="sr-only peer"><div class="p-4 border-2 border-white rounded-2xl font-bold text-center transition peer-checked:bg-primary peer-checked:text-white bg-white/50 hover:bg-white text-center">Deal Count</div></label>
                         </div>
                     </div>
                 </div>
 
                 <div id="step-4-panel" class="step-panel hidden space-y-12 text-left">
-                    <h2 class="text-3xl font-extrabold text-left text-left text-left">Action Plan Roadmap</h2>
-                    <div class="coach-note text-left text-left text-left text-left text-left">
-                        <h4 class="font-black text-sm uppercase mb-3 text-slate-900 text-left text-left">Strategic Intent</h4>
-                        <p class="mb-5 font-medium text-slate-600 leading-relaxed text-left text-left text-left">This Action Plan is your foundation. These commitments represent the personal roadmap management will use to align resources and provide targeted coaching.</p>
-                        <div class="border-t border-slate-200 pt-6 text-left text-left text-left text-left text-left">
-                            <strong class="block mb-4 text-slate-800 uppercase text-xs tracking-wider text-left text-left text-left">The SMART Goal Framework (How to write them):</strong>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-left text-left text-left text-left text-left text-left text-left">
-                                <div class="flex items-start gap-3 text-left"><span><strong>S: Specific</strong> - Define exactly what you will do. Avoid vague terms.</span></div>
-                                <div class="flex items-start gap-3 text-left text-left"><span><strong>M: Measurable</strong> - Add a number or specific milestone.</span></div>
-                                <div class="flex items-start gap-3 text-left text-left text-left text-left"><span><strong>A: Achievable</strong> - Reality check. Ensure the goal is realistic.</span></div>
-                                <div class="flex items-start gap-3 text-left text-left text-left text-left text-left"><span><strong>R: Relevant</strong> - Align with your role and objectives.</span></div>
-                                <div class="flex items-start gap-3 text-left text-left text-left text-left text-left text-left text-left"><span><strong>T: Time-bound</strong> - Set a clear deadline for execution.</span></div>
+                    <h2 class="text-3xl font-extrabold text-left text-left">Action Plan Roadmap</h2>
+                    <div class="coach-note text-left text-left text-left">
+                        <h4 class="font-black text-sm uppercase mb-3 text-slate-900 text-left">Strategic Intent</h4>
+                        <p class="mb-5 font-medium text-slate-600 leading-relaxed text-left">
+                            This section is the strategic cornerstone of your success plan. It is the definitive foundation of your professional roadmap: management will use these commitments to align resources and provide targeted coaching throughout the fiscal year. 
+                        </p>
+                        <p class="mb-5 font-bold text-primary leading-relaxed text-left">
+                            You have been provided with a 45-minute deep-work window for a reason: specificity dictates success. Use this time to move beyond general ideas and commit to the tactical behaviors that will drive your specific efficiency targets.
+                        </p>
+                        <div class="border-t border-slate-200 pt-6 text-left">
+                            <strong class="block mb-4 text-slate-800 uppercase text-xs tracking-wider text-left">The SMART Goal Framework:</strong>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-left">
+                                <div><strong>S: Specific</strong>; Define exactly what you will do.</div>
+                                <div><strong>M: Measurable</strong>; Add a number or specific milestone.</div>
+                                <div><strong>A: Achievable</strong>; Reality check: ensure the goal is realistic.</div>
+                                <div><strong>R: Relevant</strong>; Align with your 2026 targets.</div>
+                                <div><strong>T: Time-bound</strong>; Set a clear deadline for execution.</div>
+                            </div>
+                            <div class="mt-8 border-t border-slate-200 pt-6 text-left">
+                                <strong class="block mb-4 text-slate-800 uppercase text-xs tracking-wider text-left">How to Apply:</strong>
+                                <div class="space-y-3 text-sm text-left">
+                                    <p><strong>1. Sharpen Focus:</strong> Avoid vague terms like "improve." State exactly *what* you will own.</p>
+                                    <p><strong>2. Define Evidence:</strong> How will we know it worked? Attach a clear number or binary milestone.</p>
+                                    <p><strong>3. Lock in Clock:</strong> Assign a clear deadline to prevent your roadmap from becoming an indefinite wish-list.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="space-y-8 text-left text-left text-left text-left text-left">
-                        <div><label class="block font-black text-primary mb-4 text-xl text-left text-left">Strategic Goal #1</label><textarea id="goal1" class="input-field min-h-[140px]" placeholder="Enter commitment..."></textarea></div>
-                        <div><label class="block font-black text-primary mb-4 text-xl text-left text-left text-left">Strategic Goal #2</label><textarea id="goal2" class="input-field min-h-[140px]" placeholder="Enter commitment..."></textarea></div>
-                        <div><label class="block font-black text-primary mb-4 text-xl text-left text-left text-left text-left">Strategic Goal #3</label><textarea id="goal3" class="input-field min-h-[140px]" placeholder="Enter commitment..."></textarea></div>
+                    <div class="space-y-8 text-left">
+                        <div><label class="block font-black text-primary mb-4 text-xl text-left">Strategic Goal #1</label><textarea id="goal1" class="input-field min-h-[140px]" placeholder="Enter commitment..."></textarea></div>
+                        <div><label class="block font-black text-primary mb-4 text-xl text-left text-left">Strategic Goal #2</label><textarea id="goal2" class="input-field min-h-[140px]" placeholder="Enter commitment..."></textarea></div>
+                        <div><label class="block font-black text-primary mb-4 text-xl text-left text-left text-left">Strategic Goal #3</label><textarea id="goal3" class="input-field min-h-[140px]" placeholder="Enter commitment..."></textarea></div>
                     </div>
                 </div>
 
-                <div id="step-5-panel" class="step-panel hidden space-y-10 text-center text-center text-center text-center">
-                    <h2 class="text-3xl font-extrabold text-left text-left text-left text-left">Review & Commit</h2>
-                    <div id="commitmentSummaryOutput" class="bg-slate-50 p-12 rounded-[2rem] font-mono text-xs whitespace-pre-wrap leading-loose border-2 text-left shadow-inner text-left text-left text-left text-left text-left"></div>
-                    <div class="space-y-6 text-center text-center text-center text-center text-center">
-                        <button id="submitBtn" class="btn bg-accent text-slate-900 w-full text-3xl py-10 shadow-2xl hover:scale-[1.01] text-center text-center text-center text-center">Review & Commit My Plan</button>
-                        <div class="flex justify-center gap-12 text-slate-400 text-center text-center text-center text-center text-center"><button id="copyBtn" class="font-bold uppercase text-xs hover:text-primary tracking-widest text-center text-center text-center text-center text-center">Copy Text</button><button onclick="window.print()" class="font-bold uppercase text-xs hover:text-primary tracking-widest text-center text-center text-center text-center text-center">Save PDF</button></div>
+                <div id="step-5-panel" class="step-panel hidden space-y-10 text-center text-left">
+                    <h2 class="text-3xl font-extrabold text-left text-left text-left">Final Review</h2>
+                    <div class="coach-note text-left text-left text-left text-left">
+                        <strong>Instruction:</strong> Review your summary below carefully. You can <strong>Copy Text</strong> for your personal records or <strong>Save PDF</strong>. Clicking "Review & Commit" is the second-to-last step: it will open your plan in the official review interface for one final look before you hit the final submit button.
+                    </div>
+                    <div id="commitmentSummaryOutput" class="bg-slate-50 p-12 rounded-[2rem] font-mono text-xs whitespace-pre-wrap leading-loose border-2 text-left shadow-inner"></div>
+                    <div class="space-y-6 text-center text-left">
+                        <button id="submitBtn" class="btn bg-accent text-slate-900 w-full text-3xl py-10 shadow-2xl hover:scale-[1.01] text-center">Review & Commit My Plan</button>
+                        <div class="flex justify-center gap-12 text-slate-400 text-center text-left"><button id="copyBtn" class="font-bold uppercase text-xs hover:text-primary tracking-widest text-center">Copy Text</button><button onclick="window.print()" class="font-bold uppercase text-xs hover:text-primary tracking-widest text-center">Save PDF</button></div>
                     </div>
                 </div>
 
-                <div id="nav-btn-container" class="mt-20 flex justify-between border-t pt-12 text-center text-center text-center text-center text-center">
-                    <button id="prevBtn" class="btn bg-slate-100 text-slate-500 px-12 py-5 hidden text-center text-center text-center text-center text-center">Previous Phase</button>
-                    <div class="flex-grow text-center text-center text-center text-center text-center"></div>
-                    <button id="nextBtn" class="btn bg-primary text-white px-16 py-5 shadow-xl text-center text-center text-center text-center text-center">Next Phase</button>
+                <div id="nav-btn-container" class="mt-20 flex justify-between border-t pt-12">
+                    <button id="prevBtn" class="btn bg-slate-100 text-slate-500 px-12 py-5 hidden">Previous Phase</button>
+                    <div class="flex-grow"></div>
+                    <button id="nextBtn" class="btn bg-primary text-white px-16 py-5 shadow-xl">Next Phase</button>
                 </div>
             </form>
         </div>
@@ -207,16 +269,21 @@
     const fmt = (v) => '$' + v.toLocaleString(undefined, {maximumFractionDigits:0});
 
     function calculate() {
-        const q25 = getVal('quota2025'), b25 = getVal('bookings2025'), wr25 = getVal('winRate2025'), q26 = getVal('quota2026'), wrImp = getVal('winRateImprovement');
+        const q25 = getVal('quota2025'), b25 = getVal('bookings2025'), wr25 = getVal('winRate2025'), ads25 = getVal('avgDealSize2025');
+        const q26 = getVal('quota2026'), wrImp = getVal('winRateImprovement');
+
         $('attainment2025').innerText = q25 > 0 ? (b25/q25*100).toFixed(1) + '%' : '0%';
-        $('pipelineToClose2026').innerText = fmt(wr25 > 0 ? q26 / (wr25/100) : 0);
-        $('dealsToClose2026').innerText = getVal('avgDealSize2025') > 0 ? Math.ceil(q26 / getVal('avgDealSize2025')) : 0;
-        $('winRateImprovementLabel').innerText = wrImp + '%';
-        const finalWR = wr25 + wrImp;
-        $('targetedWinRateDisplay').innerText = finalWR + '%';
-        $('newPipelineNeeded').innerText = finalWR > 0 ? fmt(q26 / (finalWR/100)) : '$0';
+        const baseWR = wr25 / 100;
+        $('pipelineToClose2026').innerText = baseWR > 0 ? fmt(q26 / baseWR) : fmt(0);
+        $('dealsToClose2026').innerText = ads25 > 0 ? Math.ceil(q26 / ads25) : 0;
+
         $('meetingImprovementLabel').innerText = $('meetingImprovement').value;
         $('dealSizeImprovementLabel').innerText = $('dealSizeImprovement').value + '%';
+        $('winRateImprovementLabel').innerText = wrImp + '%';
+        
+        const finalWR = (wr25 + wrImp).toFixed(1);
+        $('targetedWinRateDisplay').innerText = finalWR + '%';
+        $('newPipelineNeeded').innerText = finalWR > 0 ? fmt(q26 / (finalWR/100)) : '$0';
     }
 
     let step = 1;
@@ -232,29 +299,24 @@
     }
 
     function renderSummary() {
-        const q26 = getVal('quota2026');
-        const winRateFinal = getVal('winRate2025') + getVal('winRateImprovement');
+        const winRateFinal = (getVal('winRate2025') + getVal('winRateImprovement')).toFixed(1);
         const pipeFinal = winRateFinal > 0 ? (getVal('quota2026') / (winRateFinal/100)) : 0;
         const feeling = document.querySelector('input[name="feeling"]:checked')?.value || "Not Set";
+        const focusGoal = document.querySelector('input[name="focus_goal"]:checked')?.value || "Not Set";
 
         $('commitmentSummaryOutput').innerText = 
-            `--- 2025 BASELINE ---` +
-            `\nNAME: ${$('personName').value}` +
-            `\nMANAGER: ${$('managerName').value}` +
-            `\nREGION: ${$('region').value}` +
-            `\n2025 TARGET: ${fmt(getVal('quota2025'))}` +
-            `\n2025 BOOKINGS: ${fmt(getVal('bookings2025'))}` +
-            `\n2025 ATTAINMENT: ${$('attainment2025').innerText}` +
-            `\n\n--- 2026 QUOTA COMMITMENT ---` +
-            `\nMY 2026 QUOTA: ${fmt(q26)}` +
-            `\nFEELING: ${feeling}` +
-            `\n\n--- 2026 EFFICIENCY TARGETS ---` +
-            `\nTARGETED WIN RATE: ${winRateFinal}%` +
-            `\nTARGETED PIPELINE COVERAGE: ${fmt(pipeFinal)}` +
-            `\n\n--- 2026 STRATEGIC GOALS ---` +
-            `\nGOAL 1: ${$('goal1').value}` +
-            `\nGOAL 2: ${$('goal2').value}` +
-            `\nGOAL 3: ${$('goal3').value}`;
+            `--- 2026 SUCCESS PLAN REVIEW ---\n` +
+            `NAME: ${$('personName').value} | MANAGER: ${$('managerName').value}\n` +
+            `REGION: ${$('region').value}\n` +
+            `2026 QUOTA: ${fmt(getVal('quota2026'))} (${feeling})\n\n` +
+            `--- STRATEGIC FOCUS ---\n` +
+            `PRIMARY FOCUS GOAL: ${focusGoal}\n\n` +
+            `--- EFFICIENCY TARGETS ---\n` +
+            `WIN RATE: ${winRateFinal}% | PIPELINE NEEDED: ${fmt(pipeFinal)}\n\n` +
+            `--- STRATEGIC COMMITMENTS ---\n` +
+            `GOAL 1: ${$('goal1').value}\n` +
+            `GOAL 2: ${$('goal2').value}\n` +
+            `GOAL 3: ${$('goal3').value}`;
     }
 
     $('startBtn').onclick = () => { $('welcome-screen').classList.add('hidden'); $('wizard-container').classList.remove('hidden'); calculate(); };
@@ -263,18 +325,20 @@
     document.querySelectorAll('.step-item').forEach(el => el.onclick = () => { step = parseInt(el.dataset.step); updateWizard(); });
 
     $('submitBtn').onclick = () => {
-        const quotaValue = Math.round(getVal('quota2026'));
-        const winRateValue = getVal('winRate2025') + getVal('winRateImprovement');
-        const pipeValue = winRateValue > 0 ? Math.round(getVal('quota2026') / (winRateValue / 100)) : 0;
+        const qVal = Math.round(getVal('quota2026'));
+        const wrVal = (getVal('winRate2025') + getVal('winRateImprovement')).toFixed(1);
+        const pipeVal = wrVal > 0 ? Math.round(getVal('quota2026') / (wrVal / 100)) : 0;
+        const feelingValue = document.querySelector('input[name="feeling"]:checked')?.value || "";
+        const focusValue = document.querySelector('input[name="focus_goal"]:checked')?.value || "";
 
         const baseUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdVizNI9jeThAxWU2FjxTcqaVfdsnXqaDbbDMzHg8Y4gGX1Hg/viewform?usp=pp_url";
         const finalUrl = baseUrl 
             + "&entry.1533888544=" + encodeURIComponent($('personName').value)
             + "&entry.2004467893=" + encodeURIComponent($('managerName').value)
             + "&entry.909220528=" + encodeURIComponent($('region').value)
-            + "&entry.1187258724=" + quotaValue
-            + "&entry.1542171120=" + winRateValue
-            + "&entry.1742797042=" + pipeValue
+            + "&entry.1187258724=" + qVal
+            + "&entry.1542171120=" + wrVal
+            + "&entry.1742797042=" + pipeVal
             + "&entry.1667466065=" + encodeURIComponent($('goal1').value)
             + "&entry.1553800751=" + encodeURIComponent($('goal2').value)
             + "&entry.1571167359=" + encodeURIComponent($('goal3').value);
