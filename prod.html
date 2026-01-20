@@ -17,7 +17,7 @@
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Open Sans', sans-serif; color: #1a1e21; background-color: #F8FAFC; overflow-x: hidden; }
+        body { font-family: 'Open Sans', sans-serif; color: #252a2e; background-color: #F8FAFC; overflow-x: hidden; }
         .wave-container { position: absolute; top: 0; width: 100%; height: 550px; background: linear-gradient(180deg, #0063a3 0%, #004a7c 100%); z-index: 0; }
         .main-card { position: relative; z-index: 10; background: white; border-radius: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); width: 95%; max-width: 72rem; margin: 4rem auto; padding: 2.5rem; }
         .step-item { flex: 1; text-align: center; padding: 1rem 0.5rem; cursor: pointer; border: none; background: transparent; }
@@ -35,7 +35,7 @@
         @media print {
             .wave-container, nav, #nav-btn-container, .btn, .absolute { display: none !important; }
             body { background: white; }
-            .main-card { box-shadow: none; margin: 0; width: 100%; max-width: 100%; padding: 1rem; }
+            .main-card { box-shadow: none; margin: 0; width: 100%; max-width: 100%; }
             .step-panel { display: block !important; page-break-after: always; }
         }
     </style>
@@ -43,7 +43,7 @@
 <body>
     <div class="wave-container"></div>
     <div class="main-card">
-        <div class="absolute top-6 right-8 text-xs text-gray-400 font-mono tracking-widest uppercase">v45.00.04-STABLE</div>
+        <div class="absolute top-6 right-8 text-xs text-gray-400 font-mono tracking-widest uppercase">v45.00.05-REFINED</div>
 
         <div id="welcome-screen" class="text-center space-y-12">
             <div class="space-y-4">
@@ -56,14 +56,6 @@
                 <p class="text-slate-600 text-lg leading-relaxed">
                     This tool helps every Account Executive at Trimble create a clear, actionable path for 2026. Success is driven by intentional planning: use this session to reflect on your impact and commit to the strategies that will define your year.
                 </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-6 max-w-5xl mx-auto">
-                <div class="text-center"><div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-black mx-auto mb-4">1</div><h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Baseline</h4><p class="text-[9px] text-slate-400 mt-2 leading-tight">Historical Context</p></div>
-                <div class="text-center"><div class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center font-black mx-auto mb-4">2</div><h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500">The Gap</h4><p class="text-[9px] text-slate-400 mt-2 leading-tight">Volume Analysis</p></div>
-                <div class="text-center"><div class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center font-black mx-auto mb-4">3</div><h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Solution</h4><p class="text-[9px] text-slate-400 mt-2 leading-tight">Lever Modeling</p></div>
-                <div class="text-center"><div class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center font-black mx-auto mb-4">4</div><h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Actions</h4><p class="text-[9px] text-slate-400 mt-2 leading-tight">Commitments</p></div>
-                <div class="text-center"><div class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center font-black mx-auto mb-4">5</div><h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Review</h4><p class="text-[9px] text-slate-400 mt-2 leading-tight">Finalize Plan</p></div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto text-left">
@@ -141,7 +133,7 @@
                         <div><label class="block font-black text-xl mb-4">My 2026 Quota ($)</label><input type="text" id="quota2026" class="input-field text-center text-4xl font-black border-2 border-primary/10 py-6" value="0" oninput="calculate()"></div>
                         <div class="grid grid-cols-2 gap-8 text-center">
                             <div class="bg-slate-50 p-10 rounded-3xl border shadow-inner"><span class="text-xs font-black text-slate-400 uppercase block mb-2">Required Pipeline</span><span id="pipelineToClose2026" class="text-3xl font-bold text-slate-900">$0</span></div>
-                            <div class="bg-slate-50 p-10 rounded-3xl border shadow-inner"><span class="text-xs font-black text-slate-400 uppercase block mb-2">Required Wins (Closed deals)</span><span id="dealsToClose2026" class="text-3xl font-bold text-slate-900">0</span></div>
+                            <div class="bg-slate-50 p-10 rounded-3xl border shadow-inner"><span class="text-xs font-black text-slate-400 uppercase block mb-2">Required Wins</span><span id="dealsToClose2026" class="text-3xl font-bold text-slate-900">0</span></div>
                         </div>
                     </div>
                     <div class="p-10 bg-slate-50 rounded-3xl border text-center max-w-2xl mx-auto">
@@ -158,26 +150,22 @@
                     <h2 class="text-3xl font-extrabold text-slate-800">Strategic Efficiency Levers</h2>
                     <div class="space-y-12">
                         <div class="bg-white border-2 p-10 rounded-[2rem] shadow-sm">
-                            <h4 class="font-bold text-2xl mb-2 text-slate-800">Lever 1: Opportunity Growth (Total Funnel Volume)</h4>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-[10px] font-bold text-slate-500 mb-6 uppercase tracking-wider">
-                                <div class="bg-slate-50 p-3 rounded-lg border">People: SDRs/Marketing</div>
-                                <div class="bg-slate-50 p-3 rounded-lg border">Pipeline: Increase opp count</div>
-                                <div class="bg-slate-50 p-3 rounded-lg border">Productivity: Coverage</div>
-                            </div>
+                            <h4 class="font-bold text-2xl mb-2 text-slate-800">Lever 1: Opportunity Growth</h4>
+                            <p class="text-sm text-slate-500 leading-relaxed mb-4">Focus on increasing your total funnel volume through intentional prospecting and lead management to build a wider base for your outcomes.</p>
                             <input type="range" id="oppCountSlider" min="0" max="1000" value="0" step="1" class="mt-8" oninput="calculate()">
                             <div class="flex justify-between items-center mt-2 font-bold text-slate-700 text-sm"><span>Modeled Opportunities</span><span id="oppCountLabel" class="bg-primary-light text-primary px-6 py-1 rounded-full">0</span></div>
                         </div>
 
                         <div class="bg-white border-2 p-10 rounded-[2rem] shadow-sm">
-                            <h4 class="font-bold text-2xl mb-2 text-emerald-700">Lever 2: Creating Deal Value (Deal Size)</h4>
-                            <p class="text-sm text-slate-500 leading-relaxed mb-4"><strong>The Logic:</strong> Identify expansion scope early. <strong>The Impact:</strong> Win weight increases toward your quota.</p>
+                            <h4 class="font-bold text-2xl mb-2 text-emerald-700">Lever 2: Creating Deal Value</h4>
+                            <p class="text-sm text-slate-500 leading-relaxed mb-4">Increase the average weight of every win by identifying expansion scope and value drivers earlier in the sales cycle.</p>
                             <input type="range" id="dealSizeImprovement" min="0" max="50" value="0" class="mt-8" oninput="calculate()">
                             <div class="flex justify-between items-center mt-2 font-bold text-slate-700 text-sm"><span>Deal Size Growth %</span><span id="dealSizeImprovementLabel" class="bg-emerald-50 text-emerald-600 px-6 py-1 rounded-full">0%</span></div>
                         </div>
 
                         <div class="bg-white border-2 p-10 rounded-[2rem] shadow-sm">
-                            <h4 class="font-bold text-2xl mb-2 text-blue-700">Lever 3: Win Rate Mastery (Precision)</h4>
-                            <p class="text-sm text-slate-500 leading-relaxed mb-4"><strong>The Logic:</strong> Mastery of qualification accuracy. <strong>The Impact:</strong> Reach target with less raw volume.</p>
+                            <h4 class="font-bold text-2xl mb-2 text-blue-700">Lever 3: Win Rate Mastery</h4>
+                            <p class="text-sm text-slate-500 leading-relaxed mb-4">Refine your qualification accuracy and closing precision to ensure a higher percentage of opportunities reach a successful conclusion.</p>
                             <input type="range" id="winRateImprovement" min="0" max="15" step="0.5" value="0" class="mt-8" oninput="calculate()">
                             <div class="grid grid-cols-2 gap-8 mt-10 border-t pt-10">
                                 <div id="winRateImprovementLabel" class="hidden">0%</div>
@@ -236,10 +224,10 @@
                 </div>
 
                 <div id="step-5-panel" class="step-panel hidden space-y-10">
-                    <h2 class="text-3xl font-extrabold text-slate-800 text-left">Final Review</h2>
+                    <h2 class="text-3xl font-extrabold text-slate-800">Final Review</h2>
                     <div class="coach-note text-sm text-slate-700">
                         <strong class="block mb-3 text-slate-800 uppercase text-xs">Final Verification:</strong>
-                        Great work! Please take a moment to <strong>double-check every single field</strong> below for accuracy before you finalize. Ensure your Name, Manager, and all Strategic Goals are correctly typed. <br><br>
+                        Great work! Please take a moment to double-check every single field below for accuracy before you finalize. Ensure your Name, Manager, and all Strategic Goals are correctly typed. <br><br>
                         Clicking <strong>Review & Commit</strong> below will open your final bridge to the submission form.
                     </div>
                     <div id="commitmentSummaryOutput" class="bg-slate-50 p-12 rounded-[2rem] font-mono text-xs whitespace-pre-wrap leading-loose border-2 shadow-inner"></div>
