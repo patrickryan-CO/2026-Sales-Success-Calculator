@@ -43,9 +43,9 @@
 <body>
     <div class="wave-container"></div>
     <div class="main-card">
-        <div class="absolute top-6 right-8 text-xs text-gray-400 font-mono tracking-widest uppercase">v45.00.10-SIMULATOR-SYNC</div>
+        <div class="absolute top-6 right-8 text-xs text-gray-400 font-mono tracking-widest uppercase">v45.00.11-STABLE</div>
 
-        <div id="welcome-screen" class="text-center space-y-12">
+        <div id="welcome-screen" class="text-center space-y-12 text-left">
             <div class="space-y-4">
                 <h1 class="text-6xl font-extrabold text-slate-900 tracking-tight">2026 Success Plan</h1>
                 <p class="text-2xl font-medium text-slate-500 italic">Built by you; For you.</p>
@@ -87,7 +87,7 @@
 
         <div id="wizard-container" class="hidden text-left">
             <nav class="flex justify-between mb-16 gap-2 border-b border-slate-100 pb-4 text-center">
-                <button type="button" class="step-item active" id="nav-1" onclick="jumpTo(1)"><div class="step-pill"></div><span class="step-label hidden md:block">1. Baseline</span></button>
+                <button type="button" class="step-item active" id="nav-1" onclick="jumpTo(1)"><div class="step-pill"></div><span class="step-label hidden md:block text-left">1. Baseline</span></button>
                 <button type="button" class="step-item" id="nav-2" onclick="jumpTo(2)"><div class="step-pill"></div><span class="step-label hidden md:block">2. Gap</span></button>
                 <button type="button" class="step-item" id="nav-3" onclick="jumpTo(3)"><div class="step-pill"></div><span class="step-label hidden md:block">3. Solution</span></button>
                 <button type="button" class="step-item" id="nav-4" onclick="jumpTo(4)"><div class="step-pill"></div><span class="step-label hidden md:block">4. Actions</span></button>
@@ -103,10 +103,10 @@
                         <strong>Instruction:</strong> Please reference your <strong>Scorecard</strong>. If you lack history, enter <strong>0</strong> in the fields below.
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div><label class="block font-bold text-xs mb-2 uppercase text-slate-500">Name</label><input type="text" id="personName" class="input-field" placeholder="Full Name"></div>
-                        <div><label class="block font-bold text-xs mb-2 uppercase text-slate-500">Manager Name</label><input type="text" id="managerName" class="input-field" placeholder="Manager Name"></div>
+                        <div><label class="block font-bold text-xs mb-2 uppercase text-slate-500 text-left">Name</label><input type="text" id="personName" class="input-field" placeholder="Full Name"></div>
+                        <div><label class="block font-bold text-xs mb-2 uppercase text-slate-500 text-left">Manager Name</label><input type="text" id="managerName" class="input-field" placeholder="Manager Name"></div>
                         <div class="md:col-span-2">
-                            <label class="block font-bold text-xs mb-2 uppercase text-slate-500">Operational Region</label>
+                            <label class="block font-bold text-xs mb-2 uppercase text-slate-500 text-left">Operational Region</label>
                             <select id="region" class="input-field">
                                 <option value="" disabled selected>Select region...</option>
                                 <option value="Americas - Customer">Americas - Customer</option>
@@ -116,10 +116,10 @@
                                 <option value="O&PS">O&PS</option>
                             </select>
                         </div>
-                        <div><label class="block font-bold text-xs mb-2 uppercase text-slate-500">2025 Target ($)</label><input type="text" id="quota2025" class="input-field" value="0" oninput="calculate()"></div>
-                        <div><label class="block font-bold text-xs mb-2 uppercase text-slate-500">2025 Comped Bookings ($)</label><input type="text" id="bookings2025" class="input-field" value="0" oninput="calculate()"></div>
-                        <div><label class="block font-bold text-xs mb-2 uppercase text-slate-500">2025 ACV Win Rate (%)</label><input type="text" id="winRate2025" class="input-field" value="0" oninput="calculate()"></div>
-                        <div><label class="block font-bold text-xs mb-2 uppercase text-slate-500">2025 Overall Avg Deal Size ($)</label><input type="text" id="avgDealSize2025" class="input-field" value="0" oninput="calculate()"></div>
+                        <div><label class="block font-bold text-xs mb-2 uppercase text-slate-500 text-left">2025 Target ($)</label><input type="text" id="quota2025" class="input-field" value="0" oninput="calculate()"></div>
+                        <div><label class="block font-bold text-xs mb-2 uppercase text-slate-500 text-left">2025 Comped Bookings ($)</label><input type="text" id="bookings2025" class="input-field" value="0" oninput="calculate()"></div>
+                        <div><label class="block font-bold text-xs mb-2 uppercase text-slate-500 text-left">2025 ACV Win Rate (%)</label><input type="text" id="winRate2025" class="input-field" value="0" oninput="calculate()"></div>
+                        <div><label class="block font-bold text-xs mb-2 uppercase text-slate-500 text-left">2025 Overall Avg Deal Size ($)</label><input type="text" id="avgDealSize2025" class="input-field" value="0" oninput="calculate()"></div>
                         <div class="md:col-span-2 bg-primary-light p-10 rounded-2xl text-center"><span class="block text-primary font-black uppercase text-xs mb-2 tracking-[0.2em]">2025 Performance Attainment</span><span id="attainment2025" class="text-6xl font-black text-primary">0%</span></div>
                     </div>
                 </div>
@@ -129,8 +129,9 @@
                     <div class="coach-note text-sm text-slate-700">
                         <strong>Why we ask:</strong> This identifies the <strong>Mountain to Climb</strong>. By seeing the raw volume needed at current efficiency, we establish the urgency for the strategic shifts in Phase 3.
                     </div>
+                    
                     <div class="max-w-2xl mx-auto space-y-10 text-center">
-                        <div><label class="block font-black text-xl mb-4">My 2026 Quota ($)</label><input type="text" id="quota2026" class="input-field text-center text-4xl font-black border-2 border-primary/10 py-6" value="0" oninput="calculate()"></div>
+                        <div><label class="block font-black text-xl mb-4 text-left">My 2026 Quota ($)</label><input type="text" id="quota2026" class="input-field text-center text-4xl font-black border-2 border-primary/10 py-6" value="0" oninput="calculate()"></div>
                         <div class="grid grid-cols-2 gap-8 text-center">
                             <div class="bg-slate-50 p-10 rounded-3xl border shadow-inner"><span class="text-xs font-black text-slate-400 uppercase block mb-2">Required Pipeline</span><span id="pipelineToClose2026" class="text-3xl font-bold text-slate-900">$0</span></div>
                             <div class="bg-slate-50 p-10 rounded-3xl border shadow-inner"><span class="text-xs font-black text-slate-400 uppercase block mb-2">Required Wins</span><span id="dealsToClose2026" class="text-3xl font-bold text-slate-900">0</span></div>
@@ -150,26 +151,26 @@
                     <h2 class="text-3xl font-extrabold text-slate-800">Strategic Efficiency Levers</h2>
                     <div class="space-y-12">
                         <div class="bg-white border-2 p-10 rounded-[2rem] shadow-sm">
-                            <h4 class="font-bold text-2xl mb-2 text-slate-800">Lever 1: Opportunity Growth</h4>
+                            <h4 class="font-bold text-2xl mb-2 text-slate-800 text-left">Lever 1: Opportunity Growth</h4>
                             <p class="text-sm text-slate-500 leading-relaxed mb-4 text-left">Modeling a change in your total funnel volume compared to your 2026 baseline. (0% = No change in volume).</p>
-                            <input type="range" id="oppCountSlider" min="-100" max="500" value="0" step="1" class="mt-8" oninput="calculate()">
+                            <input type="range" id="oppCountSlider" min="-100" max="500" value="0" step="1" class="mt-8 text-left" oninput="calculate()">
                             <div class="flex justify-between items-center mt-2 font-bold text-slate-700 text-sm"><span>Opportunity Volume % Change</span><span id="oppCountLabel" class="bg-primary-light text-primary px-6 py-1 rounded-full">0%</span></div>
                         </div>
 
                         <div class="bg-white border-2 p-10 rounded-[2rem] shadow-sm">
-                            <h4 class="font-bold text-2xl mb-2 text-emerald-700">Lever 2: Creating Deal Value</h4>
+                            <h4 class="font-bold text-2xl mb-2 text-emerald-700 text-left">Lever 2: Creating Deal Value</h4>
                             <p class="text-sm text-slate-500 leading-relaxed mb-4 text-left">Increase the average weight of every win by identifying expansion scope and value drivers earlier in the sales cycle.</p>
-                            <input type="range" id="dealSizeImprovement" min="0" max="50" value="0" class="mt-8" oninput="calculate()">
+                            <input type="range" id="dealSizeImprovement" min="0" max="50" value="0" class="mt-8 text-left" oninput="calculate()">
                             <div class="flex justify-between items-center mt-2 font-bold text-slate-700 text-sm"><span>Deal Size Growth %</span><span id="dealSizeImprovementLabel" class="bg-emerald-50 text-emerald-600 px-6 py-1 rounded-full">0%</span></div>
                         </div>
 
                         <div class="bg-white border-2 p-10 rounded-[2rem] shadow-sm">
-                            <h4 class="font-bold text-2xl mb-2 text-blue-700">Lever 3: Win Rate Mastery</h4>
+                            <h4 class="font-bold text-2xl mb-2 text-blue-700 text-left">Lever 3: Win Rate Mastery</h4>
                             <p class="text-sm text-slate-500 leading-relaxed mb-4 text-left">Refine your qualification accuracy and closing precision to ensure a higher percentage of opportunities reach a successful conclusion.</p>
-                            <input type="range" id="winRateImprovement" min="0" max="15" step="0.5" value="0" class="mt-8" oninput="calculate()">
-                            <div class="mt-10 border-t pt-10 text-left">
-                                <span class="text-xs font-black text-slate-400 uppercase block mb-2 text-center">Targeted Win Rate %</span>
-                                <span id="targetedWinRateDisplay" class="text-3xl font-black text-blue-700 block text-center">0%</span>
+                            <input type="range" id="winRateImprovement" min="0" max="15" step="0.5" value="0" class="mt-8 text-left" oninput="calculate()">
+                            <div class="mt-10 border-t pt-10 text-center">
+                                <span class="text-xs font-black text-slate-400 uppercase block mb-2">Targeted Win Rate %</span>
+                                <span id="targetedWinRateDisplay" class="text-3xl font-black text-blue-700">0%</span>
                             </div>
                         </div>
 
@@ -190,15 +191,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="bg-primary-light p-10 rounded-[2rem] border-2 border-primary/20 space-y-6">
-                            <h3 class="text-xl font-black text-primary uppercase tracking-wide text-center">My Primary Focus Goal</h3>
-                            <div class="flex flex-col md:flex-row gap-4">
-                                <label class="flex-1 cursor-pointer group"><input type="radio" name="focus_goal" value="Win Rate" class="sr-only peer"><div class="p-4 border-2 border-white rounded-2xl font-bold transition peer-checked:bg-primary peer-checked:text-white bg-white/50 hover:bg-white text-center">Win Rate</div></label>
-                                <label class="flex-1 cursor-pointer group"><input type="radio" name="focus_goal" value="Deal Size" class="sr-only peer"><div class="p-4 border-2 border-white rounded-2xl font-bold transition peer-checked:bg-primary peer-checked:text-white bg-white/50 hover:bg-white text-center">Deal Size</div></label>
-                                <label class="flex-1 cursor-pointer group"><input type="radio" name="focus_goal" value="Deal Count" class="sr-only peer"><div class="p-4 border-2 border-white rounded-2xl font-bold transition peer-checked:bg-primary peer-checked:text-white bg-white/50 hover:bg-white text-center">Deal Count</div></label>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -211,7 +203,7 @@
                         </p>
                         <div class="border-t border-slate-200 pt-6">
                             <strong class="block mb-4 text-slate-800 uppercase text-xs tracking-wider">The SMART Framework:</strong>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-medium">
                                 <div><strong>S: Specific</strong>; Define exactly what you will do.</div>
                                 <div><strong>M: Measurable</strong>; Add a number or milestone.</div>
                                 <div><strong>A: Achievable</strong>; Reality check the market.</div>
@@ -221,9 +213,9 @@
                         </div>
                     </div>
                     <div class="space-y-8">
-                        <div><label class="block font-black text-primary mb-4 text-xl">Strategic Goal #1</label><textarea id="goal1" class="input-field min-h-[140px]" placeholder="Enter commitment..."></textarea></div>
-                        <div><label class="block font-black text-primary mb-4 text-xl">Strategic Goal #2</label><textarea id="goal2" class="input-field min-h-[140px]" placeholder="Enter commitment..."></textarea></div>
-                        <div><label class="block font-black text-primary mb-4 text-xl">Strategic Goal #3</label><textarea id="goal3" class="input-field min-h-[140px]" placeholder="Enter commitment..."></textarea></div>
+                        <div><label class="block font-black text-primary mb-4 text-xl tracking-tight text-left">Strategic Goal #1</label><textarea id="goal1" class="input-field min-h-[140px]" placeholder="Enter commitment..."></textarea></div>
+                        <div><label class="block font-black text-primary mb-4 text-xl tracking-tight text-left">Strategic Goal #2</label><textarea id="goal2" class="input-field min-h-[140px]" placeholder="Enter commitment..."></textarea></div>
+                        <div><label class="block font-black text-primary mb-4 text-xl tracking-tight text-left">Strategic Goal #3</label><textarea id="goal3" class="input-field min-h-[140px]" placeholder="Enter commitment..."></textarea></div>
                     </div>
                 </div>
 
@@ -232,7 +224,7 @@
                     <div class="coach-note text-sm text-slate-700">
                         <strong class="block mb-3 text-slate-800 uppercase text-xs">Final Verification:</strong>
                         Great work! Please take a moment to double-check every field below. <br><br>
-                        Clicking <strong>Review & Commit</strong> will open the submission form.
+                        Clicking <strong>Review & Commit</strong> will open the submission form in a new tab.
                     </div>
                     <div id="commitmentSummaryOutput" class="bg-slate-50 p-12 rounded-[2rem] font-mono text-xs whitespace-pre-wrap leading-loose border-2 shadow-inner"></div>
                     <div class="space-y-6">
@@ -288,13 +280,12 @@
         var tWRRatio = tWR / 100;
         var tDealSize = ads25 * (1 + (adsImp / 100));
 
-        // LEVER UI LABELS
+        // UI UPDATES
         document.getElementById('targetedWinRateDisplay').innerText = tWR.toFixed(1) + '%';
         document.getElementById('dealSizeImprovementLabel').innerText = adsImp + '%';
         document.getElementById('oppCountLabel').innerText = volPctChange + '%';
 
         // 1. Projected Attainment (Driven by Lever 1 and Lever 2)
-        // Logic: 100% * (1 + Vol Change) * (1 + Size Change)
         var proj = 100 * (1 + (volPctChange / 100)) * (1 + (adsImp / 100));
         
         // 2. Required Wins (Driven by Lever 2)
@@ -304,7 +295,7 @@
         var optPipe = (tWRRatio > 0) ? (q26 / tWRRatio) : 0; 
         optPipe_raw = optPipe;
 
-        // SUMMARY OUTPUTS
+        // OUTPUTS
         if (q26 <= 0) {
             document.getElementById('projectedAttainment').innerText = "Set Quota";
             document.getElementById('projectedAttainment').style.fontSize = "2rem";
@@ -312,7 +303,6 @@
             document.getElementById('projectedAttainment').innerText = Math.round(proj) + '%';
             document.getElementById('projectedAttainment').style.fontSize = "3.5rem";
         }
-
         document.getElementById('requiredWinsDisplay').innerText = (isFinite(reqWins) && !isNaN(reqWins)) ? reqWins : 0;
         document.getElementById('optimizedPipelineDisplay').innerText = fmt(optPipe);
     };
@@ -337,7 +327,6 @@
         document.getElementById('nextBtn').classList.toggle('hidden', step === 5);
 
         if(step === 5) {
-            var focus = document.querySelector('input[name="focus_goal"]:checked')?.value || "Not Set";
             var feeling = document.querySelector('input[name="feeling"]:checked')?.value || "Not Set";
             document.getElementById('commitmentSummaryOutput').innerText = 
                 "NAME: " + document.getElementById('personName').value + "\n" +
@@ -345,7 +334,6 @@
                 "REGION: " + document.getElementById('region').value + "\n" +
                 "2026 QUOTA: " + fmt(q26_raw) + " (" + feeling + ")\n\n" +
                 "--- STRATEGIC OUTPUTS ---\n" +
-                "PRIMARY FOCUS: " + focus + "\n" +
                 "PROJECTED ATTAINMENT: " + document.getElementById('projectedAttainment').innerText + "\n" +
                 "TARGETED WIN RATE: " + tWR_raw.toFixed(1) + "%\n" +
                 "ADJUSTED PIPE NEEDED: " + fmt(optPipe_raw) + "\n\n" +
@@ -369,7 +357,7 @@
             + "&entry.1553800751=" + encodeURIComponent(document.getElementById('goal2').value)
             + "&entry.1571167359=" + encodeURIComponent(document.getElementById('goal3').value);
 
-        window.location.assign(finalUrl);
+        window.open(finalUrl, '_blank');
     }
 </script>
 </body>
