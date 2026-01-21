@@ -43,7 +43,7 @@
 <body>
     <div class="wave-container"></div>
     <div class="main-card">
-        <div class="absolute top-6 right-8 text-xs text-gray-400 font-mono tracking-widest uppercase">v45.00.05-REFINED</div>
+        <div class="absolute top-6 right-8 text-xs text-gray-400 font-mono tracking-widest uppercase">v45.00.06-PERCENTAGE-REFINED</div>
 
         <div id="welcome-screen" class="text-center space-y-12">
             <div class="space-y-4">
@@ -139,9 +139,9 @@
                     <div class="p-10 bg-slate-50 rounded-3xl border text-center max-w-2xl mx-auto">
                         <label class="block font-black text-slate-700 mb-6">How does this gap feel?</label>
                         <div class="flex flex-col md:flex-row gap-4">
-                            <label class="flex-1 cursor-pointer group"><input type="radio" name="feeling" value="Achievable" class="sr-only peer"><div class="p-5 border-2 rounded-2xl font-bold transition peer-checked:bg-primary peer-checked:text-white bg-white hover:border-primary">Achievable</div></label>
-                            <label class="flex-1 cursor-pointer group"><input type="radio" name="feeling" value="Challenging" class="sr-only peer"><div class="p-5 border-2 rounded-2xl font-bold transition peer-checked:bg-primary peer-checked:text-white bg-white hover:border-primary">Challenging</div></label>
-                            <label class="flex-1 cursor-pointer group"><input type="radio" name="feeling" value="Impossible" class="sr-only peer"><div class="p-5 border-2 rounded-2xl font-bold transition peer-checked:bg-primary peer-checked:text-white bg-white hover:border-primary">Impossible</div></label>
+                            <label class="flex-1 cursor-pointer group"><input type="radio" name="feeling" value="Achievable" class="sr-only peer"><div class="p-5 border-2 rounded-2xl font-bold transition peer-checked:bg-primary peer-checked:text-white bg-white hover:border-primary text-center">Achievable</div></label>
+                            <label class="flex-1 cursor-pointer group"><input type="radio" name="feeling" value="Challenging" class="sr-only peer"><div class="p-5 border-2 rounded-2xl font-bold transition peer-checked:bg-primary peer-checked:text-white bg-white hover:border-primary text-center">Challenging</div></label>
+                            <label class="flex-1 cursor-pointer group"><input type="radio" name="feeling" value="Impossible" class="sr-only peer"><div class="p-5 border-2 rounded-2xl font-bold transition peer-checked:bg-primary peer-checked:text-white bg-white hover:border-primary text-center">Impossible</div></label>
                         </div>
                     </div>
                 </div>
@@ -151,9 +151,9 @@
                     <div class="space-y-12">
                         <div class="bg-white border-2 p-10 rounded-[2rem] shadow-sm">
                             <h4 class="font-bold text-2xl mb-2 text-slate-800">Lever 1: Opportunity Growth</h4>
-                            <p class="text-sm text-slate-500 leading-relaxed mb-4">Focus on increasing your total funnel volume through intentional prospecting and lead management to build a wider base for your outcomes.</p>
-                            <input type="range" id="oppCountSlider" min="0" max="1000" value="0" step="1" class="mt-8" oninput="calculate()">
-                            <div class="flex justify-between items-center mt-2 font-bold text-slate-700 text-sm"><span>Modeled Opportunities</span><span id="oppCountLabel" class="bg-primary-light text-primary px-6 py-1 rounded-full">0</span></div>
+                            <p class="text-sm text-slate-500 leading-relaxed mb-4">Modeling a change in your total funnel volume compared to your 2026 baseline. (0% = Exactly what is required based on your modeled efficiency).</p>
+                            <input type="range" id="oppCountSlider" min="-100" max="500" value="0" step="1" class="mt-8" oninput="calculate()">
+                            <div class="flex justify-between items-center mt-2 font-bold text-slate-700 text-sm"><span>Opportunity Volume (% Change)</span><span id="oppCountLabel" class="bg-primary-light text-primary px-6 py-1 rounded-full">0%</span></div>
                         </div>
 
                         <div class="bg-white border-2 p-10 rounded-[2rem] shadow-sm">
@@ -179,10 +179,10 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
                                 <div>
                                     <span class="text-xs font-black uppercase text-slate-400 block mb-2 tracking-widest">Projected 2026 Attainment</span>
-                                    <span id="projectedAttainment" class="text-7xl font-black text-accent">0%</span>
+                                    <span id="projectedAttainment" class="text-7xl font-black text-accent">100%</span>
                                 </div>
-                                <div class="grid grid-cols-1 gap-6">
-                                    <div><span class="text-[10px] font-black uppercase text-slate-400 block mb-1 tracking-widest">Opps Needed for 100%</span><span id="oppsNeededBaseline" class="text-3xl font-black text-white">0</span></div>
+                                <div class="grid grid-cols-1 gap-6 text-left">
+                                    <div><span class="text-[10px] font-black uppercase text-slate-400 block mb-1 tracking-widest">Baseline Opps Needed (100%)</span><span id="oppsNeededBaseline" class="text-3xl font-black text-white">0</span></div>
                                 </div>
                             </div>
                         </div>
@@ -203,16 +203,16 @@
                     <div class="coach-note text-sm text-slate-700">
                         <h4 class="font-black text-sm uppercase mb-3 text-slate-900">Strategic Intent</h4>
                         <p class="mb-5 font-medium text-slate-600 leading-relaxed">
-                            This section is the <strong>definitive foundation</strong> of your success plan. It is your professional commitment on paper. You have been provided with a 45-minute deep-work window to complete this section. Specificity dictates success.
+                            This section is the <strong>definitive foundation</strong> of your success plan. Specificity dictates success.
                         </p>
                         <div class="border-t border-slate-200 pt-6">
                             <strong class="block mb-4 text-slate-800 uppercase text-xs tracking-wider">The SMART Framework:</strong>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                                <div><strong>S: Specific</strong>; Define exactly what you will do. Avoid terms like "improve."</div>
-                                <div><strong>M: Measurable</strong>; Add a number or milestone so the result is binary.</div>
-                                <div><strong>A: Achievable</strong>; Reality check the market: ensure goal is realistic.</div>
-                                <div><strong>R: Relevant</strong>; Align with your 2026 targets and levers.</div>
-                                <div><strong>T: Time-bound</strong>; Set a clear deadline or frequency.</div>
+                                <div><strong>S: Specific</strong>; Define exactly what you will do.</div>
+                                <div><strong>M: Measurable</strong>; Add a number or milestone.</div>
+                                <div><strong>A: Achievable</strong>; Reality check the market.</div>
+                                <div><strong>R: Relevant</strong>; Align with your 2026 targets.</div>
+                                <div><strong>T: Time-bound</strong>; Set a clear deadline.</div>
                             </div>
                         </div>
                     </div>
@@ -227,8 +227,8 @@
                     <h2 class="text-3xl font-extrabold text-slate-800">Final Review</h2>
                     <div class="coach-note text-sm text-slate-700">
                         <strong class="block mb-3 text-slate-800 uppercase text-xs">Final Verification:</strong>
-                        Great work! Please take a moment to double-check every single field below for accuracy before you finalize. Ensure your Name, Manager, and all Strategic Goals are correctly typed. <br><br>
-                        Clicking <strong>Review & Commit</strong> below will open your final bridge to the submission form.
+                        Double-check every single field below for accuracy. <br><br>
+                        Clicking <strong>Review & Commit</strong> will open the submission form.
                     </div>
                     <div id="commitmentSummaryOutput" class="bg-slate-50 p-12 rounded-[2rem] font-mono text-xs whitespace-pre-wrap leading-loose border-2 shadow-inner"></div>
                     <div class="space-y-6">
@@ -248,7 +248,6 @@
 
 <script>
     var step = 1;
-    var hasSnapped = false;
     var q26_raw = 0, tWR_raw = 0, optPipe_raw = 0, oppsNeeded_raw = 0;
 
     function gV(id) {
@@ -272,7 +271,7 @@
 
         var adsImp = parseFloat(document.getElementById('dealSizeImprovement').value) || 0;
         var wrImp = parseFloat(document.getElementById('winRateImprovement').value) || 0;
-        var activeOpps = parseFloat(document.getElementById('oppCountSlider').value) || 0;
+        var volPctChange = parseFloat(document.getElementById('oppCountSlider').value) || 0;
 
         document.getElementById('attainment2025').innerText = (q25 > 0) ? ((b25 / q25) * 100).toFixed(1) + '%' : '0%';
         
@@ -280,6 +279,7 @@
         document.getElementById('pipelineToClose2026').innerText = (wr25Ratio > 0) ? fmt(q26 / wr25Ratio) : '$0';
         document.getElementById('dealsToClose2026').innerText = (ads25 > 0) ? Math.ceil(q26 / ads25) : 0;
 
+        // Lever Efficiency Calculations
         var tWR = wr25 + wrImp; tWR_raw = tWR;
         var tWRRatio = tWR / 100;
         var tDealSize = ads25 * (1 + (adsImp / 100));
@@ -288,22 +288,25 @@
         document.getElementById('dealSizeImprovementLabel').innerText = adsImp + '%';
         document.getElementById('winRateImprovementLabel').innerText = wrImp + '%';
 
+        // Pipeline Needed at Optimized Efficiency (Before Volume Change)
         var optPipe = (tWRRatio > 0) ? (q26 / tWRRatio) : 0; 
         optPipe_raw = optPipe;
         
-        var opps100 = (tWRRatio > 0 && tDealSize > 0) ? Math.ceil(q26 / (tWRRatio * tDealSize)) : 0;
-        oppsNeeded_raw = opps100;
+        // Base Opps required to hit exactly 100% target at Modeled Efficiency
+        var oppsBaseline = (tWRRatio > 0 && tDealSize > 0) ? Math.ceil(q26 / (tWRRatio * tDealSize)) : 0;
+        oppsNeeded_raw = oppsBaseline;
 
         document.getElementById('optimizedPipelineDisplay').innerText = fmt(optPipe);
-        document.getElementById('oppsNeededBaseline').innerText = (isFinite(opps100) && !isNaN(opps100)) ? opps100 : 0;
-        document.getElementById('oppCountLabel').innerText = activeOpps;
+        document.getElementById('oppsNeededBaseline').innerText = (isFinite(oppsBaseline) && !isNaN(oppsBaseline)) ? oppsBaseline : 0;
+        document.getElementById('oppCountLabel').innerText = volPctChange + '%';
 
         if (q26 <= 0) {
             document.getElementById('projectedAttainment').innerText = "Set Quota";
             document.getElementById('projectedAttainment').style.fontSize = "2rem";
         } else {
-            var proj = ((tWRRatio * tDealSize * activeOpps) / q26) * 100;
-            document.getElementById('projectedAttainment').innerText = (isFinite(proj) && !isNaN(proj)) ? Math.round(proj) + '%' : '0%';
+            // Projected Attainment is directly tied to the Volume % Change vs the Baseline (100% + Vol%)
+            var proj = 100 + volPctChange;
+            document.getElementById('projectedAttainment').innerText = Math.round(proj) + '%';
             document.getElementById('projectedAttainment').style.fontSize = "4.5rem";
         }
     };
@@ -326,12 +329,6 @@
         }
         document.getElementById('prevBtn').classList.toggle('hidden', step === 1);
         document.getElementById('nextBtn').classList.toggle('hidden', step === 5);
-
-        if (step === 3 && !hasSnapped && oppsNeeded_raw > 0) {
-            document.getElementById('oppCountSlider').value = oppsNeeded_raw;
-            hasSnapped = true;
-            calculate();
-        }
 
         if(step === 5) {
             var focus = document.querySelector('input[name="focus_goal"]:checked')?.value || "Not Set";
