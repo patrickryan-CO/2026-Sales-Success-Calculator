@@ -43,7 +43,7 @@
 <body>
     <div class="wave-container"></div>
     <div class="main-card">
-        <div class="absolute top-6 right-8 text-xs text-gray-400 font-mono tracking-widest uppercase">v45.00.06-PERCENTAGE-REFINED</div>
+        <div class="absolute top-6 right-8 text-xs text-gray-400 font-mono tracking-widest uppercase">v45.00.09-RECOVERY-COMPLETE</div>
 
         <div id="welcome-screen" class="text-center space-y-12">
             <div class="space-y-4">
@@ -137,7 +137,7 @@
                         </div>
                     </div>
                     <div class="p-10 bg-slate-50 rounded-3xl border text-center max-w-2xl mx-auto">
-                        <label class="block font-black text-slate-700 mb-6">How does this gap feel?</label>
+                        <label class="block font-black text-slate-700 mb-6 uppercase text-xs">How does this gap feel?</label>
                         <div class="flex flex-col md:flex-row gap-4">
                             <label class="flex-1 cursor-pointer group"><input type="radio" name="feeling" value="Achievable" class="sr-only peer"><div class="p-5 border-2 rounded-2xl font-bold transition peer-checked:bg-primary peer-checked:text-white bg-white hover:border-primary text-center">Achievable</div></label>
                             <label class="flex-1 cursor-pointer group"><input type="radio" name="feeling" value="Challenging" class="sr-only peer"><div class="p-5 border-2 rounded-2xl font-bold transition peer-checked:bg-primary peer-checked:text-white bg-white hover:border-primary text-center">Challenging</div></label>
@@ -151,23 +151,23 @@
                     <div class="space-y-12">
                         <div class="bg-white border-2 p-10 rounded-[2rem] shadow-sm">
                             <h4 class="font-bold text-2xl mb-2 text-slate-800">Lever 1: Opportunity Growth</h4>
-                            <p class="text-sm text-slate-500 leading-relaxed mb-4">Modeling a change in your total funnel volume compared to your 2026 baseline. (0% = Exactly what is required based on your modeled efficiency).</p>
+                            <p class="text-sm text-slate-500 leading-relaxed mb-4 text-left">Modeling a change in your total funnel volume compared to your 2026 baseline. (0% = No change in volume).</p>
                             <input type="range" id="oppCountSlider" min="-100" max="500" value="0" step="1" class="mt-8" oninput="calculate()">
-                            <div class="flex justify-between items-center mt-2 font-bold text-slate-700 text-sm"><span>Opportunity Volume (% Change)</span><span id="oppCountLabel" class="bg-primary-light text-primary px-6 py-1 rounded-full">0%</span></div>
+                            <div class="flex justify-between items-center mt-2 font-bold text-slate-700 text-sm"><span>Opportunity Volume % Change</span><span id="oppCountLabel" class="bg-primary-light text-primary px-6 py-1 rounded-full">0%</span></div>
                         </div>
 
                         <div class="bg-white border-2 p-10 rounded-[2rem] shadow-sm">
                             <h4 class="font-bold text-2xl mb-2 text-emerald-700">Lever 2: Creating Deal Value</h4>
-                            <p class="text-sm text-slate-500 leading-relaxed mb-4">Increase the average weight of every win by identifying expansion scope and value drivers earlier in the sales cycle.</p>
+                            <p class="text-sm text-slate-500 leading-relaxed mb-4 text-left">Increase the average weight of every win by identifying expansion scope and value drivers earlier in the sales cycle.</p>
                             <input type="range" id="dealSizeImprovement" min="0" max="50" value="0" class="mt-8" oninput="calculate()">
                             <div class="flex justify-between items-center mt-2 font-bold text-slate-700 text-sm"><span>Deal Size Growth %</span><span id="dealSizeImprovementLabel" class="bg-emerald-50 text-emerald-600 px-6 py-1 rounded-full">0%</span></div>
                         </div>
 
                         <div class="bg-white border-2 p-10 rounded-[2rem] shadow-sm">
                             <h4 class="font-bold text-2xl mb-2 text-blue-700">Lever 3: Win Rate Mastery</h4>
-                            <p class="text-sm text-slate-500 leading-relaxed mb-4">Refine your qualification accuracy and closing precision to ensure a higher percentage of opportunities reach a successful conclusion.</p>
+                            <p class="text-sm text-slate-500 leading-relaxed mb-4 text-left">Refine your qualification accuracy and closing precision to ensure a higher percentage of opportunities reach a successful conclusion.</p>
                             <input type="range" id="winRateImprovement" min="0" max="15" step="0.5" value="0" class="mt-8" oninput="calculate()">
-                            <div class="grid grid-cols-2 gap-8 mt-10 border-t pt-10">
+                            <div class="grid grid-cols-2 gap-8 mt-10 border-t pt-10 text-left">
                                 <div id="winRateImprovementLabel" class="hidden">0%</div>
                                 <div><span class="text-xs font-black text-slate-400 uppercase block mb-2">Targeted Win Rate %</span><span id="targetedWinRateDisplay" class="text-3xl font-black text-blue-700">0%</span></div>
                                 <div><span class="text-xs font-black text-slate-400 uppercase block mb-2">Optimized Pipeline Needed</span><span id="optimizedPipelineDisplay" class="text-3xl font-black text-slate-900">$0</span></div>
@@ -175,20 +175,20 @@
                         </div>
 
                         <div class="bg-slate-900 text-white p-12 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
-                            <div class="absolute top-0 right-0 p-8 opacity-10 text-6xl font-black italic">2026</div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
-                                <div>
+                            <div class="absolute top-0 right-0 p-8 opacity-10 text-6xl font-black italic text-center">2026</div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10 items-center">
+                                <div class="text-center md:text-left">
                                     <span class="text-xs font-black uppercase text-slate-400 block mb-2 tracking-widest">Projected 2026 Attainment</span>
                                     <span id="projectedAttainment" class="text-7xl font-black text-accent">100%</span>
                                 </div>
-                                <div class="grid grid-cols-1 gap-6 text-left">
+                                <div class="grid grid-cols-1 gap-6 text-center md:text-left">
                                     <div><span class="text-[10px] font-black uppercase text-slate-400 block mb-1 tracking-widest">Baseline Opps Needed (100%)</span><span id="oppsNeededBaseline" class="text-3xl font-black text-white">0</span></div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="bg-primary-light p-10 rounded-[2rem] border-2 border-primary/20 space-y-6">
-                            <h3 class="text-xl font-black text-primary uppercase tracking-wide">My Primary Focus Goal</h3>
+                            <h3 class="text-xl font-black text-primary uppercase tracking-wide text-center">My Primary Focus Goal</h3>
                             <div class="flex flex-col md:flex-row gap-4">
                                 <label class="flex-1 cursor-pointer group"><input type="radio" name="focus_goal" value="Win Rate" class="sr-only peer"><div class="p-4 border-2 border-white rounded-2xl font-bold transition peer-checked:bg-primary peer-checked:text-white bg-white/50 hover:bg-white text-center">Win Rate</div></label>
                                 <label class="flex-1 cursor-pointer group"><input type="radio" name="focus_goal" value="Deal Size" class="sr-only peer"><div class="p-4 border-2 border-white rounded-2xl font-bold transition peer-checked:bg-primary peer-checked:text-white bg-white/50 hover:bg-white text-center">Deal Size</div></label>
@@ -198,7 +198,7 @@
                     </div>
                 </div>
 
-                <div id="step-4-panel" class="step-panel hidden space-y-12">
+                <div id="step-4-panel" class="step-panel hidden space-y-12 text-left">
                     <h2 class="text-3xl font-extrabold text-slate-800">Action Plan Roadmap</h2>
                     <div class="coach-note text-sm text-slate-700">
                         <h4 class="font-black text-sm uppercase mb-3 text-slate-900">Strategic Intent</h4>
@@ -223,11 +223,11 @@
                     </div>
                 </div>
 
-                <div id="step-5-panel" class="step-panel hidden space-y-10">
+                <div id="step-5-panel" class="step-panel hidden space-y-10 text-left">
                     <h2 class="text-3xl font-extrabold text-slate-800">Final Review</h2>
                     <div class="coach-note text-sm text-slate-700">
                         <strong class="block mb-3 text-slate-800 uppercase text-xs">Final Verification:</strong>
-                        Double-check every single field below for accuracy. <br><br>
+                        Great work! Please take a moment to double-check every field below. <br><br>
                         Clicking <strong>Review & Commit</strong> will open the submission form.
                     </div>
                     <div id="commitmentSummaryOutput" class="bg-slate-50 p-12 rounded-[2rem] font-mono text-xs whitespace-pre-wrap leading-loose border-2 shadow-inner"></div>
@@ -279,7 +279,6 @@
         document.getElementById('pipelineToClose2026').innerText = (wr25Ratio > 0) ? fmt(q26 / wr25Ratio) : '$0';
         document.getElementById('dealsToClose2026').innerText = (ads25 > 0) ? Math.ceil(q26 / ads25) : 0;
 
-        // Lever Efficiency Calculations
         var tWR = wr25 + wrImp; tWR_raw = tWR;
         var tWRRatio = tWR / 100;
         var tDealSize = ads25 * (1 + (adsImp / 100));
@@ -288,11 +287,9 @@
         document.getElementById('dealSizeImprovementLabel').innerText = adsImp + '%';
         document.getElementById('winRateImprovementLabel').innerText = wrImp + '%';
 
-        // Pipeline Needed at Optimized Efficiency (Before Volume Change)
         var optPipe = (tWRRatio > 0) ? (q26 / tWRRatio) : 0; 
         optPipe_raw = optPipe;
         
-        // Base Opps required to hit exactly 100% target at Modeled Efficiency
         var oppsBaseline = (tWRRatio > 0 && tDealSize > 0) ? Math.ceil(q26 / (tWRRatio * tDealSize)) : 0;
         oppsNeeded_raw = oppsBaseline;
 
@@ -304,7 +301,7 @@
             document.getElementById('projectedAttainment').innerText = "Set Quota";
             document.getElementById('projectedAttainment').style.fontSize = "2rem";
         } else {
-            // Projected Attainment is directly tied to the Volume % Change vs the Baseline (100% + Vol%)
+            // Projected attainment follows percentage change logic (0% slider = 100% attainment baseline)
             var proj = 100 + volPctChange;
             document.getElementById('projectedAttainment').innerText = Math.round(proj) + '%';
             document.getElementById('projectedAttainment').style.fontSize = "4.5rem";
