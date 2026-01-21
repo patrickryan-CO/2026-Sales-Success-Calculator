@@ -43,7 +43,7 @@
 <body>
     <div class="wave-container"></div>
     <div class="main-card">
-        <div class="absolute top-6 right-8 text-xs text-gray-400 font-mono tracking-widest uppercase">v45.00.09-RECOVERY-COMPLETE</div>
+        <div class="absolute top-6 right-8 text-xs text-gray-400 font-mono tracking-widest uppercase">v45.00.10-SIMULATOR-SYNC</div>
 
         <div id="welcome-screen" class="text-center space-y-12">
             <div class="space-y-4">
@@ -167,22 +167,26 @@
                             <h4 class="font-bold text-2xl mb-2 text-blue-700">Lever 3: Win Rate Mastery</h4>
                             <p class="text-sm text-slate-500 leading-relaxed mb-4 text-left">Refine your qualification accuracy and closing precision to ensure a higher percentage of opportunities reach a successful conclusion.</p>
                             <input type="range" id="winRateImprovement" min="0" max="15" step="0.5" value="0" class="mt-8" oninput="calculate()">
-                            <div class="grid grid-cols-2 gap-8 mt-10 border-t pt-10 text-left">
-                                <div id="winRateImprovementLabel" class="hidden">0%</div>
-                                <div><span class="text-xs font-black text-slate-400 uppercase block mb-2">Targeted Win Rate %</span><span id="targetedWinRateDisplay" class="text-3xl font-black text-blue-700">0%</span></div>
-                                <div><span class="text-xs font-black text-slate-400 uppercase block mb-2">Optimized Pipeline Needed</span><span id="optimizedPipelineDisplay" class="text-3xl font-black text-slate-900">$0</span></div>
+                            <div class="mt-10 border-t pt-10 text-left">
+                                <span class="text-xs font-black text-slate-400 uppercase block mb-2 text-center">Targeted Win Rate %</span>
+                                <span id="targetedWinRateDisplay" class="text-3xl font-black text-blue-700 block text-center">0%</span>
                             </div>
                         </div>
 
-                        <div class="bg-slate-900 text-white p-12 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
-                            <div class="absolute top-0 right-0 p-8 opacity-10 text-6xl font-black italic text-center">2026</div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10 items-center">
-                                <div class="text-center md:text-left">
-                                    <span class="text-xs font-black uppercase text-slate-400 block mb-2 tracking-widest">Projected 2026 Attainment</span>
-                                    <span id="projectedAttainment" class="text-7xl font-black text-accent">100%</span>
+                        <div class="bg-slate-900 text-white p-12 rounded-[2.5rem] shadow-2xl relative overflow-hidden text-center">
+                            <div class="absolute top-0 right-0 p-8 opacity-10 text-6xl font-black italic">2026</div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10 items-center">
+                                <div>
+                                    <span class="text-xs font-black uppercase text-slate-400 block mb-2 tracking-widest">Projected Attainment</span>
+                                    <span id="projectedAttainment" class="text-5xl font-black text-accent">100%</span>
                                 </div>
-                                <div class="grid grid-cols-1 gap-6 text-center md:text-left">
-                                    <div><span class="text-[10px] font-black uppercase text-slate-400 block mb-1 tracking-widest">Baseline Opps Needed (100%)</span><span id="oppsNeededBaseline" class="text-3xl font-black text-white">0</span></div>
+                                <div>
+                                    <span class="text-xs font-black uppercase text-slate-400 block mb-2 tracking-widest text-center">Required Wins</span>
+                                    <span id="requiredWinsDisplay" class="text-4xl font-black text-white block">0</span>
+                                </div>
+                                <div>
+                                    <span class="text-xs font-black uppercase text-slate-400 block mb-2 tracking-widest text-center">Optimized Pipeline Needed</span>
+                                    <span id="optimizedPipelineDisplay" class="text-3xl font-black text-white block">$0</span>
                                 </div>
                             </div>
                         </div>
@@ -248,7 +252,7 @@
 
 <script>
     var step = 1;
-    var q26_raw = 0, tWR_raw = 0, optPipe_raw = 0, oppsNeeded_raw = 0;
+    var q26_raw = 0, tWR_raw = 0, optPipe_raw = 0;
 
     function gV(id) {
         var el = document.getElementById(id);
@@ -279,33 +283,38 @@
         document.getElementById('pipelineToClose2026').innerText = (wr25Ratio > 0) ? fmt(q26 / wr25Ratio) : '$0';
         document.getElementById('dealsToClose2026').innerText = (ads25 > 0) ? Math.ceil(q26 / ads25) : 0;
 
+        // CALCULATIONS FOR SIMULATOR
         var tWR = wr25 + wrImp; tWR_raw = tWR;
         var tWRRatio = tWR / 100;
         var tDealSize = ads25 * (1 + (adsImp / 100));
 
+        // LEVER UI LABELS
         document.getElementById('targetedWinRateDisplay').innerText = tWR.toFixed(1) + '%';
         document.getElementById('dealSizeImprovementLabel').innerText = adsImp + '%';
-        document.getElementById('winRateImprovementLabel').innerText = wrImp + '%';
-
-        var optPipe = (tWRRatio > 0) ? (q26 / tWRRatio) : 0; 
-        optPipe_raw = optPipe;
-        
-        var oppsBaseline = (tWRRatio > 0 && tDealSize > 0) ? Math.ceil(q26 / (tWRRatio * tDealSize)) : 0;
-        oppsNeeded_raw = oppsBaseline;
-
-        document.getElementById('optimizedPipelineDisplay').innerText = fmt(optPipe);
-        document.getElementById('oppsNeededBaseline').innerText = (isFinite(oppsBaseline) && !isNaN(oppsBaseline)) ? oppsBaseline : 0;
         document.getElementById('oppCountLabel').innerText = volPctChange + '%';
 
+        // 1. Projected Attainment (Driven by Lever 1 and Lever 2)
+        // Logic: 100% * (1 + Vol Change) * (1 + Size Change)
+        var proj = 100 * (1 + (volPctChange / 100)) * (1 + (adsImp / 100));
+        
+        // 2. Required Wins (Driven by Lever 2)
+        var reqWins = (tDealSize > 0) ? Math.ceil(q26 / tDealSize) : 0;
+
+        // 3. Optimized Pipeline Needed (Driven by Lever 3)
+        var optPipe = (tWRRatio > 0) ? (q26 / tWRRatio) : 0; 
+        optPipe_raw = optPipe;
+
+        // SUMMARY OUTPUTS
         if (q26 <= 0) {
             document.getElementById('projectedAttainment').innerText = "Set Quota";
             document.getElementById('projectedAttainment').style.fontSize = "2rem";
         } else {
-            // Projected attainment follows percentage change logic (0% slider = 100% attainment baseline)
-            var proj = 100 + volPctChange;
             document.getElementById('projectedAttainment').innerText = Math.round(proj) + '%';
-            document.getElementById('projectedAttainment').style.fontSize = "4.5rem";
+            document.getElementById('projectedAttainment').style.fontSize = "3.5rem";
         }
+
+        document.getElementById('requiredWinsDisplay').innerText = (isFinite(reqWins) && !isNaN(reqWins)) ? reqWins : 0;
+        document.getElementById('optimizedPipelineDisplay').innerText = fmt(optPipe);
     };
 
     function startWizard() {
@@ -339,7 +348,7 @@
                 "PRIMARY FOCUS: " + focus + "\n" +
                 "PROJECTED ATTAINMENT: " + document.getElementById('projectedAttainment').innerText + "\n" +
                 "TARGETED WIN RATE: " + tWR_raw.toFixed(1) + "%\n" +
-                "PIPE VOLUME NEEDED: " + fmt(optPipe_raw) + "\n\n" +
+                "ADJUSTED PIPE NEEDED: " + fmt(optPipe_raw) + "\n\n" +
                 "--- COMMITMENTS ---\n" +
                 "GOAL 1: " + document.getElementById('goal1').value + "\n" +
                 "GOAL 2: " + document.getElementById('goal2').value + "\n" +
@@ -353,7 +362,6 @@
         var finalUrl = baseUrl 
             + "&entry.1533888544=" + encodeURIComponent(document.getElementById('personName').value)
             + "&entry.2004467893=" + encodeURIComponent(document.getElementById('managerName').value)
-            + "&entry.909220528=" + encodeURIComponent(document.getElementById('region').value)
             + "&entry.1187258724=" + Math.round(q26_raw)
             + "&entry.516044971=" + encodeURIComponent(tWR_raw.toFixed(1))
             + "&entry.10775378=" + Math.round(optPipe_raw)
